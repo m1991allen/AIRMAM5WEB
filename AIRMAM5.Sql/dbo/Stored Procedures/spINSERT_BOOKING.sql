@@ -1,0 +1,178 @@
+﻿
+
+-- =============================================
+-- 描述:	新增BOOKING&WORK
+-- 記錄:	<2019/09/06><David.Sin><新增預存>
+-- =============================================
+CREATE PROCEDURE [dbo].[spINSERT_BOOKING]
+	@fsREASON			NVARCHAR(100),
+	@fsDESCRIPTION		NVARCHAR(1024) = '',
+	@fsPROFILE_V		VARCHAR(100) = '',
+	@fsPROFILE_A		VARCHAR(100) = '',
+	@fsWATERMARK		VARCHAR(2) = '00',
+	@fsPATH				VARCHAR(2) = '00',
+	@fdSTART_WORK_TIME	DATETIME,
+	@fsCREATED_BY		VARCHAR(50),
+	--要加入調用的預借清單編號
+	@fnMATERIAL_IDs		VARCHAR(MAX)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+
+		BEGIN TRANSACTION
+		--新增BOOKING主檔
+		
+		INSERT
+			tbmBOOKING
+			(fsREASON, fsDESCRIPTION, fsPROFILE_V, fsPROFILE_A, fsWATERMARK, 
+			 fsPATH, fnORDER, fsSTATUS, fdCREATED_DATE, fsCREATED_BY)
+		VALUES
+			(@fsREASON, @fsDESCRIPTION, @fsPROFILE_V, @fsPROFILE_A, @fsWATERMARK ,
+			@fsPATH, 5, '00', GETDATE(), @fsCREATED_BY)
+		
+		-- 新增完畢時, 取回新增資料的識別編號, 或OK字樣
+		DECLARE @fnBOOKING_ID BIGINT = IDENT_CURRENT('tbmBOOKING')
+		
+		--新增L_WORK
+		--BOOKING
+		INSERT
+			tblWORK
+			(fnGROUP_ID, fsTYPE, fsPARAMETERS, fsSTATUS, fsPRIORITY, fdSTART_WORK_TIME, fsNOTE, fsCREATED_BY, fdCREATED_DATE, _ITEM_ID, _APPROVE_STATUS)
+		SELECT
+			@fnBOOKING_ID,
+			CASE
+				WHEN @fsPROFILE_V = 'COPYFILE' THEN 'COPYFILE'
+				ELSE 'BOOKING'
+			END,
+			M.fsTYPE + ';' + 
+			M.fsFILE_NO +';'+ 
+			'1;' + 
+			('\' + CONVERT(VARCHAR(10), GETDATE(), 112)) + ';' + 
+			@fsPROFILE_V + ';' + 
+			--BEG_TIME
+			CASE
+				WHEN LEN(M.fsPARAMETER) = 0 OR @fsPROFILE_V = 'COPYFILE' THEN 'ordinary'
+				ELSE dbo.fnGET_ITEM_BY_INDEX(M.fsPARAMETER, 0)
+			END + ';' +
+			--fsEND_TIME
+			CASE
+				WHEN LEN(M.fsPARAMETER) = 0 OR @fsPROFILE_V = 'COPYFILE' THEN 'ordinary'
+				ELSE dbo.fnGET_ITEM_BY_INDEX(M.fsPARAMETER, 1)
+			END + ';' + '0;' + '0;' + 
+			CASE
+				WHEN @fsWATERMARK = '00' THEN 'N;'
+				ELSE @fsWATERMARK + ';'
+			END + @fsWATERMARK + ';0;0;1;',
+			CASE
+				WHEN (SELECT fsVALUE FROM tbzCONFIG WHERE fsKEY = 'BOOKING_APPROVE') = 'Y' THEN '_A'
+				ELSE '00'
+			END,
+			'5',@fdSTART_WORK_TIME ,M.fsNOTE,@fsCREATED_BY,GETDATE(),M.fsFILE_NO,
+			CASE
+				WHEN (SELECT fsVALUE FROM tbzCONFIG WHERE fsKEY = 'BOOKING_APPROVE') = 'Y' THEN '_A'
+				ELSE NULL
+			END
+		FROM
+			[dbo].[tbmMATERIAL] M
+				JOIN (SELECT COL1 FROM fn_SLPIT(@fnMATERIAL_IDs,',')) T ON M.fnMATERIAL_ID = T.COL1 
+		WHERE
+			M.fsTYPE = 'V'
+		UNION ALL
+		SELECT
+			@fnBOOKING_ID,
+			CASE
+				WHEN @fsPROFILE_A = 'COPYFILE' THEN 'COPYFILE'
+				ELSE 'BOOKING'
+			END,
+			M.fsTYPE + ';' + 
+			M.fsFILE_NO +';'+ 
+			'1;' + 
+			('\' + CONVERT(VARCHAR(10), GETDATE(), 112)) + ';' + 
+			@fsPROFILE_A + ';' + 
+			--BEG_TIME
+			CASE
+				WHEN LEN(M.fsPARAMETER) = 0 OR @fsPROFILE_A = 'COPYFILE' THEN 'ordinary'
+				ELSE dbo.fnGET_ITEM_BY_INDEX(M.fsPARAMETER, 0)
+			END + ';' +
+			--fsEND_TIME
+			CASE
+				WHEN LEN(M.fsPARAMETER) = 0 OR @fsPROFILE_A = 'COPYFILE' THEN 'ordinary'
+				ELSE dbo.fnGET_ITEM_BY_INDEX(M.fsPARAMETER, 1)
+			END + ';' + '0;' + '0;' + 
+			CASE
+				WHEN @fsWATERMARK = '00' THEN 'N;'
+				ELSE @fsWATERMARK + ';'
+			END + @fsWATERMARK + ';0;0;1;',
+			CASE
+				WHEN (SELECT fsVALUE FROM tbzCONFIG WHERE fsKEY = 'BOOKING_APPROVE') = 'Y' THEN '_A'
+				ELSE '00'
+			END,
+			'5',@fdSTART_WORK_TIME ,M.fsNOTE,@fsCREATED_BY,GETDATE(),M.fsFILE_NO,
+			CASE
+				WHEN (SELECT fsVALUE FROM tbzCONFIG WHERE fsKEY = 'BOOKING_APPROVE') = 'Y' THEN '_A'
+				ELSE NULL
+			END
+		FROM
+			[dbo].[tbmMATERIAL] M
+				JOIN (SELECT COL1 FROM fn_SLPIT(@fnMATERIAL_IDs,',')) T ON M.fnMATERIAL_ID = T.COL1 
+		WHERE
+			M.fsTYPE = 'A'
+		UNION ALL
+		SELECT
+			@fnBOOKING_ID,
+			'COPYFILE',
+			M.fsTYPE + ';' + 
+			M.fsFILE_NO +';'+ 
+			'1;' + 
+			('\' + CONVERT(VARCHAR(10), GETDATE(), 112)) + ';',
+			CASE
+				WHEN (SELECT fsVALUE FROM tbzCONFIG WHERE fsKEY = 'BOOKING_APPROVE') = 'Y' THEN '_A'
+				ELSE '00'
+			END,
+			'5',@fdSTART_WORK_TIME ,M.fsNOTE,@fsCREATED_BY,GETDATE(),M.fsFILE_NO,
+			CASE
+				WHEN (SELECT fsVALUE FROM tbzCONFIG WHERE fsKEY = 'BOOKING_APPROVE') = 'Y' THEN '_A'
+				ELSE NULL
+			END
+		FROM
+			[dbo].[tbmMATERIAL] M
+				JOIN (SELECT COL1 FROM fn_SLPIT(@fnMATERIAL_IDs,',')) T ON M.fnMATERIAL_ID = T.COL1 
+		WHERE
+			M.fsTYPE = 'P'
+		UNION ALL
+		SELECT
+			@fnBOOKING_ID,
+			'COPYFILE',
+			M.fsTYPE + ';' + 
+			M.fsFILE_NO +';'+ 
+			'1;' + 
+			('\' + CONVERT(VARCHAR(10), GETDATE(), 112)) + ';',
+			CASE
+				WHEN (SELECT fsVALUE FROM tbzCONFIG WHERE fsKEY = 'BOOKING_APPROVE') = 'Y' THEN '_A'
+				ELSE '00'
+			END,
+			'5',@fdSTART_WORK_TIME ,M.fsNOTE,@fsCREATED_BY,GETDATE(),M.fsFILE_NO,
+			CASE
+				WHEN (SELECT fsVALUE FROM tbzCONFIG WHERE fsKEY = 'BOOKING_APPROVE') = 'Y' THEN '_A'
+				ELSE NULL
+			END
+		FROM
+			[dbo].[tbmMATERIAL] M
+				JOIN (SELECT COL1 FROM fn_SLPIT(@fnMATERIAL_IDs,',')) T ON M.fnMATERIAL_ID = T.COL1 
+		WHERE
+			M.fsTYPE = 'D'
+
+		COMMIT
+
+		SELECT RESULT = ''
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+		-- 發生例外時, 串回'ERROR:'開頭字串 + 錯誤碼 + 錯誤訊息
+		SELECT RESULT = 'ERROR:' + CAST(@@ERROR AS VARCHAR(10)) + '-' + ERROR_MESSAGE()
+	END CATCH
+END
+
+

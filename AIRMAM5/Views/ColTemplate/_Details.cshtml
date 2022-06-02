@@ -1,0 +1,55 @@
+﻿@model AIRMAM5.DBEntity.Models.Template.TemplateViewModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("DetailModal", "樣版[" + Model.fsNAME + "]資訊",
+@<form role="form" class="ui inverted form" id="DetailForm">
+    <div class="four fields">
+        <div class="field">
+            @Html.LabelFor(model => model.fnTEMP_ID)
+            @Html.TextBoxFor(model => model.fnTEMP_ID, new { @readonly = "readonly" })
+        </div>
+        <div class="required field">
+            @Html.LabelFor(model => model.fsNAME)
+            @Html.TextBoxFor(model => model.fsNAME, new { @readonly = "readonly" })
+        </div>
+        <div class="required field">
+            @Html.LabelFor(model => model.fsTABLE)
+            @Html.TextBoxFor(model => model.TableName, new { @readonly = "readonly" })
+        </div>
+        <div class="field">
+            <div class="ui checkbox">
+                @Html.CheckBoxFor(model => model.IsSearch, new { disabled = "disabled" })
+                @Html.LabelFor(model => model.IsSearch)
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.fsDESCRIPTION)
+        @Html.TextAreaFor(model => model.fsDESCRIPTION, new { @readonly = "readonly", @rows = 2 })
+    </div>
+    <div class="four fields">
+        <div class="four wide field">
+            @Html.LabelFor(model => model.CreatedDate)
+            @Html.TextBox("CreatedDate", string.Format($"{Model.CreatedDate:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.DisplayNameFor(model => model.CreatedBy)
+            @Html.TextBoxFor(m => m.CreatedBy, new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.LabelFor(model => model.UpdatedDate)
+            @Html.TextBox("UpdatedDate", string.Format($"{Model.UpdatedDate:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+            @Html.TextBoxFor(m => m.UpdatedBy, new { @readonly = "readonly" })
+        </div>
+    </div>
+</form>,
+  @<div>
+      <button class="ui cancel  button" type="button">關閉</button>
+  </div>,
+ "large")
+

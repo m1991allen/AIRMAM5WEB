@@ -1,0 +1,332 @@
+﻿@model Dictionary<string, string>
+<link rel="stylesheet" href="Content/player/Audio_style .css" />
+<script>
+    $(document).ready(function () {
+
+        var fps = 29.97;
+
+        var audio = $('#myAudio');
+
+        audio.on('loadedmetadata', function () {
+            $('.caption').animate({ 'top': -45 }, 300);
+
+            //set video properties
+            $('.current').text(frame2timecode(0));
+            $('.duration').text(frame2timecode(audio[0].duration * fps));
+            //$('.duration').text(video[0].duration);
+            updateVolume(0, 0.5);
+
+            //start to get video buffering data
+            //setTimeout(startBuffer, 150);
+
+            //bind video events
+            $('.myAudio')
+            .append('<div id="init"></div>')
+            .hover(function () {
+                //$('.control').stop().animate({'bottom':0}, 500);
+                $('.caption').stop().animate({ 'top': 0 }, 500);
+            }, function () {
+                if (!volumeDrag && !timeDrag) {
+                    //$('.control').stop().animate({'bottom':-45}, 500);
+                    $('.caption').stop().animate({ 'top': -45 }, 500);
+                }
+            })
+            .on('click', function () {
+                $('#init').remove();
+                $('.btnPlay').addClass('paused');
+                $(this).unbind('click');
+                audio[0].play();
+            });
+            $('#init').fadeIn(200);
+
+            $('.btnPlay').addClass('paused');
+            audio[0].play();
+        });
+
+
+        ////display video buffering bar
+        //var startBuffer = function () {
+        //    var currentBuffer = audio[0].buffered.end(0);
+        //    var maxduration = audio[0].duration;
+        //    var perc = 100 * currentBuffer / maxduration;
+        //    $('.bufferBar').css('width', perc + '%');
+
+        //    if (currentBuffer < maxduration) {
+        //        setTimeout(startBuffer, 500);
+        //    }
+
+        //    $('.btnPlay').addClass('paused');
+        //    audio[0].play();
+        //};
+
+        //display current video play time
+        audio.on('timeupdate', function () {
+            var currentPos = audio[0].currentTime;
+            var maxduration = audio[0].duration;
+            var perc = 100 * currentPos / maxduration;
+            $('.timeBar').css('width', perc + '%');
+            $('.current').text(frame2timecode(currentPos * fps));
+
+            if (perc == 100) {
+                $('.btnStop').css('background', 'url(Images/player/Replay.png) no-repeat');
+                $('.btnStop').on('click', function () {
+                    $('.btnPlay').addClass('paused');
+                    audio[0].play();
+                });
+            } else {
+                $('.btnStop').css('background', 'url(Images/player/stop.png) no-repeat');
+                $('.btnStop').on('click', function () {
+                    $('.btnPlay').removeClass('paused');
+                    audio[0].pause();
+                });
+            }
+        });
+
+        //CONTROLS EVENTS
+        //video screen and play button clicked
+        audio.on('click', function () { playpause(); });
+        $('.btnPlay').on('click', function () { playpause(); });
+
+        var playpause = function () {
+            if (audio[0].paused || audio[0].ended) {
+                $('.btnPlay').addClass('paused');
+                audio[0].play();
+            }
+            else {
+                $('.btnPlay').removeClass('paused');
+                audio[0].pause();
+            }
+        };
+
+
+        //stop button clicked
+        $('.btnStop').on('click', function () {
+            $('.btnPlay').removeClass('paused');
+            updatebar($('.p-progress').offset().left);
+            audio[0].pause();
+        });
+
+        //VIDEO EVENTS
+        //video canplay event
+        audio.on('canplay', function () {
+            $('.loading').fadeOut(100);
+        });
+
+        //video canplaythrough event
+        //solve Chrome cache issue
+        var completeloaded = false;
+        audio.on('canplaythrough', function () {
+            completeloaded = true;
+        });
+
+        //video ended event
+        audio.on('ended', function () {
+            $('.btnPlay').removeClass('paused');
+            video[0].pause();
+        });
+
+        //video seeking event
+        audio.on('seeking', function () {
+            //if video fully loaded, ignore loading screen
+            if (!completeloaded) {
+                $('.loading').fadeIn(200);
+            }
+        });
+
+        //video seeked event
+        audio.on('seeked', function () { });
+
+        //video waiting for more data event
+        audio.on('waiting', function () {
+            $('.loading').fadeIn(200);
+        });
+
+        //VIDEO PROGRESS BAR
+        //when video timebar clicked
+        var timeDrag = false;	/* check for drag event */
+        $('.p-progress').on('mousedown', function (e) {
+            timeDrag = true;
+            updatebar(e.pageX);
+        });
+        $(document).on('mouseup', function (e) {
+            if (timeDrag) {
+                timeDrag = false;
+                updatebar(e.pageX);
+            }
+        });
+        $(document).on('mousemove', function (e) {
+            if (timeDrag) {
+                updatebar(e.pageX);
+            }
+        });
+
+
+
+
+        var updatebar = function (x) {
+            var progress = $('.p-progress');
+
+            //calculate drag position
+            //and update video currenttime
+            //as well as progress bar
+            var maxduration = audio[0].duration;
+            var position = x - progress.offset().left;
+            var percentage = 100 * position / progress.width();
+            if (percentage > 100) {
+                percentage = 100;
+            }
+            if (percentage < 0) {
+                percentage = 0;
+            }
+
+            $('.timeBar').css('width', percentage + '%');
+            audio[0].currentTime = maxduration * percentage / 100;
+            // console.log(position);
+        };
+
+        //sound button clicked
+        $('.sound').click(function () {
+            //console.log(video[0].muted);
+            audio[0].muted = !audio[0].muted;
+
+            $(this).toggleClass('muted');
+            if (audio[0].muted) {
+                $('.volumeBar').css('width', 0);
+            }
+            else {
+                $('.volumeBar').css('width', audio[0].volume * 100 + '%');
+                audio[0].volume = 0.3;
+            }
+        });
+
+
+        //VOLUME BAR
+        //volume bar event
+        var volumeDrag = false;
+        $('.volume').on('mousedown', function (e) {
+            volumeDrag = true;
+            audio[0].muted = false;
+            $('.sound').removeClass('muted');
+            updateVolume(e.pageX);
+        });
+        $(document).on('mouseup', function (e) {
+            if (volumeDrag) {
+                volumeDrag = false;
+                updateVolume(e.pageX);
+            }
+        });
+        $(document).on('mousemove', function (e) {
+            if (volumeDrag) {
+                updateVolume(e.pageX);
+            }
+        });
+        var updateVolume = function (x, vol) {
+            var volume = $('.volume');
+            var percentage;
+            if (vol) {
+                percentage = vol * 100;
+            }
+            else {
+
+                var position = x - volume.offset().left;
+                percentage = 100 * position / volume.width();
+
+            }
+
+            if (percentage > 100) {
+                percentage = 100;
+            }
+            if (percentage < 0) {
+                percentage = 0;
+            }
+            // //update volume bar and video volume
+            // $('.volumeBar').css('height',percentage+'%');
+            $('.volumeBar').css('width', percentage + '%');
+            audio[0].volume = percentage / 100;
+
+            //change sound icon based on volume
+            if (audio[0].volume == 0) {
+                audio[0].muted = true;
+                $('.sound').addClass('muted');
+            }
+            else {
+                audio[0].muted = false;
+                $('.muted').removeClass('muted');
+            }
+
+        };
+
+    });
+
+
+    function frame2timecode(frames) {
+        var HH = 0;
+        var MM = 0;
+        var SS = 0;
+        var FF = 0;
+        var itmp = 0;
+
+        //frames = frames - 1;
+        HH = Math.floor(frames / 107892);
+        itmp = frames % 107892;
+
+        //2011/05/05 by Mike
+        MM = Math.floor(itmp / 17982) * 10;
+        itmp = itmp % 17982;
+        if (itmp > 2) {
+            MM = MM + (Math.floor((itmp - 2) / 1798));
+            itmp = (itmp - 2) % 1798;
+            itmp = itmp + 2;
+        }
+        SS = Math.floor(itmp / 30);
+        FF = Math.floor(itmp % 30);
+
+        return (showTwoDigits(HH) + ":" + showTwoDigits(MM) + ":" + showTwoDigits(SS) + ";" + showTwoDigits(FF));
+    }
+
+    function showTwoDigits(number) {
+        return ("00" + number).slice(-2);
+    }
+</script>
+
+@if (string.IsNullOrEmpty(Model["fsFILE_URL"]))
+{
+    <img src="@Model["fsIMAGE_URL"]" width="100%" height="100%" />
+
+}
+else
+{
+
+    <div class="videoContainer" style="">
+
+        <audio id="myAudio" poster="">
+            <source src="@Model["fsFILE_URL"]" type="audio/mp3" preload='none' />
+        </audio>
+        <div class="p-control">
+
+            <div class="topControl">
+                <span class="current"></span>
+                <div class="p-progress">
+                    <span class="timeBar"></span>
+                </div>
+                <span class="duration"></span>
+            </div>
+
+            <div class="btmControl">
+                <div class="Volume_adjustment">
+                    <div class="sound" title="喇叭"></div>
+                    <div class="volume" title="音量">
+                        <span class="volumeBar"></span>
+                    </div>
+
+                </div>
+                <div class="btm">
+                    <div class="btnPlay p-btn" title="播放/暫停"></div>
+                    @*<div class="btnx3 p-btn text" title="播放速度"><p>1</p></div>*@
+                </div>
+                <div class="btnStop p-btn" title="停止"></div>
+            </div>
+
+        </div>
+    </div>
+}

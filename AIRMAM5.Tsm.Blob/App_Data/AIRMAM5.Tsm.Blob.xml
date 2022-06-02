@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AIRMAM5.Tsm.Blob</name>
+    </assembly>
+    <members>
+        <member name="M:AIRMAM5.Tsm.Blob.Controllers.BlobController.PostGetFileStatusInTsm(AIRMAM5.Tsm.Blob.Models.clsFILE_STATUS_ARGS)">
+            <summary>
+            批次取得檔案在Blob的狀態
+            </summary>
+            <param name="clsFILE_STATUS_ARGS">檔案編號</param>
+            <returns>檔案狀態</returns>
+        </member>
+        <member name="M:AIRMAM5.Tsm.Blob.Controllers.BlobController.PostRecall(AIRMAM5.Tsm.Blob.Models.clsRECALL_ARGS)">
+            <summary>
+            Recall檔案
+            </summary>
+            <param name="clsRECALL_ARGS">檔案回溯參數</param>
+            <returns>檔案狀態</returns>
+        </member>
+        <member name="T:AIRMAM5.Tsm.Blob.Models.clsFILE_STATUS_ARGS">
+            <summary>
+            查詢檔案狀態參數
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Tsm.Blob.Models.clsFILE_STATUS_ARGS.lstFILE_TSM_PATH">
+            <summary>
+            檔案路徑(TSM)
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Tsm.Blob.Models.clsFILE_STATUS_ARGS.FILE_NO_TSM_PATH.fsFILE_NO">
+            <summary>
+            檔案編號
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Tsm.Blob.Models.clsFILE_STATUS_ARGS.FILE_NO_TSM_PATH.fsFILE_TSM_PATH">
+            <summary>
+            檔案在TSM路徑
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Tsm.Blob.Models.clsFILE_STATUS_RESULT">
+            <summary>
+            查詢檔案狀態結果
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Tsm.Blob.Models.clsFILE_STATUS_RESULT.FILE_NO">
+            <summary>
+            檔案編號
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Tsm.Blob.Models.clsFILE_STATUS_RESULT.FILE_STATUS">
+            <summary>
+            檔案狀態【0(檔案在磁帶);1(檔案在磁碟);2(檔案不存在);3(處理中)】
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Tsm.Blob.Models.clsRECALL_ARGS">
+            <summary>
+            檔案Recall參數
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Tsm.Blob.Models.FileStatus">
+            <summary>
+            檔案狀態列舉
+            </summary>
+        </member>
+        <member name="F:AIRMAM5.Tsm.Blob.Models.FileStatus.Tape">
+            <summary>
+            檔案在Tape
+            </summary>
+        </member>
+        <member name="F:AIRMAM5.Tsm.Blob.Models.FileStatus.NearLine">
+            <summary>
+            檔案在Nearline
+            </summary>
+        </member>
+        <member name="F:AIRMAM5.Tsm.Blob.Models.FileStatus.Error">
+            <summary>
+            錯誤
+            </summary>
+        </member>
+        <member name="F:AIRMAM5.Tsm.Blob.Models.FileStatus.Processing">
+            <summary>
+            處理中
+            </summary>
+        </member>
+        <member name="F:AIRMAM5.Tsm.Blob.Models.FileStatus.NotExist">
+            <summary>
+            無檔案路徑
+            </summary>
+        </member>
+        <member name="F:AIRMAM5.Tsm.Blob.Models.FileStatus.Online">
+            <summary>
+            檔案在線
+            </summary>
+        </member>
+        <member name="F:AIRMAM5.Tsm.Blob.Models.FileStatus.Offline">
+            <summary>
+            檔案離線
+            </summary>
+        </member>
+        <member name="F:AIRMAM5.Tsm.Blob.Models.FileStatus.Offline_Deep">
+            <summary>
+            檔案深度離線
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Tsm.Blob.Models.clsFILE_EXIST">
+            <summary>
+            檔案是否存在
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Tsm.Blob.Models.clsRETURN.IsSuccess">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Tsm.Blob.Models.clsRETURN.Message">
+            <summary>
+            錯誤訊息
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Tsm.Blob.Models.clsRETURN.Data">
+            <summary>
+            回傳資訊
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Tsm.Blob.Models.clsRETURN.ResponseTime">
+            <summary>
+            回傳時間
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Tsm.Blob.Models.clsRETURN.ErrorException">
+            <summary>
+            例外訊息
+            </summary>
+        </member>
+    </members>
+</doc>

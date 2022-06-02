@@ -1,0 +1,198 @@
+﻿@model AIRMAM5.DBEntity.Models.AcrDelete.DeleteArcViewModel
+@{
+    Layout = "";
+    string _docurl = Url.Action("_PreviewDoc", "DocViewer", new { fsSUBJECT_ID = Model.BasicMeta.fsSUBJECT_ID, fileNo = Model.BasicMeta.fsFILE_NO, kind = "del" });
+    string errorImage = Url.Content("~/Images/noImage.png");
+    bool actionButton = Model.BasicMeta.FileCategory == "P" ? false : Model.BasicMeta.FileCategory == "D" ? Model.Viewer.CanPreview : false;
+}
+
+@HtmlHelper.HtmlModal("DetailModal", "刪除紀錄內容",
+@@<div class="ui stackable grid">
+    <div class="black column nopadding x-previewcolumn">
+        @*
+            媒資-檔案: @Model.Viewer.FileUrl
+            媒資-圖檔: @Model.Viewer.ImageUrl
+        *@
+        <div id="preview" name="preview">
+            @HtmlHelper.Preview(Model.Viewer.FileUrl, Model.Viewer.ImageUrl, Model.BasicMeta.FileCategory, Model.BasicMeta.fsFILE_NO, Model.BasicMeta.fsSUBJECT_ID, _docurl, errorImage, "del", actionButton)
+        </div>
+    </div>
+    <div class="column">
+        <div class="ui pointing secondary menu tabs x-tabs">
+            <a class="active item" data-tab="basedata">基本資訊</a>
+            <a class="item" data-tab="detaildata">詳細資訊</a>
+            @if ("V;".Contains(Model.BasicMeta.FileCategory))
+                        {
+                <a class="item" data-tab="keyframe">關鍵影格(@Model.KeyFrame.Count())</a>
+                        }
+            @if ("V;A;".Contains(Model.BasicMeta.FileCategory))
+                        {
+                <a class="item" data-tab="paraDescription">段落描述(@Model.FileSeqment.Count())</a>
+                        }
+        </div>
+        <!--基本資訊-->
+        <div class="ui bottom attached active tab inverted segment" data-tab="basedata">
+            <div class="_directoryTab">
+                <div class="ui right aligned grid _styleMarginZero">
+                    @Html.LabelFor(model => model.BasicMeta.fsFILE_NO, new { @class = "center aligned three wide column" })
+                    <span class="left aligned thirteen wide column">   @Model.BasicMeta.fsFILE_NO</span>
+                </div>
+                <div class="ui right aligned grid _styleMarginZero">
+                    @Html.LabelFor(model => model.BasicMeta.FileSecretStr, new { @class = "center aligned three wide column" })
+                    <span class="left aligned thirteen wide column">@Model.BasicMeta.FileSecretStr</span>
+                </div>
+                <div class="ui right aligned grid _styleMarginZero">
+                    @Html.LabelFor(model => model.BasicMeta.Title, new { @class = "center aligned three wide column" })
+                    <span class="left aligned thirteen wide column"> @Model.BasicMeta.Title</span>
+                </div>
+                <div class="ui right aligned grid _styleMarginZero">
+                    @Html.LabelFor(model => model.BasicMeta.Description, new { @class = "center aligned three wide column" })
+                    <span class="left aligned thirteen wide column">  @Model.BasicMeta.Description</span>
+                </div>
+                <div class="ui right aligned grid _styleMarginZero">
+                    @Html.LabelFor(model => model.BasicMeta.HashTag, new { @class = "center aligned three wide column" })
+                    <span class="left aligned thirteen wide column">
+                        @{
+                           if (!string.IsNullOrEmpty(Model.BasicMeta.HashTag))
+                           {
+                               var tags = Model.BasicMeta.HashTag.Split(new char[] { '^' });
+                               foreach (string tag in tags)
+                               {
+                                 <label class="ui blue x-hashtag label">#@tag</label>
+                               }
+                           }
+                        }
+                    </span>
+                </div>
+                <div class="ui right aligned grid _styleMarginZero">
+                    @Html.LabelFor(model => model.BasicMeta.LicenseStr, new { @class = "center aligned three wide column" })
+                    @{ string LicenseInfo = string.IsNullOrEmpty(Model.BasicMeta.LicenseMessage) ? "" : string.Format("({0})", Model.BasicMeta.LicenseMessage);
+                                    string LicenseDate = Model.BasicMeta.LicenseEndDate == null ? "" : string.Format("[ {0:yyyy-MM-dd} ]", Model.BasicMeta.LicenseEndDate);
+                    }
+                    <span class="left aligned thirteen wide column">  @Model.BasicMeta.LicenseStr @LicenseInfo @LicenseDate</span>
+                </div>
+                @if (Model.BasicMeta.FileCategory == "A" || Model.BasicMeta.FileCategory == "V")
+                            {
+                    <div class="ui right aligned grid _styleMarginZero">
+                        @Html.LabelFor(model => model.BasicMeta.Voice2TextContent, new { @class = "center aligned three wide column" })
+                        <span class="left aligned thirteen wide column">  @Model.BasicMeta.Voice2TextContent</span>
+                    </div>
+                            }
+                <div class="ui right aligned grid _styleMarginZero">
+                    @Html.LabelFor(model => model.BasicMeta.OriginFileName, new { @class = "center aligned three wide column" })
+                    <span class="left aligned thirteen wide column">  @Model.BasicMeta.OriginFileName</span>
+                </div>
+                <div class="ui right aligned grid _styleMarginZero">
+                    <label class="center aligned three wide column">新增時間</label>
+                    <span class="left aligned thirteen wide column">
+                        @*@Model.BasicMeta.UserDateInfo.CreatedDate.ToString()*@
+                        @string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.BasicMeta.UserDateInfo.CreatedDate)
+                    </span>
+                </div>
+                <div class="ui right aligned grid _styleMarginZero">
+                    <label class="center aligned three wide column">新增人員</label>
+                    <span class="left aligned thirteen wide column">
+                        @{ string _createder = string.Format("{0}{1}"
+                                          , string.IsNullOrEmpty(Model.BasicMeta.UserDateInfo.CreatedBy) ? string.Empty : Model.BasicMeta.UserDateInfo.CreatedBy
+                                          , string.IsNullOrEmpty(Model.BasicMeta.UserDateInfo.CreatedByName) ? string.Empty : string.Format($"({Model.BasicMeta.UserDateInfo.CreatedByName})")); }
+                        @_createder
+                    </span>
+                </div>
+                <div class="ui right aligned grid _styleMarginZero">
+                    <label class="center aligned three wide column">修改時間</label>
+                    <span class="left aligned thirteen wide column">
+                        @*@Model.BasicMeta.UserDateInfo.UpdatedDate.ToString()*@
+                        @string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.BasicMeta.UserDateInfo.UpdatedDate)
+                    </span>
+                </div>
+                <div class="ui right aligned grid _styleMarginZero">
+                    <label class="center aligned three wide column">修改人員</label>
+                    <span class="left aligned thirteen wide column">
+                        @{ string _updateder = string.Format("{0}{1}"
+                                      , string.IsNullOrEmpty(Model.BasicMeta.UserDateInfo.UpdatedBy) ? string.Empty : Model.BasicMeta.UserDateInfo.UpdatedBy
+                                      , string.IsNullOrEmpty(Model.BasicMeta.UserDateInfo.UpdatedByName) ? string.Empty : string.Format($"({Model.BasicMeta.UserDateInfo.UpdatedByName})")); }
+                        @_updateder
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!--詳細資訊-->
+        <div class="ui bottom attached tab inverted segment" data-tab="detaildata">
+            <div class="_directoryTab">
+                @foreach (var itm in Model.DynamicInfo)
+                            {
+                    <div class="ui right aligned grid _styleMarginZero">
+                        <label class="center aligned three wide column">@itm.FieldName</label>
+                        <span class="left aligned thirteen wide column">  @itm.FieldValue</span>
+                        @Html.HiddenFor(m => itm.Field)
+                    </div>
+                            }
+            </div>
+        </div>
+        @{
+            <!--關鍵影格-->
+                        if ("V;".Contains(Model.BasicMeta.FileCategory))
+                        {
+                <div class="ui bottom attached tab inverted segment" data-tab="keyframe">
+                    <div class="ui centered grid">
+                        <div class="four column centered row">
+                            <div class="column">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="showtype" checked="checked" value="N">
+                                    <label for="showtype">畫面清單</label>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="showtype"   value="Y">
+                                    <label for="showtype">詳細資料</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sixteen wide column x-cards">
+                            <!--影格圖片-->
+                            <div class="ui three stackable cards" data-cards='@Html.Raw(Json.Encode(Model.KeyFrame))'> </div>
+                        </div>
+                    </div>
+
+                </div><!--keyframe end-->
+               }
+                if ("V;A;".Contains(Model.BasicMeta.FileCategory)) {
+                <div class="ui bottom attached tab segment" data-tab="paraDescription">
+                    <div class="ui inverted relaxed middle aligned list cuslist"  data-para='@Html.Raw(Json.Encode(Model.FileSeqment))'></div>
+                    @*@if (Model.FileSeqment == null || !Model.FileSeqment.Any())
+                                {
+                        <div class="ui inverted segment center aligned" style="min-height:100%;width:100%;">
+                            <div class="ui icon inverted yellow large header" style="margin:20px;">
+                                <i class="database icon"></i>
+                                <div class="content">
+                                    沒有資料可以顯示
+                                    <div class="sub header">Nothing to show</div>
+                                </div>
+                            </div>
+                        </div>
+                                }
+                                else
+                                {
+                                    foreach (var des in Model.FileSeqment)
+                                    {
+                            <div class="_StyleDescription">
+                                <span>@des.BegTime~@des.EndTime </span>
+                                <span>@des.Description </span>
+                            </div>
+                                    }
+                                }*@
+                </div>
+                        }
+        }
+    </div>
+</div>
+,@<div>
+   <div class="ui red left floated inverted header">
+       ✘刪除原因： @Model.DeleteReason
+   </div>
+   <button class="ui yellow cancel button" type="button">關閉</button>
+  </div>, "large"
+  )
+

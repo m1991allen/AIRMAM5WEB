@@ -1,0 +1,207 @@
+﻿@import '../../_color.scss';
+@import '../Shared/Function/_tree.scss';
+@mixin column-list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/*button樣版*/
+@mixin button-style {
+    background-color: #1b1b1b;
+    color: #cacaca;
+    border: 1px solid #cacaca;
+    background: none;
+
+    &:hover {
+        color: $yellow;
+        border: 1px solid $yellow;
+    }
+}
+
+
+/**主題列樣式*/
+ul.x-subjectItems {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    overflow: auto;
+    display: inline-block;
+    width: 100%;
+
+    li.x-subjectItem {
+        background: #424242;
+        margin: 5px;
+        display: inline-block;
+        border: 0.5px solid #666;
+
+        &:hover {
+            background: #666;
+            color: #fff;
+        }
+
+        a {
+            display: inline-block;
+            color: rgba(266,266,266,1);
+            text-align: center;
+            padding: 16px;
+            text-decoration: none;
+        }
+    }
+}
+
+.x-column {
+    width: 50%;
+    float: left;
+    height: 100%;
+
+    &.left {
+        position: absolute;
+        left: 0;
+    }
+
+    &.right {
+        position: absolute;
+        right: 0;
+    }
+}
+/**關閉列表Header顏色*/
+.tabulator-header {
+    background-image: none !important;
+    background: none !important;
+    background-color: none !important;
+
+    .tabulator-col {
+        background-image: none !important;
+        background: none !important;
+        background-color: none !important;
+    }
+}
+.tabulator-frozen {
+    .tabulator-col-content {
+        background: rgb(62, 62, 62);
+    }
+}
+
+#Table {
+    .tabulator-table {
+        width: 100%;
+    }
+
+    .x-license-label{
+        color:#cec34f;
+    }
+    .tabulator-placeholder {
+        width: 100% !important;
+    }
+
+    .tabulator-row.ui.items {
+        cursor: context-menu;
+        padding: 0;
+        margin: 0 !important;
+        white-space: normal;
+        word-break: break-word;
+
+        &.tabulator-row-even {
+            background: #2d2d2d;
+        }
+
+        &.tabulator-row-odd {
+            background: #333;
+        }
+
+        &:hover, &.cusactive, &.tabulator-selected {
+            border: 1px solid yellow;
+            background: #222 !important;
+        }
+
+        .item {
+            padding: 1em !important;
+            color: rgba(255,255,255,.74);
+
+            &:first-child, &:last-child {
+                padding-top: 1em !important;
+                padding-bottom: 1em !important;
+                border: 1px solid rgba(255,255,0,0);
+            }
+
+            .header {
+                color: rgba(255,255,255,.74);
+            }
+
+            ._styleImg {
+                position: relative;
+                height: 90px;
+                width: auto;
+                min-width: 140px;
+
+                img {
+                    height: 100%;
+                    width: auto;
+                    margin: auto;
+                }
+            }
+
+            .image {
+                display: flex;
+                align-items: end;
+                padding: 6px 7px 0 7px;
+                max-width: 150px;
+                min-width: 150px;
+            }
+
+            .content {
+                padding: 8px 0;
+                min-height: 103px;
+
+                .header {
+                    color: rgba(255, 255, 255, 0.74) !important;
+                }
+
+                .meta, .description {
+                    line-height: 1.3;
+                    color: rgba(255, 255, 255, 0.74);
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+
+            .extra {
+                margin: 0;
+            }
+        }
+    }
+}
+#TargetTable {
+    .tabulator-group-level-1 {
+        background:#444;
+        .tabulator-group-toggle{
+            display:none;
+        }
+        .x-license-group {
+            color: #b7b7b7;
+            display:inline;
+            span {
+                color: #ffff00;
+                border: 0.5px solid #ffff00;
+                padding: 0 10px;
+            }
+        }
+    }
+}
+
+/**檔案 清單圖片列表*/
+.x-image.ui.tiny.image {
+    height: 100%;
+    width: auto;
+    vertical-align: middle;
+    margin: auto;
+}
+
+/* 標題列位置調整*/
+.group-header {
+    position: relative;
+    top: -15px;
+    left: 20px;
+}

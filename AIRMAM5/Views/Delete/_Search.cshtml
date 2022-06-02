@@ -1,0 +1,37 @@
+﻿@model AIRMAM5.DBEntity.Models.Shared.DeleteDateSearchModel
+
+@*@using (Html.BeginForm("Search", "Delete", FormMethod.Post, new { role = "form", @class = "ui inverted form", @id = "SearchForm" }))
+{*@
+<form class="ui inverted form" role="form" id="SearchForm">
+    <div class="six fields">
+        <div class="three wide field">
+            @*@Html.Label("類別")*@
+            @Html.LabelFor(m=>m.MediaTypeList)
+            @Html.DropDownList("Type", new SelectList(Model.MediaTypeList, "Value", "Text"), new { @class = "ui search dropdown" })
+        </div>
+        <div class="three wide field">
+            @*@Html.Label("狀態")*@
+            @Html.LabelFor(m => m.StatusList)
+            @Html.DropDownList("Status", new SelectList(Model.StatusList, "Value", "Text"), new { @class = "ui search dropdown" })
+        </div>
+        @*<div class="three wide field">
+                <label>原因???????</label>
+                <input type="text" placeholder="?????關鍵字...." />
+            </div>*@
+        <div class="three wide ui calendar required field">
+            <label>刪除時間(起)</label>
+            <input type="text" placeholder="起" id="StartDate" , name="StartDate" autocomplete="off" />
+        </div>
+        <div class="three wide ui calendar required field">
+            <label>刪除時間(迄)</label>
+            <input type="text" placeholder="迄" id="EndDate" name="EndDate" autocomplete="off" />
+        </div>
+        <div class="four wide field">
+            <label style="visibility:hidden;">查詢</label>
+            <button type="submit" class="ui yellow button">查詢</button>
+            <button type="button" name="reset" class="ui button">清空</button>
+            @*<button type="reset" class="ui button">清空</button>*@
+        </div>
+    </div>
+</form>
+@*}*@

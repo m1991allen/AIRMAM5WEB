@@ -1,0 +1,75 @@
+﻿@using System.Configuration;
+@{ 
+    string pluginVersion = "1";
+    string IsUseTsm = ConfigurationManager.AppSettings["IsUseTSM"];
+    string IsNonCloud = ConfigurationManager.AppSettings["IsNonCloud"];
+    string IsSupportPartial = ConfigurationManager.AppSettings["IsSupportPartial"];
+    string title = ConfigurationManager.AppSettings["Title"];
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>@title</title>
+    <link rel="icon" type="image/png" href="~/Images/favicon-16x16.png?t=@pluginVersion">
+    <link href="~/Content/semanticUI/css/semantic.css?t=@pluginVersion" rel="stylesheet" />
+    <link href="~/Content/tabulatorJS/css/tabulator_semantic-ui.min.css?t=@pluginVersion" rel="stylesheet" />
+    <link href="~/Content/semanticUIdatepicker/calendar.css?t=@pluginVersion" rel="stylesheet" />
+    @*<link href="~/Content/mCustomScrollbar/jquery.mCustomScrollbar.css" rel="stylesheet" />*@
+    <link href="~/Content/toastrJS/toastr.min.css?t=@pluginVersion" rel="stylesheet" />
+    <script src="~/Content/jQuery/jquery-3.6.0.min.js?t=@pluginVersion"></script>
+    @{
+        string Browser = Request.Browser.Browser;
+        if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
+        {
+            <script src="~/Content/IE_Compatible/ie11.polyfill.min.js?t=@pluginVersion"></script>
+        }
+    }
+
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #888 #000;
+            /*-ms-overflow-style: -ms-autohiding-scrollbar;*/
+            -ms-overflow-style: none;
+        }
+
+            *::-webkit-scrollbar {
+                width: 12px;
+            }
+
+            *::-webkit-scrollbar-track {
+                background: #000;
+            }
+
+            *::-webkit-scrollbar-thumb {
+                background-color: #888;
+                border-radius: 20px;
+            }
+    </style>
+    @RenderSection("Styles", false)
+</head>
+<body>
+    <div style="height: 100%;display: flex;flex-direction: column;padding:0 10px;" name="renderCotainer" data-IsUseTsm="@IsUseTsm" data-IsNonCloud="@IsNonCloud" data-IsSupportPartial="@IsSupportPartial">
+        @RenderBody()
+        @HtmlHelper.ConfirmModal("ChangeFormConfirm", "確認切換", "還有在編輯中的表單,確定要關閉燈箱?", "mini")
+    </div>
+    <script src="~/Content/semanticUI/js/semantic.min.js?t=@pluginVersion"></script>
+    <script src="~/Content/tabulatorJS/js/tabulator.min.js?t=@pluginVersion"></script>
+    <script src="~/Content/toastrJS/toastr.min.js?t=@pluginVersion"></script>
+    @*<script src="~/Content/jquery.unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
+        <script src="~/Scripts/dist/AjaxBeginForm.min.js"></script>*@
+    @*<script src="~/Content/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>*@
+    @Html.Partial("~/Views/Bundle/SubjectFormPlugin_Js.cshtml")
+    @Html.Partial("~/Views/Bundle/BlankLayout_Js.cshtml")
+    @* 另開共用燈箱 *@
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

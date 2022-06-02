@@ -1,0 +1,65 @@
+﻿@model AIRMAM5.DBEntity.Models.Material.BookingOptionModel
+
+@HtmlHelper.HtmlModal("CreateModal", "送出調用確認",
+@<form class="ui inverted form" role="form" id="CreateForm">
+    <div class="field">
+        <label for="showFileNos"> 調用檔案:</label>
+        <span id="showFileNos" style="word-break:break-word;"></span>
+    </div>
+    <div class="field">
+        <!--調用原因-->
+        @Html.LabelFor(model => model.ResonStr)
+        @Html.DropDownListFor(model => model.ResonStr, Model.ResonList, new { @class = "ui inverted dropdown black label", @id = "ddlReson" })
+    </div>
+    <div id="OptionArea">
+        @if (Model.PathList != null && Model.PathList.Count > 0)
+                    {
+            <div class="field path">
+                <!--調用路徑-->
+                @Html.LabelFor(model => model.PathStr)
+                @Html.DropDownListFor(model => model.PathStr, Model.PathList, new { @class = "ui inverted dropdown label" })
+            </div>
+                    }
+        @if (Model.VideoProfileList != null && Model.VideoProfileList.Count > 0)
+                    {
+            <div class="field prov">
+                <!--轉出格式:影片-->
+                @Html.LabelFor(model => model.ProfileV)
+                @Html.DropDownListFor(model => model.ProfileV, Model.VideoProfileList, new { @class = "ui inverted dropdown label" })
+            </div>
+                    }
+       
+        @if (Model.AudioProfileList != null && Model.AudioProfileList.Count > 0)
+         {
+            <div class="field proa">
+                <!--轉出格式:聲音-->
+                @Html.LabelFor(model => model.ProfileA)
+                @Html.DropDownListFor(model => model.ProfileA, Model.AudioProfileList, new { @class = "ui inverted dropdown label" })
+            </div>
+          }
+       
+        @if (Model.WatermarkList != null && Model.WatermarkList.Count > 0)
+          {
+            <div class="field wmark">
+                <!--浮水印-->
+                @Html.LabelFor(model => model.WatermarkStr)
+                @Html.DropDownListFor(model => model.WatermarkStr, Model.WatermarkList, new { @class = "ui inverted dropdown label" })
+            </div>
+          }
+       
+    </div>
+
+    <div class="field">
+        <!--備註 (記得判斷是否必填)-->
+        @Html.Label("調用備註")
+        @Html.TextArea("txtDescStr", new { @row = 3, @column = 11 })
+    </div>
+</form>,
+ @<div>
+     <button class="ui yellow ok button" type="button">新增</button>
+     <button class="ui cancel  button" type="reset">取消</button>
+ </div>
+                 )
+
+
+

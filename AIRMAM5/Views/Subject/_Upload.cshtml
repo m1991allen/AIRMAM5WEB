@@ -1,0 +1,77 @@
+﻿@model AIRMAM5.DBEntity.Models.SubjectUpload.SubjectUploadViewModel
+@{ 
+    string UploadDisabled = Model.MediaTypeList.Count() > 1 ? "" : "disabled";
+}
+<!--主題檔案上傳Modal-->
+<div class="ui small modal" id="UploadModal" name="UploadModal">
+    <i class="close icon"></i>
+    <div class="header">
+        要填入上傳檔名
+    </div>
+    <div class="scrolling content">
+        <form class="ui form" id="UploadForm">
+            <div class="field">
+                <label>上傳類型</label>
+                @Html.DropDownListFor(model => model.MediaTypeList, new SelectList(Model.MediaTypeList, "Value", "Text"), new { @class = "ui search selection dropdown" })
+
+            </div>
+            <div class="required ui calendar field">
+                <label for="DateInFileNo">檔案編號日期</label>
+                @Html.TextBoxFor(model => model.DateInFileNo) @*.TextBox("DateInFileNo")*@
+
+            </div>
+            <div class="required field">
+                <label for="titletype">標題</label>@* Value=1,2,3(配合api內容,不可更換) *@
+                <select class="ui selection dropdown" name="titletype">
+                    <option value="1">以檔名為 標題</option>
+                    <option value="2">以主題標題 為標題</option>
+                    <option value="4">以預編詮釋資料標題 為標題</option>
+                    @* TIPS_20200320: 若沒有選擇「預編詮釋資料」, 就不可以選擇此項目. *@
+                    <option value="3">自訂標題</option>
+                </select>
+                @* 以上選擇自訂標題才會出現↓ *@
+                <input type="text" name="custitle" placeholder="自訂標題" disabled="disabled" style="margin-top: 4px;">
+            </div>
+
+            <div class="field">
+                <label>預編詮釋資料</label>
+                @*   注意：這裡的上傳類型選項值不是V/A/P/D, 是↑上面註解select option value)。 取預編資料的type = {類別: 主題S、影V、音A、圖P、文D}                *@
+                @Html.DropDownListFor(model => model.ArcPreTempList, new SelectList(Model.ArcPreTempList, "Value", "Text"), new { @class = "ui search selection dropdown" })
+            </div>
+
+            <div class="field">
+                <label>機密等級</label>
+                @Html.DropDownListFor(model => model.FileSecretList, new SelectList(Model.FileSecretList, "Value", "Text"), new { @class = "ui search selection dropdown" })
+            </div>
+
+            <div class="field"><!-- 版權 選單 -->
+                <label>@Html.LabelFor(model=>model.FileLicenseList)</label>
+                @Html.DropDownListFor(model => model.FileLicenseList, new SelectList(Model.FileLicenseList, "Value", "Text"), new { @class = "ui search selection dropdown" })
+            </div>
+
+            @* (2)上傳檔案有套件做掉 === 選擇上傳檔案後出現(3) *@
+            <div class="field">
+                <label>選擇上傳檔案</label>
+                <button type="button" name="mediafile" class="ui button fluid">選擇檔案</button>
+                @*<input type="file" name="mediafile" multiple>*@
+                <div class="ui inverted segment">
+                    <div name="fileList" class="ui inverted relaxed divided middle aligned selection list"></div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    @* (3)確認上傳 *@
+    <div class="actions">
+        <button class="ui yellow ok button @UploadDisabled" type="button">確認上傳</button>
+        <button class="ui cancel button" type="button">取消</button>
+    </div>
+</div>
+
+<!--(1)暫存媒體檔案類別 (2)可接受上傳的副檔名(3)節點樣板,不可刪-->
+<div id="SaveJson" data-MediaFileExtension='@Html.Raw(Json.Encode(Model.MediaFileExtension))'></div>
+<div id="ConfigJson" data-UploadConfig='@Html.Raw(Json.Encode(Model.UploadConfig))'></div>
+<div id="DirTemplate" data-DirTemplate='@Html.Raw(Json.Encode(Model.DirTemplate))'></div>
+
+
+

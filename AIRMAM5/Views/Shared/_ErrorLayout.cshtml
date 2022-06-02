@@ -1,0 +1,39 @@
+﻿@using System.Configuration;
+@{ 
+    string title = ConfigurationManager.AppSettings["Title"];
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>@title</title>
+    <link rel="icon" type="image/png" href="~/Images/favicon-16x16.png">
+    <link href="~/Content/errorpage.min.css" rel="stylesheet" />
+    @RenderSection("Styles", false)
+</head>
+<body>
+    @RenderBody()
+    <script>
+        (function () {
+            const backbtn = document.getElementById("backbtn");
+            try {
+                if (window.self !== window.top) {
+                    //在iframe中
+                    backbtn.style.display = 'none';
+                } else {
+                    //非iframe
+                    backbtn.style.display = 'block';
+                }
+            } catch (error) {
+                backbtn.style.display = 'none';
+            }
+        })();
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+

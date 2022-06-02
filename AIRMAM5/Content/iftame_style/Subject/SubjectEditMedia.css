@@ -1,0 +1,7 @@
+﻿.dropdown.x-hashtag {
+  background-image: none !important; }
+  .dropdown.x-hashtag i.dropdown.icon {
+    display: none; }
+  .dropdown.x-hashtag a.ui.label {
+    color: #fff;
+    background: #2185d0 !important; }

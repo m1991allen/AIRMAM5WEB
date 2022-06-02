@@ -1,0 +1,105 @@
+﻿@import "../../_color.scss";
+@import "../Shared/style.scss";
+@import "../Shared/Function/_tree.scss";
+@import "../Shared/Function/_directoryTab.scss";
+@include _directoryTab();
+._directoryTab {
+    label {
+        background-color: #222 !important;
+    }
+
+    span {
+        /*background-color: transparent !important;*/
+
+        &:hover + label {
+            border: 1px solid $white;
+        }
+    }
+}
+._styleMarginZero {
+    margin: 0 0 2px 0 !important;
+}
+/*--------------------
+   系統目錄維護-目錄欄位樣板  ---- Jamie
+---------------------*/
+/*._directoryTab {
+    color: #fff;
+    margin-top: 10px;
+    overflow: auto;
+}*/
+/*@include ListInfo;*/
+#TipResult {
+    height: 85vh;
+
+    .placeholder.segment {
+        background-color: #333;
+        border: 0.5px dashed #ccc;
+        color: rgba(255, 255, 255, 0.9);
+        padding: 14px;
+        height: 100%;
+    }
+}
+
+/*._directoryTab {
+    color: #fff;
+    margin-top: 10px !important;
+    padding-left:20px;
+    ._styleMarginZero {
+        margin: 1px 0 !important;
+        padding:0;
+        height:47px !important;
+        line-height:47px;
+        label {
+            background: #222;
+        }
+
+        span {
+            background: rgb(67, 67, 67);
+        }
+    }
+}*/
+
+#DirMenu {
+    position: absolute;
+    display: none;
+    z-index: 10;
+    border: .5px dashed #fff;
+    background-color: #000;
+}
+
+
+/*****************
+ 主題列表
+/***************/
+#ShowResult {
+    width: 100%;
+    height: 85vh;
+    margin: -1em;
+    margin: 0;
+}
+
+
+
+.tabulator .tabulator-header .tabulator-col.tabulator-sortable{
+    height:70px !important;/*未知原因導致table header初始渲染載入高度為0,需強迫顯示*/
+}
+
+.x-labels {
+    width: 100%;
+    overflow-wrap: break-word;
+    white-space: normal;
+
+    .ui.label:first-child {
+        margin-left: 1.71429px !important;
+    }
+}
+
+
+
+@media screen and (max-width: 760px) {
+
+    #ShowResult {
+        height: 50vh;
+    }
+}
+

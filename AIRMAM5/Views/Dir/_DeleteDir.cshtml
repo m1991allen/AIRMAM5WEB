@@ -1,0 +1,122 @@
+﻿@model AIRMAM5.DBEntity.Models.Directory.DirectoryEditModel
+
+@HtmlHelper.HtmlModal("DeleteDirModal", "刪除目錄",
+@<form role="form" class="ui inverted form" , id="DeleteDirForm">
+    <div class="field">
+        @Html.LabelFor(model => model.fsNAME)
+        @Html.TextBoxFor(model => model.fsNAME, new { @readonly = "redonly" })
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.fnORDER)
+            @Html.TextBoxFor(model => model.fnORDER, new { @type = "number", @min = "0", @step = "1", @readonly = "redonly" })
+        </div>
+        <div class="field">
+            @if (Model.UsingQueue){
+              @Html.LabelFor(model => model.fsDIRTYPE)
+             if (Model.fsDIRTYPE == "Q")
+             {
+                <div class="ui checkbox checked disabled" name="fsDIRTYPE">
+                    <input type="checkbox" checked disabled>
+                    <label>QUEUE</label>
+                </div>
+              } else {
+                <div class="ui checkbox disabled" name="fsDIRTYPE">
+                    <input type="checkbox" disabled>
+                    <label>QUEUE</label>
+                </div>
+                 }
+               }
+          
+        </div>
+    </div>
+    <div class="two fields">
+            <div class="field">
+                @{
+                      var subjectlist = Model.TemplateList.Where(x => x.fsTABLE == "S").Select(x => new SelectListItem { Text = x.fsNAME, Value = x.fnTEMP_ID.ToString() }).ToList();
+                      subjectlist.Insert(0, new SelectListItem { Value = "", Text = "-- 請選擇主題樣版 --", Selected = false, Disabled = true });
+                }
+                @Html.LabelFor(model => model.fnTEMP_ID_SUBJECT)
+                @Html.DropDownList("fnTEMP_ID_SUBJECT", new SelectList(subjectlist, "Value", "Text"), new { @class = "ui search selection fluid dropdown disabled" })
+            </div>
+            <div class="field">
+                @{
+                      var videolist = Model.TemplateList.Where(x => x.fsTABLE == "V").Select(x => new SelectListItem { Text = x.fsNAME, Value = x.fnTEMP_ID.ToString() }).ToList();
+                      videolist.Insert(0, new SelectListItem { Value = "", Text = "-- 請選擇影片樣版 --", Selected = false, Disabled = true });
+                }
+                @Html.LabelFor(model => model.fnTEMP_ID_VIDEO)
+                @Html.DropDownList("fnTEMP_ID_VIDEO", new SelectList(videolist, "Value", "Text"), new { @class = "ui search selection fluid dropdown disabled" })
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                @{
+                      var audiolist = Model.TemplateList.Where(x => x.fsTABLE == "A").Select(x => new SelectListItem { Text = x.fsNAME, Value = x.fnTEMP_ID.ToString() }).ToList();
+                      audiolist.Insert(0, new SelectListItem { Value = "", Text = "-- 請選擇聲音樣版 --", Selected = false, Disabled = true });
+                }
+                @Html.LabelFor(model => model.fnTEMP_ID_AUDIO)
+                @Html.DropDownList("fnTEMP_ID_AUDIO", new SelectList(audiolist, "Value", "Text"), new { @class = "ui search selection fluid dropdown disabled" })
+            </div>
+            <div class="field">
+                @{
+                    var photolist = Model.TemplateList.Where(x => x.fsTABLE == "P").Select(x => new SelectListItem { Text = x.fsNAME, Value = x.fnTEMP_ID.ToString() }).ToList();
+                    photolist.Insert(0, new SelectListItem { Value = "", Text = "-- 請選擇圖片樣版 --", Selected = false, Disabled = true });
+                }
+                @Html.LabelFor(model => model.fnTEMP_ID_PHOTO)
+                @Html.DropDownList("fnTEMP_ID_PHOTO", new SelectList(photolist, "Value", "Text"), new { @class = "ui search selection fluid dropdown disabled" })
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                @{
+                    var doclist = Model.TemplateList.Where(x => x.fsTABLE == "D").Select(x => new SelectListItem { Text = x.fsNAME, Value = x.fnTEMP_ID.ToString() }).ToList();
+                    doclist.Insert(0, new SelectListItem { Value = "", Text = "-- 請選擇文件樣版 --", Selected = false, Disabled = true });
+                }
+                @Html.LabelFor(model => model.fnTEMP_ID_DOC)
+                @Html.DropDownList("fnTEMP_ID_DOC", new SelectList(doclist, "Value", "Text"), new { @class = "ui search selection fluid dropdown disabled" })
+            </div>
+            <div class="field">
+                @Html.LabelFor(model => model.fsSHOWTYPE)
+                @Html.DropDownList("fsSHOWTYPE", new SelectList(Model.DirShowTypeList, "Value", "Text"), new { @class = "ui search selection fluid dropdown disabled" })
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                @{
+                    Model.GroupList.Insert(0, new SelectListItem { Value = "", Text = "-- 請選擇目錄管理群組 --", Selected = false, Disabled = true });
+                }
+                @Html.LabelFor(model => model.fsADMIN_GROUP)
+                @Html.ListBox("DirGroupsAry", new MultiSelectList(Model.GroupList, "Value", "Text"), new { @class = "ui search multiple selection fluid dropdown disabled", @multiple = "" })
+            </div>
+            <div class="field">
+                @{
+                    Model.UserList.Insert(0, new SelectListItem { Value = "", Text = "-- 請選擇目錄管理使用者 --", Selected = false, Disabled = true });
+                }
+                @Html.LabelFor(model => model.fsADMIN_USER)
+                @Html.ListBox("DirUsersAry", new MultiSelectList(Model.UserList, "Value", "Text"), new { @class = "ui search multiple selection fluid dropdown disabled", @multiple = "" })
+            </div>
+        </div>
+    <div class="field">
+        @Html.LabelFor(model => model.fsDESCRIPTION)
+        @Html.TextAreaFor(model => model.fsDESCRIPTION,new { @readonly="readonly"})
+    </div>
+</form>,
+        @<div>
+            <button type="button" class="ui ok right labeled icon red button">刪除<i class="checkmark icon"></i></button>
+            <button class="ui cancel  button" type="button">取消</button>
+        </div>
+                 )
+
+
+@helper GenerateCheckbox(string fsDIRTYPE)
+{
+    if (fsDIRTYPE == "Q")
+    {<input type="checkbox" name="dirtype" value="@fsDIRTYPE" checked="checked"> }
+    else
+    {
+        <input type="checkbox" name="dirtype" value="@fsDIRTYPE">
+    }
+}
+
+
+

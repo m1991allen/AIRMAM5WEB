@@ -1,0 +1,61 @@
+{
+    "name": "airmam5",
+    "version": "1.0.0",
+    "description": "媒資管理系統",
+    "main": "index.js",
+    "scripts": {
+        "watch": "cross-env NODE_ENV=dev webpack --config webpack.dev.js --watch --mode development",
+        "babel": "cross-env NODE_ENV=dev webpack --config webpack.babel.js --mode production",
+        "dev": "cross-env NODE_ENV=dev webpack --config webpack.dev.js --mode development",
+        "localhost": "cross-env NODE_ENV=localhost webpack --config webpack.prod.js --mode production",
+        "build": "cross-env NODE_ENV=build webpack --config webpack.prod.js --mode production",
+        "fpg": "cross-env NODE_ENV=fpg webpack --config webpack.fpg.js --mode production",
+        "ftvnews": "cross-env NODE_ENV=ftvnews webpack --config webpack.prod.js --mode production"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://ftvcsp@dev.azure.com/ftvcsp/AIRMAM5/_git/AIRMAM5"
+    },
+    "author": "FTV資訊部",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/core": "^7.15.8",
+        "@babel/plugin-proposal-class-properties": "^7.14.5",
+        "@babel/plugin-proposal-object-rest-spread": "^7.15.6",
+        "@babel/preset-env": "^7.15.8",
+        "@babel/preset-typescript": "^7.15.0",
+        "babel-loader": "^8.2.2",
+        "clean-webpack-plugin": "^3.0.0",
+        "cross-env": "^7.0.3",
+        "css-loader": "^3.6.0",
+        "file-loader": "^4.3.0",
+        "glob": "^7.2.0",
+        "html-webpack-plugin": "^4.5.2",
+        "prettier": "1.19.1",
+        "style-loader": "^1.3.0",
+        "ts-loader": "^6.2.2",
+        "typescript": "^3.9.10",
+        "uglifyjs-webpack-plugin": "^2.2.0",
+        "webpack": "^4.46.0",
+        "webpack-cli": "^3.3.10",
+        "webpack-merge": "^4.2.2"
+    },
+    "dependencies": {
+        "@babel/plugin-transform-runtime": "^7.15.8",
+        "@types/jquery": "^3.5.6",
+        "@types/mcustomscrollbar": "^2.8.33",
+        "@types/node": "^12.20.28",
+        "@types/semantic-ui": "^2.2.7",
+        "@types/signalr": "^2.2.37",
+        "@types/source-map": "^0.5.7",
+        "@types/tabulator": "^0.1.0",
+        "@types/tabulator-tables": "^4.9.4",
+        "@types/toastr": "^2.1.39",
+        "core-js": "^3.18.2",
+        "dayjs": "^1.10.7",
+        "inspire-tree": "^6.0.1",
+        "inspire-tree-dom": "^4.0.6",
+        "patternomaly": "^1.3.2",
+        "webpack-hashed-module-id-plugin": "^0.1.4"
+    }
+}

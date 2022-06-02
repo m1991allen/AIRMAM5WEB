@@ -1,0 +1,61 @@
+﻿@import "../Shared/style.scss";
+@import "../../_inputRange.scss";
+@import "../Shared/Function/_directoryTab.scss";
+@import "../Shared/Function/_keyframe.scss";
+@import "../Shared/Function/_paragraph.scss";
+@import "../../_previewPlayer.scss";
+@import "../Shared/Function/_Label.scss";
+@import "../Shared/Function/_DetailModalPlayer.scss";
+@include _transparentLabel;
+@include _DetailModalPlayer($VideoWidth);
+#CutList .item {
+    .fluid.content {
+        width: 100%;
+    }
+}
+div[name="preview"] {
+    #videoMenu{
+        position:relative;
+    }
+}
+
+@include _directoryTab;
+._directoryTab {
+    max-height: 55vh;
+    overflow: auto;
+}
+div[data-tab="keyframe"] {
+   @include _keyframe;
+}
+div[data-tab="paraDescription"] {
+    padding: 0;
+    border: 0 !important;
+    background-color: transparent !important;
+    background: none !important;
+    @include _paragraph;
+}
+
+.x-tabs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: unset !important;
+}
+.x-license-label {
+    color: $yellow;
+
+    &.red {
+        color: #ff0c0c;
+        text-shadow: 0px 0px #ff0c0c;
+    }
+}
+.x-license-message {
+    display: flex;
+    font-size: 0.8em;
+    color: $yellow;
+    padding: 5px 0;
+
+    &.red {
+        color: #fcff4c;
+    }
+}

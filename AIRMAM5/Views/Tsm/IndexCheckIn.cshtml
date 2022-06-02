@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "IndexCheckIn";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+@section Styles{
+    <link href="~/Content/iftame_style/Tsm/TsmCheckin.min.css" rel="stylesheet" />
+}
+
+@HtmlHelper.Breadcrumb(new string[] { "磁帶管理", "磁帶上架" })
+<div class="_Filter">
+
+    <form class="ui inverted form" role="form" id="SearchForm">
+        <div class="fields">
+            <div class="sixteen wide field">
+                <label style="visibility:hidden;">查詢</label>
+                @*<button type="submit" class="ui yellow button">查詢</button>
+                    <button type="button" name="reset" class="ui button">清空</button>*@
+                <button type="button" class="ui _darkGrey disabled button" id="CheckInBtn"><i class="level up alternate icon"></i> 上架</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="Table"></div>
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+
+<!--磁帶上架確認燈箱-->
+@HtmlHelper.ConfirmModal("ConfirmCheckinModal", "磁帶上架確認", "確定要上架這些磁帶嗎？");
+
+@section Scripts{
+    <script src="~/Content/dayJS/dayjs.min.js"></script>
+    @Html.Partial("~/Views/Bundle/TsmCheckIn_Js.cshtml")
+}

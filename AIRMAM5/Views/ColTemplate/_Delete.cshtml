@@ -1,0 +1,64 @@
+﻿@*@model AIRMAM5.DBEntity.Models.Template.TemplateEditModel*@
+@model AIRMAM5.DBEntity.Models.Template.TemplateViewModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("DeleteModal", "確定刪除樣版[" + Model.fsNAME + "]? ",
+@<div>
+    @using (Ajax.BeginForm("Delete", "ColTemplete",
+                    new AjaxOptions { HttpMethod = "POST", OnSuccess = "ShowMessage", OnFailure = "ShowMessage" },
+                    new { role = "form", @class = "ui inverted form", @id = "EditForm" }))
+                {
+        @Html.AntiForgeryToken()
+        <div class="four fields">
+            <div class="field">
+                @Html.LabelFor(model => model.fnTEMP_ID)
+                @Html.TextBoxFor(model => model.fnTEMP_ID, new { @readonly = "readonly" })
+            </div>
+            <div class="required field">
+                @Html.LabelFor(model => model.fsNAME)
+                @Html.TextBoxFor(model => model.fsNAME, new { @readonly = "readonly" })
+            </div>
+            <div class="required field">
+                @Html.LabelFor(model => model.fsTABLE)
+                @Html.TextBoxFor(model => model.TableName, new { @readonly = "readonly" })
+            </div>
+            <div class="field">
+                <div class="ui checkbox">
+                    @Html.CheckBoxFor(model => model.IsSearch, new { disabled = "disabled" })
+                    @Html.LabelFor(model => model.IsSearch)
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.fsDESCRIPTION)
+            @Html.TextAreaFor(model => model.fsDESCRIPTION, new { @readonly = "readonly", @rows = 2 })
+        </div>
+        <div class="four fields">
+            <div class="four wide field">
+                @Html.LabelFor(model => model.CreatedDate)
+                @Html.TextBox("CreatedDate", string.Format($"{Model.CreatedDate:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+            </div>
+            <div class="four wide field">
+                @Html.DisplayNameFor(model => model.CreatedBy)
+                @Html.TextBoxFor(m => m.CreatedBy, new { @readonly = "readonly" })
+            </div>
+            <div class="four wide field">
+                @Html.LabelFor(model => model.UpdatedDate)
+                @Html.TextBox("UpdatedDate", string.Format($"{Model.UpdatedDate:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+            </div>
+            <div class="four wide field">
+                @Html.DisplayNameFor(model => model.UpdatedBy)
+                @Html.TextBoxFor(m => m.UpdatedBy, new { @readonly = "readonly" })
+            </div>
+        </div>
+                }
+</div>,
+  @<div>
+    <button class="ui red ok button" type="submit">刪除</button>
+    <button class="ui cancel  button" type="button">取消</button>
+</div>,
+ "large")
+
+

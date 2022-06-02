@@ -1,0 +1,17 @@
+﻿@import "../Shared/style.scss";
+@import "../../_variable.scss";
+.x-user {
+    &.cards {
+        .card {
+            background: $greyPrimary !important;
+            border: none;
+            box-shadow: none;
+
+            .header, .meta, .description, .content {
+                color: $white !important;
+            }
+        }
+    }
+
+ 
+}

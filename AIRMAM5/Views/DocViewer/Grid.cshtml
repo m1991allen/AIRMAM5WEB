@@ -1,0 +1,138 @@
+﻿@using System.Collections
+
+@model Hashtable
+@{
+    ViewBag.Title = "Document Grid - Click Document Link To View";
+    Layout = "~/Views/Shared/_DocViewerLayout.cshtml";
+}
+
+<h2>Document Grid</h2>
+<br />
+
+<style>
+
+    body {
+        padding: 50px;
+    }
+</style>
+
+<div class="row">
+    <ul class="list-group">
+        @foreach (DictionaryEntry doc in Model)
+        {
+            <li class="list-group-item">
+                <a href="javascript:void(0);" onclick="OpenDocument(this);" data-token="@doc.Value" title="View @doc.Key">@doc.Key</a>
+            </li>
+        }
+    </ul>
+</div>
+<div class="row">
+    <button type="button" onclick="window.location.href='/Home/Index'" class="btn btn-success" data-dismiss="modal">Back</button>
+</div>
+<div class="row">
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Document</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="divDocViewer">
+                        <div id="div_@ViewBag.ViewerID"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<style>
+
+    .modal-dialog {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .modal-content {
+        height: auto;
+        min-height: 100%;
+        border-radius: 0;
+    }
+</style>
+
+@section css {
+
+    @* CSS for the Viewer *@
+    @Html.Raw(ViewBag.ViewerCSS)
+
+    <!-- Bootstrap 3 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+}
+
+
+@section scripts {
+
+    <!-- Viewer header scripts include-->
+    @Html.Raw(ViewBag.ViewerScripts)
+
+    <!-- Bootstrap 3 JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script language="javascript" type="text/javascript">
+
+        var objctlDoc = null; // Server object id is "ctlDoc"
+
+        function Resize() {
+
+            var h = "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight;
+            // var w = "innerWidth" in window ? window.innerWidth : document.documentElement.offsetWidth;
+            // use width variable w if required
+
+            $("#divDocViewer").height(h - 150); // adjust value as required
+
+        }
+
+
+        $(window).on("load", function () {
+
+
+            /* Init code for viewer */
+            @Html.Raw(ViewBag.ViewerInit)
+
+            Resize();
+
+        });
+
+
+        $(window).resize(function () {
+            Resize();
+        });
+
+        $('#myModal').on('shown.bs.modal', function () {
+            // Refresh the viewer
+            setTimeout(function () { objctlDoc.HideThumbs(true); objctlDoc.HideThumbs(false); }, 100);
+        });
+
+        function OpenDocument(link) {
+            var token = $(link).attr("data-token");
+
+            setTimeout(function () { objctlDoc.View(token);}, 100);
+            $('#myModal').modal('show');
+        }
+
+    </script>
+}
+
+

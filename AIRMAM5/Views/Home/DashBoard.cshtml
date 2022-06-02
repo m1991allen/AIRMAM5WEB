@@ -1,0 +1,289 @@
+﻿@model AIRMAM5.DBEntity.Models.Shared.DashboardViewModel
+@using AIRMAM5.DBEntity.Models.Enums
+@{
+    ViewBag.Title = "DashBoard";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+    string AnnRowDisplay = Model.AnnounceData.Count() > 0 ? "flex" : "none";
+}
+
+@section Styles{
+    <link href="~/Content/chartJS/Chart.min.css" rel="stylesheet" />
+    <link href="~/Content/iftame_style/Home/HomeDashBoard.min.css" rel="stylesheet" />
+}
+
+@*<h2 class="ui inverted grey small header">@HtmlHelper.Breadcrumb(new string[] { "" })</h2>*@
+
+    <div class="ui stackable grid" style="overflow-y:auto;overflow-x:hidden;">
+   <!--入庫調用數量列-->
+        <div class="sixteen wide column">
+            <div class="ui six stackable cards">
+                <div class="ui pink card">
+                    <!--今日入庫-->
+                    <div class="right aligned content">
+                        <div class="ui pink huge header" id="todayupload">@Model.StatisticsData.Where(x => x.Category == 1).FirstOrDefault().Counts </div>
+                    </div>
+                    <div class="extra content">
+                        <i class="pink upload icon"></i>
+                        <div class="right floated">
+                            @Model.StatisticsData.Where(x => x.Category == 1).FirstOrDefault().LabelStr
+                        </div>
+                    </div>
+                </div>
+                <div class="ui pink card">
+                    <!--今日調用-->
+                    <div class="right aligned content">
+                        <div class="ui pink huge header" id="todaybooking">
+                            @Model.StatisticsData.Where(x => x.Category == 2).FirstOrDefault().Counts
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <i class="pink download icon"></i>
+                        <div class="right floated">
+                            @Model.StatisticsData.Where(x => x.Category == 2).FirstOrDefault().LabelStr
+                        </div>
+                    </div>
+                </div>
+                <div class="ui teal card">
+                    <!--本月入庫-->
+                    <div class="right aligned content">
+                        <div class="ui teal huge header" id="monthupload">
+                            @Model.StatisticsData.Where(x => x.Category == 3).FirstOrDefault().Counts
+                        </div>
+                    </div>
+                    <div class="extra  content">
+                        <i class="teal cloud upload icon"></i>
+                        <div class="right floated">
+                            @Model.StatisticsData.Where(x => x.Category == 3).FirstOrDefault().LabelStr
+                        </div>
+                    </div>
+                </div>
+                <div class="ui card">
+                    <!--本月調用-->
+                    <div class="right aligned content">
+                        <div class="ui teal huge header" id="monthbooking">
+                            @Model.StatisticsData.Where(x => x.Category == 4).FirstOrDefault().Counts
+                        </div>
+                    </div>
+                    <div class="extra  content">
+                        <i class="teal cloud download icon"></i>
+                        <div class="right floated">
+                            @Model.StatisticsData.Where(x => x.Category == 4).FirstOrDefault().LabelStr
+                        </div>
+                    </div>
+                </div>
+                <div class="ui grey card">
+                    <!--昨日入庫-->
+                    <div class="right aligned content">
+                        <div class="ui grey huge header" id="yesterdayupload">
+                            @Model.StatisticsData.Where(x => x.Category == 5).FirstOrDefault().Counts
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <i class="grey upload icon"></i>
+                        <div class="right floated">
+                            @Model.StatisticsData.Where(x => x.Category == 5).FirstOrDefault().LabelStr
+                        </div>
+                    </div>
+                </div>
+                <div class="ui grey card">
+                    <!--昨日調用-->
+                    <div class="right aligned content">
+                        <div class="ui grey huge header" id="yesterdaybooking">
+                            @Model.StatisticsData.Where(x => x.Category == 6).FirstOrDefault().Counts
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <i class="grey download icon"></i>
+                        <div class="right floated">
+                            @Model.StatisticsData.Where(x => x.Category == 6).FirstOrDefault().LabelStr
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     <!--圖表列-->
+        <div class="row" id="guagechartRow">
+            <div class="four wide computer sixteen wide tablet column">
+                <!--目前調用作業-->
+                <div class="ui fluid card">
+                    <div class="content">
+                        <canvas id="guageBoooking" data-chart='@Html.Raw(Json.Encode(Model.WorkBookQty))'></canvas>
+                    </div>
+                </div>
+                <!--目前入庫作業-->
+                <div class="ui fluid card">
+                    <div class="content">
+                        <canvas id="guageUpload" data-chart='@Html.Raw(Json.Encode(Model.WorkArcQty))'></canvas>
+                    </div>
+                </div>
+            </div>
+            <!--今日前10大調用者-->
+            <div class="twelve wide computer sixteen wide tablet column ui card" style="height:100%;">
+                <div class="extra content">
+                    <button type="button" class="ui black button right floated" id="stackchangeBtn">切換圖表</button>
+                </div>
+                <div class="content">
+                    <canvas id="stackBar" data-chart='@Html.Raw(Json.Encode(Model.BookingTodayTOP))' style="min-height:30vh;max-height:100%;"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="AnnRows" style="display:@AnnRowDisplay;">
+            <!--區塊:系統公告 -->
+            <div class="sixteen wide column">
+                <div class="ui inverted segment">
+                    <div class="ui grey horizontal header"><i class="bullhorn down icon"></i> 系統公告 </div>
+                    <div class="ui doubling cards" id="AnnCards">
+                        @{
+                            foreach (var itm in Model.AnnounceData)
+                            {
+                                IHtmlString anncontent = new HtmlString(@itm.AnnContent.TrimStart());
+                                string Color = (itm.AnnType == AnnounceTypeEnum.O.ToString()) ? "teal" : (itm.AnnType == AnnounceTypeEnum.Y.ToString()) ? "red" : "orange";
+                                <div class="ui card">
+                                    <div class="content">
+                                        <span class="right floated mini ui  @Color label">@itm.AnnTypeName</span>
+                                        <div class="header">
+                                            @itm.AnnTitle
+                                        </div>
+                                        <div class="meta">
+                                            @itm.AnnPublishDept  @itm.AnnSdate
+                                        </div>
+                                        <div class="description">
+                                            @anncontent
+                                        </div>
+                                    </div>
+                                    <div class="extra content">
+
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!--區塊: 近期活動Chart -->
+            <div class="eleven wide computer sixteen wide tablet column">
+                <div class="ui fluid card chartjs" id="chartjscard" style="height:100%;">
+                    <div class="ui grey header"><i class="chart line icon"></i>近期活動 </div>
+                    <div class="content">
+                        <canvas id="myChart" data-chart='@Html.Raw(Json.Encode(Model.Charts))'></canvas>
+                    </div>
+                </div>
+            </div>
+            <!--區塊:熱索關鍵字 TOP 10 -->
+            <div class="five wide computer sixteen wide tablet column">
+                <div class="ui fluid card hotkeys" id="hotkeyscard" style="height:100%;">
+                    <div class="ui grey horizontal header"> <i class="search down icon"></i> 熱索關鍵字 </div>
+                    <div class="content">
+                        <select class="ui compact selection dropdown right floated" name="hotkey">
+                            <option value="7" d>近一週</option>
+                            <option value="@DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)" selected>近一個月</option>
+                            <option value="@DateTime.DaysInMonth(DateTime.Now.Year,  DateTime.Now.AddMonths(-1).Month)">近兩個月</option>
+                        </select>
+                        <div class="ui labeled inverted transparent compact input right floated" data-inverted="" data-tooltip="最多查詢50筆" data-position="top center">
+                            <div class="ui label">
+                                TOP
+                            </div>
+                            <input id="topHotKey" type="number" placeholder="排名" min="1" step="1" max="50" style="max-width:100px;">
+                        </div>
+                        <table class="ui inverted basic selectable  stackable striped table hotkeys">
+                            <thead>
+                                <tr>
+                                    <th>關鍵字</th>
+                                    <th>次數</th>
+                                    <th>最近搜尋時間</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ChangeHotKey"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--/// -->
+        </div>
+        @*<div class="row">
+            <!--區塊:最新入庫 -->
+            <div class="eleven wide column">
+                    <div class="ui fluid card newupload" id="newuploadcard">
+                        <div class="ui grey horizontal header"><i class="angle down icon"></i> 最新入庫(近14日統計) </div>
+                        <div class="content">
+                            <table class="ui inverted selectable basic stackable striped table">
+                                <thead>
+                                    <tr>
+                                        <th>標題</th>
+                                        <th>檔案類別</th>
+                                        <th>路徑</th>
+                                        <th>建立人員</th>
+                                        <th>入庫時間</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        foreach (var itm in Model.NewUploadData)
+                                        {
+                                            <tr>
+                                                <td title="副檔名.@itm.FileExtension">@itm.Title </td>
+                                                <td>@itm.FileCategory </td>
+                                                <td title="檔編: @itm.fsFILE_NO">@itm.SubjectPath </td>
+                                                <td>@itm.CreatedByName </td>
+                                                <td>@itm.CreatedDate </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <!--區塊:最近過審紀錄 -->
+            <div class="five wide column">
+                    <div class="ui fluid card VerifyBooking" id="Verifycard" style="height:100%;">
+                        <div class="ui grey horizontal header"><i class="file alternate icon"></i> 最近過審紀錄 </div>
+                        <div class="content">
+                            <table class="ui inverted basic selectable  stackable striped table VerifyBooking">
+                                <thead>
+                                    <tr>
+                                        <th>調用編號</th>
+                                        <th>調用時間</th>
+                                        <th>審核狀態</th>
+                                        <th>審核說明</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="width:100%;">
+                                    @{
+                                        for (var m = 1; m < 8; m++)
+                                        {
+                                            string _clr = (m % 2 == 0) ? "hotpink" : "";
+                                            <tr style="color: @_clr;">
+                                                <td>@m </td>
+                                                <td>2019/02/16 15:16:12 </td>
+                                                @if (m % 2 == 0)
+                                                {
+                                                    <td>未過審</td>
+                                                    <td>不符合資格</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>已過審</td>
+                                                    <td></td>
+                                                }
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>*@
+
+        @*<div> @Html.Raw(Json.Encode(Model.Charts.Months)) </div>*@
+    </div>
+
+@section Scripts{
+    <!--Notice:Chart.js目前使用2.5版本,2.6~2.9版本在交互與動態資料同步上有已知的奇怪Bug-->
+    <script src="~/Content/chartJS/Chart.min.js"></script>
+    @Html.Partial("~/Views/Bundle/HomeDashBoard_Js.cshtml")
+    @*<script src="~/Scripts/dist/HomeDashBoard.min.js"></script>*@
+}

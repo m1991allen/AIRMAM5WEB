@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+
+@section Styles{
+    <link href="~/Content/iftame_style/Synonym/SynonymIndex.min.css" rel="stylesheet" />
+}
+@HtmlHelper.Breadcrumb(new string[] { "系統設定", "同義詞維護" })
+<div class="_Filter">
+    @Html.Action("_Search", "Synonym")
+</div>
+<table id="Table"></table>
+
+<!--新增燈箱-->
+@Html.Action("_Create", "Synonym")
+
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+
+@section Scripts{
+    <script src="~/Content/dayJS/dayjs.min.js"></script>
+    <script src="~/Content/semanticUIdatepicker/calendar.min.js" type="text/javascript"></script>
+    @Html.Partial("~/Views/Bundle/SynonymIndex_Js.cshtml")
+    @*<script src="~/Scripts/dist/SynonymIndex.min.js"></script>*@
+
+}

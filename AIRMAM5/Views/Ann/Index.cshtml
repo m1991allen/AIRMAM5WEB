@@ -1,0 +1,53 @@
+﻿@model IEnumerable<AIRMAM5.DBEntity.Models.Announce.AnnouncePublicViewModel>
+@using AIRMAM5.DBEntity.Models.Enums
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+@section Styles{
+   <link href="~/Content/iftame_style/Ann/AnnIndex.min.css" rel="stylesheet" />
+}
+<div class="ui four stackable cards">
+    @foreach (var item in Model)
+    {
+    <div class="ui raised card">
+        <div class="content _TitleScroll">
+
+            <div class="header">@item.AnnTitle</div>
+            @*<span class="">@item.AnnSdate.ToString("yyyy/MM/dd HH:mm") </span>*@
+
+            <div class="description secondary">
+                @item.AnnContent
+            </div>
+        </div>
+       
+        <div class="extra content">
+            <p class="">公告時間 : @item.AnnSdate.ToString("yyyy/MM/dd HH:mm") </p>
+            <p class="">
+                <span class="ui labeled">@Html.DisplayNameFor(model => model.AnnPublishDept) : </span>
+                <span class="ui horizontal blue label">@item.AnnPublishDept</span>
+                @*<span class="ui teal tag label">@item.AnnPublishDept</span>*@
+            </p>
+            <p class="">
+                <span class="ui labeled">@Html.DisplayNameFor(model => model.AnnTypeName) : </span>
+                @if (item.AnnType == AnnounceTypeEnum.O.ToString())
+                {
+                    <span class="ui horizontal teal label">@item.AnnTypeName</span>
+                }
+                else if (item.AnnType == AnnounceTypeEnum.Y.ToString())
+                {
+                    <span class="ui horizontal red label">@item.AnnTypeName</span>
+                }
+                else
+                {
+                    <span class="ui horizontal yellow label">@item.AnnTypeName</span>
+                }
+            </p>
+
+        </div>
+    </div>
+    }
+
+</div>
+
+

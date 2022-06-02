@@ -1,0 +1,24 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "錯誤";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIRMAM媒體資產管理系統</title>
+    <link href="~/Content/errorpage.min.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>500</h1>
+    <p>系統發生未知錯誤</p>
+    <p class="quotething"> “抱歉，我們最終出了問題。我們正在努力解決這個問題.”</p><br>
+    <div align="center">
+        <a class="button404" href="@Url.Action("Index","Home")">回首頁</a>
+    </div>
+</body>
+</html>

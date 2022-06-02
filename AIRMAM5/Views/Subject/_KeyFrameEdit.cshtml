@@ -1,0 +1,21 @@
+﻿@model AIRMAM5.DBEntity.Models.Subject.VideoKeyFrameModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("KeyFrameEditModal", "編輯關鍵影格【"+Model.Time+"】",
+@<form class="ui inverted form" role="form">
+     <div class="ui field">
+         @Html.LabelFor(model => model.Title)
+         @Html.TextBoxFor(model => model.Title)
+     </div>
+    <div class="ui field req">
+        @Html.LabelFor(model => model.Description)
+        @Html.TextAreaFor(model => model.Description, new { @row = "10" })
+    </div>
+</form>,
+ @<div>
+    <button class="ui yellow approve button" type="button">儲存</button>
+    <button class="ui deny button" type="button">取消</button>
+</div>,
+ "small")

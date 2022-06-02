@@ -1,0 +1,59 @@
+﻿@model AIRMAM5.DBEntity.Models.Subject.SubjectFileSeqmentModel
+
+@if (Model == null)
+{
+    @HtmlHelper.HtmlModal("ParagraphEditModal", "編輯段落描述【檔案編號:無法取得!】",
+     @<form class="ui inverted form" role="form" id="EditParagraphForm">
+             <div class="ui field required">
+                 <label for="BegTime">開始時間</label>
+                 <div class="ui action input">
+                     @Html.TextBox("BegTime", null, new { @readonly = "readonly", data_Seconds = Model.BegTime })
+                     <button type="button" class="ui grey button" name="PlayerDuration">設定</button>
+                 </div>
+             </div>
+             <div class="ui field required">
+                 <label for="EndTime">結束時間</label>
+                 <div class="ui action input">
+                     @Html.TextBox("EndTime",null, new { @readonly = "readonly", data_Seconds = Model.EndTime })
+                     <button type="button" class="ui grey button" name="PlayerDuration">設定</button>
+                 </div>
+             </div>
+             <div class="ui field required">
+                 <label>描述</label>
+                 @Html.TextArea("Description", null, new { @row = "20" })
+             </div>
+     </form>,
+         @<div>
+             <button type="button" class="ui approve right labeled icon green button">編輯<i class="edit icon"></i></button>
+             <button type="button" class="ui deny  button">取消</button>
+         </div>,
+     "small")
+}else{
+  @HtmlHelper.HtmlModal("ParagraphEditModal", "編輯段落描述【檔案編號:" + Model.fsFILE_NO + "】 - " + Model.SeqNo,
+    @<form class="ui inverted form" role="form">
+    <div class="ui field required">
+        @Html.LabelFor(model => model.BegTime)
+        <div class="ui action input">
+            @Html.TextBox("BegTime", Model.BegTime, new { @readonly = "readonly", data_Seconds = Model.BegTime })
+            <button type="button" class="ui grey button" name="PlayerDuration">設定</button>
+        </div>
+    </div>
+    <div class="ui field required">
+        @Html.LabelFor(model => model.EndTime)
+        <div class="ui action input">
+            @Html.TextBox("EndTime", Model.EndTime, new { @readonly = "readonly", data_Seconds = Model.EndTime })
+            <button type="button" class="ui grey button" name="PlayerDuration">設定</button>
+        </div>
+    </div>
+    <div class="ui field required">
+        @Html.LabelFor(model => model.Description)
+        @Html.TextAreaFor(model => model.Description, new { @row = "20" })
+    </div>
+</form>,
+  @<div>
+      <button type="button" class="ui approve right labeled icon green button">儲存<i class="edit icon"></i></button>
+      <button type="button" class="ui deny  button">取消</button>
+  </div>,
+ "small")
+}
+

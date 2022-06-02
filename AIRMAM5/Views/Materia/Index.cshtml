@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "SecondmentList";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+@section Styles{
+    <link href="~/Content/iftame_style/Materia/MateriaIndex.min.css" rel="stylesheet" />
+}
+@HtmlHelper.Breadcrumb(new string[] { "檔案調用", "我的調用清單" })
+<div class="_Filter">
+    <div class="ui stackable three column grid">
+        <div class="computer only column nopadding">
+            <div class="ui horizontal inverted divider">
+                <span class="ui circular grey label">1</span>
+                加入借調
+            </div>
+        </div>
+        <div class="column  nopadding">
+            <div class="ui horizontal inverted divider">
+                <span class="ui red circular label">2</span>
+                我的調用清單
+            </div>
+        </div>
+        <div class="computer only column  nopadding">
+            <div class="ui horizontal inverted divider">
+                <span class="ui circular grey label">3</span>
+                我的調用狀態
+            </div>
+        </div>
+    </div>
+    <button name="addbooking" type="button" class="ui yellow button"><i class="add icon"></i>確定調用</button>
+    <button name="reload" type="button" class="ui _darkGrey button">重載列表</button>
+    <button name="batchdelete" type="button" class="ui _darkGrey button"><i class="delete icon"></i>刪除</button>
+</div>
+<div id="Table"></div>
+
+
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+<!--刪除確認燈箱-->
+@HtmlHelper.ConfirmModal("DeleteConfirm", "確認是否要刪除資料", "確定要刪除指定檔案?")
+@HtmlHelper.ConfirmModal("BatchDeleteConfirm", "確認是否要刪除資料", "確定要刪除指定檔案?")
+@HtmlHelper.ConfirmModal("FileEditConfirm", "確定要關閉剪裁視窗", "還有剪裁資料未儲存完成，確定要關閉剪裁視窗?")
+@section scripts{
+    <script src="~/Content/wavesurfer/wavesurfer.js"></script>
+    @Html.Partial("~/Views/Bundle/MateriaIndex_Js.cshtml")
+    @*<script src="~/Scripts/dist/MateriaIndex.min.js"></script>*@
+}

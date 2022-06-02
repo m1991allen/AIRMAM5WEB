@@ -1,0 +1,56 @@
+﻿@model AIRMAM5.DBEntity.DBEntity.tbmGROUPS
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("DeleteModal", "您正要刪除群組資料!請確認！",
+@<div>
+    @using (Html.BeginForm("Delete", "Group", new { id = Model.fsGROUP_ID }, FormMethod.Post, new { role = "form", @class = "ui form", @id = "DeleteForm" }))
+                {
+        <div class="field">
+            <h5 class="ui red header"> 確定要刪除這筆資料嗎?</h5>
+        </div>
+        <div class="three fields">
+            @*<div class="field">
+                @Html.DisplayNameFor(model => model.fsGROUP_ID)
+                @Html.TextBoxFor(model => model.fsGROUP_ID,new { @readonly="readonly"})
+                </div>*@
+            <div class="field">
+                @Html.DisplayNameFor(model => model.fsNAME)
+                @Html.TextBoxFor(model => model.fsNAME, new { @readonly = "readonly" })
+            </div>
+            <div class="field">
+                @Html.DisplayNameFor(model => model.fsDESCRIPTION)
+                @Html.TextBoxFor(model => model.fsDESCRIPTION, new { @readonly = "readonly" })
+            </div>
+            <div class="field">
+                @Html.DisplayNameFor(model => model.fsTYPE)
+                @Html.TextBoxFor(model => model.fsTYPE, new { @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                @Html.DisplayNameFor(model => model.fdCREATED_DATE)
+                @Html.TextBoxFor(model => model.fdCREATED_DATE, string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.fdCREATED_DATE), new { @readonly = "readonly" })
+            </div>
+            <div class="field">
+                @Html.DisplayNameFor(model => model.fsCREATED_BY)
+                @Html.TextBoxFor(model => model.fsCREATED_BY, new { @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                @Html.DisplayNameFor(model => model.fdUPDATED_DATE)
+                @Html.TextBoxFor(model => model.fdUPDATED_DATE, string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.fdUPDATED_DATE), new { @readonly = "readonly" })
+            </div>
+            <div class="field">
+                @Html.DisplayNameFor(model => model.fsUPDATED_BY)
+                @Html.TextBoxFor(model => model.fsUPDATED_BY, new { @readonly = "readonly" })
+            </div>
+        </div>
+    }
+        </div>
+,@<div>
+    <button type="button" class="ui ok right labeled icon red button">刪除<i class="checkmark icon"></i></button>
+    <button type="button" class="ui black cancel button">取消</button>
+</div>)

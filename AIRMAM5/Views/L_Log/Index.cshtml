@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+@section Styles{
+    <link href="~/Content/iftame_style/L_Log/L_LogIndex.min.css" rel="stylesheet" />
+}
+
+@HtmlHelper.Breadcrumb(new string[] { "查詢作業", "系統操作紀錄" })
+
+<div class="_Filter">
+    @Html.Action("_Search", "L_Log")
+</div>
+<div id="Table"></div>
+
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+
+@section Scripts{
+    <script src="~/Content/dayJS/dayjs.min.js"></script>
+    <script src="~/Content/semanticUIdatepicker/calendar.min.js" type="text/javascript"></script>
+    @Html.Partial("~/Views/Bundle/LLogIndex_Js.cshtml")
+    @*<script src="~/Scripts/dist/LLogIndex.min.js"></script>*@
+}
+

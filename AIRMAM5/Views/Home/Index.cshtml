@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles{
+    <link href="~/Content/iftame_style/Home/HomeIndex.min.css" rel="stylesheet" />
+}
+
+@* 第一次預設載入系統公告畫面 *@
+<div id="TitleTab" class="ui top attached tabular menu tabs">
+    <a class="item permanent active" data-tab="first" data-add="0">
+        儀表板
+    </a>
+</div>
+<div id="ContentTab">
+    <div id="first" class="ui bottom attached tab active _content" data-tab="first">
+        <iframe id="DashBoardIframe" src="@Url.Action("DashBoard","Home")"></iframe>
+        @*<iframe src="@Url.Action("Index","Home")"></iframe>*@
+    </div>
+</div>
+

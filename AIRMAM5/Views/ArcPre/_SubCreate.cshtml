@@ -1,0 +1,103 @@
+﻿@model AIRMAM5.DBEntity.Models.ArcPre.ArcPreModel
+@using Newtonsoft.Json;
+@{
+    Layout = "";
+    var _cser = new AIRMAM5.DBEntity.Services.CodeService();
+}
+<link href="~/Content/iftame_style/Subject/SubjectEditMedia.min.css" rel="stylesheet" />
+@HtmlHelper.HtmlModal("SubCreateModal", "新增詮釋資料",
+@<div>
+    @using (Ajax.BeginForm("Create", "ArcPre",
+                 new AjaxOptions { HttpMethod = "POST", OnSuccess = "ShowMessage", OnFailure = "ShowMessage" },
+                 new { role = "form", @class = "ui inverted form", @id = "SubCreateForm" }))
+                {
+        <div class="required field">
+            @Html.LabelFor(m => m.fsNAME)
+            @Html.TextBoxFor(m => m.fsNAME)
+        </div>
+        <dvi class="two fields">
+            <div class="field">
+                @Html.LabelFor(m => m.fsTYPE)
+                @Html.TextBoxFor(m => m.fsTYPE_NAME, new { @readonly = "readonly" })
+                @Html.HiddenFor(m => m.fsTYPE)
+            </div>
+            <div class="field">
+                @Html.LabelFor(m => m.fnTEMP_ID)
+                @Html.TextBoxFor(m => m.fsTEMP_NAME, new { @readonly = "readonly" })
+                @Html.HiddenFor(m => m.fnTEMP_ID)
+            </div>
+        </dvi>
+        <div class="ui inverted horizontal divider">編輯詮釋資料</div>
+        <div class="required field">
+            @Html.LabelFor(m => m.fsTITLE)
+            @Html.TextBoxFor(m => m.fsTITLE)
+        </div>
+        <div class="field">
+            @Html.LabelFor(m => m.fsDESCRIPTION)
+            @Html.TextAreaFor(m => m.fsDESCRIPTION, new { @rows = 3 })
+        </div>
+        <div class="field">
+            @{ string HashTag = Model.HashTag==null || Model.HashTag.Length==0? "": string.Join("^", Model.HashTag);}
+            @Html.LabelFor(model => model.HashTag)
+            @Html.HiddenFor(model => @HashTag)
+            <div class="ui fluid multiple search selection  x-hashtag dropdown" name="x-hashtag">
+                <input name="tags" type="hidden" value="@HashTag.Replace("^",",")">
+                <i class="dropdown icon"></i>
+                <div class="default text">輸入後按下Enter，可以創建新的標籤</div>
+                <div class="menu"></div>
+            </div>
+        </div>
+        <div name="ArcPreAttributes">
+            <!--自訂欄位, 判斷型態決定顯示控制項-->
+            @foreach (var itm in Model.ArcPreAttributes)
+            {
+                string _req = itm.IsNullable ? "" : "required";
+                string itmjson = JsonConvert.SerializeObject(itm);
+                string ArcPreAttribute = itmjson.Replace("&quot;", @""""); ;
+                if (itm.FieldType == "NVARCHAR")
+                {
+                    if (itm.IsMultiline)
+                    {
+                        <div class="@_req field">
+                             @Html.Label(itm.Field, itm.FieldName)
+                            @Html.TextArea(itm.Field, itm.FieldDef, new { @rows = 3, @maxlength = itm.FieldLen, data_nullable = itm.IsNullable, data_ArcPreAttribute= ArcPreAttribute })
+                        </div>
+                    }else{
+                        <div class="@_req field">
+                             @Html.Label(itm.Field, itm.FieldName)
+                            @Html.TextBox(itm.Field, itm.FieldDef, string.Empty, new { @type = "text", @maxlength = itm.FieldLen, data_nullable = itm.IsNullable, data_ArcPreAttribute = ArcPreAttribute })
+                        </div>
+                    }
+                } else if (itm.FieldType == "INTEGER"){
+                        <div class="@_req field">
+                             @Html.Label(itm.Field, itm.FieldName)
+                            @Html.TextBox(itm.Field, itm.FieldDef, new { @type = "number", @min = 0, @setp = 1, data_nullable = itm.IsNullable, data_ArcPreAttribute = ArcPreAttribute })
+                        </div>
+                }else if (itm.FieldType == "DATETIME"){
+                        <div class="@_req ui calendar field">
+                             @Html.Label(itm.Field, itm.FieldName) 
+                            @Html.TextBox(itm.Field, itm.FieldDef, new { @type = "text", data_nullable = itm.IsNullable, data_ArcPreAttribute = ArcPreAttribute })
+                        </div>
+                }else if (itm.FieldType == "CODE"){
+                    <div class="@_req field">
+                         @Html.Label(itm.Field, itm.FieldName) 
+                        @{ var _ddlCode = _cser.GetCodeItemList(itm.FieldCodeId, true); }
+                        @if (itm.FieldCodeCnt == 1){
+                            @Html.DropDownList(itm.Field, new SelectList(_ddlCode, "Value", "Text"), new { @class = "ui search selection fluid dropdown", data_nullable = itm.IsNullable, data_ArcPreAttribute = ArcPreAttribute })
+                        }else{
+                            var _clist = _cser.CodeListItemSelected(itm.FieldCodeId, itm.FieldValue);
+                            @Html.DropDownList(itm.Field, _clist, new { @class = "ui search multiple selection fluid dropdown", @multiple = "", data_nullable = itm.IsNullable, data_ArcPreAttribute = ArcPreAttribute })
+                         }
+                    </div>
+                }
+        }
+        </div>
+     }
+</div>,
+        @<div>
+            <button type="button" class="ui ok yellow  button">確定</button>
+            <button class="ui cancel  button" type="button">取消</button>
+        </div>
+  )
+ )
+

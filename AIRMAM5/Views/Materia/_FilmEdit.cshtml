@@ -1,0 +1,89 @@
+﻿@model AIRMAM5.DBEntity.Models.Material.MaterialFilmModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("FilmModal", "段落剪輯",
+    @<div id="CreateFilm" class="ui stackable two column grid">
+        <div class="ten wide black column nopaddingLR">
+            <div class="ui stackable grid">
+                <div class="eight wide column">
+                    <div class="ui fluid inverted transparent  input">
+                        <label for="BeginTime" class="ui label">起始時間</label>
+                        <input type="text" placeholder="起始時間(唯讀)" readonly title="不開放直接輸入" id="BeginTime" style="color:yellow;" />
+                    </div>
+                </div>
+                <div class="eight wide column">
+                    <div class="ui fluid inverted transparent  input">
+                        <label for="EndTime" class="ui label">結束時間</label>
+                        <input type="text" placeholder="結束時間(唯讀)" readonly title="不開放直接輸入" id="EndTime" style="color:yellow;" />
+                    </div>
+                </div>
+            </div>
+            <!--注意:因為有指定videoMenu,所以video與menu容器外包一層div,讓全螢幕時僅顯示此div-->
+            <div name="preview">
+                <div id="fullScreenContainer">
+                    <div class="ui embed" data-url="@Model.FileDLowUrl" data-placeholder="@Url.Content("~/Images/noImage.png")" data-icon="right circle arrow"></div>
+                    <div id="videoMenu"></div>
+                </div>
+            </div>
+            @*<div style="width:100%;background-color:#000;height:270px;">
+                    <div id="fullScreenContainer" style="margin-top:10px;" name="preview">
+                        <div class="ui embed" data-url="@Model.FileDLowUrl" data-placeholder="@Url.Content("~/Images/noImage.png")" data-icon="right circle arrow"></div>
+                        <div id="videoMenu"></div>
+                    </div>
+                </div>*@
+        </div>
+        <div class="six wide column">
+            <div class="ui  grid">
+                <div class="row">
+                    <div class="sixteen wide column">
+                        <h4 class="ui horizontal inverted divider header"><i class="tag icon"></i> 剪輯清單 </h4>
+                        <div class="ui  divided selection inverted list" id="CutList" style="max-height:60vh;overflow:auto;"> </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>,
+        @<div>
+            <button id="SetBegin" type="button" class="ui violet inverted icon button left floated"><i class="hourglass start icon"></i>設定起始</button>
+            <button id="SetEnd" type="button" class="ui violet inverted icon  button  left floated"><i class="hourglass end icon"></i>設定結束</button>
+            <button id="AddList" type="button" class="ui  yellow inverted button  left floated"><i class="plus icon"></i>加入清單</button>
+            <button class="ui yellow ok  button" type="button">新增</button>
+            <button class="ui cancel  button" type="button">取消</button>
+        </div>, "large")
+
+<script>
+    @*var jsdata = [];
+    jsdata.push(
+        {
+            FileCategory: "@Model.FileCategory",
+            FileNo: "@Model.FileNo",
+            MaterialDesc: "",
+            MaterialNote: "@DateTime.Now.ToShortTimeString()",
+            ParameterStr: "01.234;05.678;"
+        });
+    function _submit() {
+        //console.log('------(確認調用.CreateFilm)---(_submit)------');
+        //console.log(jsdata);
+        $.ajax({
+            url: "../Materia/FilmEdit",
+            type: "POST",
+            data: JSON.stringify(jsdata),
+            cache: false,
+            contentType: "application/json",
+            beforeSend: function () { },
+            success: function (data) {
+                if (data.IsSuccess == false) {
+                    toastr.error(data.Message);
+                }
+                toastr.success(data.Message);
+                console.log(data);
+                console.log("------(確認調用.CreateFilm)---success---Done------");
+            },
+            error: function (data) { },
+            complete: function (data) { }
+        });
+    }*@
+</script>

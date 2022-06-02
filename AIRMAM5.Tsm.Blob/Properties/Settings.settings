@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AIRMAM5.Tsm.Blob.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="fsAZ_CMD" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files (x86)\Microsoft SDKs\Azure\CLI2\wbin\az</Value>
+    </Setting>
+    <Setting Name="fsACCOUNT_NAME" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">airmamblob</Value>
+    </Setting>
+    <Setting Name="fsACCOUNT_KEY" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">9JMBVoyWaVAYKdKtoOd04CzhXT6O4lEi+kd+2aXYmIHDNUbL3rNmZigHNZdGafJVI16XMBB0YDtz1rIoTtsDuQ==</Value>
+    </Setting>
+    <Setting Name="fsCONTAINER_NAME" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">hvideo</Value>
+    </Setting>
+    <Setting Name="fsLOG_PATH" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\AIRMAM5LOG\Blob\</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

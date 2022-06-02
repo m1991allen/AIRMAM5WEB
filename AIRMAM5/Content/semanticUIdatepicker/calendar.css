@@ -1,0 +1,165 @@
+﻿@charset "UTF-8";
+/*!
+ * # Semantic UI 0.0.8 - Calendar
+ * http://github.com/semantic-org/semantic-ui/
+ */
+/*******************************
+            Popup
+*******************************/
+.ui.calendar .ui.popup {
+  max-width: none;
+  padding: 0;
+  border: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+/*******************************
+            Calendar
+*******************************/
+.ui.calendar .calendar:focus {
+  outline: 0; }
+
+/*******************************
+            Grid
+*******************************/
+.ui.calendar .ui.popup .ui.grid {
+  display: block;
+  white-space: nowrap; }
+
+.ui.calendar .ui.popup .ui.grid > .column {
+  width: auto; }
+
+/*******************************
+            Table
+*******************************/
+.ui.calendar .ui.table.year,
+.ui.calendar .ui.table.month,
+.ui.calendar .ui.table.minute {
+  min-width: 15em;
+  background: #585858;
+  /*Jamie*/ }
+
+.ui.calendar .ui.table.day {
+  min-width: 18em;
+  background: #585858;
+  /*Jamie*/ }
+
+.ui.calendar .ui.table.hour {
+  min-width: 20em;
+  /*Jamie*/
+  border: 1px solid #222;
+  border-radius: 9rem; }
+
+.ui.calendar .ui.table tr th,
+.ui.calendar .ui.table tr td {
+  padding: 0.5em;
+  white-space: nowrap; }
+
+.ui.calendar .ui.table tr th {
+  /*border-left: none;*/
+  /*Jamie*/
+  background: #585858;
+  border-bottom: 1px solid #383838;
+  color: #d8d8d8; }
+
+.ui.calendar .ui.table tr th .icon {
+  margin: 0; }
+
+.ui.calendar .ui.table tr th .icon {
+  margin: 0; }
+
+.ui.calendar .ui.table tr:first-child th {
+  position: relative;
+  padding-left: 0;
+  padding-right: 0;
+  /*Jamie*/
+  border-bottom: 1px solid #000;
+  background: #212121;
+  color: #aaa; }
+
+.ui.calendar .ui.table.day tr:first-child th {
+  /*border: none;*/
+  /*Jamie*/
+  border-bottom: 1px solid #000;
+  background: #212121;
+  color: #aaa; }
+
+.ui.calendar .ui.table.day tr:nth-child(2) th {
+  padding-top: 0.2em;
+  padding-bottom: 0.3em; }
+
+.ui.calendar .ui.table tr td {
+  padding-left: 0.1em;
+  padding-right: 0.1em; }
+
+.ui.calendar .ui.table tr .link {
+  cursor: pointer; }
+  .ui.calendar .ui.table tr .link.active {
+    background: #383838 !important;
+    color: #fff !important;
+    background-image: none, -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3) 0, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%) !important;
+    background-image: none, -o-linear-gradient(top, rgba(255, 255, 255, 0.3) 0, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%) !important;
+    background-image: none, linear-gradient(top, rgba(255, 255, 255, 0.3) 0, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%) !important;
+    background-image: none, -moz-linear-gradient(top, rgba(255, 255, 255, 0.3) 0, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%) !important; }
+  .ui.calendar .ui.table tr .link.green {
+    background-color: #92b492;
+    border: 1px solid #8fae8f;
+    color: #2d2d2d; }
+
+.ui.calendar .ui.table tr .prev.link {
+  width: 14.28571429%;
+  position: absolute;
+  left: 0; }
+
+.ui.calendar .ui.table tr .next.link {
+  width: 14.28571429%;
+  position: absolute;
+  right: 0; }
+
+.ui.calendar .ui.table tr .disabled {
+  pointer-events: none;
+  color: rgba(40, 40, 40, 0.3); }
+
+/*--------------
+     States
+---------------*/
+.ui.calendar .ui.table tr td.today {
+  font-weight: bold; }
+
+.ui.calendar .ui.table tr td.range {
+  background-color: #2d2d2d;
+  color: #ffffff;
+  box-shadow: none; }
+
+.ui.calendar .ui.table.inverted tr td.range {
+  background: ligten(#2d2d2d, 5%);
+  color: #ffffff;
+  box-shadow: none; }
+
+.ui.calendar .calendar:focus .ui.table tbody tr td.focus,
+.ui.calendar .calendar.active .ui.table tbody tr td.focus {
+  /*background: #222 !important;*/
+  /*box-shadow: inset 0 0 0 1px #85B7D9;*/
+  background: #383838 !important;
+  color: #fff !important;
+  background-image: none, -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3) 0, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%) !important;
+  background-image: none, -o-linear-gradient(top, rgba(255, 255, 255, 0.3) 0, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%) !important;
+  background-image: none, linear-gradient(top, rgba(255, 255, 255, 0.3) 0, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%) !important;
+  background-image: none, -moz-linear-gradient(top, rgba(255, 255, 255, 0.3) 0, rgba(255, 255, 255, 0.09) 50%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0) 100%) !important; }
+
+.ui.calendar .calendar:focus .ui.table.inverted tbody tr td.focus,
+.ui.calendar .calendar.active .ui.table.inverted tbody tr td.focus {
+  /*box-shadow: inset 0 0 0 1px #85B7D9;*/ }
+
+/*******************************
+         Theme Overrides
+*******************************/
+/*Jamie �t�վ�*/
+.ui.calendar tbody {
+  background: #4e4e4e;
+  color: #dedede; }
+
+.ui.calendar table tr:nth-child(even) {
+  background: none; }

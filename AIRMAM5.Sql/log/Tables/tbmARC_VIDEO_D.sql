@@ -1,0 +1,22 @@
+﻿CREATE TABLE [log].[tbmARC_VIDEO_D] (
+    [fnID]           BIGINT          IDENTITY (1, 1) NOT NULL,
+    [fsFILE_NO]      VARCHAR (16)    NOT NULL,
+    [fnSEQ_NO]       INT             NOT NULL,
+    [fsDESCRIPTION]  NVARCHAR (MAX)  NOT NULL,
+    [fdBEG_TIME]     DECIMAL (13, 3) NOT NULL,
+    [fdEND_TIME]     DECIMAL (13, 3) NOT NULL,
+    [fdCREATED_DATE] DATETIME        NOT NULL,
+    [fsCREATED_BY]   VARCHAR (50)    NOT NULL,
+    [fdUPDATED_DATE] DATETIME        NULL,
+    [fsUPDATED_BY]   VARCHAR (50)    NULL,
+    [fcMODE]         CHAR (1)        NOT NULL,
+    [fdOP_DATE]      DATETIME        CONSTRAINT [DF_tbmARC_VIDEO_D_fdOP_DATE] DEFAULT (getdate()) NULL,
+    [fsOP_BY]        VARCHAR (50)    NULL,
+    CONSTRAINT [PK_tbmARC_VIDEO_D] PRIMARY KEY CLUSTERED ([fnID] ASC)
+) TEXTIMAGE_ON [PRIMARY];
+
+
+GO
+CREATE NONCLUSTERED INDEX [IDX_1]
+    ON [log].[tbmARC_VIDEO_D]([fsFILE_NO] ASC, [fnSEQ_NO] ASC);
+

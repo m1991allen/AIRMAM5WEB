@@ -1,0 +1,111 @@
+﻿
+
+
+-- =============================================
+-- 描述:	取出ARC_PRE預編詮釋資料
+-- 記錄:	<2019/05/29><David.Sin><新增本預存>
+-- =============================================
+CREATE PROCEDURE [dbo].[spGET_ARC_PRE]
+	
+	@fnPRE_ID		BIGINT,
+	@fsNAME			NVARCHAR(50),
+	@fsTYPE			CHAR(1),
+	@fnTEMP_ID		INT
+
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+
+	SELECT
+		[tbmARC_PRE].[fnPRE_ID],
+		[tbmARC_PRE].[fsNAME],
+		[tbmARC_PRE].[fsTYPE],
+		[tbmARC_PRE].[fnTEMP_ID],
+		[tbmARC_PRE].[fsTITLE],
+		[tbmARC_PRE].[fsDESCRIPTION],
+		[tbmARC_PRE].[fdCREATED_DATE],
+		[tbmARC_PRE].[fsCREATED_BY],
+		[tbmARC_PRE].[fdUPDATED_DATE],
+		[tbmARC_PRE].[fsUPDATED_BY],
+		ISNULL(USERS_CRT.fsNAME,'') AS fsCREATED_BY_NAME,
+		ISNULL(USERS_UPD.fsNAME,'') AS fsUPDATED_BY_NAME,
+
+		[tbzCODE].fsNAME AS fsTYPE_NAME,
+		[tbmTEMPLATE].fsNAME AS fsTEMP_NAME,
+
+
+		[tbmARC_PRE].[fsATTRIBUTE1],
+		[tbmARC_PRE].[fsATTRIBUTE2],
+		[tbmARC_PRE].[fsATTRIBUTE3],
+		[tbmARC_PRE].[fsATTRIBUTE4],
+		[tbmARC_PRE].[fsATTRIBUTE5],
+		[tbmARC_PRE].[fsATTRIBUTE6],
+		[tbmARC_PRE].[fsATTRIBUTE7],
+		[tbmARC_PRE].[fsATTRIBUTE8],
+		[tbmARC_PRE].[fsATTRIBUTE9],
+		[tbmARC_PRE].[fsATTRIBUTE10],
+		[tbmARC_PRE].[fsATTRIBUTE11],
+		[tbmARC_PRE].[fsATTRIBUTE12],
+		[tbmARC_PRE].[fsATTRIBUTE13],
+		[tbmARC_PRE].[fsATTRIBUTE14],
+		[tbmARC_PRE].[fsATTRIBUTE15],
+		[tbmARC_PRE].[fsATTRIBUTE16],
+		[tbmARC_PRE].[fsATTRIBUTE17],
+		[tbmARC_PRE].[fsATTRIBUTE18],
+		[tbmARC_PRE].[fsATTRIBUTE19],
+		[tbmARC_PRE].[fsATTRIBUTE20],
+		[tbmARC_PRE].[fsATTRIBUTE21],
+		[tbmARC_PRE].[fsATTRIBUTE22],
+		[tbmARC_PRE].[fsATTRIBUTE23],
+		[tbmARC_PRE].[fsATTRIBUTE24],
+		[tbmARC_PRE].[fsATTRIBUTE25],
+		[tbmARC_PRE].[fsATTRIBUTE26],
+		[tbmARC_PRE].[fsATTRIBUTE27],
+		[tbmARC_PRE].[fsATTRIBUTE28],
+		[tbmARC_PRE].[fsATTRIBUTE29],
+		[tbmARC_PRE].[fsATTRIBUTE30],
+		[tbmARC_PRE].[fsATTRIBUTE31],
+		[tbmARC_PRE].[fsATTRIBUTE32],
+		[tbmARC_PRE].[fsATTRIBUTE33],
+		[tbmARC_PRE].[fsATTRIBUTE34],
+		[tbmARC_PRE].[fsATTRIBUTE35],
+		[tbmARC_PRE].[fsATTRIBUTE36],
+		[tbmARC_PRE].[fsATTRIBUTE37],
+		[tbmARC_PRE].[fsATTRIBUTE38],
+		[tbmARC_PRE].[fsATTRIBUTE39],
+		[tbmARC_PRE].[fsATTRIBUTE40],
+		[tbmARC_PRE].[fsATTRIBUTE41],
+		[tbmARC_PRE].[fsATTRIBUTE42],
+		[tbmARC_PRE].[fsATTRIBUTE43],
+		[tbmARC_PRE].[fsATTRIBUTE44],
+		[tbmARC_PRE].[fsATTRIBUTE45],
+		[tbmARC_PRE].[fsATTRIBUTE46],
+		[tbmARC_PRE].[fsATTRIBUTE47],
+		[tbmARC_PRE].[fsATTRIBUTE48],
+		[tbmARC_PRE].[fsATTRIBUTE49],
+		[tbmARC_PRE].[fsATTRIBUTE50],
+		[tbmARC_PRE].[fsATTRIBUTE51],
+		[tbmARC_PRE].[fsATTRIBUTE52],
+		[tbmARC_PRE].[fsATTRIBUTE53],
+		[tbmARC_PRE].[fsATTRIBUTE54],
+		[tbmARC_PRE].[fsATTRIBUTE55],
+		[tbmARC_PRE].[fsATTRIBUTE56],
+		[tbmARC_PRE].[fsATTRIBUTE57],
+		[tbmARC_PRE].[fsATTRIBUTE58],
+		[tbmARC_PRE].[fsATTRIBUTE59],
+		[tbmARC_PRE].[fsATTRIBUTE60]
+
+	FROM
+		[dbo].[tbmARC_PRE] 
+			JOIN [dbo].[tbzCODE] ON [tbmARC_PRE].[fsTYPE] = [tbzCODE].[fsCODE] AND [tbzCODE].[fsCODE_ID] = 'TEMP001'
+			JOIN [dbo].[tbmTEMPLATE] ON [tbmARC_PRE].[fnTEMP_ID] = [tbmTEMPLATE].[fnTEMP_ID]
+			LEFT JOIN tbmUSERS USERS_CRT ON [tbmARC_PRE].fsCREATED_BY = USERS_CRT.fsLOGIN_ID
+			LEFT JOIN tbmUSERS USERS_UPD ON [tbmARC_PRE].fsUPDATED_BY = USERS_UPD.fsLOGIN_ID
+	WHERE
+		(@fnPRE_ID = 0 OR [tbmARC_PRE].fnPRE_ID = @fnPRE_ID) AND
+		(@fsNAME = '' OR [tbmARC_PRE].fsNAME LIKE @fsNAME + '%') AND
+		(@fsTYPE = '' OR [tbmARC_PRE].fsTYPE = @fsTYPE) AND
+		(@fnTEMP_ID = 0 OR [tbmARC_PRE].fnTEMP_ID = @fnTEMP_ID)
+END
+
+

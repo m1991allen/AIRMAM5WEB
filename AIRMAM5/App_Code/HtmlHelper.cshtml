@@ -1,0 +1,184 @@
+﻿<!--View頁面_麵包屑-->
+@helper Breadcrumb(string[] ActionsNames)
+{
+    int ActionLength = ActionsNames.Length;
+    <div class="ui mini breadcrumb" style="border-bottom: 1px solid #3e3e3e;padding:5px;">
+        @for (int i = 0; i < ActionLength; i++)
+        {
+            if (i != ActionLength - 1)
+            {
+                <a class="section">@ActionsNames[i]</a>
+                <i class="inverted right chevron icon"></i>
+            }
+            else
+            {
+                <div class="active section">@ActionsNames[i]</div>
+            }
+        }
+    </div>
+
+}
+
+<!--右擊選單-->
+@helper ContextMenu()
+{
+    <div class="ui vertical compact menu inverted" id="rightMenu">
+        <a class="item" name="close">
+            關閉分頁
+        </a>
+        <a class="item" name="favorite">
+            加入常用
+        </a>
+    </div>
+}
+
+<!--預覽頁面-->
+@helper Preview(string FileUrl, string ImageUrl, string filetype, string fileNo, string subjectId, string DocUrl, string errorImage, string kind = "normal", bool? actionButton = false)
+{
+switch (filetype)
+{
+    case "V":
+            <div id="fullScreenContainer">
+                <div name="video" class="ui embed" data-url="@FileUrl" data-placeholder="@ImageUrl" data-icon="right circle arrow"> </div>
+                <div id="videoMenu"></div>
+            </div>
+        break;
+    case "A":
+            <div name="audio" class="ui embed" style="padding:0;height:100%;" data-url="@FileUrl" data-placeholder="@ImageUrl" data-icon="right circle arrow"> </div>
+        break;
+    case "P":
+        if (@actionButton == true)
+        {
+                       <button class="ui icon black button x-imgslider-btn" name="preImg" style="padding: 0.4em;">
+                           <i class="angle left icon"></i>
+                       </button>
+        }
+                   <div class="ui inverted segment" style="height:330px;">
+                       <img name="lightbox" src="@ImageUrl" alt="預覽圖 @fileNo" class="ui centered medium image" style="height:250px;width:auto;position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto;" onerror="this.src='@errorImage'" />
+                   </div>
+        if (@actionButton == true)
+        {
+                <button class="ui icon black button x-imgslider-btn" name="nextImg" style="padding: 0.4em;">
+                    <i class="angle right icon"></i>
+                </button>
+        }
+        break;
+         case "D":
+                <div class="ui inverted segment" style="height:330px;">
+                    @*<a class="ui top right attached orange label" name="openDocumentViewer" data-href="~/DocViewer/_PreviewDoc?fsSUBJECT_ID=@subjectId&fileNo=@fileNo&kind=@kind"> <i class="eye icon"></i>預覽</a>*@
+                    @{
+                        string enabled = actionButton ==null ?"true":(bool)actionButton ? "true" : "false";
+                    }
+                    <a  data-showdoc="@enabled" class="ui top right attached orange label" name="openDocumentViewer" data-href="~/DocViewer/_PreviewDoc?fsSUBJECT_ID=@subjectId&fileNo=@fileNo&kind=@kind"> <i class="eye icon"></i>預覽</a>
+                    <img src="@ImageUrl" alt="預覽圖  @fileNo" class="ui centered medium image" style="height:250px;width:auto;" onerror="this.src='@errorImage'" />
+                </div>
+            break;
+
+    }
+
+}
+
+<!--確認燈箱-->
+@helper ConfirmModal(string modalId, string title, string content, string className = "")
+{
+    <div class="ui modal @className" id="@modalId">
+        @*<i class="close icon"></i>*@
+        <div class="header">
+            @title
+        </div>
+        <div class="content">
+            @content
+        </div>
+        <div class="actions">
+            <button type="button" class="ui ok yellow button">確定</button>
+            <button type="button" class="ui cancel button">取消</button>
+        </div>
+    </div>
+}
+<!--可傳入html燈箱-->
+@helper HtmlModal(string modalId, string title, Func<dynamic, HelperResult> content, Func<dynamic, HelperResult> actions, string className = "")
+{
+    <div class="ui modal @className" id="@modalId" name="@modalId">
+        <i class="close icon"></i>
+        <div class="header">
+            @title
+        </div>
+        <div class="scrolling content">
+            @content(null)
+        </div>
+        <div class="actions">
+            @actions(null)
+        </div>
+    </div>
+}
+
+
+<!--可傳入html且自訂class的全螢幕燈箱-->
+@helper HtmlFullScreenModal(string modalId, string title, string[] className, string name, Func<dynamic, HelperResult> content, Func<dynamic, HelperResult> actions)
+{
+    string classlist = string.Join(" ", className);
+    <div class="ui modal @classlist" id="@modalId" name="@name">
+        @if (!string.IsNullOrEmpty(title))
+        {
+            <i class="close icon"></i>
+            <div class="header">
+                @title
+            </div>
+        }
+        <div class="content">
+            @content(null)
+        </div>
+        <div class="actions">
+            @actions(null)
+        </div>
+    </div>
+}
+
+<!--可傳入html且自訂class的全螢幕燈箱-->
+@*@helper HtmlFullScreenModal01(string modalId, string title, string[] className, string name, Func<dynamic, HelperResult> content, Func<dynamic, HelperResult> actions)
+{
+    string classlist = string.Join(" ", className);
+    <div class="@classlist" id="@modalId" name="@name">
+        @if (!string.IsNullOrEmpty(title))
+        {
+            <i class="close icon"></i>
+            <div class="header">
+                @title
+            </div>
+        }
+        <div class="content scrolling">
+            @content(null)
+        </div>
+        <div class="actions">
+            @actions(null)
+        </div>
+    </div>
+}*@
+
+@helper Tree(bool ShowSearchNodeStr)
+{
+    string heightStyle = ShowSearchNodeStr ? "x-dir-height" : "";
+    <div class="ui inverted transparent left action fluid input x-treeinput">
+        <button id="ReloadTreeBtn" type="button" class="ui icon button inverted black" title="重新整理樹狀節點">  <i class="undo link icon inverted grey"></i></button>
+        <input type="text" placeholder="節點關鍵字查詢" id="SearchNode" name="SearchNode">
+    </div>
+    <!--樹狀圖-->
+    if (ShowSearchNodeStr)
+    {
+        <label name="SearchNodeStr" class="ui label">※對節點按右鍵,可以進行編輯</label>
+    }
+    <div class="treeContainer @heightStyle">
+        <div id="treeBg" class="treeBg"> </div>
+        <div id="treeList" class="tree">
+            <div class="ui inverted placeholder">
+                <div class="paragraph">
+                    @for (int y = 0; y < 40; y++)
+                    {
+                        <div class="line"></div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--樹狀圖-->
+}

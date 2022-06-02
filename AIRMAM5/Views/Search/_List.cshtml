@@ -1,0 +1,87 @@
+﻿@using AIRMAM5.DBEntity.Models.Enums;
+@model IEnumerable<AIRMAM5.DBEntity.Models.GetArcSearchResult>
+
+<div name="ListMenu" class="ui divided items _ListMenu" data-list=" @Html.Raw(Json.Encode(Model))">
+    @*@for (int i = 0; i < 10; i++)*@
+    @foreach(var itm in Model)
+    {
+        <div class="item">
+            @Html.HiddenFor(m => itm.fsSUBJECT_ID)
+            @Html.HiddenFor(m => itm.fsFILE_NO)
+            <div class="ui small image">
+                <div class="_styleImg">
+                    <img src="@itm.HeadFrame">@*<img src="~/Images/noImage.png">*@
+                    <div class="_timeLong">
+                        @switch (itm.SearchType)
+                        {
+                            case SearchTypeEnum.Video_DEV:
+                                <span>@itm.Duration </span><!--依照mediaType,影=時間,音=時間,圖=像素,文=檔案副檔名-->
+                                break;
+                            case SearchTypeEnum.Audio_DEV:
+                                <span>@itm.Duration </span>
+                                break;
+                            case SearchTypeEnum.Photo_DEV:
+                                <span>@itm.FileType </span>
+                                break;
+                            case SearchTypeEnum.Doc_DEV:
+                                <span>@itm.FileType </span>
+                                break;
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <span class="header">@itm.Title </span>
+                <div class="meta">
+                    <div class="item _contentDoc">@itm.fsMATCH </div>
+                    @*<div class="item">檔案狀態:</div>*@
+                </div>
+                <div class="_time">
+                    <span>資料日期:@itm.CreateDate </span>
+                    <div class="_status">檔案狀態: <span>@itm.TSMFileStatus @itm.TSMFileStatusStr </span></div>
+                    <button type="button" class="ui mini button booking" href="javascript:void(0);" onclick="AddBooking();"><i class="plus icon"></i>加入借調</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<script>
+    //TODO:加入借調
+    function AddBooking() {
+        var jsdata = [{
+            fsTYPE: "V",        //借調的檔案類型 tbzCODE.MTRL001= V,A,P,D (參考IE版本,只有影片可以操作 借調)
+            fsFILE_NO: "201911260000120",      //(借調的)檔案編號
+            fsDESCRIPTION: "檔案:201911260000120",  //描述
+            fsNOTE: "",         //備註
+            fsPARAMETER: ""     //相關參數 如: 部分調用起訖點(12.162;48.437;) ***分號;為分隔符號*** 不指定就傳入空值
+        }, {
+                fsTYPE: "V",
+                fsFILE_NO: "201911260000224",
+                fsDESCRIPTION: "檔案:201911260000224",
+                fsNOTE: "",
+                fsPARAMETER: "12.162;48.437;"
+            }];
+        $.ajax({
+            url: "../Booking/AddBooking",
+            type: "POST",
+            data: JSON.stringify(jsdata),
+            cache: false,
+            contentType: "application/json",
+            beforeSend: function () {
+                if (!confirm("確定加入借調清單?")) {
+                    return;
+                }
+            },
+            success: function (data) {
+                console.log(data);
+                console.log("--------------success-done-");
+            },
+            error: function (data) {
+                //
+            },
+            complete: function (data) {
+                //
+            }
+        });
+    }
+</script>

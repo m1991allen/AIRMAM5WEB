@@ -1,0 +1,80 @@
+﻿@model AIRMAM5.DBEntity.Models.Search.SearchParameterViewModel
+@{
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+@section Styles{
+    <link href="~/Content/semanticUIdatepicker/calendar.min.css" rel="stylesheet" />
+    <link href="~/Content/iftame_style/Search/SearchIndex.min.css" rel="stylesheet" />
+    <link href="~/Content/split-pane/split-pane.css" rel="stylesheet" />@* 載入拖拉視窗 *@
+}
+
+
+<div class="ui active centered inline loader"></div>
+<div id="Main" class="ui bottom attached active inverted tab" data-Parameter='@Html.Raw(Json.Encode(Model))'>
+    <div id="split-pane-1" class="split-pane fixed-left">
+        <div id="left-component" class="split-pane-component _SearchStyleGrid_left">
+            <div name="condition">
+                <!--查詢條件partialview--><!--查詢條件partialview-->
+            </div>
+            <div id="Table" name="list" class="_row_scroll ui relaxed selection list"> <!--列表--></div>
+            @*<div name="filter" class="ui basic compact center aligned segment">
+                <div class="ui inverted mini grey header">
+                    本頁快速篩選：
+                    <div class="ui inverted transparent input">
+                        <input autocomplete="off" id="wordFilter" type="text" placeholder="請輸入篩選詞彙">
+                    </div>
+                </div>
+            </div>*@
+        </div>
+        <div id="divider" class="split-pane-divider"></div>
+        <div id="right-component" class="split-pane-component  _SearchStyleGrid_right">
+            <!--預覽圖-->
+            <div id="top-component2" name="preview" class="split-pane-component">
+                <!--加載器樣式-->
+                <div style="background-color:#333 !important;width:100%;height:100%;box-shadow:none;border-bottom: 0.2px solid #2f2f2f;" class="ui placeholder segment">
+                    <div class="ui inverted placeholder" style="width:100%;margin: auto;max-height: 300px;">
+                        <div class="square image" style="margin:auto;"></div>
+                    </div>
+                </div>
+                <!--加載器樣式-->
+            </div>
+            <!--預覽圖-->
+            <!--資料區-->
+            <div id="bottom-component2" class="split-pane-component">
+
+                <div class="_right_button">
+                    <div name="dataTitle" class="ui top attached tabular menu tabs"></div>
+                    <div name="dataTab" class="_SearchStyleContent">
+                        <!--加載器樣式-->
+                        <div style="background-color:#333 !important;width:100%;height:100%;box-shadow:none;border-bottom: 0.2px solid #2f2f2f;" class="ui placeholder segment">
+                            <div class="ui inverted placeholder" style="width:100%;margin: auto;max-height: 300px;">
+                                <div class="paragraph" style="margin:auto;">
+                                    @for (int i = 0; i < 15; i++)
+                                    {
+                                        <div class="line"></div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!--加載器樣式-->
+                    </div>
+       
+                    <button name="edit" class="_SearchStyleButton ui circular icon button disabled" title="修改" data-subjectId="" data-fileno="" data-mediatype=""><i class="pencil alternate large icon"></i> </button>
+                </div>
+
+            </div>
+            <!--資料區-->
+        </div>
+    </div>
+</div>
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+
+@section Scripts{
+    <script src="~/Content/split-pane/split-pane.js"></script>
+    <script src="~/Content/wavesurfer/wavesurfer.js"></script>
+    <script src="~/Content/dayJS/dayjs.min.js"></script>
+    <script src="~/Content/semanticUIdatepicker/calendar.min.js" type="text/javascript"></script>
+    @Html.Partial("~/Views/Bundle/SearchIndex_Js.cshtml")
+    @*<script src="~/Scripts/dist/SearchIndex.min.js"></script>*@
+}

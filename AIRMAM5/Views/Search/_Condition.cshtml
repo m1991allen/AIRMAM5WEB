@@ -1,0 +1,88 @@
+﻿@model AIRMAM5.DBEntity.Models.SearchResponse.SearchResponseBaseModel
+@{ int cnt = Model.CountData.fnVIDEO_COUNT + Model.CountData.fnAUDIO_COUNT + Model.CountData.fnPHOTO_COUNT + Model.CountData.fnDOC_COUNT; }
+
+<div class="ui small breadcrumb _SearchStyleLinchpin">
+    查詢＂
+    <span>@Model.SearchParam.fsKEYWORD </span>＂結果：共
+    <span>@cnt </span>筆
+    <i class="angle right link icon" style="margin: 0 0 0 2px;" id="MoreConditions"></i>
+
+    <div class="_Custom" id="MoreC">
+        <div class="_filter">
+            @*檢索類型：
+                <span>影片、聲音、圖片、文字</span>*@
+            @Model.ConditionStr.SearchType
+        </div>
+        <div class="_filter">
+            @*<label>查詢方式：</label>
+                <span>同音、同義</span>*@
+            @Model.ConditionStr.SearchMode
+        </div>
+        <div class="_filter">
+            @*日期區間：
+                <span>2019-09-25~2019-10-02</span>
+                <span style="margin-left: .3em;">大到小</span>*@
+            @Model.ConditionStr.DateInterval
+        </div>
+    </div>
+</div>
+@{
+    var Count = Model.CountData;
+    string activetype = (Count.fnVIDEO_COUNT > 0) ? "V" : (Count.fnAUDIO_COUNT > 0) ? "A" : (Count.fnPHOTO_COUNT > 0) ? "P" : (Count.fnDOC_COUNT > 0) ? "D" : "";
+}
+<div class="ui secondary stackable pointing mini menu tabs _SearchStyleTabs">
+    @if (activetype == "V")
+    {
+        <a class="active item" data-type="V">影片(<span>@Model.CountData.fnVIDEO_COUNT</span>)</a>
+    }
+    else
+    {
+        <a class="item" data-type="V">影片(<span>@Model.CountData.fnVIDEO_COUNT</span>)</a>
+    }
+    @if (activetype == "A")
+    {
+        <a class="active item" data-type="A">音(<span>@Model.CountData.fnAUDIO_COUNT</span>)</a>
+    }
+    else
+    {<a class="item" data-type="A">音(<span>@Model.CountData.fnAUDIO_COUNT</span>)</a>}
+
+    @if (activetype == "P")
+    {
+        <a class="active item" data-type="P">圖(<span>@Model.CountData.fnPHOTO_COUNT</span>)</a>
+    }
+    else
+    {<a class="item" data-type="P">圖(<span>@Model.CountData.fnPHOTO_COUNT</span>)</a>}
+
+    @if (activetype == "D")
+    {
+        <a class="active item" data-type="D">文(<span>@Model.CountData.fnDOC_COUNT</span>)</a>
+    }
+    else
+    {
+        <a class="item" data-type="D">文(<span>@Model.CountData.fnDOC_COUNT</span>)</a>
+    }
+        <div class="right menu">
+            <div class="ui action small item input"   name="templeteMenu"style="padding:2px 0;display:none;">
+                <div name="templeteItem">
+                    <select class="ui loading labeled selection dropdown" name="templeteDropdown">
+                        <option value="">匯出樣版</option>
+                    </select>
+                </div>
+                <div class="ui yellow button" name="export">匯出</div>
+            </div>
+            @*<div class="item" name="templeteItem">
+                <select class="ui loading labeled selection dropdown item" name="templeteDropdown">
+                    <option value="">匯出樣版</option>
+                </select>
+            </div>*@
+            @*<div class="item"><div class="ui yellow button" name="export">匯出</div> </div>*@
+            <div class="item">
+                顯示：
+               <button class="ui mini icon grey button" name="viewstyle" data-inverted="" data-tooltip="圖文列表" data-position="bottom center" type="button"> 
+                <i class="ui icon th list"></i>
+                </button> 
+            </div>
+        </div>
+
+
+</div>

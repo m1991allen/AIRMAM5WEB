@@ -1,0 +1,43 @@
+﻿
+
+
+
+-- =============================================
+-- 描述:	取出GROUPS主檔資料
+-- 記錄:	<2011/08/19><Eric.Huang><新增本預存>
+--      	<2011/09/09><Eric.Huang><修改本預存>
+--      	<2019/05/09><David.Sin><合併spGET_GROUPS_ALL>
+-- =============================================
+CREATE PROCEDURE [dbo].[spGET_GROUPS]
+	@fsGROUP_ID		NVARCHAR(128)
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+
+	SELECT 
+			tbmGROUPS.fsGROUP_ID,
+			tbmGROUPS.fsNAME,
+			tbmGROUPS.fsDESCRIPTION,
+			tbmGROUPS.fsTYPE, 
+			tbmGROUPS.fdCREATED_DATE,
+			tbmGROUPS.fsCREATED_BY,
+			ISNULL(USERS_CRT.fsNAME,'') AS fsCREATED_BY_NAME,
+			tbmGROUPS.fdUPDATED_DATE,
+			tbmGROUPS.fsUPDATED_BY,
+			ISNULL(USERS_UPD.fsNAME,'') AS fsUPDATED_BY_NAME,
+			ISNULL(A.fnCOUNT,0) AS fnUSER_COUNT
+
+		FROM
+			tbmGROUPS 
+				LEFT JOIN tbmUSERS AS USERS_CRT ON tbmGROUPS.fsCREATED_BY = USERS_CRT.fsLOGIN_ID
+				LEFT JOIN tbmUSERS AS USERS_UPD ON tbmGROUPS.fsUPDATED_BY = USERS_UPD.fsLOGIN_ID
+				LEFT JOIN (SELECT fsGROUP_ID,COUNT(1) AS fnCOUNT FROM tbmUSER_GROUP GROUP BY fsGROUP_ID) A ON tbmGROUPS.fsGROUP_ID = A.fsGROUP_ID
+		WHERE
+			(@fsGROUP_ID = '' OR tbmGROUPS.fsGROUP_ID = @fsGROUP_ID)
+		ORDER BY
+			tbmGROUPS.fsGROUP_ID DESC
+END
+
+
+
+

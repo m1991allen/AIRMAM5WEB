@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+@section Styles{
+    <link href="~/Content/iftame_style/Dir/DirIndex.min.css" rel="stylesheet" />
+    <link href="~/Content/inspireTreeJS/inspire-tree-dark.min.css" rel="stylesheet" />
+}
+
+<div class="ui grid x-overflow x-main-grid">
+    <div class="four wide computer five wide tablet sixteen wide mobile column">
+        @HtmlHelper.Breadcrumb(new string[] { "媒資管理", "系統目錄維護" })
+        <!--樹狀圖-->@HtmlHelper.Tree(true) <!--樹狀圖-->
+    </div>
+    <div class="twelve wide computer eleven wide tablet sixteen wide mobile column" style="margin-top: 20px;">
+        <div class="ui top attached tabular menu tabs">
+            <a class="active item" data-tab="first">目錄資訊與欄位</a>
+            <a class="item" data-tab="second">目錄使用權限</a>
+        </div>
+        <div id="TipResult">
+            <div class="ui placeholder inverted segment">
+                <p style="color:#585858;font-size: 2em;text-align: center;">請選擇樹狀結構目錄節點@*末端之Queue以維護目錄資料*@</p>
+            </div>
+        </div>
+        <div id="ShowResult">
+            <div class="ui bottom attached active tab" data-tab="first"> </div>
+            <div class="ui bottom attached tab" data-tab="second"></div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+<!--目錄權限確認燈箱-->
+@HtmlHelper.ConfirmModal("ConfirmAdminModal", "目錄管理權限設定", "所選取的角色群組(帳號)，目前影音圖文的細部維護權限繼承自上層目錄。調整此目錄權限後，上層目錄的影音圖文的細部維護權限將不會再影響此目錄。是否要繼續設定？")
+<!--目錄權限警告燈箱-->
+@HtmlHelper.HtmlModal("AlertAdminModal", "目錄管理權限設定", @<p>有管理權限的角色群組(帳號)無法調整影音圖文的細部維護權限!</p>,@<button type="button" class="ui cancel button">關閉</button>)
+<!--刪除確認燈箱-->
+@HtmlHelper.ConfirmModal("ConfirmDeleteModal", "刪除設定", "確定要刪除此帳號/群組？")
+<!--刪除警告燈箱-->
+@HtmlHelper.HtmlModal("AlertDeleteModal", "刪除設定", @<p>此群組或帳號不可刪除!</p>,@<button type="button" class="ui cancel button">關閉</button>)
+<!--移動節點確認燈箱-->
+@HtmlHelper.ConfirmModal("ConfirmNodeMovingModal", "移動節點", "確定要移動節點?")
+
+<!--樹狀目錄-->
+<div id="DirMenu" class="ui vertical compact menu inverted">
+    <a class="item" name="addnode">
+        <i class="add icon"></i>
+        新增節點
+    </a>
+    <a class="item" name="editnode">
+        <i class="edit icon"></i>
+        編輯節點
+    </a>
+    <a class="item" name="removenode">
+        <i class="delete icon"></i>
+        刪除節點
+    </a>
+</div>
+
+@section Scripts{
+    <!--三個檔案已經一起打包至DorIndex內-->
+    @*<script src="~/Content/loadash/lodash.min.js"></script>
+        <script src="~/Content/inspireTreeJS/inspire-tree.min.js"></script>
+        <script src="~/Content/inspireTreeJS/inspire-tree-dom.min.js"></script>*@
+    @*<script src="~/Scripts/dist/DirIndex.min.js"></script>*@
+    @Html.Partial("~/Views/Bundle/SubjectTreePlugin_Js.cshtml")
+    @Html.Partial("~/Views/Bundle/DirIndex_Js.cshtml")
+}

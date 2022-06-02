@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <style type="text/css">
+
+        body {
+            font-size: 12px;
+            font-family: Verdana;
+        }
+
+        #divPrint {
+            display: none;
+        }
+
+        @@media print {
+            #non-printable {
+                display: none;
+            }
+
+            #divPrint {
+                display: block;
+            }
+        }
+
+        #img {
+            float: left;
+        }
+
+        #divProgress {
+            margin-top: 5px;
+            background-color: #79B933;
+            height: 20px;
+            width: 250px;
+            text-align: center;
+            color: white
+        }
+
+        input, select {
+            border: solid 1px #CDCDCD;
+            font-size: 12px;
+            font-family: Verdana;
+        }
+
+        /* You can define your own, Adjust values for page margins */
+
+        .A4Page {
+            width: 7in;
+            height: 10in;
+        }
+
+        .LegalPage {
+            width: 7.5in;
+            height: 13in;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="non-printable">
+            <table style="width: 100%">
+                <tr>
+                    <td>Pages (from : to)</td>
+                    <td><input type="text" id="txtFrom" style="width:50px" value="1" />&nbsp;:&nbsp;<input type="text" id="txtTo" style="width:50px" /></td>
+                </tr>
+                <tr>
+                    <td>Zoom Level</td>
+                    <td><input type="text" id="txtZoom" style="width:50px" value="100" /></td>
+                </tr>
+                <tr>
+                    <td>Paper</td>
+                    <td><select id="drpPaper" style="width:50px"><option value="">Custom</option><option value="A4Page" selected>A4</option><option value="LegalPage">Legal</option></select></td>
+                </tr>
+                <tr>
+                    <td>Landscape</td>
+                    <td><input id="chkLandscape" type="checkbox" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="button" id="btnPrint" onclick="DoPrint();" value="Print" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><div id="divProgress" style="width: 90%">&nbsp;</div></td>
+                </tr>
+            </table>
+        </div>
+        <div id="divPrint">
+
+        </div>
+    </form>
+    <script type="text/javascript" language="javascript">
+
+        function GetBaseUrl() {
+            // Fix this URL as required by your application
+            return '';
+        }
+
+        var totalp = 0;
+        var steps = 1;
+        var pageFrom = 0;
+        var pageTo = 0;
+        var pageZoom = 0;
+        var token = "";
+        var objdivPrint = null;
+
+        function PrintPages(from, to, zoom) {
+            if (from > to) {
+                alert("wrong page range");
+                return;
+            }
+            totalp = 0;
+
+            pageFrom = from;
+            pageTo = to;
+            pageZoom = zoom;
+
+            token = getQueryVariable("token");
+
+            steps = Math.ceil(parseInt($("#divProgress").width())) / ((to - from) + 1);
+
+            document.getElementById("divProgress").style.visibility = "visible";
+            document.getElementById("divProgress").style.width = "0px";
+
+            var cssPaper = $('#drpPaper').val();
+            var pagePrintCss = "";
+
+            if (cssPaper.length > 0) {
+                pagePrintCss = cssPaper;
+            }
+
+
+            // code to rotate the pages
+            if ($("#chkLandscape").prop('checked')) {
+
+                for (var j = from; j <= to; j++) {
+                    $.post(GetBaseUrl() + "/DocImage.axd?token=" + token + "&zoom=" + pageZoom + "&action=1&rotate=90&page=" + j, function (data) { });
+                }
+
+                sleep(5);
+            }
+
+
+            for (var i = from; i <= to; i++) {
+                var pgImg = document.createElement("IMG");
+                pgImg.id = "img" + i;
+
+
+                pgImg.src = GetBaseUrl() + "/DocImage.axd?token=" + token + "&zoom=" + zoom + "&page=" + i;
+                // If you don't want to print annotations then..  + "&AnnMode=1";
+
+                pgImg.className = pagePrintCss;
+
+                objdivPrint.appendChild(pgImg);
+                pgImg.onload = function () { LoadCount((pageTo - pageFrom) + 1) };
+            }
+
+        }
+
+        function sleep(seconds) 
+        {
+            var e = new Date().getTime() + (seconds * 1000);
+            while (new Date().getTime() <= e) {}
+        }
+
+        function LoadCount(t) {
+
+            totalp = totalp + 1;
+            document.getElementById("divProgress").style.width = parseInt($("#divProgress").width()) + steps + "px";
+            document.getElementById("divProgress").innerHTML = "Page " + totalp;
+
+            if (totalp === t) {
+
+                $('#non-printable').remove();  // Fix for IE 9
+
+                setTimeout("self.focus(); window.print(); self.parent.tb_remove();", 2000);
+            }
+        }
+
+        function DoPrint() {
+
+            document.getElementById("btnPrint").disabled = 'disabled';
+
+            objdivPrint = document.getElementById("divPrint");
+
+            ClearControls();
+
+            var startPage = document.getElementById("txtFrom").value;
+            var endPage = document.getElementById("txtTo").value;
+            var zoomLevel = document.getElementById("txtZoom").value;
+
+            PrintPages(startPage, endPage, zoomLevel);
+        }
+
+        function ClearControls() {
+            var x = objdivPrint.childNodes.length;
+
+            for (i = x - 1; i > -1; i--) {
+                if ('undefined' != objdivPrint.childNodes[i].id) {
+                    var objToRemove = document.getElementById(objdivPrint.childNodes[i].id);
+                    if (null != objToRemove) {
+                        objdivPrint.removeChild(objToRemove);
+                    }
+                }
+            }
+        }
+
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) {
+                    return pair[1];
+                }
+            }
+        }
+
+        var p = getQueryVariable("printpage");
+        if (typeof (p) != "undefined") {
+            document.getElementById("non-printable").style.display = "none";
+            var zoom = getQueryVariable("printzoom");
+
+            if (typeof (zoom) == "undefined") {
+                zoom = "100";
+            }
+
+            PrintPages(p, p, zoom);
+        }
+        else {
+            document.getElementById("txtTo").value = getQueryVariable("printtotal");
+            document.getElementById("divProgress").style.visibility = "hidden";
+        }
+    </script>
+</body>
+</html>

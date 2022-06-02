@@ -1,0 +1,38 @@
+﻿@*@model AIRMAM5.DBEntity.DBEntity.sp_t_GET_ARC_INDEX_BY_CONDITION_Result*@
+@model AIRMAM5.DBEntity.Models.AcrDelete.DeleteConfirmViewModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("RedoModal", "您正要還原實體檔案!請確認！",
+@<div>
+    @using (Html.BeginForm("Redo", "Delete", new { id = Model.IndexId, type = Model.fsTYPE, fileno = Model.fsFILE_NO }, FormMethod.Post, new { role = "form", @class = "ui inverted form", @id = "RedoForm" }))
+                {
+        <div class="field">
+            <h5 class="ui red header"> 確定要還原這個檔案嗎?</h5>
+        </div>
+        <div class="three fields">
+            <div class="two wide field">
+                @Html.DisplayNameFor(model => model.fsTYPE)
+                <input type="text" value="@Model.fsTYPE" readonly />
+            </div>
+            <div class="four wide field">
+                @Html.DisplayNameFor(model => model.fsFILE_NO)
+                @Html.TextBoxFor(model => model.fsFILE_NO, new { @readonly = "readonly" })
+            </div>
+            <div class="ten wide field">
+                @Html.DisplayNameFor(model => model.C_sTITLE)
+                @Html.TextBoxFor(model => model.C_sTITLE, new { @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.DisplayNameFor(model => model.DeleteReason)
+            <input type="text" value="@Model.DeleteReason" readonly />
+        </div>
+                }
+</div>
+ ,@<div>
+     <button type="button" class="ui ok right labeled icon blue button">還原<i class="checkmark icon"></i></button>
+     <button type="button" class="ui black cancel button">取消</button>
+ </div>
+ )

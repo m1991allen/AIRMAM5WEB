@@ -1,0 +1,9 @@
+﻿@model AIRMAM5.DBEntity.Models.Subject.ShowViewerModel
+@{
+    string errorImage = Url.Content("~/Images/noImage.png");
+    string _imageUrl =string.IsNullOrEmpty(Model.ImageUrl)? errorImage : Model.ImageUrl;
+    string _docurl = Url.Action("_PreviewDoc", "DocViewer", new { fsSUBJECT_ID = Model.fsSUBJECT_ID, fileNo = Model.fsFILE_NO });
+    bool actionButton = Model.FileType == "P" ? true : Model.FileType == "D" ? Model.CanPreview : false;
+}
+
+@HtmlHelper.Preview(Model.FileUrl, _imageUrl, Model.FileType, Model.fsFILE_NO, Model.fsSUBJECT_ID, _docurl, errorImage, null, @actionButton)

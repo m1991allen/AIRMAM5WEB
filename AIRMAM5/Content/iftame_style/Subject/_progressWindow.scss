@@ -1,0 +1,45 @@
+﻿/*-----------------------------------------
+   上傳視窗
+------------------------------------*/
+
+  ._styleLoad {
+      position: relative;
+      margin: 0 !important;
+      color: rgba(255, 255, 255, 0.9);
+
+      .ui.progress {
+          height: 1px;
+          width: 100%;
+          background: #888;
+
+          .bar {
+              height: 1px;
+          }
+      }
+
+      &.error, &.red {
+          ._colorPerc {
+              color: $red;
+          }
+      }
+
+      &.success, &.green {
+          ._colorPerc {
+              color: $green;
+          }
+      }
+
+      & > ._colorPerc {
+          color: #ffd800;
+      }
+
+      & > a {
+          color: #bdbdbd;
+
+          &:hover {
+              color: rgba(255, 255, 255, 0.9);
+          }
+      }
+  }
+
+

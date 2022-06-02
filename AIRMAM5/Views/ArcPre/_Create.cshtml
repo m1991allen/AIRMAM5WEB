@@ -1,0 +1,50 @@
+﻿@model AIRMAM5.DBEntity.Models.ArcPre.ArcPreCreateModel
+@{
+    Layout = "";
+}
+@HtmlHelper.HtmlModal("CreateModal", "新增詮釋資料",
+@<form role="form" class="ui inverted form" , id="CreateForm">
+    <div class="field required">
+        @*<label>類型</label>*@
+        @Html.LabelFor(m=>m.ArcPreTypeList)
+        <div class="ui grid">
+            @foreach (var arcitem in Model.ArcPreTypeList.Skip(1))
+                        {
+                <div class="four wide column">
+                    <div class="ui inverted segment">
+                        <div class="ui radio checkbox">
+                            <input type="radio" value="@arcitem.Value" name="templetetype" required>
+                            <label for="templetetype">@arcitem.Text</label>
+                        </div>
+                    </div>
+                </div>
+             }
+        </div>
+    </div>
+    <div class="field required">
+        @*<label>樣板</label>*@
+        @Html.LabelFor(m => m.ArcPreTemplateList)
+        <div class="ui grid" id="templeteLayout">
+            @foreach (var arctemp in Model.ArcPreTemplateList)
+                        {
+                <div class="four wide column">
+                    <div class="ui inverted segment">
+                        <div class="ui radio checkbox">
+                            <input type="radio" value="@arctemp.Value" name="templetetlayout" required>
+                            <label>@arctemp.Text</label>
+                        </div>
+                    </div>
+                </div>
+                        }
+            /**/
+        </div>
+    </div>
+    <div class="ui error message"></div>
+</form>,
+ @<div>
+     <button type="button" class="ui ok yellow  button">儲存</button>
+     <button class="ui cancel  button" type="button">取消</button>
+ </div>
+ )
+
+

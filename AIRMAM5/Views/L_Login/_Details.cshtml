@@ -1,0 +1,74 @@
+﻿@model AIRMAM5.DBEntity.DBEntity.spGET_L_LOGIN_ResultViewModel
+
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("DetailModal", "登入登出紀錄內容",
+@<form class="ui form" name="Detail">
+    <div class="three fields">
+        <div class="two wide field">
+            @Html.DisplayNameFor(model => model.fnLOGIN_ID)
+            @Html.TextBoxFor(model => model.fnLOGIN_ID, new { @readonly = "readonly" })
+        </div>
+        <div class="ten wide field">
+            @Html.DisplayNameFor(model => model.fsLOGIN_ID)
+            @{ 
+                string _userByName = string.Format($"{Model.fsLOGIN_ID}({Model.fsLOGIN_NAME})"); }
+                @if (Model.fsLOGIN_ID == "0" || Model.fsLOGIN_ID == "") { _userByName = ""; }
+            @Html.TextBox("UserByName", _userByName, new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.DisplayNameFor(model => model.fdSTIME)
+            @Html.TextBoxFor(model => model.fdSTIME, new { @readonly = "readonly" })
+        </div>
+    </div>
+    <div class="three fields">
+        <div class="six wide field">
+            @Html.DisplayNameFor(model => model.fdETIME)
+            @Html.TextBoxFor(model => model.fdETIME, new { @readonly = "readonly" })
+        </div>
+        <div class="six wide field">
+            @Html.DisplayNameFor(model => model.UsageTime)
+            @Html.TextBoxFor(model => model.UsageTime, new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @*<label>登入IP</label>
+            <input type="text" name="name" value="" readonly />*@ &nbsp;
+        </div>
+    </div>
+    <div class="field">
+        @Html.DisplayNameFor(model => model.fsNOTE)
+        @Html.TextBoxFor(model => model.fsNOTE, new { @readonly = "readonly" })
+    </div>
+    <div class="four fields">
+        <div class="four wide field">
+            @Html.DisplayNameFor(model => model.fdCREATED_DATE)
+            @*@Html.TextBoxFor(model => model.fdCREATED_DATE, new { @readonly = "readonly" })*@
+            @Html.TextBox("fdCREATED_DATE", string.Format($"{Model.fdCREATED_DATE:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.DisplayNameFor(model => model.fsCREATED_BY)
+            @{ string _createder = string.Format("{0}{1}"
+                   , string.IsNullOrEmpty(Model.fsCREATED_BY) ? string.Empty : Model.fsCREATED_BY
+                   , string.IsNullOrEmpty(Model.fsCREATED_BY_NAME) ? string.Empty : string.Format($"({Model.fsCREATED_BY_NAME})")); }
+            @Html.TextBox("CreatedByName", _createder, new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.DisplayNameFor(model => model.fdUPDATED_DATE)
+            @*@Html.TextBoxFor(model => model.fdUPDATED_DATE, new { @readonly = "readonly" })*@
+            @Html.TextBox("fdUPDATED_DATE", string.Format($"{Model.fdUPDATED_DATE:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @{ string _updateder = string.Format("{0}{1}"
+                   , string.IsNullOrEmpty(Model.fsUPDATED_BY) ? string.Empty : Model.fsUPDATED_BY
+                   , string.IsNullOrEmpty(Model.fsUPDATED_BY_NAME) ? string.Empty : string.Format($"({Model.fsUPDATED_BY_NAME})"));
+            }
+            @Html.DisplayNameFor(model => model.fsUPDATED_BY)
+            @Html.TextBox("UpdatedByName", _updateder, new { @readonly = "readonly" })
+        </div>
+    </div>
+</form>
+,@<button class="ui cancel button" type="button">關閉</button>
+ )
+

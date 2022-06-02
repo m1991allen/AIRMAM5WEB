@@ -1,0 +1,66 @@
+﻿@using AIRMAM5.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "媒體資產管理系統";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+ @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form", @id="loginform" }))
+{
+    @Html.AntiForgeryToken()
+<div class="inputs">
+    <div class="field">
+        @Html.LabelFor(m => m.UserName)
+        @Html.TextBoxFor(m => m.UserName, new { @placeholder = "", @autocomplete = "off", @autofocus= "autofocus" })
+        @*@Html.TextBoxFor(m => m.UserName, new { @placeholder = "", @Value = "admin" })*@
+        <span class="right">@Html.ValidationMessageFor(m => m.UserName, "", new { @class = "valid" })</span>
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password, new { @placeholder = "", @autocomplete = "off" })
+        @*@Html.PasswordFor(m => m.Password, new { @placeholder = "", @Value = "P@ssw0rd" })*@
+        <span class="right">@Html.ValidationMessageFor(m => m.Password, "", new { @class = "valid" })</span>
+    </div>
+    <div class="field">
+        <div class="buttons" style="margin-top:32px;">
+            @*<p>@Html.ValidationSummary("", new { @class = "center valid" })</p> <p class="center">還沒有帳號? @Html.ActionLink("註冊會員", "Register")</p>*@
+            <button type="submit" class="btn">登入</button>
+            <button type="reset" class="btn" onclick="document.getElementById('loginform').reset();">清空</button>
+        </div>
+    </div>
+    <div class="field">
+        <div class="group">
+            <label class="check">
+                @Html.CheckBoxFor(m => m.RememberMe)
+                <span class="checkmark"></span>
+                @Html.LabelFor(m => m.RememberMe)
+            </label>
+            @Html.ActionLink("忘記密碼", "ForgotPassword", new { @class = "forgot" })
+        </div>
+        <div class="group">
+            <span class="right">@Html.ValidationMessageFor(m => m.RememberMe, "", new { @class = "valid" })</span>
+        </div>
+    </div>
+    @*<div class="center">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </div>*@
+</div>
+
+
+
+}
+
+
+@section Scripts {
+ <script>
+     function getCookie(name) {
+         var value = "; " + document.cookie;
+         var parts = value.split("; " + name + "=");
+         if (parts.length == 2) return parts.pop().split(";").shift();
+     }
+     var isRemember = getCookie("RememberMe") == undefined ? false : true;
+     document.getElementById("UserName").value = !isRemember ? "" : getCookie("RememberMe");
+     document.querySelector("input[name='RememberMe']").checked = isRemember;
+ </script>
+}

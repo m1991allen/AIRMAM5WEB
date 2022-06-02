@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "IndexCheckOut";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+    var MaxSelect = @ViewData["TapeMax"];
+}
+@section Styles{
+    <link href="~/Content/iftame_style/Tsm/TsmCheckout.min.css" rel="stylesheet" />
+}
+
+@HtmlHelper.Breadcrumb(new string[] { "磁帶管理", "磁帶下架" })
+ <input type="hidden" name="MaxCheckOutCount" value="@MaxSelect" />
+<div class="_Filter">
+    @*@Html.Action("_Search", "TSM")*@
+    <form class="ui inverted form" role="form" id="SearchForm">
+        <div class="two fields">
+            <div class="four wide field inline fields">
+                <div class="six wide field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="ChckoutType" checked="checked" value="Lib">
+                        <label>僅磁帶櫃</label>
+                    </div>
+                </div>
+                <div class="six wide field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="ChckoutType" value="All">
+                        <label>所有納管</label>
+                    </div>
+                </div>
+            </div>
+            <div class="twelve wide field">
+                <label style="visibility:hidden;">查詢</label>
+                <button type="submit" class="ui yellow button">查詢</button>
+                <button type="button" name="reset" class="ui button">清空</button>
+                <button type="button" class="ui red button" id="CheckOutBtn"><i class="level down alternate icon"></i> 下架</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="Table"></div>
+
+
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+
+
+<!--磁帶下架確認燈箱-->
+@HtmlHelper.ConfirmModal("ConfirmCheckoutModal", "磁帶下架確認", "確定要下架這些磁帶嗎？");
+
+@section Scripts{
+    @Html.Partial("~/Views/Bundle/TsmCheckOut_Js.cshtml")
+}
+
+
+
+
+
+

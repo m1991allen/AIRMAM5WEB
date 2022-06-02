@@ -1,0 +1,40 @@
+﻿
+
+-- =============================================
+-- 描述:	取出TEMPLATE 主檔 資料
+-- 記錄:	<2011/09/16><Eric.Huang><新增本預存>
+--			<2012/05/02><Mihsiu.Chiu><新增欄位t_ USING_CNT>
+--			<2012/10/04><Eric.Huang><MARK欄位t_USING_CNT(因為動作執行太久)>
+-- =============================================
+CREATE PROCEDURE [dbo].[spGET_TEMPLATE]
+	@fnTEMP_ID		INT,
+	@fsTABLE		CHAR(1)
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+	SELECT 
+
+		TEMP.fnTEMP_ID, 
+		TEMP.fsNAME, 
+		TEMP.fsTABLE, 
+		T.fsNAME AS _sTABLENAME, 
+		TEMP.fsDESCRIPTION, 
+		TEMP.fcIS_SEARCH,
+		TEMP.fdCREATED_DATE, 
+		TEMP.fsCREATED_BY, 
+		TEMP.fdUPDATED_DATE, 
+		TEMP.fsUPDATED_BY,
+		ISNULL(USERS_CRT.fsNAME,'') AS fsCREATED_BY_NAME,
+		ISNULL(USERS_UPD.fsNAME,'') AS fsUPDATED_BY_NAME
+		--t_USING_CNT = dbo.fn_t_GET_USING_CNT_BY_TEMP_ID(fsTABLE,@fnTEMP_ID)
+
+	FROM
+		tbmTEMPLATE AS TEMP
+			LEFT JOIN tbzCODE AS T ON (TEMP.fsTABLE = T.fsCODE)	AND T.fsCODE_ID = 'TEMP001'	
+			LEFT JOIN tbmUSERS USERS_CRT ON TEMP.fsCREATED_BY = USERS_CRT.fsLOGIN_ID
+			LEFT JOIN tbmUSERS USERS_UPD ON TEMP.fsUPDATED_BY = USERS_UPD.fsLOGIN_ID	
+	WHERE
+		(@fnTEMP_ID = 0 OR fnTEMP_ID = @fnTEMP_ID) AND
+		(@fsTABLE = '' OR fsTABLE = @fsTABLE)
+END
+

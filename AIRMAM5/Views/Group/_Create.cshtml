@@ -1,0 +1,25 @@
+﻿@model AIRMAM5.DBEntity.DBEntity.tbmGROUPS
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("CreateModal", "新增角色群組",
+@<form class="ui inverted form" role="form" id="CreateForm">
+    <div class="two fields">
+        <div class="eight wide field required">
+            @Html.LabelFor(model => model.fsNAME)
+            @Html.TextBoxFor(model => model.fsNAME, new { @placeholder = "例:影視組...", @id = "GroupName" })
+            @Html.ValidationMessageFor(model => model.fsNAME, "", new { @class = "" })
+        </div>
+        <div class="eight wide field required">
+            @Html.LabelFor(model => model.fsDESCRIPTION)
+            @Html.TextBoxFor(model => model.fsDESCRIPTION, new { @placeholder = "例:合作廠商A,只有XX權限", @id = "GroupDescription" })
+            @Html.ValidationMessageFor(model => model.fsDESCRIPTION, "", new { @class = "" })
+        </div>
+    </div>
+    @*} </div>*@
+</form>
+  ,@<div>
+      <button class="ui yellow ok button" type="submit">新增</button>
+      <button class="ui cancel  button" type="reset">取消</button>
+  </div>)

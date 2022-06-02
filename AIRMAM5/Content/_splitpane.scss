@@ -1,0 +1,127 @@
+﻿@import "./_variable.scss";
+$fixedLeftWidth:35em;
+$topCompoentHeight:500px;
+$minBottomHeight:50%;
+@mixin splitPanel {
+    /*******************************
+   影音圖文共用拖拉容器尺寸樣版
+*******************************/
+    .left-component {
+        width: 50%;
+
+        .bottom-component {
+            .tabulator-header {
+                display: none;
+            }
+
+            .tabulator-odd {
+                background-color: transparent;
+            }
+        }
+    }
+
+    .right-component {
+        width: 50%;
+
+        .ui.bottom.attached.tab {
+            min-height: 90%;
+            height: 90%;
+            overflow: auto;
+        }
+    }
+
+    .fixed-left {
+        .left-component {
+            width: $fixedLeftWidth;
+            min-width: $fixedLeftWidth;
+        }
+
+        .right-component {
+            width: calc(100% - #{ $fixedLeftWidth });
+            left: $fixedLeftWidth;
+            padding-left: 25px;
+            /*overflow: hidden;*/
+        }
+    }
+
+    .fixed-right {
+        .left-component {
+            width: calc(100% - #{ $fixedLeftWidth });
+            right: $fixedLeftWidth;
+            padding-left: 25px;
+        }
+
+        .right-component {
+            width: $fixedLeftWidth;
+            min-width: $fixedLeftWidth;
+            padding-left: 25px;
+            /*overflow: hidden;*/
+        }
+    }
+
+
+    .top-component {
+        bottom: $minBottomHeight;
+        margin-bottom: 1.3em;
+        /*height:100%;*/
+        height: $topCompoentHeight;
+    }
+
+    .bottom-component {
+        height: $minBottomHeight;
+        /*height: calc ( 100% - #{$topCompoentHeight});*/
+        /*overflow: hidden;*/
+    }
+
+    .divider, .horizontal-divider {
+        .split-pane-divider-inner {
+            position: relative;
+            background-color: #222;
+
+            &::before {
+                content: "|||";
+                color: #545454;
+                margin: auto;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 0;
+            }
+        }
+    }
+
+    .divider {
+        left: $fixedLeftWidth;
+        padding: 0 6px;
+
+        &:hover::after {
+            display: block;
+            width: 1px;
+            min-height: 100%;
+            border: 0.5px dashed $white;
+        }
+
+        .split-pane-divider-inner {
+            &::before {
+                left: 0;
+                height: 30px;
+            }
+        }
+    }
+
+    .horizontal-divider {
+        bottom: $minBottomHeight;
+        padding: 5px 0;
+
+        .split-pane-divider-inner {
+            top: 0;
+
+            &:before {
+                left: 6px;
+                transform: rotate(90deg);
+                -webkit-transform: rotate(90deg);
+                width: 10px;
+            }
+        }
+    }
+}

@@ -1,0 +1,170 @@
+﻿@model AIRMAM5.DBEntity.Models.Subject.SubjectFileMetaViewModel
+@{
+    var _codeSer = new AIRMAM5.DBEntity.Services.CodeService();
+    bool IsMutiple = !string.IsNullOrEmpty(Model.fsFILE_NO) && Model.fsFILE_NO.Split(',').Length > 1 ? true : false;
+    string IsMutipleEdit = IsMutiple ? "" : "disabled";
+    string cusCheck = IsMutiple ? "" : "cuschecked";
+}
+<link href="~/Content/iftame_style/Subject/SubjectEditMedia.min.css" rel="stylesheet" />
+
+@HtmlHelper.HtmlModal("EditMediaModal", "編輯主題-" + Model.FileCategoryStr + "檔案資料【編號:" + Model.fsFILE_NO + "】",
+@<form role="form" class="ui inverted form" id="EditMediaForm" method="post" changed="false">
+    @Html.HiddenFor(m => m.fsSUBJECT_ID)
+    @Html.Hidden("SubjectId", Model.fsSUBJECT_ID)
+    @Html.HiddenFor(m => m.fsFILE_NO)
+    <dvi class="three fields">
+        <div class="two wide field">
+            @Html.LabelFor(model => model.FileCategory)
+            @Html.TextBox("FileCategoryTxt", Model.FileCategoryStr, new { @type = "text", @readonly = "readonly" })
+            @Html.HiddenFor(m => m.FileCategory)
+        </div>
+        <div class="four wide field">
+            @Html.LabelFor(model => model.FileSecret)
+            <div class="ui checkbox @IsMutipleEdit  @cusCheck">
+                <input type="checkbox" name="FileSecret_IsEdit">
+                <label></label>
+            </div>
+            @Html.DropDownListFor(m => m.FileSecret, new SelectList(Model.FileSecretList, "Value", "Text"), new { @class = "ui search selection dropdown" })
+        </div>
+        <div class="ten wide field">
+            <!--20210909_ADDED_版權 -->
+            @Html.LabelFor(model => model.LicenseCode)
+            <div class="ui checkbox @IsMutipleEdit  @cusCheck">
+                <input type="checkbox" name="LicenseCode_IsEdit">
+                <label></label>
+            </div>
+            @Html.DropDownListFor(m => m.LicenseCode, new SelectList(Model.FileLicenseList, "Value", "Text"), new { @class = "ui search selection dropdown" })
+        </div>
+    </dvi>
+    <div class="required field">
+        @Html.LabelFor(model => model.Title)
+        <div class="ui checkbox @IsMutipleEdit  @cusCheck">
+            <input type="checkbox" name="Title_IsEdit">
+            <label></label>
+        </div>
+        @Html.TextBoxFor(model => model.Title, new { @type = "text", data_nullable = "False" })<!--因為這裡的元素不是自訂欄位,為配合勾選才驗證,加入data_nullable屬性讓js去動態判斷這裡的必填-->
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.Description)
+        <div class="ui checkbox @IsMutipleEdit  @cusCheck">
+            <input type="checkbox" name="Description_IsEdit">
+            <label></label>
+        </div>
+        @Html.TextAreaFor(model => model.Description, new { @type = "text" })
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.HashTag)
+        <div class="ui checkbox @IsMutipleEdit  @cusCheck">
+            <input type="checkbox" name="HashTag_IsEdit">
+            <label></label>
+        </div>
+        @Html.HiddenFor(model => model.HashTag)
+        <div class="ui fluid multiple search selection  x-hashtag dropdown" name="x-hashtag">
+            <input name="tags" type="hidden" value="@Model.HashTag.Replace("^",",")">
+            <i class="dropdown icon"></i>
+            <div class="default text">輸入後按下Enter，可以創建新的標籤</div>
+            <div class="menu"></div>
+        </div>
+    </div>
+    @{
+        //自訂欄位, 判斷型態決定顯示控制項
+        List<string> fieldList = new List<string>();
+                    int num = 0;
+                    foreach (var itm in Model.ArcPreAttributes)
+                    {
+                        fieldList.Add(itm.Field);
+                        int.TryParse(itm.Field.Replace("fsATTRIBUTE", ""), out int _num);
+                        if (_num > num) { num = _num; } /* Tips: fsATTRIBUTE編號不一定會按照順序,取fsATTRIBUTE最大編號記錄 */
+                        string _req = itm.IsNullable ? "" : "required";
+                        string _editName = itm.Field + "_IsEdit";
+                        if (itm.FieldType == "NVARCHAR")
+                        {
+                            if (itm.IsMultiline)
+                            {
+                    <div class="@_req field">
+                        @Html.Label(itm.Field, itm.FieldName)
+                        <div class="ui checkbox @IsMutipleEdit  @cusCheck">
+                            <input type="checkbox" name="@_editName">
+                            <label></label>
+                        </div>
+                        @Html.TextArea(itm.Field, itm.FieldValue, new { @rows = 3, @maxlength = itm.FieldLen, data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                    </div>
+                            }
+                            else
+                            {
+                    <div class="@_req field">
+                        @Html.Label(itm.Field, itm.FieldName)
+                        <div class="ui checkbox @IsMutipleEdit  @cusCheck">
+                            <input type="checkbox" name="@_editName">
+                            <label></label>
+                        </div>
+                        @Html.TextBox(itm.Field, itm.FieldValue, new { @type = "text", @maxlength = itm.FieldLen, data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                    </div>
+                            }
+                        }
+                        else if (itm.FieldType == "INTEGER")
+                        {
+                <div class="@_req field">
+                    @Html.Label(itm.Field, itm.FieldName)
+                    <div class="ui checkbox @IsMutipleEdit  @cusCheck">
+                        <input type="checkbox" name="@_editName">
+                        <label></label>
+                    </div>
+                    @Html.TextBox(itm.Field, itm.FieldValue, new { @type = "number", @min = 0, @setp = 1, data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                </div>
+                        }
+                        else if (itm.FieldType == "DATETIME")
+                        {
+                <div class="@_req  field">
+                    @Html.Label(itm.FieldName)
+                    <div class="ui checkbox @IsMutipleEdit  @cusCheck">
+                        <input type="checkbox" name="@_editName">
+                        <label></label>
+                    </div>
+                    <div class="ui calendar">
+                        @Html.TextBox(itm.Field, itm.FieldValue, new { @type = "text", data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                    </div>
+                </div>
+                        }
+                        else if (itm.FieldType == "CODE")
+                        {
+
+                <div class="@_req field">
+                    @Html.Label(itm.FieldName)
+                    <div class="ui checkbox @IsMutipleEdit  @cusCheck">
+                        <input type="checkbox" name="@_editName">
+                        <label></label>
+                    </div>
+                    @{
+                                    var _ddlCode = _codeSer.CodeListItemSelected(itm.FieldCodeId, itm.FieldDef);
+                                    if (itm.FieldCodeCnt == 1)
+                                    {
+                            @Html.DropDownList(itm.Field, _ddlCode, new { @class = "ui search selection fluid dropdown", data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                                    }
+                                    else
+                                    {
+                            @Html.ListBox(itm.Field, _ddlCode, new { @class = "ui search multiple selection fluid dropdown", @multiple = "", data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                                    }
+                    }
+                </div>
+                        }
+                    }
+                    if (Model.FileCategory == "V" || Model.FileCategory == "A")
+                    {
+            <div class="field">
+                <!-- added_20210831_語音轉文字  -->
+                @Html.LabelFor(model => model.Voice2TextContent)
+                <div class="ui checkbox @IsMutipleEdit  @cusCheck">
+                    <input type="checkbox" name="Voice2TextContent_IsEdit">
+                    <label></label>
+                </div>
+                @*@Html.TextBoxFor(model => model.Voice2TextContent, new { @type = "text" })*@
+                @Html.TextArea("Voice2TextContent", Model.Voice2TextContent, new { @rows = 4 })
+            </div>
+                    }
+    }
+</form>,
+                @<div>
+                    <button class="ui yellow approve button" type="button">儲存</button>
+                    <button class="ui deny button" type="button">取消</button>
+                </div>)

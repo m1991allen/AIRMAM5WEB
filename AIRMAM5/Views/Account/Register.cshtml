@@ -1,0 +1,101 @@
+﻿@model AIRMAM5.Models.RegisterViewModel
+@{
+    ViewBag.Title = "會員註冊";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="inputs">
+        <div class="field">
+            @Html.LabelFor(m => m.UserName)
+            @Html.TextBoxFor(m => m.UserName, new { @placeholder = "請輸入帳號..." })
+            <span class="right">@Html.ValidationMessageFor(m => m.UserName, "", new { @class = "valid" })</span>
+        </div>
+        <div class="field">
+            @Html.LabelFor(m => m.RealName, new { })
+            @Html.TextBoxFor(m => m.RealName, new { @placeholder = "請輸入姓名..." })
+            <span class="right">@Html.ValidationMessageFor(m => m.RealName, "", new { @class = "valid" })</span>
+        </div>
+        <div class="field">
+            @Html.LabelFor(m => m.RoleName, new { })
+            @Html.DropDownListFor(m => m.RoleName, Model.RoleList)
+            <span class="right">@Html.ValidationMessageFor(m => m.RoleName, "", new { @class = "valid" })</span>
+        </div>
+        <div class="field">
+            @Html.LabelFor(m => m.Email, new { })
+            @Html.TextBoxFor(m => m.Email, new { @placeholder = "請輸入電子信箱..." })
+            <span class="right">@Html.ValidationMessageFor(m => m.Email, "", new { @class = "valid" })</span>
+        </div>
+        <div class="field">
+            @Html.LabelFor(m => m.Password, new { })
+            @Html.PasswordFor(m => m.Password, new { @placeholder = "請輸入密碼..." })
+            <span class="right">@Html.ValidationMessageFor(m => m.Password, "", new { @class = "valid" })</span>
+        </div>
+        <div class="field">
+            @Html.LabelFor(m => m.ConfirmPassword, new { })
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "請輸入密碼..." })
+            <span class="right">@Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "valid" })</span>
+        </div>
+        <div class="group buttons">
+            <button type="reset" class="btn btn-red">清空</button>
+            <button type="submit" class="btn btn-default">註冊</button>
+        </div>
+        <p class="center">已有帳號? @Html.ActionLink("登入", "Login")</p>
+        <p>@Html.ValidationSummary("", new { @class = "center valid" })</p>
+    </div>
+
+
+}
+
+    @*<div class="form-group">
+        @Html.LabelFor(m => m.UserName)
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+        </div>
+    </div>*@
+    @*<div class="form-group">
+        @Html.LabelFor(m => m.RealName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.RealName, new { @class = "form-control" })
+        </div>
+    </div>*@
+    @*<div class="form-group">
+        @Html.LabelFor(m => m.RoleName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.RoleName, Model.RoleList, new { @class = "form-control" })
+        </div>
+    </div>*@
+
+    @*<div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>*@
+    @*<div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+    </div>*@
+    @*<div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>*@
+    @*<div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="註冊" />
+        </div>
+    </div>
+}*@
+
+@section Scripts {
+
+}

@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "確認電子郵件";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<hgroup class="title">
+    <h1 style="color:navajowhite;">@ViewBag.Title </h1>
+</hgroup>
+<div>
+    <p>
+        感謝您確認電子郵件。請 @Html.ActionLink("按一下這裡登入", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+    </p>
+</div>
+
+
+@*<h2>@ViewBag.Title.</h2>
+<p class="center">
+    感謝您確認電子郵件。請@Html.ActionLink("按一下這裡登入", "登入", "帳戶", routeValues: null, htmlAttributes: new { id = "loginLink" })
+</p>*@

@@ -1,0 +1,20 @@
+﻿CREATE TABLE [dbo].[xtbmUSER_APP] (
+    [fnUSER_A_ID]    BIGINT         IDENTITY (1, 1) NOT NULL,
+    [fsLOGIN_ID]     NVARCHAR (50)  NOT NULL,
+    [fsPASSWORD]     VARCHAR (255)  NOT NULL,
+    [fsNAME]         NVARCHAR (50)  NOT NULL,
+    [fsENAME]        VARCHAR (50)   NOT NULL,
+    [fsTITLE]        NVARCHAR (50)  NOT NULL,
+    [fsDEPT_ID]      VARCHAR (10)   NOT NULL,
+    [fsEMAIL]        VARCHAR (50)   NOT NULL,
+    [fsPHONE]        VARCHAR (20)   NOT NULL,
+    [fsDESCRIPTION]  NVARCHAR (MAX) NULL,
+    [fsSTATUS]       VARCHAR (1)    NOT NULL,
+    [fsNOTE]         NVARCHAR (20)  NOT NULL,
+    [fdCREATED_DATE] DATETIME       NOT NULL,
+    [fsCREATED_BY]   NVARCHAR (50)  NOT NULL,
+    [fdUPDATED_DATE] DATETIME       NOT NULL,
+    [fsUPDATED_BY]   NVARCHAR (50)  NOT NULL,
+    CONSTRAINT [PK_tbmUSER_APP] PRIMARY KEY CLUSTERED ([fnUSER_A_ID] ASC)
+);
+

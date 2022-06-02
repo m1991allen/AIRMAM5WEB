@@ -1,0 +1,35 @@
+﻿@model AIRMAM5.DBEntity.Models.Synonym.SynonymSearchModel
+
+@{
+    Layout = "";
+}
+<form class="ui inverted form" role="form" id="SearchForm">
+    <div class="three fields">
+        <div class="four wide field">
+            <label>分類</label>
+            <select class="ui search selection fluid dropdown" id="SynonymType" name="SynonymType">
+                <option value="">請選擇分類</option>
+                <option value="*" selected>全部</option>
+                @{
+                    foreach (var item in Model.SynoList)
+                    {
+                        <option value="@item.Value">@item.Text </option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="four wide field">
+            <label>詞彙</label>
+            <input type="text" id="SearchWord" />
+        </div>
+        <div class="eight wide field">
+            <label style="visibility:hidden;">操作</label>
+            <button type="submit" class="ui yellow button"><i class="search icon"></i>查詢</button>
+            <button type="button" name="reset" class="ui button">清空</button>
+            @*<button type="reset" class="ui button">清空</button>*@
+            <button name="createSynonym" type="button" class="ui _darkGrey button"><i class="add icon"></i>新增同義詞</button>
+
+            <button id="RebuildBtn" type="button" class="ui _darkGrey button"><i class="cubes icon"></i>全部重建</button>
+        </div>
+    </div>
+</form>

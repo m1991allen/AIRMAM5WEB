@@ -1,0 +1,207 @@
+﻿@charset "UTF-8";
+/* The emerging W3C standard
+   that is currently Firefox-only */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); }
+
+/*--------------
+     共用Table  ---- Jamie
+---------------*/
+/*#Table {
+    height: $Width_Height !important;
+    display: nth($display,1);
+    flex-direction: $flexColumn;
+}
+
+#Table > .tabulator-tableHolder {
+    height: $Width_Height !important;
+    min-height: nth($Width_Height,2) !important;
+}
+
+._ShareScroll {
+    overflow: $overflow;
+    height: $Width_Height;
+}*/
+body {
+  font-family: 'Microsoft JhengHei',"Avenir Next", "Helvetica Neue", Arial,-apple-system, Roboto, sans-serif; }
+
+thead {
+  background-image: none, -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.12)), color-stop(50%, rgba(255, 255, 255, 0.08)), color-stop(50%, rgba(255, 255, 255, 0.05)), to(rgba(255, 255, 255, 0)));
+  background-image: none, -webkit-linear-gradient(top, rgba(255, 255, 255, 0.12) 0, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+  background-image: none, linear-gradient(to bottom, rgba(255, 255, 255, 0.12) 0, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+  /*background-position: 50% 50%;*/
+  background-color: #232323; }
+
+table tr:nth-child(even) {
+  background: #3a3a3a; }
+
+._Filter {
+  border-radius: 0;
+  margin: 0;
+  padding: 1em 0 0 0; }
+
+._Filter_01 {
+  border-radius: 0;
+  margin: 0;
+  padding: 1em 0; }
+
+._ShareScroll table.ui > thead tr:first-child > th {
+  position: sticky !important;
+  top: 0;
+  z-index: 2; }
+
+/*--------------
+     共用_contentBox 燈箱樣式   ---- Jamie
+---------------*/
+._BigBlock {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important; }
+
+._contentBox {
+  height: 100% !important;
+  overflow: auto !important; }
+
+._ArrayFlex {
+  display: flex;
+  margin: 0em 0em 0.28571429rem 0em;
+  color: rgba(255, 255, 255, 0.71);
+  align-items: center; }
+
+._ArrayFlex span {
+  color: #ff9595;
+  margin-left: 5px;
+  font-size: .5em; }
+
+/*--------------------
+    顯示內容解除Focus   ---- Jamie
+---------------------*/
+.ui.form[name="Detail"] input:not([type]):focus,
+.ui.form[name="Detail"] input[type="date"]:focus,
+.ui.form[name="Detail"] input[type="datetime-local"]:focus,
+.ui.form[name="Detail"] input[type="email"]:focus,
+.ui.form[name="Detail"] input[type="number"]:focus,
+.ui.form[name="Detail"] input[type="password"]:focus,
+.ui.form[name="Detail"] input[type="search"]:focus,
+.ui.form[name="Detail"] input[type="tel"]:focus,
+.ui.form[name="Detail"] input[type="time"]:focus,
+.ui.form[name="Detail"] input[type="text"]:focus,
+.ui.form[name="Detail"] input[type="file"]:focus,
+.ui.form[name="Detail"] input[type="url"]:focus {
+  border: 1px solid rgba(34, 36, 38, 0.11) !important;
+  /*border: 1px solid #c2b701 !important;*/ }
+
+.ui.form[name="Detail"] textarea:focus {
+  border: 1px solid rgba(34, 36, 38, 0.11) !important; }
+
+.ui.form[name="Detail"] input:hover, .ui.form[name="Detail"] textarea:hover {
+  cursor: context-menu; }
+
+.ui.form[name="Detail"] .field select:disabled {
+  background: none;
+  color: #fff !important;
+  border: none;
+  opacity: 1; }
+
+.ui.form[name="Detail"] .field select {
+  /* Chrome */
+  -webkit-appearance: none;
+  /* Firefox */
+  -moz-appearance: none;
+  text-indent: 0.01px;
+  text-overflow: ' ';
+  /* space */ }
+
+.ui.form > div[name="Detail"] input:not([type]):focus,
+.ui.form > div[name="Detail"] input[type="date"]:focus,
+.ui.form > div[name="Detail"] input[type="datetime-local"]:focus,
+.ui.form > div[name="Detail"] input[type="email"]:focus,
+.ui.form > div[name="Detail"] input[type="number"]:focus,
+.ui.form > div[name="Detail"] input[type="password"]:focus,
+.ui.form > div[name="Detail"] input[type="search"]:focus,
+.ui.form > div[name="Detail"] input[type="tel"]:focus,
+.ui.form > div[name="Detail"] input[type="time"]:focus,
+.ui.form > div[name="Detail"] input[type="text"]:focus,
+.ui.form > div[name="Detail"] input[type="file"]:focus,
+.ui.form > div[name="Detail"] input[type="url"]:focus {
+  border: 1px solid rgba(34, 36, 38, 0.11) !important;
+  /*border: 1px solid #c2b701 !important;*/ }
+
+.ui.form > div[name="Detail"] textarea:focus {
+  border: 1px solid rgba(34, 36, 38, 0.11) !important; }
+
+.ui.form > div[name="Detail"] input:hover, .ui.form > div[name="Detail"] textarea:hover {
+  cursor: context-menu; }
+
+.ui.form > div[name="Detail"] .field select:disabled {
+  background: none;
+  color: #fff !important;
+  border: none;
+  opacity: 1; }
+
+.ui.form > div[name="Detail"] .field select {
+  /* Chrome */
+  -webkit-appearance: none;
+  /* Firefox */
+  -moz-appearance: none;
+  text-indent: 0.01px;
+  text-overflow: ' ';
+  /* space */ }
+
+/*--------------------
+   尚無資料 icon   ---- Jamie
+---------------------*/
+.NoDateImg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #424242;
+  font-size: 1.2em !important; }
+
+.NoDateImg > i {
+  font-size: 5em;
+  margin: 0;
+  height: .65em; }
+
+/*--------------------
+   主題檔案與系統目錄維護樣板  ---- Jamie
+---------------------*/
+._GridHeight {
+  height: 100%; }
+
+._GridFlex {
+  height: 100%;
+  display: flex !important;
+  flex-direction: column; }
+
+._GridCenter {
+  height: 100%;
+  margin: 0;
+  border: 1px dashed #6f6f6f !important;
+  background: #333 !important; }
+
+._contentFlex {
+  height: 100%;
+  flex-direction: column; }
+
+/*.ui.tab.active {
+    display: flex !important;
+}*/
+/*--------------------
+  資訊欄位樣板  ---- Jamie
+---------------------*/
+/*tabulator-table強制顯示*/
+.tabulator-table {
+  visibility: visible !important; }
+
+/**主管要求卡片間距減少*/
+.ui.cards > .card {
+  margin-bottom: 0.1em; }
+
+/* 標題列位置調整*/
+.group-header {
+  position: relative;
+  top: -15px;
+  left: 20px; }

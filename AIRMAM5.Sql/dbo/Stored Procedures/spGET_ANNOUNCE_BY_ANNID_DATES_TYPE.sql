@@ -1,0 +1,58 @@
+﻿
+
+
+
+
+-- =============================================
+-- 描述:	依起迄編號，日期，類型取出ANNOUNCE主檔資料
+-- 記錄:	<2016/09/05><David.Sin><新增預存>
+-- =============================================
+CREATE PROCEDURE [dbo].[spGET_ANNOUNCE_BY_ANNID_DATES_TYPE]
+	@fnANN_ID	BIGINT,
+	@fdSDATE	VARCHAR(10),
+	@fdEDATE	VARCHAR(10),
+	@fsTYPE		CHAR(1)
+AS
+
+	SELECT 
+		ANN.fnANN_ID, 
+		ANN.fsTITLE, 
+		ANN.fsCONTENT, 
+		ANN.fdSDATE, 
+		ANN.fdEDATE, 
+		ANN.fsTYPE, 
+		ANN.fnORDER,
+		ANN.fsGROUP_LIST,
+		ANN.fsIS_HIDDEN, 
+		ANN.fsDEPT,
+		ANN.fsNOTE,
+		ANN.fdCREATED_DATE,
+		ANN.fsCREATED_BY,
+		ISNULL(USERS_CRT.fsNAME,'') AS fsCREATED_BY_NAME,
+		ANN.fdUPDATED_DATE,
+		ANN.fsUPDATED_BY,
+		ISNULL(USERS_UPD.fsNAME,'') AS fsUPDATED_BY_NAME,
+		CASE 
+			WHEN ANN.fsTYPE = '' THEN '(未選擇)' 
+			ELSE ISNULL(CODE1.fsNAME, '錯誤代碼: '+ ANN.fsTYPE) 
+		END AS fsTYPE_NAME,
+		CASE 
+			WHEN ANN.fsDEPT = '' THEN '(未選擇)' 
+			ELSE ISNULL(CODE2.fsNAME, '錯誤代碼: '+ ANN.fsDEPT) 
+		END AS fsDEPT_NAME
+	FROM
+		tbmANNOUNCE AS ANN 
+			LEFT JOIN tbmUSERS USERS_CRT ON ANN.fsCREATED_BY = USERS_CRT.fsLOGIN_ID
+			LEFT JOIN tbmUSERS USERS_UPD ON ANN.fsUPDATED_BY = USERS_UPD.fsLOGIN_ID
+			LEFT JOIN tbzCODE CODE1 ON ANN.fsTYPE = CODE1.fsCODE AND CODE1.fsCODE_ID = 'ANN001'
+			LEFT JOIN tbzCODE CODE2 ON ANN.fsDEPT = CODE2.fsCODE AND CODE2.fsCODE_ID = 'DEPT001'			
+	WHERE
+		(@fnANN_ID = 0 OR ANN.fnANN_ID = @fnANN_ID) AND
+		(@fdSDATE = '' OR CONVERT(VARCHAR(10),[fdSDATE],111) >= @fdSDATE) AND
+		(@fdEDATE = '' OR CONVERT(VARCHAR(10),[fdSDATE],111) <= @fdEDATE) AND
+		(@fsTYPE = '' OR ANN.[fsTYPE] = @fsTYPE)
+	ORDER BY
+		ANN.fdCREATED_DATE DESC
+
+
+

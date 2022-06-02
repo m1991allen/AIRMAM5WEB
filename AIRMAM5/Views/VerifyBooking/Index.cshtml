@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+@section Styles{
+    <link href="~/Content/iftame_style/VerifyBooking/VerifyBookingIndex.min.css" rel="stylesheet" />
+}
+
+@HtmlHelper.Breadcrumb(new string[] { "檔案調用", " 審核調用" })
+
+<div class="_Filter">
+    @Html.Action("_Search", "VerifyBooking")
+</div>
+
+<div id="Table"></div>
+
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+<!--批次過審確認燈箱-->
+@HtmlHelper.ConfirmModal("ConfirmPassCodeModal", "批次過審", "確定要標註為過審？")
+<!--批次不過審確認燈箱-->
+@Html.Action("_Delete", "VerifyBooking")
+
+@section Scripts{
+    <script src="~/Content/dayJS/dayjs.min.js"></script>
+    <script src="~/Content/semanticUIdatepicker/calendar.min.js"></script>
+    <script src="~/Content/wavesurfer/wavesurfer.js"></script>
+    @Html.Partial("~/Views/Bundle/VerifyBookingIndex_Js.cshtml")
+    @*<script src="~/Scripts/dist/VerifyBookingIndex.min.js"></script>*@
+}

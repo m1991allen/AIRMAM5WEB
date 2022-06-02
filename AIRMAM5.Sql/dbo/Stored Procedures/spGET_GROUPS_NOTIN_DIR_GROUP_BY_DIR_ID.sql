@@ -1,0 +1,40 @@
+﻿
+
+
+
+
+-- =============================================
+-- 描述:	依目錄取出未設定過權限的角色群組
+-- 記錄:	<2011/11/02><David.Sin><新增預存>
+-- 記錄:	<2016/10/24><David.Sin><增加篩選條件>
+-- =============================================
+CREATE  PROCEDURE [dbo].[spGET_GROUPS_NOTIN_DIR_GROUP_BY_DIR_ID]
+	@fnDIR_ID	BIGINT
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT 
+		G.fsGROUP_ID,G.fsNAME
+	FROM 
+		tbmGROUPS G
+			LEFT JOIN (SELECT fsGROUP_ID FROM tbmDIR_GROUP WHERE fnDIR_ID = @fnDIR_ID) DG ON G.fsGROUP_ID = DG.fsGROUP_ID
+			LEFT JOIN (SELECT fsGROUP_ID FROM tbmGROUPS JOIN tbmDIRECTORIES ON tbmDIRECTORIES.fsADMIN_GROUP LIKE '%'+ tbmGROUPS.fsGROUP_ID +';%' AND tbmDIRECTORIES.fnDIR_ID = @fnDIR_ID) DIR ON G.fsGROUP_ID = DIR.fsGROUP_ID
+	WHERE
+		DG.fsGROUP_ID IS NULL AND
+		DIR.fsGROUP_ID IS NULL
+	ORDER BY
+		G.fsGROUP_ID
+	--UNION
+	--SELECT 
+	--	G.fsGROUP_ID,G.fsNAME
+	--FROM 
+	--	tbmGROUPS G
+	--		LEFT JOIN (SELECT fsGROUP_ID FROM tbmGROUPS JOIN tbmDIRECTORIES ON tbmDIRECTORIES.fsADMIN_GROUP LIKE '%'+ tbmGROUPS.fsGROUP_ID +';%' AND tbmDIRECTORIES.fnDIR_ID = @fnDIR_ID) DIR ON G.fsGROUP_ID = DIR.fsGROUP_ID
+	--WHERE
+	--	DIR.fsGROUP_ID IS NULL
+END
+
+
+
+

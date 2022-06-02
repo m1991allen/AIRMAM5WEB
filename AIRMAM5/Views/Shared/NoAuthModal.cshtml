@@ -1,0 +1,25 @@
+﻿@model string
+
+@section Styles{
+
+}
+
+@HtmlHelper.HtmlModal(@Model, "燈箱無法顯示",
+@<div>
+    <h2 class="ui icon center aligned inverted  header">
+        <i class="window close blue icon"></i>
+        <div class="content">
+            403 沒有權限，燈箱存取遭拒
+            <div class="sub mini header" style="padding:20px 0;">請確認"網路是否正常"或"已經登出系統"</div>
+        </div>
+    </h2>
+</div>
+ ,@<button class="ui yellow cancel button" type="button">關閉</button>
+)
+
+
+
+
+@section Scripts{
+
+}

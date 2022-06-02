@@ -1,0 +1,59 @@
+﻿@model AIRMAM5.DBEntity.Models.Directory.DirAuthEditModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("EditModal", "編輯使用者群組權限",
+    @<div> @using (Ajax.BeginForm("EditUserAuth", "Dir",
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "ShowMessage", OnFailure = "ShowMessage" },
+         new { role = "form", @class = "ui inverted form", @id = "EditForm" }))
+         {
+            @Html.AntiForgeryToken()
+         <div class="form-horizontal">
+
+             @Html.ValidationSummary(true)
+             
+             <div class="field">
+                 @Html.LabelFor(model => model.LoginId)
+                 @Html.HiddenFor(model => model.DirId)
+                 @Html.HiddenFor(model => model.LoginId)
+                 @Html.HiddenFor(model => model.UserId)
+                 @Html.TextBoxFor(model => model.ShowName, new { @readonly = "readonly" })
+             </div>
+
+             <div class="field">
+                 @Html.LabelFor(model => model.LimitSubject)
+                 @Html.ListBox("LimitSubject", new MultiSelectList(Model.AuthOperaList, "Value", "Text"), new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+             </div>
+
+             <div class="field">
+                 @Html.LabelFor(model => model.LimitVideo)
+                 @Html.ListBox("LimitVideo", new MultiSelectList(Model.AuthOperaList, "Value", "Text"), new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+             </div>
+
+             <div class="field">
+                 @Html.LabelFor(model => model.LimitAudio)
+                 @Html.ListBox("LimitAudio", new MultiSelectList(Model.AuthOperaList, "Value", "Text"), new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+             </div>
+
+             <div class="field">
+                 @Html.LabelFor(model => model.LimitPhoto)
+                 @Html.ListBox("LimitPhoto", new MultiSelectList(Model.AuthOperaList, "Value", "Text"), new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+             </div>
+
+             <div class="field">
+                 @Html.LabelFor(model => model.LimitDoc)
+                 @Html.ListBox("LimitDoc", new MultiSelectList(Model.AuthOperaList, "Value", "Text"), new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+             </div>
+
+         </div>
+    }
+    </div>,
+ @<div>
+     <button class="ui yellow ok button" type="submit">儲存</button>
+     <button class="ui cancel  button" type="button">取消</button>
+ </div>
+ )
+
+
+

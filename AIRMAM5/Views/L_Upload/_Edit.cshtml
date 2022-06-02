@@ -1,0 +1,67 @@
+﻿@model AIRMAM5.DBEntity.Models.Works.UploadWorkEditModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("EditModal", "編輯入庫轉檔紀錄內容",
+@<form role = "form" class = "ui form" id = "EditForm">
+        <div class="three fields">
+            <div class="four wide field">
+                @Html.DisplayNameFor(model => model.fnWORK_ID)
+                @Html.TextBoxFor(model => model.fnWORK_ID, new { @readonly = "readonly" })
+            </div>
+            <div class="six wide field">
+                @Html.DisplayNameFor(model => model.fsTYPE)
+                @Html.TextBoxFor(model => model.C_sTYPENAME, new { @readonly = "readonly" })
+            </div>
+            <div class="six wide field">
+                @Html.DisplayNameFor(model => model.WorkStatus)
+                @Html.TextBoxFor(model => model.StatusName, new { @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="eight wide field">
+                @Html.DisplayNameFor(model => model.fdSTIME)
+                @Html.TextBoxFor(model => model.fdSTIME, string.Format($"{Model.fdSTIME:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+            </div>
+            <div class="eight wide field">
+                @Html.DisplayNameFor(model => model.fdETIME)
+                @Html.TextBoxFor(model => model.fdETIME, string.Format($"{Model.fdETIME:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+            </div>
+
+        </div>
+        <div class="field">
+            <div class="field">
+                @Html.DisplayNameFor(model => model.C_sFILE_INFO)
+                @Html.TextBoxFor(model => model.C_sFILE_INFO, new { @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="field">
+            <div class="field">
+                @Html.DisplayNameFor(model => model.fsPARAMETERS)
+                @Html.TextBoxFor(model => model.fsPARAMETERS, new { @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="field">
+            <div class="field">
+                @Html.DisplayNameFor(model => model.fsRESULT)
+                @Html.TextBoxFor(model => model.fsRESULT, new { @readonly = "readonly" })
+            </div>
+        </div>
+        <h4 class="ui horizontal inverted divider header">
+            <i class="edit icon"></i>編輯內容
+        </h4>
+        <div class="field">
+            @Html.LabelFor(model => model.fsPRIORITY)
+            @Html.TextBoxFor(model => model.fsPRIORITY, new { @type = "number", @id = "priority", @min = 1, @max = 9 })
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.fsNOTE)
+            @Html.TextAreaFor(model => model.fsNOTE, new { @row = 12 })
+        </div>
+</form>
+  ,@<div>
+     <button class="ui yellow ok button" type="submit">確認</button>
+     <button class="ui cancel button" type="reset">取消</button>
+ </div>
+ )

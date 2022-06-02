@@ -1,0 +1,232 @@
+﻿@import "../../_variable.scss";
+@import "../Shared/Function/_color.scss";
+@import "../Shared/Function/_padding.scss";
+@import "../Shared/Function/_tree.scss";
+@font-face {
+    font-family: 'Icons';
+    src: url("../../semanticUI/css/themes/default/assets/fonts/icons.eot");
+    src: url("../../semanticUI/css/themes/default/assets/fonts/icons.eot?#iefix") format('embedded-opentype'),
+          url("../../semanticUI/css/themes/default/assets/fonts/icons.woff2") format('woff2'),
+          url("../../semanticUI/css/themes/default/assets/fonts/icons.woff") format('woff'), 
+          url("../../semanticUI/css/themes/default/assets/fonts/icons.ttf") format('truetype'), 
+          url("../../semanticUI/css/themes/default/assets/fonts/icons.svg#icons") format('svg');
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-decoration: inherit;
+    text-transform: none;
+}
+
+$AreaColor: #333;
+/*顯示檔案容器*/
+#ShowResult {
+    position: relative;
+    top: 10px;
+    right: 0;
+    display: none;
+    height: 95vh;
+
+    & > .ui.grid {
+        height:100%;
+        width: 100%;
+      
+    }
+
+}
+
+
+/*主題列表*/
+.x-subjectlist {
+    height: 100%;
+    overflow-y: auto;
+    background-color: $AreaColor;
+    /*padding-top: 30px;*/
+    .items {
+        height: 100%;
+
+        .item {
+            padding: 8px 20px;
+            background: #505050;
+            cursor: pointer;
+
+            &:hover {
+                background: #5d5d5d;
+            }
+
+            .content {
+                color: $white;
+                font-size: 1.2rem;
+                word-break: break-all;
+            }
+
+            &.selected {
+                @include backgroundOpacity($primary,0.6);
+                border: 2px solid rgba(3,169,244,.8);
+
+                &:before {
+                    display: inline-block;
+                    opacity: 1;
+                    width: 1.18em;
+                    height: 1em;
+                    font-family: 'Icons';
+                    font-style: normal;
+                    font-weight: normal;
+                    text-decoration: inherit;
+                    text-align: center;
+                    speak: none;
+                    font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    -webkit-font-smoothing: antialiased;
+                    -webkit-backface-visibility: hidden;
+                    backface-visibility: hidden;
+                    content: '\f058';
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                    background-color: $primary;
+                    color: $white;
+                    position: relative;
+                    right: 20px;
+                    top: 0px !important;
+                }
+            }
+        }
+    }
+
+    &#TargetSubjectList {
+        .items {
+            .item.x-dragEnter {
+                border: 2px solid $white !important;
+            }
+        }
+    }
+}
+
+/*檔案區域*/
+#FileArea {
+    background-color: $AreaColor;
+    height: 100%;
+    overflow-y: auto;
+
+    .x-fileheader {
+        color: $white;
+        padding: 10px 0;
+        position: relative;
+        top: 10px;
+        background: $AreaColor;
+        width: 80px;
+        z-index: 2;
+
+        i {
+            cursor: pointer;
+        }
+    }
+
+    .divider {
+        position: relative;
+        top: -25px
+    }
+
+    .x-area {
+        /*取消瀏覽器Hightlight選擇樣式*/
+        -khtml-user-select: none;
+        -o-user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+
+        .x-filelist {
+            /*margin-left: 40px;*/
+            width:100%;
+        }
+
+        .cards {
+            &.draggable:hover {
+                /*border: 1px dashed $white;*/
+                cursor: grab;
+            }
+
+            .card {
+                /*width: 190px !important;
+                width: 190px;*/
+                box-shadow: none;
+                background-color: transparent;
+
+                .image {
+                    height: 90px !important;
+                    background: transparent;
+
+                    img {
+                        width: auto !important;
+                        height: 100% !important;
+                        margin: auto;
+                    }
+                }
+
+                .content {
+                    .header {
+                        color: $white !important;
+                        /*max-width: 190px;*/
+                        text-overflow: ellipsis;
+                        word-break: break-all;
+                    }
+                }
+
+                &.ui-selecting {
+                    border: 2px solid $primary;
+                    /*.image {
+                        border: 2px solid $primary;
+                    }*/
+                }
+
+                &.x-selected, &.ui-selected {
+                    font-family: 'Icons';
+
+                    .image:before {
+                        content: '';
+                        display: block;
+                        /*width: 190px;*/
+                        width:100%;
+                        height: 90px;
+                        border: 2px solid $primary;
+                        position: absolute;
+                        top: 0;
+                    }
+
+                    .image:after {
+                        display: inline-block;
+                        opacity: 1;
+                        width: 1.18em;
+                        height: 1em;
+                        font-family: 'Icons';
+                        font-style: normal;
+                        font-weight: normal;
+                        text-decoration: inherit;
+                        text-align: center;
+                        speak: none;
+                        font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        -webkit-font-smoothing: antialiased;
+                        -webkit-backface-visibility: hidden;
+                        backface-visibility: hidden;
+                        content: '\f058';
+                        display: block;
+                        width: 30px;
+                        height: 20px;
+                        background-color: $primary;
+                        color: $white;
+                        position: absolute;
+                        right: 0;
+                        bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+button[name="move"] {
+    z-index: 2;
+    position: relative;
+    bottom: 0px;
+}

@@ -1,0 +1,24 @@
+﻿
+
+<form class="ui inverted form" role="form" id="SearchForm">
+    <div class="fields">
+        <div class="two wide field">
+            <label>版權名稱</label>
+            <input type="text" name="licensename" id="licensename" value="" title="關鍵字查詢"/>
+        </div>
+        <div class="ui calendar two wide field">
+            <label>版權到期日期</label>
+            <div class="ui action input">
+                <input type="text" name="edate" id="edate" />
+            </div>
+        </div>
+
+        <div class="five wide field center aligned">
+            <label style="visibility:hidden;">查詢</label>
+            <button type="submit" class="ui yellow button">查詢</button>
+            <button type="button" name="reset" class="ui button">清空</button>
+            <button type="button" class="ui _darkGrey button" onclick="$('#CreateModal').modal('show');"><i class="plus icon"></i> 新增版權 </button>
+        </div>
+    </div>
+    <div class="ui error message"></div>
+</form>

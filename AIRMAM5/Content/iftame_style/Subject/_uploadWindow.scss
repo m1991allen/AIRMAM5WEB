@@ -1,0 +1,25 @@
+﻿
+/*-----------------------------------------
+  上傳檔案區域列表
+------------------------------------*/
+div[name='fileList'], div[name='refileList'] {
+    .ui.list {
+        .item {
+            img.image + .content {
+                display: inline-block;
+                width: auto;
+            }
+
+            .content {
+                padding: 2px;
+            }
+        }
+    }
+
+    .right.floated.content {
+        button[name='removeFile'] {
+            clear: both;
+            float: right;
+        }
+    }
+}

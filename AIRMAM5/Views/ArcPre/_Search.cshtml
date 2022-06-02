@@ -1,0 +1,25 @@
+﻿@model AIRMAM5.DBEntity.Models.ArcPre.ArcPreSearchModel
+@{
+    Layout = "";
+}
+
+<form role="form" class="ui inverted form" id="SearchForm">
+    <div class="three fields">
+        <div class="three wide field">
+            @*<label>預編名稱</label>*@
+            @Html.LabelFor(m=>m.ArcPreName)
+            <input type="text" name="name" value="" id="TempleteName" />
+        </div>
+        <div class="three wide field">
+            @*<label>類型</label>*@
+            @Html.LabelFor(m => m.ArcPreTypeList)
+            @Html.DropDownList("Type", new SelectList(Model.ArcPreTypeList, "Value", "Text"), new { @class = "ui search dropdown", @id = "TempleteType" })
+        </div>
+        <div class="ten wide field">
+            <label style="visibility:hidden;">查詢</label>
+            <button type="submit" class="ui yellow button">查詢</button>
+            <button type="button" name="reset" class="ui button">清空</button>
+            <button type="button" class="ui _darkGrey button" name="create"><i class="plus icon"></i> 新增詮釋資料 </button>
+        </div>
+    </div>
+</form>

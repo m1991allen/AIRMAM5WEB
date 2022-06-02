@@ -1,0 +1,21 @@
+﻿<form class="ui inverted form" role="form" id="SearchForm">
+    <div class="two fields">
+        <div class="three wide field">
+            <label>規則類型</label>
+            <select name="condition" class="ui compact selection dropdown">
+                <option value="BOOKING">調用</option>
+                <option value="UPLOAD">入庫</option>
+                <option value="TRANSCODE">轉檔</option>
+                <option value="*">所有</option>
+            </select>
+        </div>
+        <div class="thirteen wide field">
+            <label style="visibility:hidden;">查詢</label>
+            <button type="submit" class="ui yellow button">查詢</button>
+            <button type="button" name="reset" class="ui button">清空</button>
+            @*<button type="reset" class="ui button">清空</button>*@
+            <button type="button" class="ui _darkGrey button" name="create" onclick="$('#CreateModal').modal('show');"><i class="plus icon"></i> 新增流程 </button>
+        </div>
+    </div>
+</form>
+

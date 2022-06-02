@@ -1,0 +1,285 @@
+﻿@charset "UTF-8";
+body {
+  font-family: 'Microsoft JhengHei',"Avenir Next", "Helvetica Neue", Arial,-apple-system, Roboto, sans-serif !important; }
+
+nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  /*left: $sidemenuWidth;*/
+  width: calc( 100% - 275px);
+  -webkit-transition: width 0.5s;
+  /* For Safari 3.1 to 6.0 */
+  transition: width 0.5s;
+  /*overflow-x: auto;*/
+  /*會導致Dropdown失敗*/
+  /*overflow-y:hidden;*/ }
+  nav.expand {
+    width: 100%;
+    transition: width .8s;
+    /*left: 0;*/ }
+
+aside {
+  height: 100%;
+  background-color: #2a2929;
+  width: 275px; }
+  aside .header {
+    font-family: 'Microsoft JhengHei',"Avenir Next", "Helvetica Neue", Arial,-apple-system, Roboto, sans-serif !important;
+    color: #03A9F4; }
+  aside .x-header {
+    color: #B3E5FC !important; }
+  aside .menu {
+    width: 100%;
+    min-width: 100%;
+    height: 100%;
+    display: flex !important;
+    flex-direction: column !important; }
+    aside .menu .item .icon {
+      float: left !important;
+      margin: 0em 1rem 0em 0em !important; }
+  aside .accordion {
+    color: #179b77 !important;
+    background: linear-gradient(to bottom, #222 5%, #2a2929 90%, transparent 5%);
+    font-size: 1.1em; }
+    aside .accordion .title .item, aside .accordion .content .item, aside .accordion i {
+      /*color: $darkgrey !important;*/
+      color: rgba(255, 255, 255, 0.6);
+      /*test*/ }
+    aside .accordion .title.active, aside .accordion .title.active .item, aside .accordion .title:hover, aside .accordion .title:hover .item {
+      color: #ffffff !important;
+      background: #2196F3 !important; }
+    aside .accordion .content.active {
+      background: #333 !important;
+      color: ligten(#1ab188, 5%) !important;
+      position: relative;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      -webkit-transition: color 1000ms;
+      transition: color 1000ms;
+      transition: padding 1000ms; }
+      aside .accordion .content.active:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        -webkit-transform: scaleY(0);
+        transform: scaleY(0);
+        -webkit-transform-origin: 50% 0%;
+        transform-origin: 50% 0%;
+        -webkit-transition-property: transform;
+        transition-property: transform;
+        -webkit-transition: 300ms ease-out;
+        transition: 300ms ease-out; }
+      aside .accordion .content.active:hover:before {
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1); }
+      aside .accordion .content.active .item {
+        margin-left: 3px;
+        padding-left: 30px;
+        border: none;
+        font-family: 'Microsoft JhengHei',"Avenir Next", "Helvetica Neue", Arial,-apple-system, Roboto, sans-serif !important;
+        background-color: #2a2929; }
+        aside .accordion .content.active .item:hover, aside .accordion .content.active .item.active {
+          border-left: 3px solid #03A9F4;
+          color: #ffffff !important;
+          border: none;
+          background: #444343 !important;
+          box-shadow: rgba(96, 125, 139, 0.3) -15px -15px 38px inset;
+          background: #1976D2 !important; }
+          aside .accordion .content.active .item:hover i, aside .accordion .content.active .item.active i {
+            color: #ffffff !important; }
+            aside .accordion .content.active .item:hover i .menu, aside .accordion .content.active .item.active i .menu {
+              background-color: transparent !important; }
+
+._MAMscroll {
+  overflow: auto;
+  height: 100%;
+  flex: 1; }
+
+._MAMuser_logo {
+  /*height: 100%;*/ }
+
+._mainBody {
+  position: absolute;
+  /*top: 80px;*/
+  /*top:0;*/
+  right: 0;
+  /*left: $sidemenuWidth;*/
+  width: calc( 100% - 275px);
+  padding: 0 20px;
+  -webkit-transition: width 0.5s;
+  /* For Safari 3.1 to 6.0 */
+  transition: width 0.5s; }
+  ._mainBody.expand {
+    width: 100%;
+    -webkit-transition: width 0.8s;
+    /* For Safari 3.1 to 6.0 */
+    transition: width .8s;
+    /*left: 0;*/ }
+  ._mainBody #TitleTab {
+    display: block;
+    min-height: auto; }
+    ._mainBody #TitleTab a.item {
+      display: flex;
+      max-width: 180px;
+      height: 2em;
+      float: left;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
+  ._mainBody #ContentTab {
+    position: relative;
+    height: inherit;
+    top: 1em;
+    /*min-height: 100%;*/ }
+    ._mainBody #ContentTab .tab._content {
+      height: calc(100% - 40px);
+      width: inherit;
+      overflow: hidden; }
+
+.rack {
+  position: relative;
+  height: 100%;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  /*background: oldlace;*/ }
+
+#Sidebar {
+  overflow: hidden !important; }
+  #Sidebar .inside .inside-scroll {
+    overflow-y: auto;
+    height: 100vh; }
+  #Sidebar .inside .item.x-history {
+    cursor: pointer; }
+    #Sidebar .inside .item.x-history .header .time {
+      text-align: right;
+      display: inline;
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      color: #cbc3c3; }
+    #Sidebar .inside .item.x-history .content .meta {
+      color: #ccc;
+      padding-left: 2em;
+      padding-top: 0.5em;
+      font-weight: 800;
+      color: #c2b701; }
+  #Sidebar .inside:nth-of-type(3) {
+    height: 100%;
+    min-height: 100%;
+    overflow-y: auto; }
+    #Sidebar .inside:nth-of-type(3) .top.fixed.menu {
+      background: #2d2d2d !important;
+      opacity: .85;
+      position: absolute; }
+    #Sidebar .inside:nth-of-type(3) #MessageSide {
+      position: relative;
+      top: 50px; }
+      #Sidebar .inside:nth-of-type(3) #MessageSide .card {
+        border-color: #ffd800;
+        box-shadow: inherit inherit #ffd800; }
+        #Sidebar .inside:nth-of-type(3) #MessageSide .card a {
+          word-break: break-all; }
+          #Sidebar .inside:nth-of-type(3) #MessageSide .card a:hover {
+            text-decoration: underline; }
+
+.cards.inverted, .card.inverted {
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0;
+  font-size: 0.7rem;
+  /*margin:0;*/
+  background-color: #2d2d2d; }
+  .cards.inverted .extra, .cards.inverted .content, .card.inverted .extra, .card.inverted .content {
+    border: 0;
+    border-radius: 0; }
+    .cards.inverted .extra.extra, .cards.inverted .content.extra, .card.inverted .extra.extra, .card.inverted .content.extra {
+      color: #bfb9b9; }
+    .cards.inverted .extra .header, .cards.inverted .extra .meta, .cards.inverted .extra .description, .cards.inverted .content .header, .cards.inverted .content .meta, .cards.inverted .content .description, .card.inverted .extra .header, .card.inverted .extra .meta, .card.inverted .extra .description, .card.inverted .content .header, .card.inverted .content .meta, .card.inverted .content .description {
+      color: #ffffff; }
+
+.cards.inverted .card.link:hover, .card.inverted.link:hover {
+  background-color: #2d2d2d;
+  opacity: .8; }
+
+.cards.inverted .card:first-child, .cards.inverted .card:last-child, .card.inverted:first-child, .card.inverted:last-child {
+  border: 0;
+  border-radius: 0; }
+
+/*#ContentTab {
+    height: 100%;
+    flex: 1;
+}
+    ._content {
+        height: 100%;
+    }*/
+iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  /*height: calc(90vh - 20px);*/
+  border: 0;
+  /*body {
+        overflow: auto;
+    }*/ }
+
+#rightMenu {
+  display: none;
+  position: fixed;
+  background-color: #2d2d2d;
+  z-index: 999; }
+  #rightMenu a.item:hover {
+    color: #ffd800; }
+
+body {
+  height: 100%;
+  overflow: hidden; }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #000;
+  /*-ms-overflow-style: -ms-autohiding-scrollbar;*/
+  -ms-overflow-style: none; }
+
+*::-webkit-scrollbar {
+  width: 12px; }
+
+*::-webkit-scrollbar-track {
+  background: #000; }
+
+*::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 20px; }
+
+/*文件檢視器樣式*/
+#DocumentViewer .content object, #DocumentViewer .content iframe {
+  width: 100%;
+  height: 100%;
+  min-width: 95vw;
+  min-height: 100vh; }
+
+/**客戶Logo圖片*/
+.x-brandLogo {
+  width: 200px;
+  height: auto;
+  max-height: 200px;
+  margin: auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("~/Images/logo_Horizontal.svg"); }
+
+.x-version {
+  font-size: 8px;
+  text-align: center;
+  font-weight: lighter;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 5px; }
+
+@media only screen and (max-width: 760px) {
+  nav .menu .item {
+    font-size: 0.5rem; } }

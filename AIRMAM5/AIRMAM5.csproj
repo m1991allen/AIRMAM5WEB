@@ -1,0 +1,2184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{23C4AC7D-8BEF-4386-9173-44205FB1CCB7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AIRMAM5</RootNamespace>
+    <AssemblyName>AIRMAM5</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CsvHelper, Version=18.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.18.0.0\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentConfig, Version=1.0.0.7, Culture=neutral, PublicKeyToken=b44de83eed7e98a7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\DocumentConfig.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormats, Version=2.0.1.8, Culture=neutral, PublicKeyToken=b44de83eed7e98a7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\DocumentFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentViewer, Version=1.0.3.2, Culture=neutral, PublicKeyToken=b44de83eed7e98a7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\DocumentViewer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExifNET">
+      <HintPath>..\..\..\..\AIRMAM5\AIRMAM5\bin\ExifNET.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.10.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.10.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.10.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.10.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.10.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.10.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.10.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.10.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.10.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.10.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.10.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.10.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.5\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Cors, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.4.1.0\lib\net45\Microsoft.Owin.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.8.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.RollingFile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.RollingFile.3.3.0\lib\net45\Serilog.Sinks.RollingFile.dll</HintPath>
+    </Reference>
+    <Reference Include="STD_MAM3.Security">
+      <HintPath>..\..\..\..\AIRMAM5\AIRMAM5\bin\STD_MAM3.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.7.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Cors, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Unity.Abstractions, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net46\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.1\lib\net46\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mvc5, Version=1.4.0.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc5.1.4.0\lib\net45\Unity.Mvc5.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.0.0\lib\net451\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.0.0\lib\net451\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.0\lib\net451\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.4.0.0\lib\net451\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="APIServer\SearchAPIService.cs" />
+    <Compile Include="APIServer\CallAPIService.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Common\KeyFrame.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AnnController.cs" />
+    <Compile Include="Controllers\ArchiveMoveController.cs" />
+    <Compile Include="Controllers\ArcPreController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BatchBookingController.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
+    <Compile Include="Controllers\BundleController.cs" />
+    <Compile Include="Controllers\ColTemplateController.cs" />
+    <Compile Include="Controllers\DeleteController.cs" />
+    <Compile Include="Controllers\DirController.cs" />
+    <Compile Include="Controllers\DocViewerController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\GroupController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LicenseController.cs" />
+    <Compile Include="Controllers\L_LogController.cs" />
+    <Compile Include="Controllers\L_LoginController.cs" />
+    <Compile Include="Controllers\L_SearchController.cs" />
+    <Compile Include="Controllers\L_TranController.cs" />
+    <Compile Include="Controllers\L_UploadController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MateriaController.cs" />
+    <Compile Include="Controllers\MyBookingController.cs" />
+    <Compile Include="Controllers\NotifyController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\RuleController.cs" />
+    <Compile Include="Controllers\RuleTableController.cs" />
+    <Compile Include="Controllers\RuleUserController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
+    <Compile Include="Controllers\SubjectController.cs" />
+    <Compile Include="Controllers\SubjExtendController.cs" />
+    <Compile Include="Controllers\SynonymController.cs" />
+    <Compile Include="Controllers\SysCodeController.cs" />
+    <Compile Include="Controllers\SysMonitorController.cs" />
+    <Compile Include="Controllers\TsmController.cs" />
+    <Compile Include="Controllers\UserCodeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\VerifyBookingController.cs" />
+    <Compile Include="Filters\InterceptorOfControllerAttribute .cs" />
+    <Compile Include="Filters\InterceptorOfExceptionAttribute.cs" />
+    <Compile Include="Filters\ReadablePropertiesOnlyResolver.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HubServer\BroadcastHub2.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DocViewer\DocViewModel.cs" />
+    <Compile Include="Models\DocViewer\ViewerFileModel.cs" />
+    <Compile Include="Models\DocViewer\ViewerTempFileNameModel.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TSMapi\FileStatusArgs.cs" />
+    <Compile Include="Models\TSMapi\GetFileStatusResult.cs" />
+    <Compile Include="Models\TSMapi\GetPendingTapeMode.cs" />
+    <Compile Include="Models\TSMapi\GetTsmFileStatusResult.cs" />
+    <Compile Include="Models\TSMapi\TapeCheckOutArgs.cs" />
+    <Compile Include="Models\TSMapi\TapeInfoModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\AuthRepository.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\chartJS\Chart.bundle.min.js" />
+    <Content Include="Content\chartJS\Chart.css" />
+    <Content Include="Content\chartJS\Chart.js" />
+    <Content Include="Content\chartJS\Chart.min.css" />
+    <Content Include="Content\chartJS\Chart.min.js" />
+    <Content Include="Content\common.css">
+      <DependentUpon>common.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\common.min.css">
+      <DependentUpon>common.css</DependentUpon>
+    </Content>
+    <Content Include="Content\cssreset.css">
+      <DependentUpon>cssreset.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\cssreset.min.css">
+      <DependentUpon>cssreset.css</DependentUpon>
+    </Content>
+    <Content Include="Content\dayJS\dayjs.min.js" />
+    <Content Include="Content\dayJS\esm\constant.js" />
+    <Content Include="Content\dayJS\esm\index.js" />
+    <Content Include="Content\dayJS\esm\locale\af.js" />
+    <Content Include="Content\dayJS\esm\locale\ar-dz.js" />
+    <Content Include="Content\dayJS\esm\locale\ar-kw.js" />
+    <Content Include="Content\dayJS\esm\locale\ar-ly.js" />
+    <Content Include="Content\dayJS\esm\locale\ar-ma.js" />
+    <Content Include="Content\dayJS\esm\locale\ar-sa.js" />
+    <Content Include="Content\dayJS\esm\locale\ar-tn.js" />
+    <Content Include="Content\dayJS\esm\locale\ar.js" />
+    <Content Include="Content\dayJS\esm\locale\az.js" />
+    <Content Include="Content\dayJS\esm\locale\be.js" />
+    <Content Include="Content\dayJS\esm\locale\bg.js" />
+    <Content Include="Content\dayJS\esm\locale\bm.js" />
+    <Content Include="Content\dayJS\esm\locale\bn.js" />
+    <Content Include="Content\dayJS\esm\locale\bo.js" />
+    <Content Include="Content\dayJS\esm\locale\br.js" />
+    <Content Include="Content\dayJS\esm\locale\bs.js" />
+    <Content Include="Content\dayJS\esm\locale\ca.js" />
+    <Content Include="Content\dayJS\esm\locale\cs.js" />
+    <Content Include="Content\dayJS\esm\locale\cv.js" />
+    <Content Include="Content\dayJS\esm\locale\cy.js" />
+    <Content Include="Content\dayJS\esm\locale\da.js" />
+    <Content Include="Content\dayJS\esm\locale\de-at.js" />
+    <Content Include="Content\dayJS\esm\locale\de-ch.js" />
+    <Content Include="Content\dayJS\esm\locale\de.js" />
+    <Content Include="Content\dayJS\esm\locale\dv.js" />
+    <Content Include="Content\dayJS\esm\locale\el.js" />
+    <Content Include="Content\dayJS\esm\locale\en-au.js" />
+    <Content Include="Content\dayJS\esm\locale\en-ca.js" />
+    <Content Include="Content\dayJS\esm\locale\en-gb.js" />
+    <Content Include="Content\dayJS\esm\locale\en-ie.js" />
+    <Content Include="Content\dayJS\esm\locale\en-il.js" />
+    <Content Include="Content\dayJS\esm\locale\en-nz.js" />
+    <Content Include="Content\dayJS\esm\locale\en-SG.js" />
+    <Content Include="Content\dayJS\esm\locale\en.js" />
+    <Content Include="Content\dayJS\esm\locale\eo.js" />
+    <Content Include="Content\dayJS\esm\locale\es-do.js" />
+    <Content Include="Content\dayJS\esm\locale\es-us.js" />
+    <Content Include="Content\dayJS\esm\locale\es.js" />
+    <Content Include="Content\dayJS\esm\locale\et.js" />
+    <Content Include="Content\dayJS\esm\locale\eu.js" />
+    <Content Include="Content\dayJS\esm\locale\fa.js" />
+    <Content Include="Content\dayJS\esm\locale\fi.js" />
+    <Content Include="Content\dayJS\esm\locale\fo.js" />
+    <Content Include="Content\dayJS\esm\locale\fr-ca.js" />
+    <Content Include="Content\dayJS\esm\locale\fr-ch.js" />
+    <Content Include="Content\dayJS\esm\locale\fr.js" />
+    <Content Include="Content\dayJS\esm\locale\fy.js" />
+    <Content Include="Content\dayJS\esm\locale\ga.js" />
+    <Content Include="Content\dayJS\esm\locale\gd.js" />
+    <Content Include="Content\dayJS\esm\locale\gl.js" />
+    <Content Include="Content\dayJS\esm\locale\gom-latn.js" />
+    <Content Include="Content\dayJS\esm\locale\gu.js" />
+    <Content Include="Content\dayJS\esm\locale\he.js" />
+    <Content Include="Content\dayJS\esm\locale\hi.js" />
+    <Content Include="Content\dayJS\esm\locale\hr.js" />
+    <Content Include="Content\dayJS\esm\locale\hu.js" />
+    <Content Include="Content\dayJS\esm\locale\hy-am.js" />
+    <Content Include="Content\dayJS\esm\locale\id.js" />
+    <Content Include="Content\dayJS\esm\locale\is.js" />
+    <Content Include="Content\dayJS\esm\locale\it-ch.js" />
+    <Content Include="Content\dayJS\esm\locale\it.js" />
+    <Content Include="Content\dayJS\esm\locale\ja.js" />
+    <Content Include="Content\dayJS\esm\locale\jv.js" />
+    <Content Include="Content\dayJS\esm\locale\ka.js" />
+    <Content Include="Content\dayJS\esm\locale\kk.js" />
+    <Content Include="Content\dayJS\esm\locale\km.js" />
+    <Content Include="Content\dayJS\esm\locale\kn.js" />
+    <Content Include="Content\dayJS\esm\locale\ko.js" />
+    <Content Include="Content\dayJS\esm\locale\ku.js" />
+    <Content Include="Content\dayJS\esm\locale\ky.js" />
+    <Content Include="Content\dayJS\esm\locale\lb.js" />
+    <Content Include="Content\dayJS\esm\locale\lo.js" />
+    <Content Include="Content\dayJS\esm\locale\lt.js" />
+    <Content Include="Content\dayJS\esm\locale\lv.js" />
+    <Content Include="Content\dayJS\esm\locale\me.js" />
+    <Content Include="Content\dayJS\esm\locale\mi.js" />
+    <Content Include="Content\dayJS\esm\locale\mk.js" />
+    <Content Include="Content\dayJS\esm\locale\ml.js" />
+    <Content Include="Content\dayJS\esm\locale\mn.js" />
+    <Content Include="Content\dayJS\esm\locale\mr.js" />
+    <Content Include="Content\dayJS\esm\locale\ms-my.js" />
+    <Content Include="Content\dayJS\esm\locale\ms.js" />
+    <Content Include="Content\dayJS\esm\locale\mt.js" />
+    <Content Include="Content\dayJS\esm\locale\my.js" />
+    <Content Include="Content\dayJS\esm\locale\nb.js" />
+    <Content Include="Content\dayJS\esm\locale\ne.js" />
+    <Content Include="Content\dayJS\esm\locale\nl-be.js" />
+    <Content Include="Content\dayJS\esm\locale\nl.js" />
+    <Content Include="Content\dayJS\esm\locale\nn.js" />
+    <Content Include="Content\dayJS\esm\locale\oc-lnc.js" />
+    <Content Include="Content\dayJS\esm\locale\pa-in.js" />
+    <Content Include="Content\dayJS\esm\locale\pl.js" />
+    <Content Include="Content\dayJS\esm\locale\pt-br.js" />
+    <Content Include="Content\dayJS\esm\locale\pt.js" />
+    <Content Include="Content\dayJS\esm\locale\ro.js" />
+    <Content Include="Content\dayJS\esm\locale\ru.js" />
+    <Content Include="Content\dayJS\esm\locale\sd.js" />
+    <Content Include="Content\dayJS\esm\locale\se.js" />
+    <Content Include="Content\dayJS\esm\locale\si.js" />
+    <Content Include="Content\dayJS\esm\locale\sk.js" />
+    <Content Include="Content\dayJS\esm\locale\sl.js" />
+    <Content Include="Content\dayJS\esm\locale\sq.js" />
+    <Content Include="Content\dayJS\esm\locale\sr-cyrl.js" />
+    <Content Include="Content\dayJS\esm\locale\sr.js" />
+    <Content Include="Content\dayJS\esm\locale\ss.js" />
+    <Content Include="Content\dayJS\esm\locale\sv.js" />
+    <Content Include="Content\dayJS\esm\locale\sw.js" />
+    <Content Include="Content\dayJS\esm\locale\ta.js" />
+    <Content Include="Content\dayJS\esm\locale\te.js" />
+    <Content Include="Content\dayJS\esm\locale\tet.js" />
+    <Content Include="Content\dayJS\esm\locale\tg.js" />
+    <Content Include="Content\dayJS\esm\locale\th.js" />
+    <Content Include="Content\dayJS\esm\locale\tl-ph.js" />
+    <Content Include="Content\dayJS\esm\locale\tlh.js" />
+    <Content Include="Content\dayJS\esm\locale\tr.js" />
+    <Content Include="Content\dayJS\esm\locale\tzl.js" />
+    <Content Include="Content\dayJS\esm\locale\tzm-latn.js" />
+    <Content Include="Content\dayJS\esm\locale\tzm.js" />
+    <Content Include="Content\dayJS\esm\locale\ug-cn.js" />
+    <Content Include="Content\dayJS\esm\locale\uk.js" />
+    <Content Include="Content\dayJS\esm\locale\ur.js" />
+    <Content Include="Content\dayJS\esm\locale\uz-latn.js" />
+    <Content Include="Content\dayJS\esm\locale\uz.js" />
+    <Content Include="Content\dayJS\esm\locale\vi.js" />
+    <Content Include="Content\dayJS\esm\locale\x-pseudo.js" />
+    <Content Include="Content\dayJS\esm\locale\yo.js" />
+    <Content Include="Content\dayJS\esm\locale\zh-cn.js" />
+    <Content Include="Content\dayJS\esm\locale\zh-hk.js" />
+    <Content Include="Content\dayJS\esm\locale\zh-tw.js" />
+    <Content Include="Content\dayJS\esm\plugin\advancedFormat\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\badMutable\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\buddhistEra\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\calendar\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\customParseFormat\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\dayOfYear\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\isBetween\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\isLeapYear\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\isMoment\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\isoWeeksInYear\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\isSameOrAfter\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\isSameOrBefore\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\localeData\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\localizedFormat\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\minMax\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\quarterOfYear\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\relativeTime\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\toArray\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\toObject\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\utc\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\weekday\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\weekOfYear\index.js" />
+    <Content Include="Content\dayJS\esm\plugin\weekYear\index.js" />
+    <Content Include="Content\dayJS\esm\utils.js" />
+    <Content Include="Content\dayJS\locale\af.js" />
+    <Content Include="Content\dayJS\locale\ar-dz.js" />
+    <Content Include="Content\dayJS\locale\ar-kw.js" />
+    <Content Include="Content\dayJS\locale\ar-ly.js" />
+    <Content Include="Content\dayJS\locale\ar-ma.js" />
+    <Content Include="Content\dayJS\locale\ar-sa.js" />
+    <Content Include="Content\dayJS\locale\ar-tn.js" />
+    <Content Include="Content\dayJS\locale\ar.js" />
+    <Content Include="Content\dayJS\locale\az.js" />
+    <Content Include="Content\dayJS\locale\be.js" />
+    <Content Include="Content\dayJS\locale\bg.js" />
+    <Content Include="Content\dayJS\locale\bm.js" />
+    <Content Include="Content\dayJS\locale\bn.js" />
+    <Content Include="Content\dayJS\locale\bo.js" />
+    <Content Include="Content\dayJS\locale\br.js" />
+    <Content Include="Content\dayJS\locale\bs.js" />
+    <Content Include="Content\dayJS\locale\ca.js" />
+    <Content Include="Content\dayJS\locale\cs.js" />
+    <Content Include="Content\dayJS\locale\cv.js" />
+    <Content Include="Content\dayJS\locale\cy.js" />
+    <Content Include="Content\dayJS\locale\da.js" />
+    <Content Include="Content\dayJS\locale\de-at.js" />
+    <Content Include="Content\dayJS\locale\de-ch.js" />
+    <Content Include="Content\dayJS\locale\de.js" />
+    <Content Include="Content\dayJS\locale\dv.js" />
+    <Content Include="Content\dayJS\locale\el.js" />
+    <Content Include="Content\dayJS\locale\en-au.js" />
+    <Content Include="Content\dayJS\locale\en-ca.js" />
+    <Content Include="Content\dayJS\locale\en-gb.js" />
+    <Content Include="Content\dayJS\locale\en-ie.js" />
+    <Content Include="Content\dayJS\locale\en-il.js" />
+    <Content Include="Content\dayJS\locale\en-nz.js" />
+    <Content Include="Content\dayJS\locale\en-SG.js" />
+    <Content Include="Content\dayJS\locale\en.js" />
+    <Content Include="Content\dayJS\locale\eo.js" />
+    <Content Include="Content\dayJS\locale\es-do.js" />
+    <Content Include="Content\dayJS\locale\es-us.js" />
+    <Content Include="Content\dayJS\locale\es.js" />
+    <Content Include="Content\dayJS\locale\et.js" />
+    <Content Include="Content\dayJS\locale\eu.js" />
+    <Content Include="Content\dayJS\locale\fa.js" />
+    <Content Include="Content\dayJS\locale\fi.js" />
+    <Content Include="Content\dayJS\locale\fo.js" />
+    <Content Include="Content\dayJS\locale\fr-ca.js" />
+    <Content Include="Content\dayJS\locale\fr-ch.js" />
+    <Content Include="Content\dayJS\locale\fr.js" />
+    <Content Include="Content\dayJS\locale\fy.js" />
+    <Content Include="Content\dayJS\locale\ga.js" />
+    <Content Include="Content\dayJS\locale\gd.js" />
+    <Content Include="Content\dayJS\locale\gl.js" />
+    <Content Include="Content\dayJS\locale\gom-latn.js" />
+    <Content Include="Content\dayJS\locale\gu.js" />
+    <Content Include="Content\dayJS\locale\he.js" />
+    <Content Include="Content\dayJS\locale\hi.js" />
+    <Content Include="Content\dayJS\locale\hr.js" />
+    <Content Include="Content\dayJS\locale\hu.js" />
+    <Content Include="Content\dayJS\locale\hy-am.js" />
+    <Content Include="Content\dayJS\locale\id.js" />
+    <Content Include="Content\dayJS\locale\is.js" />
+    <Content Include="Content\dayJS\locale\it-ch.js" />
+    <Content Include="Content\dayJS\locale\it.js" />
+    <Content Include="Content\dayJS\locale\ja.js" />
+    <Content Include="Content\dayJS\locale\jv.js" />
+    <Content Include="Content\dayJS\locale\ka.js" />
+    <Content Include="Content\dayJS\locale\kk.js" />
+    <Content Include="Content\dayJS\locale\km.js" />
+    <Content Include="Content\dayJS\locale\kn.js" />
+    <Content Include="Content\dayJS\locale\ko.js" />
+    <Content Include="Content\dayJS\locale\ku.js" />
+    <Content Include="Content\dayJS\locale\ky.js" />
+    <Content Include="Content\dayJS\locale\lb.js" />
+    <Content Include="Content\dayJS\locale\lo.js" />
+    <Content Include="Content\dayJS\locale\lt.js" />
+    <Content Include="Content\dayJS\locale\lv.js" />
+    <Content Include="Content\dayJS\locale\me.js" />
+    <Content Include="Content\dayJS\locale\mi.js" />
+    <Content Include="Content\dayJS\locale\mk.js" />
+    <Content Include="Content\dayJS\locale\ml.js" />
+    <Content Include="Content\dayJS\locale\mn.js" />
+    <Content Include="Content\dayJS\locale\mr.js" />
+    <Content Include="Content\dayJS\locale\ms-my.js" />
+    <Content Include="Content\dayJS\locale\ms.js" />
+    <Content Include="Content\dayJS\locale\mt.js" />
+    <Content Include="Content\dayJS\locale\my.js" />
+    <Content Include="Content\dayJS\locale\nb.js" />
+    <Content Include="Content\dayJS\locale\ne.js" />
+    <Content Include="Content\dayJS\locale\nl-be.js" />
+    <Content Include="Content\dayJS\locale\nl.js" />
+    <Content Include="Content\dayJS\locale\nn.js" />
+    <Content Include="Content\dayJS\locale\oc-lnc.js" />
+    <Content Include="Content\dayJS\locale\pa-in.js" />
+    <Content Include="Content\dayJS\locale\pl.js" />
+    <Content Include="Content\dayJS\locale\pt-br.js" />
+    <Content Include="Content\dayJS\locale\pt.js" />
+    <Content Include="Content\dayJS\locale\ro.js" />
+    <Content Include="Content\dayJS\locale\ru.js" />
+    <Content Include="Content\dayJS\locale\sd.js" />
+    <Content Include="Content\dayJS\locale\se.js" />
+    <Content Include="Content\dayJS\locale\si.js" />
+    <Content Include="Content\dayJS\locale\sk.js" />
+    <Content Include="Content\dayJS\locale\sl.js" />
+    <Content Include="Content\dayJS\locale\sq.js" />
+    <Content Include="Content\dayJS\locale\sr-cyrl.js" />
+    <Content Include="Content\dayJS\locale\sr.js" />
+    <Content Include="Content\dayJS\locale\ss.js" />
+    <Content Include="Content\dayJS\locale\sv.js" />
+    <Content Include="Content\dayJS\locale\sw.js" />
+    <Content Include="Content\dayJS\locale\ta.js" />
+    <Content Include="Content\dayJS\locale\te.js" />
+    <Content Include="Content\dayJS\locale\tet.js" />
+    <Content Include="Content\dayJS\locale\tg.js" />
+    <Content Include="Content\dayJS\locale\th.js" />
+    <Content Include="Content\dayJS\locale\tl-ph.js" />
+    <Content Include="Content\dayJS\locale\tlh.js" />
+    <Content Include="Content\dayJS\locale\tr.js" />
+    <Content Include="Content\dayJS\locale\tzl.js" />
+    <Content Include="Content\dayJS\locale\tzm-latn.js" />
+    <Content Include="Content\dayJS\locale\tzm.js" />
+    <Content Include="Content\dayJS\locale\ug-cn.js" />
+    <Content Include="Content\dayJS\locale\uk.js" />
+    <Content Include="Content\dayJS\locale\ur.js" />
+    <Content Include="Content\dayJS\locale\uz-latn.js" />
+    <Content Include="Content\dayJS\locale\uz.js" />
+    <Content Include="Content\dayJS\locale\vi.js" />
+    <Content Include="Content\dayJS\locale\x-pseudo.js" />
+    <Content Include="Content\dayJS\locale\yo.js" />
+    <Content Include="Content\dayJS\locale\zh-cn.js" />
+    <Content Include="Content\dayJS\locale\zh-hk.js" />
+    <Content Include="Content\dayJS\locale\zh-tw.js" />
+    <Content Include="Content\dayJS\plugin\advancedFormat.js" />
+    <Content Include="Content\dayJS\plugin\badMutable.js" />
+    <Content Include="Content\dayJS\plugin\buddhistEra.js" />
+    <Content Include="Content\dayJS\plugin\calendar.js" />
+    <Content Include="Content\dayJS\plugin\customParseFormat.js" />
+    <Content Include="Content\dayJS\plugin\dayOfYear.js" />
+    <Content Include="Content\dayJS\plugin\isBetween.js" />
+    <Content Include="Content\dayJS\plugin\isLeapYear.js" />
+    <Content Include="Content\dayJS\plugin\isMoment.js" />
+    <Content Include="Content\dayJS\plugin\isoWeeksInYear.js" />
+    <Content Include="Content\dayJS\plugin\isSameOrAfter.js" />
+    <Content Include="Content\dayJS\plugin\isSameOrBefore.js" />
+    <Content Include="Content\dayJS\plugin\localeData.js" />
+    <Content Include="Content\dayJS\plugin\localizedFormat.js" />
+    <Content Include="Content\dayJS\plugin\minMax.js" />
+    <Content Include="Content\dayJS\plugin\quarterOfYear.js" />
+    <Content Include="Content\dayJS\plugin\relativeTime.js" />
+    <Content Include="Content\dayJS\plugin\toArray.js" />
+    <Content Include="Content\dayJS\plugin\toObject.js" />
+    <Content Include="Content\dayJS\plugin\utc.js" />
+    <Content Include="Content\dayJS\plugin\weekday.js" />
+    <Content Include="Content\dayJS\plugin\weekOfYear.js" />
+    <Content Include="Content\dayJS\plugin\weekYear.js" />
+    <Content Include="Content\DocoViewer\loadingAnimation.gif" />
+    <Content Include="Content\DocoViewer\thickbox-compressed.js" />
+    <Content Include="Content\DocoViewer\thickbox.css" />
+    <Content Include="Content\dropzone\basic.css" />
+    <Content Include="Content\dropzone\basic.min.css" />
+    <Content Include="Content\dropzone\dropzone.css" />
+    <Content Include="Content\dropzone\dropzone.js" />
+    <Content Include="Content\dropzone\dropzone.min.css" />
+    <Content Include="Content\dropzone\dropzone.min.js" />
+    <Content Include="Content\errorpage.css">
+      <DependentUpon>errorpage.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\errorpage.min.css">
+      <DependentUpon>errorpage.css</DependentUpon>
+    </Content>
+    <Content Include="Content\fonts\brand-icons.svg" />
+    <Content Include="Content\fonts\icons.svg" />
+    <Content Include="Content\fonts\outline-icons.svg" />
+    <Content Include="Content\ie-login.css">
+      <DependentUpon>ie-login.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\ie-login.min.css">
+      <DependentUpon>ie-login.css</DependentUpon>
+    </Content>
+    <Content Include="Content\IE_Compatible\ie11.polyfill.min.js" />
+    <Content Include="Content\iftame_style\Account\UserPassword.css">
+      <DependentUpon>UserPassword.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Account\UserPassword.min.css">
+      <DependentUpon>UserPassword.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Ann\AnnIndex.css">
+      <DependentUpon>AnnIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Ann\AnnIndex.min.css">
+      <DependentUpon>AnnIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Ann\AnnMatain.css">
+      <DependentUpon>AnnMatain.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Ann\AnnMatain.min.css">
+      <DependentUpon>AnnMatain.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Ann\_Details.css">
+      <DependentUpon>_Details.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Ann\_Details.min.css">
+      <DependentUpon>_Details.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Ann\_Edit.css">
+      <DependentUpon>_Edit.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Ann\_Edit.min.css">
+      <DependentUpon>_Edit.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\ArchiveMove\ArchiveMoveIndex.css">
+      <DependentUpon>ArchiveMoveIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\ArchiveMove\ArchiveMoveIndex.min.css">
+      <DependentUpon>ArchiveMoveIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\ArcPre\ArcPreIndex.css">
+      <DependentUpon>ArcPreIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\ArcPre\ArcPreIndex.min.css">
+      <DependentUpon>ArcPreIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\BatchBooking\BatchBookingIndex.css">
+      <DependentUpon>BatchBookingIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\BatchBooking\BatchBookingIndex.min.css">
+      <DependentUpon>BatchBookingIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Booking\BookingIndex.css">
+      <DependentUpon>BookingIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Booking\BookingIndex.min.css">
+      <DependentUpon>BookingIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\ColTemplate\ColTemplateIndex.css">
+      <DependentUpon>ColTemplateIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\ColTemplate\ColTemplateIndex.min.css">
+      <DependentUpon>ColTemplateIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Delete\DeleteIndex.css">
+      <DependentUpon>DeleteIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Delete\DeleteIndex.min.css">
+      <DependentUpon>DeleteIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Dir\DirIndex.css">
+      <DependentUpon>DirIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Dir\DirIndex.min.css">
+      <DependentUpon>DirIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\DocumentViwer\Index.css">
+      <DependentUpon>Index.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\DocumentViwer\Index.min.css">
+      <DependentUpon>Index.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Error\NotSupportBrowser.css">
+      <DependentUpon>NotSupportBrowser.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Error\NotSupportBrowser.min.css">
+      <DependentUpon>NotSupportBrowser.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Group\GroupIndex.css">
+      <DependentUpon>GroupIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Group\GroupIndex.min.css">
+      <DependentUpon>GroupIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Home\HomeDashBoard.css">
+      <DependentUpon>HomeDashBoard.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Home\HomeDashBoard.min.css">
+      <DependentUpon>HomeDashBoard.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Home\HomeIndex.css">
+      <DependentUpon>HomeIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Home\HomeIndex.min.css">
+      <DependentUpon>HomeIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\L_Login\L_LoginIndex.css">
+      <DependentUpon>L_LoginIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\L_Login\L_LoginIndex.min.css">
+      <DependentUpon>L_LoginIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\L_Log\L_LogIndex.css">
+      <DependentUpon>L_LogIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\L_Log\L_LogIndex.min.css">
+      <DependentUpon>L_LogIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\L_Search\L_SearchIndex.css">
+      <DependentUpon>L_SearchIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\L_Search\L_SearchIndex.min.css">
+      <DependentUpon>L_SearchIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\L_Tran\L_TranIndex.css">
+      <DependentUpon>L_TranIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\L_Tran\L_TranIndex.min.css">
+      <DependentUpon>L_TranIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\L_Upload\L_UploadIndex.css">
+      <DependentUpon>L_UploadIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\L_Upload\L_UploadIndex.min.css">
+      <DependentUpon>L_UploadIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Materia\MateriaIndex.css">
+      <DependentUpon>MateriaIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Materia\MateriaIndex.min.css">
+      <DependentUpon>MateriaIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\MyBooking\MyBookingIndex.css">
+      <DependentUpon>MyBookingIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\MyBooking\MyBookingIndex.min.css">
+      <DependentUpon>MyBookingIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Report\commonReport.css">
+      <DependentUpon>commonReport.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Report\commonReport.min.css">
+      <DependentUpon>commonReport.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Rule\RuleIndex.css">
+      <DependentUpon>RuleIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Rule\RuleIndex.min.css">
+      <DependentUpon>RuleIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Search\SearchIndex.css">
+      <DependentUpon>SearchIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Search\SearchIndex.min.css">
+      <DependentUpon>SearchIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Search\SearchIndex.scss" />
+    <Content Include="Content\iftame_style\Shared\style.css">
+      <DependentUpon>style.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Shared\style.min.css">
+      <DependentUpon>style.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Subject\SubjectEditMedia.css">
+      <DependentUpon>SubjectEditMedia.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Subject\SubjectEditMedia.min.css">
+      <DependentUpon>SubjectEditMedia.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Subject\SubjectIndex.css">
+      <DependentUpon>SubjectIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Subject\SubjectIndex.min.css">
+      <DependentUpon>SubjectIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Synonym\SynonymIndex.css">
+      <DependentUpon>SynonymIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Synonym\SynonymIndex.min.css">
+      <DependentUpon>SynonymIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\SysCode\SysCodeIndex.css">
+      <DependentUpon>SysCodeIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\SysCode\SysCodeIndex.min.css">
+      <DependentUpon>SysCodeIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Tsm\TsmCheckin.css">
+      <DependentUpon>TsmCheckin.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Tsm\TsmCheckin.min.css">
+      <DependentUpon>TsmCheckin.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Tsm\TsmCheckout.css">
+      <DependentUpon>TsmCheckout.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\Tsm\TsmCheckout.min.css">
+      <DependentUpon>TsmCheckout.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\UserCode\UserCodeIndex.css">
+      <DependentUpon>UserCodeIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\UserCode\UserCodeIndex.min.css">
+      <DependentUpon>UserCodeIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\User\UserIndex.css">
+      <DependentUpon>UserIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\User\UserIndex.min.css">
+      <DependentUpon>UserIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\SysCode\SysCodeIndex.scss" />
+    <Content Include="Content\iftame_style\Synonym\SynonymIndex.scss" />
+    <Content Include="Content\iftame_style\ArcPre\ArcPreIndex.scss" />
+    <Content Include="Content\iftame_style\Dir\DirIndex.scss" />
+    <Content Include="Content\iftame_style\UserCode\UserCodeIndex.scss" />
+    <Content Include="Content\iftame_style\ColTemplate\ColTemplateIndex.scss" />
+    <Content Include="Content\iftame_style\Account\UserPassword.scss" />
+    <Content Include="Content\iftame_style\VerifyBooking\VerifyBookingIndex.css">
+      <DependentUpon>VerifyBookingIndex.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\VerifyBooking\VerifyBookingIndex.min.css">
+      <DependentUpon>VerifyBookingIndex.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\VerifyBooking\VerifyBookingIndex.scss" />
+    <Content Include="Content\iftame_style\Booking\BookingIndex.scss" />
+    <Content Include="Content\iftame_style\Materia\MateriaIndex.scss" />
+    <Content Include="Content\iftame_style\MyBooking\MyBookingIndex.scss" />
+    <Content Include="Content\fonts\brand-icons.eot" />
+    <Content Include="Content\fonts\brand-icons.ttf" />
+    <Content Include="Content\fonts\brand-icons.woff" />
+    <Content Include="Content\fonts\brand-icons.woff2" />
+    <Content Include="Content\fonts\icons.eot" />
+    <Content Include="Content\fonts\icons.otf" />
+    <Content Include="Content\fonts\icons.ttf" />
+    <Content Include="Content\fonts\icons.woff" />
+    <Content Include="Content\fonts\icons.woff2" />
+    <Content Include="Content\fonts\outline-icons.eot" />
+    <Content Include="Content\fonts\outline-icons.ttf" />
+    <Content Include="Content\fonts\outline-icons.woff" />
+    <Content Include="Content\fonts\outline-icons.woff2" />
+    <Content Include="Content\iftame_style\Report\commonReport.scss" />
+    <Content Include="Content\iftame_style\Home\HomeDashBoard.scss" />
+    <Content Include="Content\ie-login.scss" />
+    <Content Include="Content\iftame_style\Subject\_uploadBtn.scss" />
+    <Content Include="Content\iftame_style\Subject\_progressWindow.scss" />
+    <Content Include="Content\iftame_style\Subject\_cusModal.scss" />
+    <Content Include="Content\iftame_style\Subject\_uploadWindow.scss" />
+    <Content Include="Content\iftame_style\Subject\_directoryTab.scss" />
+    <Content Include="Content\iftame_style\Subject\_keyFrame.scss" />
+    <Content Include="Content\iftame_style\Subject\_paragraphDescription.scss" />
+    <Content Include="Content\iftame_style\Subject\_tree.scss" />
+    <Content Include="Content\iftame_style\Shared\Function\_directoryTab.scss" />
+    <Content Include="Content\iftame_style\Shared\Function\_keyframe.scss" />
+    <Content Include="Content\iftame_style\Shared\Function\_paragraph.scss" />
+    <Content Include="Content\iftame_style\Shared\Function\_Label.scss" />
+    <Content Include="Content\iftame_style\DocumentViwer\Index.scss" />
+    <Content Include="Content\iftame_style\Rule\RuleIndex.scss" />
+    <Content Include="Content\iftame_style\ArchiveMove\ArchiveMoveIndex.scss" />
+    <Content Include="Content\iftame_style\Home\HomeIndex.scss" />
+    <Content Include="Content\iftame_style\Shared\Function\_padding.scss" />
+    <Content Include="Content\iftame_style\Shared\Function\_color.scss" />
+    <Content Include="Content\iftame_style\Shared\Function\_DetailModalPlayer.scss" />
+    <Content Include="Content\iftame_style\Shared\Function\_Scrollbar.scss" />
+    <Content Include="Content\iftame_style\Error\NotSupportBrowser.scss" />
+    <Content Include="Content\iftame_style\Tsm\TsmCheckout.scss" />
+    <Content Include="Content\iftame_style\Tsm\TsmCheckin.scss" />
+    <Content Include="Content\iftame_style\Shared\Function\_Switching.scss" />
+    <Content Include="Content\iftame_style\BatchBooking\BatchBookingIndex.scss" />
+    <Content Include="Content\iftame_style\Shared\Function\_tree.scss" />
+    <Content Include="Content\iftame_style\Subject\_docsystemView.scss" />
+    <Content Include="Content\iftame_style\Subject\SubjectEditMedia.scss" />
+    <None Include="Content\inspireTreeJS\inspire-tree-dark.scss" />
+    <Content Include="Content\inspireTreeJS\inspire-tree-dark.css">
+      <DependentUpon>inspire-tree-dark.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\inspireTreeJS\inspire-tree-dark.min.css">
+      <DependentUpon>inspire-tree-dark.css</DependentUpon>
+    </Content>
+    <Content Include="Content\inspireTreeJS\inspire-tree-dom.min.js" />
+    <Content Include="Content\inspireTreeJS\inspire-tree.min.js" />
+    <Content Include="Content\jQuerySignalR\jquery.signalR-2.4.1.min.js" />
+    <Content Include="Content\jQuery\jquery-3.4.1.min.js" />
+    <Content Include="Content\jQuery\jquery-3.6.0.min.js" />
+    <Content Include="Content\loadash\loadash_core.js" />
+    <Content Include="Content\loadash\lodash.min.js" />
+    <Content Include="Content\login.css">
+      <DependentUpon>login.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\login.min.css">
+      <DependentUpon>login.css</DependentUpon>
+    </Content>
+    <Content Include="Content\mCustomScrollbar\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="Content\mCustomScrollbar\jquery.mCustomScrollbar.css" />
+    <Content Include="Content\MergeVariables\_login.css">
+      <DependentUpon>_login.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\MergeVariables\_login.min.css">
+      <DependentUpon>_login.css</DependentUpon>
+    </Content>
+    <Content Include="Content\iftame_style\L_Login\L_LoginIndex.scss" />
+    <Content Include="Content\iftame_style\Group\GroupIndex.scss" />
+    <Content Include="Content\iftame_style\User\UserIndex.scss" />
+    <Content Include="Content\iftame_style\L_Search\L_SearchIndex.scss" />
+    <Content Include="Content\iftame_style\L_Log\L_LogIndex.scss" />
+    <Content Include="Content\iftame_style\L_Tran\L_TranIndex.scss" />
+    <Content Include="Content\iftame_style\L_Upload\L_UploadIndex.scss" />
+    <Content Include="Content\iftame_style\Delete\DeleteIndex.scss" />
+    <Content Include="Content\iftame_style\Ann\_Edit.scss" />
+    <Content Include="Content\iftame_style\Ann\_Details.scss" />
+    <Content Include="Content\iftame_style\Subject\SubjectIndex.scss" />
+    <None Include="Content\semanticUIdatepicker\calendar.scss" />
+    <Content Include="Content\resumableJS\resumable.js" />
+    <Content Include="Content\selectableJS\selectable.min.js" />
+    <Content Include="Content\semanticUIdatepicker\calendar.css">
+      <DependentUpon>calendar.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\semanticUIdatepicker\calendar.min.css">
+      <DependentUpon>calendar.css</DependentUpon>
+    </Content>
+    <Content Include="Content\semanticUIdatepicker\calendar.min.js" />
+    <Content Include="Content\semanticUI\css\semantic.css" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\brand-icons.svg" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\icons.svg" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\outline-icons.svg" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\images\flags.png" />
+    <Content Include="Content\semanticUI\js\accordion.js" />
+    <Content Include="Content\semanticUI\js\accordion.min.js" />
+    <Content Include="Content\semanticUI\js\api.js" />
+    <Content Include="Content\semanticUI\js\api.min.js" />
+    <Content Include="Content\semanticUI\js\checkbox.js" />
+    <Content Include="Content\semanticUI\js\checkbox.min.js" />
+    <Content Include="Content\semanticUI\js\colorize.js" />
+    <Content Include="Content\semanticUI\js\colorize.min.js" />
+    <Content Include="Content\semanticUI\js\dimmer.js" />
+    <Content Include="Content\semanticUI\js\dimmer.min.js" />
+    <Content Include="Content\semanticUI\js\dropdown.js" />
+    <Content Include="Content\semanticUI\js\dropdown.min.js" />
+    <Content Include="Content\semanticUI\js\embed.js" />
+    <Content Include="Content\semanticUI\js\embed.min.js" />
+    <Content Include="Content\semanticUI\js\form.js" />
+    <Content Include="Content\semanticUI\js\form.min.js" />
+    <Content Include="Content\semanticUI\js\modal.js" />
+    <Content Include="Content\semanticUI\js\modal.min.js" />
+    <Content Include="Content\semanticUI\js\nag.js" />
+    <Content Include="Content\semanticUI\js\nag.min.js" />
+    <Content Include="Content\semanticUI\js\popup.js" />
+    <Content Include="Content\semanticUI\js\popup.min.js" />
+    <Content Include="Content\semanticUI\js\progress.js" />
+    <Content Include="Content\semanticUI\js\progress.min.js" />
+    <Content Include="Content\semanticUI\js\rating.js" />
+    <Content Include="Content\semanticUI\js\rating.min.js" />
+    <Content Include="Content\semanticUI\js\search.js" />
+    <Content Include="Content\semanticUI\js\search.min.js" />
+    <Content Include="Content\semanticUI\js\semantic.js" />
+    <Content Include="Content\semanticUI\js\semantic.min.js" />
+    <Content Include="Content\semanticUI\js\shape.js" />
+    <Content Include="Content\semanticUI\js\shape.min.js" />
+    <Content Include="Content\semanticUI\js\sidebar.js" />
+    <Content Include="Content\semanticUI\js\sidebar.min.js" />
+    <Content Include="Content\semanticUI\js\site.js" />
+    <Content Include="Content\semanticUI\js\site.min.js" />
+    <Content Include="Content\semanticUI\js\state.js" />
+    <Content Include="Content\semanticUI\js\state.min.js" />
+    <Content Include="Content\semanticUI\js\sticky.js" />
+    <Content Include="Content\semanticUI\js\sticky.min.js" />
+    <Content Include="Content\semanticUI\js\tab.js" />
+    <Content Include="Content\semanticUI\js\tab.min.js" />
+    <Content Include="Content\semanticUI\js\transition.js" />
+    <Content Include="Content\semanticUI\js\transition.min.js" />
+    <Content Include="Content\semanticUI\js\video.js" />
+    <Content Include="Content\semanticUI\js\video.min.js" />
+    <Content Include="Content\semanticUI\js\visibility.js" />
+    <Content Include="Content\semanticUI\js\visibility.min.js" />
+    <Content Include="Content\semanticUI\js\visit.js" />
+    <Content Include="Content\semanticUI\js\visit.min.js" />
+    <Content Include="Content\split-pane\split-pane.css" />
+    <Content Include="Content\split-pane\split-pane.js" />
+    <Content Include="Content\tabulatorJS\css\tabulator_semantic-ui.css">
+      <DependentUpon>tabulator_semantic-ui.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\tabulatorJS\css\tabulator_semantic-ui.min.css">
+      <DependentUpon>tabulator_semantic-ui.css</DependentUpon>
+    </Content>
+    <Content Include="Content\tabulatorJS\js\tabulator.min.js" />
+    <Content Include="Content\toastrJS\toastr.css">
+      <DependentUpon>toastr.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\toastrJS\toastr.min.css">
+      <DependentUpon>toastr.css</DependentUpon>
+    </Content>
+    <Content Include="Content\toastrJS\toastr.min.js" />
+    <Content Include="Content\wavesurfer\wavesurfer.js" />
+    <Content Include="Content\_color.css">
+      <DependentUpon>_color.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\_color.min.css">
+      <DependentUpon>_color.css</DependentUpon>
+    </Content>
+    <Content Include="Content\_contextmenu.css">
+      <DependentUpon>_contextmenu.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\_contextmenu.min.css">
+      <DependentUpon>_contextmenu.css</DependentUpon>
+    </Content>
+    <Content Include="Content\_iframe.css">
+      <DependentUpon>_iframe.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\_iframe.min.css">
+      <DependentUpon>_iframe.css</DependentUpon>
+    </Content>
+    <Content Include="Content\_struct.css">
+      <DependentUpon>_struct.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\_struct.min.css">
+      <DependentUpon>_struct.css</DependentUpon>
+    </Content>
+    <Content Include="Content\_variable.css">
+      <DependentUpon>_variable.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\_variable.min.css">
+      <DependentUpon>_variable.css</DependentUpon>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\brand-icons.eot" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\brand-icons.ttf" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\brand-icons.woff" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\brand-icons.woff2" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\icons.eot" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\icons.otf" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\icons.ttf" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\icons.woff" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\icons.woff2" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\outline-icons.eot" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\outline-icons.ttf" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\outline-icons.woff" />
+    <Content Include="Content\semanticUI\css\themes\default\assets\fonts\outline-icons.woff2" />
+    <Content Include="Content\tabulatorJS\css\tabulator_semantic-ui.scss" />
+    <Content Include="Content\tabulatorJS\css\variables.scss" />
+    <Content Include="Content\tabulatorJS\css\variables_table.scss" />
+    <Content Include="Content\_color.scss" />
+    <Content Include="Content\_struct.scss" />
+    <Content Include="Content\_variable.scss" />
+    <Content Include="Content\common.scss" />
+    <Content Include="Content\cssreset.scss" />
+    <Content Include="Content\login.scss" />
+    <Content Include="Content\errorpage.scss" />
+    <Content Include="Images\archiveExplanation.png" />
+    <Content Include="Images\audioError.png" />
+    <Content Include="Images\audiopreview.png" />
+    <Content Include="Images\browserIcon\chrome.png" />
+    <Content Include="Images\browserIcon\edge.png" />
+    <Content Include="Images\browserIcon\mozillafirefox.png" />
+    <Content Include="Images\browserIcon\notSupportBg.png" />
+    <Content Include="Images\browserIcon\opera.png" />
+    <Content Include="Images\dirTree.svg" />
+    <Content Include="Images\docpreview.png" />
+    <Content Include="Images\favicon-16x16.png" />
+    <Content Include="Images\imagepreview.png" />
+    <Content Include="Images\logo_Horizontal-w-a50.svg" />
+    <Content Include="Images\logo_Horizontal.svg" />
+    <Content Include="Images\logo_Straight.svg" />
+    <Content Include="Images\nodata.svg" />
+    <Content Include="Images\noImage.png" />
+    <Content Include="Images\StockSnap_BTSVMWKZUD.jpg" />
+    <Content Include="Images\transcoding.png" />
+    <Content Include="Images\tsm_fileError.png" />
+    <Content Include="Images\tsm_fileNotExsit.png" />
+    <Content Include="Images\tsm_hardDrive.png" />
+    <Content Include="Images\tsm_noData.png" />
+    <Content Include="Images\tsm_progress.png" />
+    <Content Include="Images\tsm_tape.png" />
+    <Content Include="Images\videoError.png" />
+    <Content Include="Images\videoNetworkError.png" />
+    <Content Include="Images\videoNotfoundError.png" />
+    <Content Include="Images\videopreview.png" />
+    <Content Include="libman.json" />
+    <Content Include="Content\MergeVariables\_login.scss" />
+    <Content Include="ApplicationInsights.config" />
+    <Content Include="App_Code\HtmlHelper.cshtml" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="Content\_iframe.scss" />
+    <Content Include="Content\_contextmenu.scss" />
+    <Content Include="Content\toastrJS\toastr.scss" />
+    <Content Include="Content\iftame_style\Ann\AnnIndex.scss" />
+    <Content Include="Content\iftame_style\Shared\style.scss" />
+    <Content Include="Content\iftame_style\Ann\AnnMatain.scss" />
+    <Content Include="Content\semanticUI\css\accordion.scss" />
+    <Content Include="Content\semanticUI\css\ad.scss" />
+    <Content Include="Content\semanticUI\css\breadcrumb.scss" />
+    <Content Include="Content\semanticUI\css\button.scss" />
+    <Content Include="Content\semanticUI\css\card.scss" />
+    <Content Include="Content\semanticUI\css\checkbox.scss" />
+    <Content Include="Content\semanticUI\css\comment.scss" />
+    <Content Include="Content\semanticUI\css\container.scss" />
+    <Content Include="Content\semanticUI\css\dimmer.scss" />
+    <Content Include="Content\semanticUI\css\divider.scss" />
+    <Content Include="Content\semanticUI\css\dropdown.scss" />
+    <Content Include="Content\semanticUI\css\embed.scss" />
+    <Content Include="Content\semanticUI\css\feed.scss" />
+    <Content Include="Content\semanticUI\css\flag.scss" />
+    <Content Include="Content\semanticUI\css\form.scss" />
+    <Content Include="Content\semanticUI\css\grid.scss" />
+    <Content Include="Content\semanticUI\css\header.scss" />
+    <Content Include="Content\semanticUI\css\icon.scss" />
+    <Content Include="Content\semanticUI\css\image.scss" />
+    <Content Include="Content\semanticUI\css\input.scss" />
+    <Content Include="Content\semanticUI\css\item.scss" />
+    <Content Include="Content\semanticUI\css\label.scss" />
+    <Content Include="Content\semanticUI\css\list.scss" />
+    <Content Include="Content\semanticUI\css\loader.scss" />
+    <Content Include="Content\semanticUI\css\menu.scss" />
+    <Content Include="Content\semanticUI\css\message.scss" />
+    <Content Include="Content\semanticUI\css\modal.scss" />
+    <Content Include="Content\semanticUI\css\nag.scss" />
+    <Content Include="Content\semanticUI\css\placeholder.scss" />
+    <Content Include="Content\semanticUI\css\popup.scss" />
+    <Content Include="Content\semanticUI\css\progress.scss" />
+    <Content Include="Content\semanticUI\css\rail.scss" />
+    <Content Include="Content\semanticUI\css\rating.scss" />
+    <Content Include="Content\semanticUI\css\reset.scss" />
+    <Content Include="Content\semanticUI\css\reveal.scss" />
+    <Content Include="Content\semanticUI\css\search.scss" />
+    <Content Include="Content\semanticUI\css\segment.scss" />
+    <Content Include="Content\semanticUI\css\semantic.scss" />
+    <Content Include="Content\semanticUI\css\shape.scss" />
+    <Content Include="Content\semanticUI\css\sidebar.scss" />
+    <Content Include="Content\semanticUI\css\site.scss" />
+    <Content Include="Content\semanticUI\css\statistic.scss" />
+    <Content Include="Content\semanticUI\css\step.scss" />
+    <Content Include="Content\semanticUI\css\sticky.scss" />
+    <Content Include="Content\semanticUI\css\tab.scss" />
+    <Content Include="Content\semanticUI\css\table.scss" />
+    <Content Include="Content\semanticUI\css\transition.scss" />
+    <Content Include="Content\semanticUI\css\video.scss" />
+    <Content Include="Content\_inputRange.scss" />
+    <Content Include="Content\_splitpane.scss" />
+    <Content Include="Content\_previewPlayer.scss" />
+    <None Include="Properties\PublishProfiles\AIRMAM5_dev.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Images\login.jpg" />
+    <Content Include="Images\tran_error.png" />
+    <Content Include="Content\jquery.unobtrusive-ajax\jquery.unobtrusive-ajax.js" />
+    <Content Include="Content\jquery.unobtrusive-ajax\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\cross-spawn\index.js" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\cross-spawn\lib\enoent.js" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\cross-spawn\lib\parse.js" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\cross-spawn\lib\util\escape.js" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\cross-spawn\lib\util\readShebang.js" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\cross-spawn\lib\util\resolveCommand.js" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\path-key\index.js" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\shebang-command\index.js" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\shebang-regex\index.js" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\which\which.js" />
+    <Content Include="Scripts\node_modules\cross-env\src\bin\cross-env-shell.js" />
+    <Content Include="Scripts\node_modules\cross-env\src\bin\cross-env.js" />
+    <Content Include="Scripts\node_modules\cross-env\src\command.js" />
+    <Content Include="Scripts\node_modules\cross-env\src\index.js" />
+    <Content Include="Scripts\node_modules\cross-env\src\is-windows.js" />
+    <Content Include="Scripts\node_modules\cross-env\src\variable.js" />
+    <Content Include="Scripts\Views\License\Index.js" />
+    <Content Include="Scripts\webpack.babel.js" />
+    <Content Include="Scripts\webpack.config.js" />
+    <Content Include="Scripts\webpack.dev.js" />
+    <Content Include="Scripts\webpack.fpg.js" />
+    <Content Include="Scripts\webpack.prod.js" />
+    <Content Include="Views\ColTemplate\_Cog.cshtml" />
+    <Content Include="Views\ColTemplate\_Copy.cshtml" />
+    <Content Include="Views\Report\_Search.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Notify\NotifyNew.cshtml" />
+    <Content Include="Views\Notify\CreateNotify.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\_SideMenuPartial.cshtml" />
+    <Content Include="Scripts\package-lock.json" />
+    <Content Include="Scripts\package.json" />
+    <Content Include="Scripts\tsconfig.json" />
+    <Content Include="Views\Shared\NoAuth.cshtml" />
+    <Content Include="Views\Shared\_BlankLayout.cshtml" />
+    <Content Include="Views\Ann\Index.cshtml" />
+    <Content Include="Views\L_Login\Index.cshtml" />
+    <Content Include="Views\L_Log\Index.cshtml" />
+    <Content Include="Views\L_Tran\Index.cshtml" />
+    <Content Include="Views\L_Upload\Index.cshtml" />
+    <Content Include="Views\Subject\Index.cshtml" />
+    <Content Include="Views\Dir\Index.cshtml" />
+    <Content Include="Views\Group\Index.cshtml" />
+    <Content Include="Views\Home\_PartialPageFunctionList.cshtml" />
+    <Content Include="Views\Ann\Matain.cshtml" />
+    <Content Include="Scripts\node_modules\%40types\jquery\package.json" />
+    <Content Include="Scripts\node_modules\%40types\mcustomscrollbar\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-accordion\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-api\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-checkbox\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-dimmer\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-dropdown\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-embed\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-form\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-modal\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-nag\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-popup\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-progress\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-rating\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-search\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-shape\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-sidebar\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-site\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-sticky\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-tab\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-transition\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui-visibility\package.json" />
+    <Content Include="Scripts\node_modules\%40types\semantic-ui\package.json" />
+    <Content Include="Scripts\node_modules\%40types\sizzle\package.json" />
+    <Content Include="Scripts\node_modules\%40types\tabulator-tables\package.json" />
+    <Content Include="Scripts\node_modules\%40types\tabulator\package.json" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Ann\_Create.cshtml" />
+    <Content Include="Views\Ann\_Delete.cshtml" />
+    <Content Include="Views\Ann\_Details.cshtml" />
+    <Content Include="Views\Ann\_Edit.cshtml" />
+    <Content Include="Views\Ann\_Search.cshtml" />
+    <Content Include="Views\Group\_Create.cshtml" />
+    <Content Include="Views\Group\_Edit.cshtml" />
+    <Content Include="Views\Group\_Delete.cshtml" />
+    <Content Include="Views\L_Login\_Search.cshtml" />
+    <Content Include="Views\L_Login\_Details.cshtml" />
+    <Content Include="Views\L_Log\_Search.cshtml" />
+    <Content Include="Views\L_Log\_Details.cshtml" />
+    <Content Include="Views\L_Tran\_Search.cshtml" />
+    <Content Include="Views\L_Upload\_Details.cshtml" />
+    <Content Include="Views\L_Upload\_Search.cshtml" />
+    <Content Include="Views\L_Search\Index.cshtml" />
+    <Content Include="Views\L_Search\_Search.cshtml" />
+    <Content Include="Views\Delete\Index.cshtml" />
+    <Content Include="Views\Delete\_Search.cshtml" />
+    <Content Include="Views\Group\Funcs.cshtml" />
+    <Content Include="Views\SysCode\Index.cshtml" />
+    <Content Include="Views\UserCode\Index.cshtml" />
+    <Content Include="Views\User\_Create.cshtml" />
+    <Content Include="Views\User\_Edit.cshtml" />
+    <Content Include="Scripts\node_modules\%40types\toastr\package.json" />
+    <Content Include="Views\Synonym\Index.cshtml" />
+    <Content Include="Views\Synonym\_Search.cshtml" />
+    <Content Include="Views\Synonym\_Create.cshtml" />
+    <Content Include="Views\Synonym\_Edit.cshtml" />
+    <Content Include="Views\Synonym\_Details.cshtml" />
+    <Content Include="Views\Synonym\_Delete.cshtml" />
+    <Content Include="Views\Dir\_DirInfo.cshtml" />
+    <Content Include="Views\Dir\_DirAuth.cshtml" />
+    <Content Include="Views\ArcPre\Index.cshtml" />
+    <Content Include="Views\ArcPre\_Search.cshtml" />
+    <Content Include="Views\L_Upload\_Edit.cshtml" />
+    <Content Include="Views\ColTemplate\Index.cshtml" />
+    <Content Include="Views\User\_Details.cshtml" />
+    <Content Include="Views\SysCode\_Search.cshtml" />
+    <Content Include="Views\SysCode\_Edit.cshtml" />
+    <Content Include="Views\SysCode\_Details.cshtml" />
+    <Content Include="Views\SysCode\_Delete.cshtml" />
+    <Content Include="Views\SysCode\_Create.cshtml" />
+    <Content Include="Views\UserCode\_Search.cshtml" />
+    <Content Include="Views\UserCode\_Create.cshtml" />
+    <Content Include="Views\UserCode\_Details.cshtml" />
+    <Content Include="Views\UserCode\_Delete.cshtml" />
+    <Content Include="Views\UserCode\_Edit.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Materia\Index.cshtml" />
+    <Content Include="Views\MyBooking\Index.cshtml" />
+    <Content Include="Views\Booking\Index.cshtml" />
+    <Content Include="Views\VerifyBooking\Index.cshtml" />
+    <Content Include="Views\MyBooking\_Search.cshtml" />
+    <Content Include="Views\Booking\_Search.cshtml" />
+    <Content Include="Views\VerifyBooking\_Search.cshtml" />
+    <Content Include="Views\SysMonitor\Index.cshtml" />
+    <Content Include="Views\Shared\_ModalArea.cshtml" />
+    <Content Include="Views\Delete\_Delete.cshtml" />
+    <Content Include="Views\Delete\_Redo.cshtml" />
+    <Content Include="Views\ColTemplate\_Edit.cshtml" />
+    <Content Include="Views\Dir\_DirUserAuthCreate.cshtml" />
+    <Content Include="Views\Dir\_DirGroupAuthCreate.cshtml" />
+    <Content Include="Views\UserCode\_Cog.cshtml" />
+    <Content Include="Views\Search\_Condition.cshtml" />
+    <Content Include="Views\Search\_BasicMedia.cshtml" />
+    <Content Include="Views\Search\_DynamicMedia.cshtml" />
+    <Content Include="Views\Search\_Preview.cshtml" />
+    <Content Include="Views\SysCode\_Cog.cshtml" />
+    <Content Include="Views\ColTemplate\_Details.cshtml" />
+    <Content Include="Views\ColTemplate\_ChooseType.cshtml" />
+    <Content Include="Views\ColTemplate\_Delete.cshtml" />
+    <Content Include="Views\Dir\_DirGroupAuthEdit.cshtml" />
+    <Content Include="Views\Dir\_DirUserAuthEdit.cshtml" />
+    <Content Include="Views\ArcPre\_Details.cshtml" />
+    <Content Include="Views\ArcPre\_Edit.cshtml" />
+    <Content Include="Views\ArcPre\_Delete.cshtml" />
+    <Content Include="Views\ArcPre\_Create.cshtml" />
+    <Content Include="Views\ArcPre\_SubCreate.cshtml" />
+    <Content Include="Views\Dir\_CreateDir.cshtml" />
+    <Content Include="Views\Dir\_EditDir.cshtml" />
+    <Content Include="Views\Dir\_DeleteDir.cshtml" />
+    <Content Include="Views\Subject\_Create.cshtml" />
+    <Content Include="Views\Subject\_Details.cshtml" />
+    <Content Include="Views\Subject\_Edit.cshtml" />
+    <Content Include="Views\Subject\_Delete.cshtml" />
+    <Content Include="Views\Subject\_Upload.cshtml" />
+    <Content Include="Views\Subject\_DeleteMedia.cshtml" />
+    <Content Include="Views\Subject\_EditMedia.cshtml" />
+    <Content Include="Views\Subject\_ParagraphEdit.cshtml" />
+    <Content Include="Views\Subject\_ParagraphAdd.cshtml" />
+    <Content Include="Views\Subject\_ParagraphDelete.cshtml" />
+    <Content Include="Views\Subject\_KeyFrameEdit.cshtml" />
+    <Content Include="Views\Subject\_KeyFrameDelete.cshtml" />
+    <Content Include="Views\Subject\_KeyFrameAdd.cshtml" />
+    <Content Include="Views\DocViewer\Index.cshtml" />
+    <Content Include="Views\Shared\_DocViewerLayout.cshtml" />
+    <Content Include="Views\DocViewer\Grid.cshtml" />
+    <Content Include="Views\DocViewer\Print.cshtml" />
+    <Content Include="Views\Subject\_ChangeMedia.cshtml" />
+    <Content Include="Scripts\node_modules\%40types\node\LICENSE" />
+    <Content Include="Scripts\node_modules\%40types\node\package.json" />
+    <Content Include="Scripts\node_modules\%40types\node\README.md" />
+    <Content Include="Views\Materia\_FilmEdit.cshtml" />
+    <Content Include="Views\Materia\_Booking.cshtml" />
+    <Content Include="Views\MyBooking\_Details.cshtml" />
+    <Content Include="Views\Booking\_Details.cshtml" />
+    <Content Include="Views\Booking\_Edit.cshtml" />
+    <Content Include="Views\Search\_KeyFrame.cshtml" />
+    <Content Include="Views\Search\_AudioAlbumInfo.cshtml" />
+    <Content Include="Views\Search\_PhotoExifInfo.cshtml" />
+    <Content Include="Views\Search\_DocInfo.cshtml" />
+    <Content Include="Views\Search\_ParaDescription.cshtml" />
+    <Content Include="Views\Subject\_Preview.cshtml" />
+    <Content Include="Views\Report\GetArcListDetail.cshtml" />
+    <Content Include="Views\Report\GetArcListSum.cshtml" />
+    <Content Include="Views\Report\GetBookingListDetail.cshtml" />
+    <Content Include="Views\Report\GetBookingListSum.cshtml" />
+    <Content Include="Views\Home\DashBoard.cshtml" />
+    <Content Include="Views\User\_Search.cshtml" />
+    <Content Include="Views\Rule\Index.cshtml" />
+    <Content Include="Views\VerifyBooking\_Delete.cshtml" />
+    <Content Include="Views\VerifyBooking\_Details.cshtml" />
+    <Content Include="Views\Rule\_Edit.cshtml" />
+    <Content Include="Views\Rule\_Search.cshtml" />
+    <Content Include="Views\RuleUser\Index.cshtml" />
+    <Content Include="Views\RuleUser\_Search.cshtml" />
+    <Content Include="Views\RuleUser\_Edit.cshtml" />
+    <Content Include="Views\Rule\_Create.cshtml" />
+    <Content Include="Views\Delete\_Details.cshtml" />
+    <Content Include="Views\Materia\_Details.cshtml" />
+    <Content Include="Views\User\_ChangePassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordInvalid.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\User\CreateConfirmChange.cshtml" />
+    <Content Include="Views\User\CreateConfirmChangeInvalid.cshtml" />
+    <Content Include="Views\Account\ConfirmEmailInvalid.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\RuleTable\Index.cshtml" />
+    <Content Include="Views\Rule\_Delete.cshtml" />
+    <Content Include="Views\Rule\_CategoryEdit.cshtml" />
+    <Content Include="Views\Rule\_SubCreate.cshtml" />
+    <Content Include="Views\ArchiveMove\Index.cshtml" />
+    <Content Include="Views\Bundle\_JsTemplate.cshtml" />
+    <Content Include="Views\Bundle\_CssTemplate.cshtml" />
+    <Content Include="Scripts\config.setting.json" />
+    <Content Include="Scripts\.prettierrc.json" />
+    <Content Include="Scripts\node_modules\cross-env\CHANGELOG.md" />
+    <Content Include="Scripts\node_modules\cross-env\LICENSE" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\.bin\node-which" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\.bin\node-which.cmd" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\.bin\node-which.ps1" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\cross-spawn\CHANGELOG.md" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\cross-spawn\LICENSE" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\cross-spawn\package.json" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\cross-spawn\README.md" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\path-key\license" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\path-key\package.json" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\path-key\readme.md" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\shebang-command\license" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\shebang-command\package.json" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\shebang-command\readme.md" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\shebang-regex\license" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\shebang-regex\package.json" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\shebang-regex\readme.md" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\which\bin\node-which" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\which\CHANGELOG.md" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\which\LICENSE" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\which\package.json" />
+    <Content Include="Scripts\node_modules\cross-env\node_modules\which\README.md" />
+    <Content Include="Scripts\node_modules\cross-env\package.json" />
+    <Content Include="Scripts\node_modules\cross-env\README.md" />
+    <Content Include="Views\Bundle\AccountResetPassword_Js.cshtml" />
+    <Content Include="Views\Bundle\AnnMatain_Js.cshtml" />
+    <Content Include="Views\Bundle\ArchiveMoveIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\ArePreIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\BlankLayout_Js.cshtml" />
+    <Content Include="Views\Bundle\BookingIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\ColTemplateIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\DeleteIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\DirIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\DocumentViewerIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\GroupIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\HomeDashBoard_Js.cshtml" />
+    <Content Include="Views\Bundle\Layout_Js.cshtml" />
+    <Content Include="Views\Bundle\LLogIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\LLoginIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\LSearchIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\LTranIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\LUploadIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\MateriaIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\MyBookingIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\OnlineSignalR_Js.cshtml" />
+    <Content Include="Views\Bundle\ReportIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\RuleIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\SearchIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\SubjectIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\SynonymIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\SysCodeIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\UserCodeIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\UserIndex_Js.cshtml" />
+    <Content Include="Views\Bundle\VerifyBookingIndex_Js.cshtml" />
+    <Content Include="Scripts\node_modules\%40types\events\package.json" />
+    <Content Include="Scripts\node_modules\%40types\glob\package.json" />
+    <Content Include="Scripts\node_modules\%40types\html-minifier-terser\package.json" />
+    <Content Include="Scripts\node_modules\%40types\minimatch\package.json" />
+    <Content Include="Scripts\node_modules\%40types\anymatch\package.json" />
+    <Content Include="Scripts\node_modules\%40types\source-list-map\package.json" />
+    <Content Include="Scripts\node_modules\%40types\source-map\LICENSE" />
+    <Content Include="Scripts\node_modules\%40types\source-map\package.json" />
+    <Content Include="Scripts\node_modules\%40types\tapable\package.json" />
+    <Content Include="Scripts\node_modules\%40types\uglify-js\package.json" />
+    <Content Include="Scripts\node_modules\%40types\webpack-sources\package.json" />
+    <Content Include="Scripts\node_modules\%40types\webpack\package.json" />
+    <Content Include="Views\Shared\_ErrorLayout.cshtml" />
+    <Content Include="Views\Shared\NoAuthModal.cshtml" />
+    <Content Include="Views\Shared\NotSupportBrowser.cshtml" />
+    <Content Include="Views\Tsm\IndexCheckOut.cshtml" />
+    <Content Include="Views\Tsm\IndexCheckIn.cshtml" />
+    <Content Include="Views\Bundle\TsmCheckIn_Js.cshtml" />
+    <Content Include="Views\Bundle\TsmCheckOut_Js.cshtml" />
+    <Content Include="Views\BatchBooking\Index.cshtml" />
+    <Content Include="Views\Bundle\BatchBookingIndex_Js.cshtml" />
+    <Content Include="Views\BatchBooking\_Booking.cshtml" />
+    <Content Include="Views\Bundle\SubjectTreePlugin_Js.cshtml" />
+    <Content Include="Views\Bundle\SuhjectDocSystem_Js.cshtml" />
+    <Content Include="Views\Subject\_DocSystem.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Bundle\SubjectFormPlugin_Js.cshtml" />
+    <Content Include="Views\License\Index.cshtml" />
+    <Content Include="Views\License\_Search.cshtml" />
+    <Content Include="Scripts\Views\License\Index.js.map" />
+    <Content Include="Views\Bundle\LicenseIndex_Js.cshtml" />
+    <Content Include="Views\License\_Details.cshtml" />
+    <Content Include="Views\License\_Edit.cshtml" />
+    <Content Include="Views\License\_Create.cshtml" />
+    <None Include="Web.ftvnews.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Views\SubjExtend\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AIRMAM5.DBEntity\AIRMAM5.DBEntity.csproj">
+      <Project>{5E27F271-C859-4E7F-B7BA-EE2BD6C3FCA2}</Project>
+      <Name>AIRMAM5.DBEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AIRMAM5.Utility\AIRMAM5.Utility.csproj">
+      <Project>{C0F99ECD-FE34-4860-92BE-9B38A4702D1C}</Project>
+      <Name>AIRMAM5.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Models\%40types\chart.d.ts" />
+    <TypeScriptCompile Include="Scripts\Models\%40types\eventemitter2.d.ts" />
+    <TypeScriptCompile Include="Scripts\Models\%40types\formantic-ui-calendar.d.ts" />
+    <TypeScriptCompile Include="Scripts\Models\%40types\inspire-treeExtend.d.ts" />
+    <TypeScriptCompile Include="Scripts\Models\%40types\jQueryExtend_customtree.d.ts" />
+    <TypeScriptCompile Include="Scripts\Models\%40types\jQueryExtend_form.d.ts" />
+    <TypeScriptCompile Include="Scripts\Models\%40types\jQueryExtend_splitPanel.d.ts" />
+    <TypeScriptCompile Include="Scripts\Models\%40types\jQueryExtend_subjectwindow.d.ts" />
+    <TypeScriptCompile Include="Scripts\Models\%40types\json.d.ts" />
+    <TypeScriptCompile Include="Scripts\Models\%40types\resumablejs.d.ts" />
+    <TypeScriptCompile Include="Scripts\Models\%40types\selectablejs.d.ts" />
+    <TypeScriptCompile Include="Scripts\Models\%40types\wavesurfer.d.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Class\abstractClass.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Class\audioPlayer.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Class\dynamicTabClass.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Class\LoggerService.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Class\resumableService.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Class\signalRService.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Class\tabulatorService.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Class\videoPlayer.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Class\wavesurferService.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Const\API.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Const\Const..ts" />
+    <TypeScriptCompile Include="Scripts\Models\Const\FormValid.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Const\Image.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\AnnController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\ArchiveMoveController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\ArePreController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\BaseController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\BatchBookingController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\BookingController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\ColTemplateController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\DeleteController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\DirController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\GroupController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\LicenseController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\LUploadController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\MateriaController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\MyBookingController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\NotifyController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\ReportController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\RuleController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\SearchController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\SharedController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\SubjectController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\SysCodeController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\TsmController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\UserCodeController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\UserController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Controller\VerifyBookingController.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\Action.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\AnnEnum.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\BooleanEnum.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\ColorEnum.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\ColTypeEnum.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\Controller.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\DashBoadType.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\DirAuthEnum.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\FileRecycleStatus.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\Filter.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\HomoMode.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\HttpStatusCode.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\KeyFrameStatus.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\MediaType.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\NotifyCategory.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\PermissionDefinition.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\ReportEnum.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\RuleCategory.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\RuleOperator.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\SidebarEnum.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\SortEnum.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\StringEnum.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\SynonymousMode.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\TabNameEnum.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\TempleteEnum.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\TitleEnum.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\TSMFileStatus.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\VerifyRejectReason.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\VerifyStatus.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\VideoNetworkState.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\WorkProgressStatus.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Enum\WorkStatus.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Ajax.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Check.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Color.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\ConvertMedia.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Cookie.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Date.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\DecoratorConvert.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Element.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Form.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Frame.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Icon.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Image.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\KeyValuePair.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Message.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Modal.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Password.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Range.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\TSM.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Function\Url.ts" />
+    <TypeScriptCompile Include="Scripts\Models\initSetting.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Ann\AnnCreateModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Ann\AnnCreateResponseModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Ann\AnnEditModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Ann\AnnListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Ann\AnnMatainBaseModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Ann\AnnSearchModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ArchiveMove\GetDirByFileNoLoadOnDemand.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ArchiveMove\MoveFilesSaveModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ArchiveMove\MoveSubjectsModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ArchiveMove\MoveTreeNodeModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ArchiveMove\SubjectFilesViewModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ArchiveMove\SubjFileModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ArePre\ArePreDeleteInputModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ArePre\ArePreDynamicField.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ArePre\ArePreEditInputModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ArePre\ArePreMainModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ArePre\ArePreSearchModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ArePre\CreateArePreDynamicField.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\BatchBooking\BatchBookingCreateModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\BatchBooking\BatchBookingFileListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Booking\BookingBaseModel .ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Booking\BookingListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Booking\BookingOptionModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Booking\CreateBookingModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\ColTemplateSearchModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\ColTemplateTableModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\CreateTempFieldModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\DeleteTempFieldModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\EditTempFieldModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\EditTempleteModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\EditTempleteRealModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\MainCodeListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\SelectTempModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\ShowCreateTempModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\ShowTempleteModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\templateField.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\TemplateFieldModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ColTemplate\templateFieldTime.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Delete\DeleteListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Delete\DeleteSearchModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Dir\CreateGroupAuthModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Dir\CreateNodeModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Dir\CreateUserAuthModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Dir\DirTreeData.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Dir\EditAuthInputModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Dir\EditAuthModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Dir\EditNodeModel .ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Dir\EditNodeResponseModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Dir\GetDirModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Dir\SaveAuthResponseModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Dir\ShowAuthListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\DocumentViewer\DocumentPostMessageModal.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Group\FunctionIdModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Group\GroupDataModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Group\GroupEditModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Group\GroupInputModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Group\GroupModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Group\RoleFuncUpdateModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Home\ChartModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Home\DashboardViewModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Home\HotkeyModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Home\PopularKeywordsModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Home\StatisticsModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\IinitSetting.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\IinspireTreeService.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ILLogIndex.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ILLoginIndex.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ILSearchIndex.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\ILUploadIndex.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\License\LicenseBaseModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\License\LicenseCreateModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\License\LicenseEditModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\License\LicenseIdModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\License\LicenseListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\License\LicenseModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\License\LicenseSearchModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\LTran\LTranListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Materia\BatchDeleteResponseModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Materia\CreateMaterialModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Materia\MaterialListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\MyBooking\MyBookingListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\MyBooking\MyBookingSearchModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Notify\NotifyCreateModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Report\ReportParameterModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Report\ReportResponseModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\CreateRuleModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\CreateRuleParamsModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\EditRuleFilterModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\EditRuleModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\FieldInfo.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\FilterTableModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\GetRuleListByProgress.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\GetRuleModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\RuleCategoryModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\RuleDropdownGroup.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\RuleListFilterModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\RuleSearchListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\RuleSearchModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Rule\RuleTableModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Search\IFullTextSearchInput.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Search\IPopularKeywords.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Search\ISearchResponseVideoModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Search\ISearchResult.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Search\SearchParameterLogModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Service\IresumableService.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Service\ItabulatorService.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Service\IvideoService.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Service\IwavesurferService.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Shared\IDate.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Shared\IdModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Shared\IDynamicFieldModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Shared\IResponse.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Shared\ISelectListItem.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Shared\OnlinePersonModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Shared\OnlineSignalR\OnlineDataModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Shared\OnlineSignalR\UserConnectedModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Shared\OnlineSignalR\UserInfoModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Shared\OnlineSignalR\UserNotifyModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Shared\UserFavoriteModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\CreateSubjectModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\DeleteMediaModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\DirTempleteModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\FileListInputModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\FileListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\GetKeyFrameModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\GetParagraphModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\KeyFrameCUModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\KeyFrameDataModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\KeyFrameInputModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\MediaDataInputModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\MediaDataModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\ParaDescriptionModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\ParagraphCUModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\RetransferModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\SubjectBaseModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\SubjectIdModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\SubjectListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\SubjectMainModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\SubjectModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\SubjectPreviewModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\SubjectSearchModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\SubjectTaskQuery.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\SubjectUploadConfig.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\SubjectUploadQuery.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\UploadServiceConfig.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\UserDirAuthModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\UserFileAuthModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Subject\ViewerDataModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Synonym\SynonymCreateModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Synonym\SynonymEditModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Synonym\SynonymEditResModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Synonym\SynonymListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Synonym\SynonymSearchModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\SysCode\SysCodeSearchModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Tsm\GetPendingTapeModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\Tsm\TapeInfoModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\UserCode\CodeBaseModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\UserCode\CodeIdModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\UserCode\CodeNoteModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\UserCode\CodeSearchModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\UserCode\CodoResponseModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\UserCode\CreateUserCodeModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\UserCode\CreateUserSubCodeModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\UserCode\DeleteUserSubCodeModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\UserCode\EditUserCodeModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\UserCode\EditUserSubCodeModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\UserCode\MainSubCodeListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\UserCode\SubCodeListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\User\UserCreateModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\User\UserEditModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\User\UserListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\User\UserResetModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\User\UserSearchModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\VerifyBooking\VerifyBookingListModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Interface\VerifyBooking\VerifyBookingSearchModel.ts" />
+    <TypeScriptCompile Include="Scripts\Models\MessageSetting.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Templete\ButtonTemp.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Templete\CompoentTemp.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Templete\FormTemp.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Templete\IconTemp.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Templete\ImageTemp.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Templete\InputTemp.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Templete\LabelTemp.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Templete\ModalTemp.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Templete\PlaceholderTemp.ts" />
+    <TypeScriptCompile Include="Scripts\Models\Templete\SplitPanelTemp.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\anymatch\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\advancedFormat.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\badMutable.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\buddhistEra.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\calendar.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\customParseFormat.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\dayOfYear.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\isBetween.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\isLeapYear.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\isMoment.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\isoWeeksInYear.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\isSameOrAfter.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\isSameOrBefore.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\localeData.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\localizedFormat.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\minMax.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\quarterOfYear.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\relativeTime.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\toArray.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\toObject.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\utc.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\weekday.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\weekOfYear.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\dayjs\plugin\weekYear.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\eventemitter2\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\events\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\formantic-ui-calendar\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\formantic-ui-calendar\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\glob\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\html-minifier-terser\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\inspire-tree-dom\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\inspire-tree\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\jquery\dist\jquery.slim.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\jquery\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\jquery\JQuery.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\jquery\jQueryExtend.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\jquery\JQueryStatic.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\jquery\legacy.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\jquery\misc.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\mcustomscrollbar\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\minimatch\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\assert.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\async_hooks.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\base.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\buffer.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\child_process.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\cluster.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\console.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\constants.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\crypto.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\dgram.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\dns.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\domain.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\events.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\fs.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\globals.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\http.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\http2.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\https.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\inspector.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\module.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\net.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\os.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\path.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\perf_hooks.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\process.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\punycode.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\querystring.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\readline.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\repl.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\stream.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\string_decoder.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\timers.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\tls.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\trace_events.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\ts3.2\fs.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\ts3.2\globals.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\ts3.2\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\ts3.2\util.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\tty.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\url.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\util.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\v8.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\vm.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\worker_threads.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\node\zlib.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\resumablejs\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-accordion\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-accordion\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-api\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-api\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-checkbox\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-checkbox\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-dimmer\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-dimmer\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-dropdown\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-dropdown\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-embed\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-embed\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-form\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-form\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-modal\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-modal\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-nag\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-nag\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-popup\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-popup\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-progress\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-progress\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-rating\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-rating\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-search\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-search\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-shape\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-shape\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-sidebar\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-sidebar\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-site\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-site\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-sticky\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-sticky\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-tab\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-tab\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-transition\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-transition\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-visibility\global.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui-visibility\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\semantic-ui\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\signalr\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\sizzle\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\source-list-map\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\source-map\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\tabulator-tables\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\tabulator\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\tapable\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\toastr\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\uglify-js\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\webpack-sources\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\webpack\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\%40types\webpack\next.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\cross-env\node_modules\path-key\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\node_modules\cross-env\node_modules\shebang-regex\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Account\ResetPassword.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Ann\Matain.ts" />
+    <TypeScriptCompile Include="Scripts\Views\ArchiveMove\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\ArcPre\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\BatchBooking\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Booking\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\ColTemplate\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Delete\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Dir\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\DocumentViewer\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Group\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Home\DashBoard.ts" />
+    <TypeScriptCompile Include="Scripts\Views\License\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\L_Login\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\L_Log\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\L_Search\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\L_Tran\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\L_Upload\FileProgress.ts" />
+    <TypeScriptCompile Include="Scripts\Views\L_Upload\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Materia\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Materia\_Detail.ts" />
+    <TypeScriptCompile Include="Scripts\Views\MyBooking\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Report\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Rule\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Search\GetTsmStatus.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Search\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Shared\BlankLayout.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Shared\Layout.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Shared\OnlineSignalR.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Shared\_windowParameter.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Subject\DocSystem.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Subject\FormPlugin.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Subject\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Subject\keyFrame.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Subject\metaData.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Subject\paragraph.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Subject\TreePlugin.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Subject\upload.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Synonym\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\SysCode\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Tsm\CheckIn.ts" />
+    <TypeScriptCompile Include="Scripts\Views\Tsm\CheckOut.ts" />
+    <TypeScriptCompile Include="Scripts\Views\UserCode\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\User\ChangePassword.ts" />
+    <TypeScriptCompile Include="Scripts\Views\User\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Views\VerifyBooking\Index.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ftvnews|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52954</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/AIRMAM5</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <UserProperties compilerconfig_1json__JSONSchema="" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.10.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.10.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.10.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.10.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.10.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.10.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.10.0\build\Microsoft.ApplicationInsights.WindowsServer.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.WindowsServer.2.10.0\build\Microsoft.ApplicationInsights.WindowsServer.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.ApplicationInsights.Web.2.10.0\build\Microsoft.ApplicationInsights.Web.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.ApplicationInsights.Web.2.10.0\build\Microsoft.ApplicationInsights.Web.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.10.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.10.0\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.10.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.10.0\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.10.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.10.0\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.WindowsServer.2.10.0\build\Microsoft.ApplicationInsights.WindowsServer.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.WindowsServer.2.10.0\build\Microsoft.ApplicationInsights.WindowsServer.targets')" />
+  <Import Project="..\packages\Microsoft.ApplicationInsights.Web.2.10.0\build\Microsoft.ApplicationInsights.Web.targets" Condition="Exists('..\packages\Microsoft.ApplicationInsights.Web.2.10.0\build\Microsoft.ApplicationInsights.Web.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

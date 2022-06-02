@@ -1,0 +1,64 @@
+﻿@model AIRMAM5.DBEntity.Models.SubjectUpload.ChangeUploadViewModel
+
+<!--置換檔案:影音-->
+@HtmlHelper.HtmlModal("ReplacementModal", "置換檔案【編號:"+Model.fsFILE_NO+"】",
+@<form role="form" class="ui inverted form" id="ReplacementForm" method="post" changed="false">
+    @Html.HiddenFor(m => m.fsSUBJECT_ID)
+    @Html.Hidden("SubjectId", Model.fsSUBJECT_ID)
+    @Html.HiddenFor(m => m.fsFILE_NO)
+
+    @{
+        string _q = (string.IsNullOrEmpty(Model.DisplayQuestion)) ? "選擇上傳檔案" : "2.選擇上傳檔案 ";
+    }
+    <div class="field" name="KFquestion">
+        <h5 class="ui red inverted header"><i class="exclamation triangle icon"></i>置換會刪除原始高解、低解與關鍵影格檔案!</h5>
+    </div>
+    <div class="inline fields" name="KFquestion">
+        @*<label for="KeepMedia">1.是否保留關鍵影格描述與段落描述?</label>*@
+        <label for="KeepMedia">@Model.DisplayQuestion </label>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="KeepMedia" checked="checked" value="1">
+                <label>保留</label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="KeepMedia" value="0">
+                <label>不保留</label>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.FileSecretList)
+        @*@Html.DropDownList("FileSecretList", new SelectList(Model.FileSecretList, "Value", "Text"), new { @class = "ui search selection fluid dropdown" })*@
+        @Html.DropDownListFor(model => model.FileSecret, new SelectList(Model.FileSecretList, "Value", "Text"), new { @class = "ui search selection fluid dropdown" })
+    </div>
+    <!-- 版權 選單 -->
+    <div class="field">
+        <label>@Html.LabelFor(model => model.FileLicenseList)</label>
+        @Html.DropDownListFor(model => model.FileLicense, new SelectList(Model.FileLicenseList, "Value", "Text"), new { @class = "ui search selection fluid dropdown" })
+    </div>
+    <div class="field">
+        <label>@_q </label>
+        @{ string accept = (@Model.MediaFileExtension.FirstOrDefault() == null) ? "" : @Model.MediaFileExtension.First().FileExtension;
+                        accept = string.Join(".", accept).TrimEnd(';').Replace(";", ",.");
+        }
+        <button type="button" name="remediafile" class="ui button fluid">選擇檔案</button>
+        @*<input type="file" name="remediafile" accept="@accept" required>*@
+        <div class="ui inverted segment">
+            <div name="refileList" class="ui inverted relaxed divided middle aligned selection list"></div>
+        </div>
+    </div>
+</form>
+             ,@<div>
+                <button type="button" class="ui approve right labeled icon red button">確定置換<i class="upload icon"></i></button>
+                <button class="ui deny button" type="button">取消</button>
+            </div>, "small")
+
+
+<!--暫存媒體檔案類別 可接受上傳的副檔名,不可刪-->
+<!--注意:Html.Raw要用單引號-->
+<div id="ReSaveJson" data-MediaFileExtension='@Html.Raw(Json.Encode(Model.MediaFileExtension))'></div>
+<div id="ReConfigJson" data-UploadConfig='@Html.Raw(Json.Encode(Model.UploadConfig))'></div>
+

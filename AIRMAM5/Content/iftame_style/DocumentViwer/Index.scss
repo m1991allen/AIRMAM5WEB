@@ -1,0 +1,114 @@
+﻿@import "../../_inputRange.scss";
+body {
+    background: #212121;
+}
+
+#divDocViewer {
+    width: 100%;
+    border-radius: 6px;
+    background-color: #333;
+    border: 1px grey;
+}
+
+/* IMP: This css is required to prevent bootstrap css from shrinking the main viewer */
+nav {
+    background: #222;
+}
+
+nav div.item img {
+    height: 100% !important;
+    width: auto !important;
+}
+
+nav .dropdown.item > .menu {
+    background: #222 !important;
+}
+
+nav .dropdown.item > .menu > .item.selected, .item.active {
+    border: none;
+}
+
+main {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 50px;
+}
+
+.docLeftPane {
+    background: #222 !important;
+   width:214px !important;
+}
+.docRightPane{
+    float:left !important;
+    width:calc(100% - 250px) !important;
+}
+.docMain {
+    background: #333 !important;
+    border: none;
+}
+
+.docScrollPane input[type="image"], .docLeftPane input[type="image"] {
+    box-shadow: none;
+    border: 1px solid #448AFF;
+}
+
+.docLeftPane input[type="image"]:hover, .docLeftPane input[type="image"]:active {
+    border-width: 2px;
+}
+
+.splitbarV {
+    background: #757575;
+}
+
+#FitBtns{
+    position:fixed;
+    bottom:10%;
+    right:20px;
+}
+
+.btn {
+    display: inline-block;
+    height: 30px;
+    width: auto;
+    border: none;
+    color: #fff;
+    padding: 5px 20px;
+    margin: 20px 8px;
+    float: right;
+    cursor: pointer;
+
+    &.yes {
+        background: #de7070;
+    }
+
+    &.no {
+        background: #4d5152;
+    }
+}
+
+.nodoc {
+    width: 100%;
+    height: 50%;
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
+    transform: translateY(-50%);
+    text-align: center;
+    display: inline-block;
+
+    &::before {
+        display: inline-block;
+        content: '找不到可檢視的檔案';
+        position: relative;
+        top: 50%;
+        font-size: 1.5em;
+        background: #de7070;
+        box-shadow: 0px 0px 20px #de7070;
+        padding: 20px;
+        transform: translateY(-50%);
+    }
+}

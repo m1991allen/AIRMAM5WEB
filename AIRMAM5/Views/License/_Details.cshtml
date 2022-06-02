@@ -1,0 +1,80 @@
+﻿@model AIRMAM5.DBEntity.Models.License.LicenseDetailModel
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("DetailModal", "版權內容",
+@<form class="ui inverted form" name="Detail">
+     <div class="three fields">
+         <div class="two wide field">
+             @Html.LabelFor(model => model.LicenseCode)
+             @Html.TextBoxFor(model => model.LicenseCode, new { @readonly = "readonly" })
+         </div>
+         <div class="six wide field">
+             @Html.LabelFor(model => model.LicenseName)
+             @Html.TextBoxFor(model => model.LicenseName, new { @readonly = "readonly" })
+         </div>
+         <div class="four wide field">
+             @Html.LabelFor(model => model.EndDate)
+             @Html.TextBoxFor(model => model.EndDate, string.Format("{0:yyyy/MM/dd}", Model.EndDate), new { @readonly = "readonly" })
+         </div>
+         <div class="two wide field">
+             @Html.LabelFor(model => model.Order)
+             @Html.TextBoxFor(model => model.Order, new { @type="number", @min=0, @max=999, @step=1, @readonly = "readonly" })
+         </div>
+     </div>
+    <div class="two fields">
+        <div class="two wide field">
+            @Html.LabelFor(model => model.IsActive)
+             @if (Model.IsActive == true)
+             { <span class="ui green fluid label">啟用</span> }
+             else
+             { <span class="ui red fluid label">停用</span> }
+        </div>
+        <div class="two wide field">
+            @Html.LabelFor(model => model.IsBookingAlert)
+             @if (Model.IsBookingAlert == true)
+             { <span class="ui green fluid label">提醒</span> }
+             else
+             { <span class="ui red fluid label">不提醒</span> }
+        </div>
+        <div class="nine wide field">
+            @Html.LabelFor(model => model.AlertMessage)
+            @Html.TextBoxFor(model => model.AlertMessage, new { @readonly = "readonly" })
+        </div>
+        <div class="two wide field">
+            @Html.LabelFor(model => model.IsNotBooking)
+             @if (Model.IsNotBooking == true)
+             { <span class="ui red fluid label">禁止調用</span> }
+             else
+             { <span class="ui green fluid label">可調用</span> }
+        </div>
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.LicenseDesc)
+        @Html.TextAreaFor(model => model.LicenseDesc, new { @readonly = "readonly", @rows = "2" })
+    </div>
+    <div class="four fields">
+        <div class="four wide field">
+            @Html.LabelFor(model => model.CreatedTime)
+            @Html.TextBoxFor(model => model.CreatedTime, string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.CreatedTime), new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.LabelFor(model => model.CreatedBy)
+            @Html.TextBoxFor(model => model.CreatedBy, new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.LabelFor(model => model.UpdatedTime)
+            @Html.TextBoxFor(model => model.UpdatedTime, string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.UpdatedTime), new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.LabelFor(model => model.UpdatedBy)
+            @Html.TextBoxFor(model => model.UpdatedBy, new { @readonly = "readonly" })
+        </div>
+    </div>
+</form>
+,@<button class="ui yellow cancel button" type="button">關閉</button>
+)
+

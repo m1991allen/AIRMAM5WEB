@@ -1,0 +1,58 @@
+﻿
+@using AIRMAM5.DBEntity.Models.Function
+@model RoleFuncMenuViewModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("RoleFuncsModal", "角色群組["+Model.RoleName+"] 可使用的功能項目編輯",
+@<div class="ui stackable three column grid">
+    @foreach (var row in Model.FuncItemList)   {
+       var _chk = row.Usable ? "checked = \"checked\"" : ""; 
+        if (row.SubList.Count() > 0)  {
+            <div class="column">
+                <div class="ui inverted relaxed list">
+                    <div class="item">
+                        @*<div class="ui master checkbox">
+                                @if (row.Usable == true) { <input type="checkbox" name="mainfunction" value="@row.FuncId" checked="checked">}
+                                else { <input type="checkbox" name="mainfunction" value="@row.FuncId" @_chk>}
+                                <label style="color:navy;">@row.FuncName</label>
+                            </div>*@
+                        <div class="ui master checkbox">
+                            <input type="checkbox" name="functionType">
+                            <label>@row.FuncName</label>
+                        </div>
+                        <div class="ui selection list">
+                            @GenerateTree(row.SubList)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+          }
+
+</div>,
+ @<div>
+     <button id="saveFunc" class="ui red ok button" type="submit">更新</button>
+     <button class="ui cancel  button" type="reset">取消</button>
+ </div>)
+
+
+
+@helper GenerateTree(IEnumerable<FunctionViewModel>
+    nodes)
+{
+    foreach (var itm in nodes)
+    {
+        var _chk = itm.Usable ? "checked = \"hecked\"" : "";
+        <div class="item">
+            <div class="ui child checkbox">
+                @if (itm.Usable == true)
+                {<input type="checkbox" name="function" value="@itm.FuncId" checked="checked"> }
+                else
+                { <input type="checkbox" name="function" value="@itm.FuncId">}
+                <label>@itm.FuncName</label>
+            </div>
+        </div>
+    }
+}

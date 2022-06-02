@@ -1,0 +1,37 @@
+﻿@using System.Configuration;
+@{
+    string pluginVersion = "20201014";
+    string title = string.Format("{0}檢視器", ConfigurationManager.AppSettings["Title"]);
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="@title" />
+    <link rel="icon" type="image/png" href="~/Images/favicon-16x16.png?t=@pluginVersion">
+    <!-- Drop zone css (for upload)-->
+    <link href="~/Content/dropzone/basic.min.css?t=@pluginVersion" rel="stylesheet" />
+    @*<link href="~/Content/dropzone/dropzone.min.css" rel="stylesheet" />*@
+    <!-- Thickbox (For print) -->
+    @*<link href="~/Content/DocoViewer/thickbox.css" rel="stylesheet" />*@
+    <link href="~/Content/semanticUI/css/semantic.css?t=@pluginVersion" rel="stylesheet" />
+    <link href="~/Content/toastrJS/toastr.min.css?t=@pluginVersion" rel="stylesheet" />
+    @RenderSection("css", required: false)
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    @RenderBody()
+
+    <!-- jQuery-->
+    <script src="~/Content/jQuery/jquery-3.6.0.min.js?t=@pluginVersion" type="text/javascript"></script>
+    <script src="~/Content/semanticUI/js/dropdown.min.js?t=@pluginVersion"></script>
+    <script src="~/Content/semanticUI/js/transition.min.js?t=@pluginVersion"></script>
+
+    <script src="~/Content/toastrJS/toastr.min.js?t=@pluginVersion"></script>
+    @Html.Partial("~/Views/Bundle/DocumentViewerIndex_Js.cshtml")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+﻿@model AIRMAM5.DBEntity.Models.Rule.CreateRuleViewModel
+@{
+    Layout = "";
+    bool isEnable = Model.RuleCategoryList.Count() > 0;
+    string modalStr = isEnable ? "新增流程規則" : "流程皆已新增，請使用列表編輯";
+    string disabledStyle = isEnable ? "" : "disabled";
+}
+
+@HtmlHelper.HtmlModal("CreateModal", @modalStr,
+@<form role="form" class="ui inverted form" , id="CreateForm">
+    <div class="three fields">
+        <div class="three wide required field">
+            @Html.LabelFor(model => model.RuleName)
+            @Html.EditorFor(model => model.RuleName, new { @placeholder = "規則名稱" })
+        </div>
+        <div class="three wide required field">
+            <!--流程類型-->
+            @Html.LabelFor(model => model.RuleCategory)
+            @Html.DropDownList("RuleCategory", new SelectList(Model.RuleCategoryList, "Value", "Text"), new { @class = "ui search selection fluid dropdown" })
+        </div>
+        <div class="ten wide field">
+            @Html.LabelFor(model => model.Note)
+            @Html.EditorFor(model => model.Note, new { @placeholder = "備註" })
+        </div>
+    </div>
+    <div class="sixteen wide field">
+        <div class="ui horizontal orange list">
+            <div class="item">
+                <i class="bell icon"></i>至少需要一個條件設定。
+            </div>
+            <div class="item">
+                <i class="bell icon"></i>流程類型不可重複新增規則, 請使用編輯功能。
+            </div>
+            <div class="item">
+                <i class="bell icon orange"></i>邏輯建立後,立即生效。
+            </div>
+        </div>
+    </div>
+    <div class="ui horizontal inverted divider">審核邏輯(篩選條件上限5個)</div>
+    <div class="two fields nopadding x-keyaddboard">
+        <div class="fourteen wide field">
+            <div class="item field" id="RuleInput">
+                <div class="middle aligned content">
+                    <div class="four fields">
+                        <div class="two required field">
+                            <label>序</label>
+                            <input type="number" name="RuleOrder" min="1" step="1" />
+                        </div>
+                        <div class="four wide  field">
+                            <label>條件</label>
+                            <select class="ui selection fluid dropdown" name="RuleWhereClause">
+                                <option value="AND" selected title="and">與(And)</option>
+                                <option value="OR" title="or">或(OR)</option>
+                            </select>
+                        </div>
+                        <div class="four wide field">
+                            <label>套用規則表</label>
+                            <select class="ui selection fluid dropdown" name="RuleTable"></select>
+                        </div>
+                        <div class="six wide field">
+                            <label>是否啟用</label>
+                            <div class="ui toggle checkbox" name="RuleEnabled">
+                                <input type="checkbox" name="enabled" checked />
+                                <label>啟用規則</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="three fields">
+                        <div class="four wide field">
+                            <label>欄位</label>
+                            <select class="ui selection fluid dropdown" name="RuleColumn"> </select>
+                        </div>
+                        <div class="two wide field">
+                            <label>運算子</label>
+                            <select class="ui selection fluid dropdown" name="RuleOperator">
+                                @*<option value="include">包含</option>
+                                <option value="exclude">不包含</option>
+                                <option value="equal">等於</option>
+                                <option value="between">介於</option>*@
+                            </select>
+                        </div>
+                        <div class="ten wide field">
+                            <label>篩選值</label>
+                            <div name="FilterUI"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="two wide field nopadding">
+            <div class="ui inverted center aligned segment x-keyadd">
+                <div class="ui icon header">
+                    <i class="icon key huge"></i>
+                </div>
+                <div class="inline">
+                    <button type="submit" class="ui icon yellow fluid animated button" name="createRule">
+                        <div class="visible content">  <i class="plus icon"></i></div>
+                        <div class="hidden content"> 加入規則 </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h5 class="ui basic center aligned segment" id="CreateRuleTip"><span class="ui label">------暫無規則------</span></h5>
+        <div class="ui middle aligned divided inverted animated  selection list" id="CreateRuleArea">
+            @*@for (int i = 0; i < 5; i++)
+            {
+              <div class="item">
+                  <div class="right floated content">
+                      <span class="ui teal basic transparent left floated label"><i class="check icon"></i>啟用</span>
+                      <button class="ui red right floated icon button" type="button" name="deleteRule">  <i class="icon delete"></i> </button>
+                  </div>
+                <div class="content">
+                    <span class="ui basic label">與(And)</span>
+                    <span class="ui label">序:</span>
+                    <span class="ui circular black label">12</span>
+                    <span class="ui label">聲音檔案</span>
+                    <span class="ui blue label">機密等級</span>
+                    <span class="ui label">包含</span>
+                    <span class="ui blue label">機密;極機密;</span>
+                </div>
+            </div>
+            }*@
+        </div>
+    </div>
+</form>,
+ @<div>
+
+     <button type="button" class="ui ok yellow  button @disabledStyle">儲存</button>
+     <button class="ui cancel  button" type="button">取消</button>
+ </div>,"large"
+)
+
+

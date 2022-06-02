@@ -1,0 +1,74 @@
+﻿@*@model AIRMAM5.DBEntity.Models.Announce.AnnouncePublicViewModel*@
+@model AIRMAM5.DBEntity.Models.Announce.AnnounceDetailViewModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("DeleteModal", "您正要刪除公告資料!請確認！",
+@<div>
+    @using (Html.BeginForm("Delete", "Ann", new { annid = Model.AnnounceId }, FormMethod.Post, new { role = "form", @class = "ui form", @id = "DeleteForm" }))
+                {
+        <div class="field">
+            <h5 class="ui red header"> 確定要刪除這筆公告嗎?</h5>
+        </div>
+        <div class="three fields">
+            <div class="two wide field">
+                @Html.LabelFor(model => model.AnnounceId)
+                @Html.TextBoxFor(model => model.AnnounceId, new { @readonly = "readonly" })
+            </div>
+            <div class="ten wide field">
+                @Html.LabelFor(model => model.AnnTitle)
+                @Html.TextBoxFor(model => model.AnnTitle, new { @readonly = "readonly" })
+            </div>
+            <div class="four wide field">
+                @Html.LabelFor(model => model.AnnSdate)
+                @Html.TextBoxFor(model => model.AnnSdate, string.Format("{0:yyyy/MM/dd HH:mm}", Model.AnnSdate), new { @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="three fields">
+            <div class="six wide field">
+                @Html.LabelFor(model => model.AnnTypeName)
+                @Html.TextBoxFor(model => model.AnnTypeName, new { @readonly = "readonly" })
+            </div>
+            <div class="six wide field">
+                @Html.LabelFor(model => model.AnnPublishDept)
+                @Html.TextBoxFor(model => model.AnnPublishDept, new { @readonly = "readonly" })
+            </div>
+            <div class="four wide field">
+                @Html.LabelFor(model => model.AnnEdate)
+                @Html.TextBoxFor(model => model.AnnEdate, string.Format("{0:yyyy/MM/dd HH:mm}", Model.AnnEdate), new { @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.AnnContent)
+            @Html.TextAreaFor(model => model.AnnContent, new { @readonly = "readonly", @rows = "6" })
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.AnnNote)
+            @Html.TextAreaFor(model => model.AnnNote, new { @readonly = "readonly", @rows = "2" })
+        </div>
+        <div class="four fields">
+            <div class="four wide field">
+                @Html.LabelFor(model => model.CreatedTime)
+                @Html.TextBoxFor(model => model.CreatedTime, string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.CreatedTime), new { @readonly = "readonly" })
+            </div>
+            <div class="four wide field">
+                @Html.LabelFor(model => model.CreatedBy)
+                @Html.TextBoxFor(model => model.CreatedBy, new { @readonly = "readonly" })
+            </div>
+            <div class="four wide field">
+                @Html.LabelFor(model => model.UpdatedTime)
+                @Html.TextBoxFor(model => model.UpdatedTime, string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.UpdatedTime), new { @readonly = "readonly" })
+            </div>
+            <div class="four wide field">
+                @Html.LabelFor(model => model.UpdatedBy)
+                @Html.TextBoxFor(model => model.UpdatedBy, new { @readonly = "readonly" })
+            </div>
+        </div>
+                }
+</div>
+  ,@<div>
+    <button type="button" class="ui ok right labeled icon red button">刪除<i class="checkmark icon"></i></button>
+    <button type="button" class="ui black cancel button">取消</button>
+</div>
+   )

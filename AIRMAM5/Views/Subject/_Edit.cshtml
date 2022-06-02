@@ -1,0 +1,89 @@
+﻿@model AIRMAM5.DBEntity.Models.Subject.SubjectViewModel
+@{ var _cser = new AIRMAM5.DBEntity.Services.CodeService(); }
+
+@HtmlHelper.HtmlModal("EditModal", "編輯主檔資料",
+@<form role="form" class="ui inverted form" id="EditForm">
+    <dvi class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.SubjectId)
+            @Html.TextBoxFor(model => model.SubjectId, new { @type = "text", @readonly = "readonly" })
+        </div>
+        <div class="required field">
+            @Html.LabelFor(model => model.Title)
+            @Html.TextBoxFor(model => model.Title, new { @type = "text" })
+        </div>
+    </dvi>
+    <div class="field">
+        @Html.LabelFor(model => model.Description)
+        @Html.TextAreaFor(model => model.Description, new { @type = "text" })
+    </div>
+
+    @{
+        //自訂欄位, 判斷型態決定顯示控制項
+        List<string> fieldList = new List<string>();
+        int num = 0;
+        foreach (var itm in Model.SubjectAttributes)
+        {
+            fieldList.Add(itm.Field);
+            int.TryParse(itm.Field.Replace("fsATTRIBUTE", ""), out int _num);
+            if (_num > num) { num = _num; }/*fsATTRIBUTE編號不一定會按照順序,取fsATTRIBUTE最大編號記錄*/
+            string _req = itm.IsNullable ? "" : "required";
+            if (itm.FieldType == "NVARCHAR")
+            {
+                if (itm.IsMultiline)
+                {
+                    <div class="@_req field">
+                       @Html.Label(itm.Field, itm.FieldName)
+                        @Html.TextArea(itm.Field, itm.FieldValue, new { @rows = 3, @maxlength = itm.FieldLen, data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                    </div>
+                }
+                else
+                {
+                    <div class="@_req field">
+                         @Html.Label(itm.Field, itm.FieldName)
+                        @Html.TextBox(itm.Field, itm.FieldValue, new { @type = "text", @maxlength = itm.FieldLen, data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                    </div>
+                }
+            }
+            else if (itm.FieldType == "INTEGER")
+            {
+                <div class="field">
+                     @Html.Label(itm.Field, itm.FieldName)
+                    @Html.TextBox(itm.Field, itm.FieldValue, new { @type = "number", @min = 0, @setp = 1, data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                </div>
+            }
+            else if (itm.FieldType == "DATETIME")
+            {
+                <div class="@_req ui calendar field">
+                     @Html.Label(itm.Field, itm.FieldName)
+                    @Html.TextBox(itm.Field, itm.FieldValue, new { @type = "text", data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                </div>
+            }
+            else if (itm.FieldType == "CODE")
+            {
+                <div class="@_req field">
+                    @Html.Label(itm.Field, itm.FieldName)
+                    @{var _ddlCode = _cser.CodeListItemSelected(itm.FieldCodeId, itm.FieldDef); }
+
+                    @if (itm.FieldCodeCnt == 1)
+                    {
+                        //var _ddlCode = _cser.GetCodeItemList(itm.FieldCodeId, true, false);
+                        @Html.DropDownList(itm.Field, _ddlCode, new { @class = "ui search selection fluid dropdown", data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                    }
+                    else
+                    {
+                        //var _clist = _cser.GetCodeItemList(itm.FieldCodeId, true, false);
+                        @Html.DropDownList(itm.Field, _ddlCode, new { @class = "ui search multiple selection fluid dropdown", @multiple = "", data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                    }
+                </div>
+            }
+        }
+
+        @Html.Hidden("fieldList", (fieldList.Count > 0 ? String.Join("^", fieldList) : ""))
+    }
+</form>,
+@<div>
+    <button class="ui yellow ok button" type="button">儲存</button>
+    <button class="ui cancel  button" type="button">取消</button>
+</div>
+)

@@ -1,0 +1,158 @@
+﻿//Step1:引入共用變數樣式
+@import "../../_variable.scss";
+@import "../Shared/style.scss";
+//Step2:引入上傳按鈕樣式
+@import "./_uploadBtn.scss";
+//Step3:引入上傳進度視窗樣式
+@import "./_progressWindow.scss";
+//Step4:引入上傳檔案區域樣式
+@import "./_uploadWindow.scss";
+//引入影音圖文燈箱中的右側資料樣式
+@import "./_directoryTab.scss";
+@import "./_keyFrame.scss";
+@import "./_paragraphDescription.scss";
+@import "./_docsystemView.scss";
+//Step4:引入影音圖文燈箱樣式
+@import "./_cusModal.scss";
+//引入inputRange與player樣式
+@import "../../_inputRange.scss";
+@import "../../_previewPlayer.scss";
+//引入樹狀節點樣式
+@import "../Shared/Function/_tree.scss";
+
+
+@include ListInfo;
+/*$ComponentWidth: 480px;
+$ComponentHeight: 330px; /**影片高度270px,menu 60px*/
+@include CusModal ($VideoWidth,#{$VideoHeight+60px});
+
+div.nopadding {
+    padding: 0;
+
+    &.basic {
+        border: none;
+    }
+}
+div.nopaddingLR {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+
+._header {
+    color: #fff;
+    padding-bottom: 1em;
+    font-size: 1.2em;
+}
+
+
+
+/*****************
+     TipResult遮罩
+****************/
+#TipResult {
+    position:absolute;
+    top:0;
+    left:0;
+    height: 85vh;
+
+    .placeholder.segment {
+        background-color: #333;
+        border: 0.5px dashed #ccc;
+        color: rgba(255, 255, 255, 0.9);
+        padding: 14px;
+        height: 100%;
+    }
+}
+/*****************
+ 主題列表
+***************/
+#ShowResult {
+    width: 100%;
+    height: 85vh;
+    margin: -1em;
+    margin: 0;
+}
+.x-overflow {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+}
+@media screen and (max-width: 760px) {
+    #ShowResult {
+        height: 50vh;
+    }
+    .cusmodal {
+        overflow: auto !important;
+    }
+}
+#EditMediaModal {
+    width:88% !important;//使用原有寬度會超出該區域臨界值
+    .field {
+        label {
+            float: left;
+            margin-left: 5px;
+        }
+
+        .checkbox.disabled {
+            visibility: hidden;
+        }
+
+        .checkbox:after {
+            display: none;
+        }
+    }
+}
+/**圖片上下一張切換按鈕*/
+button.x-imgslider-btn {
+    position: absolute;
+    top: 0em;
+    z-index: 99;
+    bottom: 0;
+    height: 100%;
+    background: transparent;
+    color: #fff;
+
+    &[name="preImg"] {
+        left: 0;
+    }
+
+    &[name="nextImg"] {
+        left: calc(#{ $VideoWidth} - 28px);
+    }
+}
+
+/*覆蓋一開始預設的:active顏色*/
+.ui.black.button:active {
+    background-color: #1B1C1D !important;
+}
+
+
+    /**圖片燈箱*/
+    img[name="lightbox"] {
+        cursor: zoom-in;
+    }
+
+    .x-lightbox {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0,0,0,0.7);
+        z-index: 9999;
+
+        img {
+            height: 90%;
+            width: auto;
+            margin: auto;
+            display: inline-block;
+            left: 0;
+            right: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            cursor: zoom-out;
+        }
+    }

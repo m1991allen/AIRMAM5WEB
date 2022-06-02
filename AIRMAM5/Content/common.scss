@@ -1,0 +1,62 @@
+﻿@import "_struct.scss";
+@import "_color.scss";
+@import "_iframe.scss";
+@import "_contextmenu.scss";
+
+body{
+    height:100%;
+    overflow:hidden;
+}
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #000;
+    /*-ms-overflow-style: -ms-autohiding-scrollbar;*/
+    -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #000;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 20px;
+}
+/*文件檢視器樣式*/
+#DocumentViewer .content object, #DocumentViewer .content iframe {
+    width: 100%;
+    height: 100%;
+    min-width: 95vw;
+    min-height: 100vh;
+}
+
+/**客戶Logo圖片*/
+.x-brandLogo {
+    width: 200px;
+    height: auto;
+    max-height: 200px;
+    margin: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("~/Images/logo_Horizontal.svg");
+}
+.x-version {
+    font-size: 8px;
+    text-align: center;
+    font-weight: lighter;
+    color: rgba(255,255,255,0.5);
+    margin-top: 5px;
+}
+@media only screen and (max-width: 760px) {
+    #SearchHot input {
+ 
+    }
+    nav .menu .item{
+        font-size:0.5rem;
+    }
+}

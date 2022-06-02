@@ -1,0 +1,33 @@
+﻿@model AIRMAM5.DBEntity.Models.Shared.LoginIdDateSerarchModel
+
+@*@using (Html.BeginForm("Search", "L_Login", new { }, FormMethod.Post, new { role = "form", @class = "ui inverted form", @id = "SearchForm", onsubmit = "return ValidForm();" }))
+    {*@
+<form class="ui inverted form" role="form" id="SearchForm">
+    <div class="four fields">
+        <div class="three wide  field">
+            @*<label>系統帳號</label>*@
+            @Html.LabelFor(m=>m.UserId)
+            <input type="hidden" name="SelfAccount" value="@Model.UserId" id="SelfAccount" /><!--預設查詢自己的記錄-->
+            @Html.DropDownList("SysAccount", Model.LoginIdList, new { @class = "ui search selection dropdown", @id = "SysAccount", @name = "SysAccount" })
+        </div>
+        <div class="eight wdie two fields">
+            <div class="eight wide ui calendar required field">
+                <label>登入日期(起)</label>
+                @*<input type="text" placeholder="起" readonly id="sdate" />*@
+                @Html.TextBoxFor(model => model.BeginDate, new { type = "text", placeholder = "起", @id = "sdate" })
+            </div>
+            <div class="eight wide ui calendar required field">
+                <label>登入日期(迄)</label>
+                @*<input type="text" placeholder="迄" readonly id="edate" />*@
+                @Html.TextBoxFor(model => model.EndDate, new { type = "text", placeholder = "迄", @id = "edate" })
+            </div>
+        </div>
+        <div class="three wide field">
+            <label style="visibility:hidden;">查詢</label>
+            <button type="submit" class="ui yellow button">查詢</button>
+            <button type="button" name="reset"  class="ui button">清空</button>
+            @*<button type="reset" class="ui button">清空</button>*@
+        </div>
+    </div>
+</form>
+@*}*@

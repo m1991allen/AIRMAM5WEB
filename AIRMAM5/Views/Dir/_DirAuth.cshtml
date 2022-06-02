@@ -1,0 +1,49 @@
+﻿@model AIRMAM5.DBEntity.Models.Directory.DirectoriesAuthorithModel
+
+<div class="ui form" style="position: relative;top: 10px;left: 0;">
+    <!--類型欄位-->
+    <div class="inline fields">
+        <label class="ui label">欄位類型 :</label>
+        <div class="field">
+            @Html.HiddenFor(model => model.DirId)
+            <select class="ui search selection fluid dropdown" id="DataType">
+                @{
+                    if (Model.DATATYPE == "G")
+                    {
+                        <option value="G" selected>群組</option>
+                    }
+                    else
+                    {
+                        <option value="G">群組</option>
+                    }
+
+                    if (Model.DATATYPE == "U")
+                    {
+                        <option value="U" selected>使用者</option>
+                    }
+                    else
+                    {
+                        <option value="U">使用者</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="field">
+            <!--類型欄位-->
+            <button type="button" class="ui _darkGrey mini button" name="create"><i class="plus icon"></i> 新增 </button>
+        </div>
+    </div>
+</div>
+<div style="height:80vh !important;">
+    <div id="Table" style="max-width:100%;"></div>
+    <div id="SaveData" data-json='@Html.Raw(Json.Encode(Model.DirAuthority))'></div>
+</div>
+
+@if (Model != null)
+{
+    <!--新增使用者燈箱-->
+    @Html.Action("_DirAuthCreate", "Dir", new { id = Model.DirId, type = "U" })
+    <!--新增群組燈箱-->
+    @Html.Action("_DirAuthCreate", "Dir", new { id = Model.DirId, type = "G" })
+}
+

@@ -1,0 +1,24 @@
+﻿@model AIRMAM5.DBEntity.Models.SearchResponse.SearchResponseDocModel.ExtendIfno
+
+<div class="ui bottom attached tab" data-tab="documentInfo" style="flex-direction: column;">
+    <div class="ui form basic segment" style="width: 100%; padding: 1px;">
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(model=>model.Content, new { @class = "ui black label three wide field" })
+                <span>@Model.Content </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(model => model.FileCreatedDate, new { @class = "ui black label three wide field" })
+                <span>@string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.FileCreatedDate) </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(model => model.FileUpdatedDate, new { @class = "ui black label three wide field" })
+                <span>@string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.FileUpdatedDate) </span>
+            </div>
+        </div>
+    </div>
+</div>

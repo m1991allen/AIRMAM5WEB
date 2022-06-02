@@ -1,0 +1,54 @@
+﻿@model AIRMAM5.DBEntity.Models.Synonym.SynonymEditModel
+
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("EditModal", "編輯同義詞",
+@<form role = "form" class = "ui form" id = "EditForm">
+        <div class="two fields">
+            <div class="three wide field">
+                @Html.LabelFor(model => model.fnINDEX_ID)
+                @Html.TextBoxFor(model => model.fnINDEX_ID, new { @readonly = "readonly", @class = "" })
+            </div>
+            <div class="thirteen wide required field">
+                @Html.LabelFor(model => model.fsTYPE)
+                <select class="ui serach selection fluid dropdown" style="padding:0;">
+                    <option value="*" selected>全部</option>
+                    @{
+                                    foreach (var itm in Model.SynonymTypeList)
+                                    {
+                            <option value="@itm.Value">@itm.Text</option>
+                                    }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="sixteen wide four field">
+            @Html.HiddenFor(m => m.OrigSynonyms)
+            @Html.HiddenFor(m => m.fsTEXT_LIST, new { @id = "TextList" })
+            <table class="ui inverted selectable stackable table">
+                <thead>
+                    <tr>
+                        <th>@Html.LabelFor(model => model.fsTEXT_LIST) @*同義詞詞彙*@</th>
+                        <th>
+                            <div class="ui action transparent inverted input">
+                                <input type="text" placeholder="請輸入同義詞..." name="SynonymWord" autofocus>
+                                <button type="button" class="ui yellow button" name="InsertSynonym" data-type="Edit"><i class="add icon"></i>新增</button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="EditShowSynonymList"> </tbody>
+            </table>
+        </div>
+        <div class="sixteen wide field">
+            <label>備註</label>
+            @Html.TextAreaFor(model => model.fsNOTE, new { rows = "4" })
+        </div>
+</form>,
+@<div>
+    <button type="button" class="ui ok yellow  button">儲存</button>
+    <button class="ui cancel  button" type="button">取消</button>
+</div>
+)

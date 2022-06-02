@@ -1,0 +1,39 @@
+﻿@{ Layout = "";}
+
+<form class="ui form" id="SearchForm" autocomplete="off">
+    <label class="ui fluid label">請新增需要的查詢條件<i class="ui delete icon x-delete"></i></label>
+    <div class="three fields">
+        <div class="field">
+            <select name="factorInput" class="ui fluid dropdown"></select>
+        </div>
+        <div class="ten wide field x-calendar-input">
+            <input type="text" placeholder="請輸入搜尋條件" class="x-input">
+            <div class="ui calendar">
+                @*<div class="ui black label x-timelabel">從</div>*@
+                <input id="sdate" type="text" placeholder="開始日期" class="x-input" name="datetime" readonly>
+            </div>
+            <div class="ui calendar">
+                @*<div class="ui black label x-timelabel">至</div>*@
+                <input id="edate" type="text" placeholder="結束日期" class="x-input" name="datetime" readonly>
+            </div>
+        </div>
+        <div class="field">
+            <button class="ui black icon button" name="docfactoradd" type="button"><i class="ui icon add"></i></button>
+            <button type="submit" class="ui yellow button mini">查詢</button>
+        </div>
+
+    </div>
+</form>
+
+
+<div class="x-doc-top">
+    <div class="x-doc-list" name="doclist">
+
+    </div>
+
+</div>
+<div class="x-doc-bottom">
+    <div id="doctable"></div>
+</div>
+
+

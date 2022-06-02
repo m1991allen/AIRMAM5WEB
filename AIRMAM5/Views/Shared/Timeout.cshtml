@@ -1,0 +1,7 @@
+﻿@{ 
+    Layout = null;
+}
+<script>
+    alert("網頁時間逾時，請重新登入!");
+    top.location.href = @Url.Action("Index", "Login");
+</script>

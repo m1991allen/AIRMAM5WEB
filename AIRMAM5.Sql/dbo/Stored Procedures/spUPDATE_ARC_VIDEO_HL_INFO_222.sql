@@ -1,0 +1,230 @@
+﻿
+
+
+
+
+
+-- =============================================
+-- 描述:	修改 ARC_VIDEO 入庫項目-影片檔主檔 資料的高低解欄位
+-- 記錄:	<2011/11/25><Dennis.Wen><新增本預存>
+--			<2012/05/21><Dennis.Wen><一堆欄位調整>
+-- ※主要讓AP呼叫, 轉檔完後回寫高低解資料欄位
+--			<2017/07/26><David.Sin><文件檔案不用清空高低解>
+-- =============================================
+CREATE PROCEDURE [dbo].[spUPDATE_ARC_VIDEO_HL_INFO_222]
+
+	@TYPE			VARCHAR(1), 
+	@fsFILE_NO		VARCHAR(16),
+		
+	@fsFILE_PATH_H	NVARCHAR(100), 
+	@fsFILE_TYPE_H	VARCHAR(10), 
+	@fsFILE_SIZE_H	VARCHAR(50),
+	@fsFILE_PATH_L	NVARCHAR(100), 
+	@fsFILE_TYPE_L	VARCHAR(10), 
+	@fsFILE_SIZE_L	VARCHAR(50), 
+	@fdDURATION		DECIMAL(13,3),
+	@fsUPDATED_BY	VARCHAR(50)
+
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+		DECLARE @COUNT INT = 0
+		
+		DECLARE
+			@FILE_PATH_H NVARCHAR(100),	
+			@FILE_TYPE_H VARCHAR(10),		
+			@FILE_SIZE_H VARCHAR(50),	
+			@FILE_PATH_L NVARCHAR(100),	
+			@FILE_TYPE_L VARCHAR(10),		
+			@FILE_SIZE_L VARCHAR(50)	
+			
+			
+		IF (@TYPE = 'V')
+		BEGIN
+			SELECT
+				--@FILE_PATH_H = CASE WHEN (@fsFILE_PATH_H = '' ) THEN fsFILE_PATH_H  WHEN (@fsFILE_PATH_H = '@' ) THEN '' ELSE @fsFILE_PATH_H END,
+				--@FILE_TYPE_H = CASE WHEN (@fsFILE_TYPE_H = '' ) THEN fsFILE_TYPE_H  WHEN (@fsFILE_TYPE_H = '@' ) THEN '' ELSE @fsFILE_TYPE_H END,
+				--@FILE_SIZE_H = CASE WHEN (@fsFILE_SIZE_H = '' ) THEN fsFILE_SIZE_H  WHEN (@fsFILE_SIZE_H = '@' ) THEN '' ELSE @fsFILE_SIZE_H END,
+				@FILE_PATH_L = CASE WHEN (@fsFILE_PATH_L = '' ) THEN fsFILE_PATH_L  WHEN (@fsFILE_PATH_L = '@' ) THEN '' ELSE @fsFILE_PATH_L END,
+				@FILE_TYPE_L = CASE WHEN (@fsFILE_TYPE_L = '' ) THEN fsFILE_TYPE_L  WHEN (@fsFILE_TYPE_L = '@' ) THEN '' ELSE @fsFILE_TYPE_L END,
+				@FILE_SIZE_L = CASE WHEN (@fsFILE_SIZE_L = '' ) THEN fsFILE_SIZE_L  WHEN (@fsFILE_SIZE_L = '@' ) THEN '' ELSE @fsFILE_SIZE_L END
+			FROM
+				tbmARC_VIDEO
+			WHERE 
+				(@TYPE = 'V') AND 
+				(fsFILE_NO = @fsFILE_NO)
+			
+			-----
+				
+			UPDATE	
+				tbmARC_VIDEO
+			SET		
+				--fsFILE_PATH_H = @FILE_PATH_H, 
+				--fsFILE_TYPE_H = @FILE_TYPE_H, 
+				--fsFILE_SIZE_H = @FILE_SIZE_H,
+				fsFILE_PATH_L = @FILE_PATH_L, 
+				fsFILE_TYPE_L = @FILE_TYPE_L, 
+				fsFILE_SIZE_L = @FILE_SIZE_L,
+				fdEND_TIME = fdBEG_TIME + @fdDURATION, 
+				fdDURATION = @fdDURATION,
+				fdUPDATED_DATE = GETDATE(), 
+				fsUPDATED_BY = @fsUPDATED_BY
+			WHERE 
+				(@TYPE = 'V') AND 
+				(fsFILE_NO = @fsFILE_NO)
+
+			SET @COUNT = @COUNT + @@ROWCOUNT
+		END
+			
+		ELSE IF (@TYPE = 'A')
+		BEGIN
+			SELECT
+				--@FILE_PATH_H = CASE WHEN (@fsFILE_PATH_H = '' ) THEN fsFILE_PATH_H ELSE @fsFILE_PATH_H END,
+				--@FILE_TYPE_H = CASE WHEN (@fsFILE_TYPE_H = '' ) THEN fsFILE_TYPE_H ELSE @fsFILE_TYPE_H END,
+				--@FILE_SIZE_H = CASE WHEN (@fsFILE_SIZE_H = '' ) THEN fsFILE_SIZE_H ELSE @fsFILE_SIZE_H END,
+				@FILE_PATH_L = CASE WHEN (@fsFILE_PATH_L = '' ) THEN fsFILE_PATH_L ELSE @fsFILE_PATH_L END,
+				@FILE_TYPE_L = CASE WHEN (@fsFILE_TYPE_L = '' ) THEN fsFILE_TYPE_L ELSE @fsFILE_TYPE_L END,
+				@FILE_SIZE_L = CASE WHEN (@fsFILE_SIZE_L = '' ) THEN fsFILE_SIZE_L ELSE @fsFILE_SIZE_L END
+			FROM
+				tbmARC_AUDIO
+			WHERE 
+				(@TYPE = 'A') AND 
+				(fsFILE_NO = @fsFILE_NO)
+				
+			-----
+				
+			UPDATE	
+				tbmARC_AUDIO
+			SET		
+				--fsFILE_PATH_H = @FILE_PATH_H, 
+				--fsFILE_TYPE_H = @FILE_TYPE_H, 
+				--fsFILE_SIZE_H = @FILE_SIZE_H,
+				fsFILE_PATH_L = @FILE_PATH_L, 
+				fsFILE_TYPE_L = @FILE_TYPE_L, 
+				fsFILE_SIZE_L = @FILE_SIZE_L,	
+				fdEND_TIME = fdBEG_TIME + @fdDURATION, 
+				fdDURATION = @fdDURATION,	
+				fdUPDATED_DATE = GETDATE(), 
+				fsUPDATED_BY = @fsUPDATED_BY
+			WHERE 
+				(@TYPE = 'A') AND 
+				(fsFILE_NO = @fsFILE_NO)
+
+			SET @COUNT = @COUNT + @@ROWCOUNT
+		END
+			
+		ELSE IF (@TYPE = 'P')
+		BEGIN
+			SELECT
+				--@FILE_PATH_H = CASE WHEN (@fsFILE_PATH_H = '' ) THEN fsFILE_PATH_H ELSE @fsFILE_PATH_H END,
+				--@FILE_TYPE_H = CASE WHEN (@fsFILE_TYPE_H = '' ) THEN fsFILE_TYPE_H ELSE @fsFILE_TYPE_H END,
+				--@FILE_SIZE_H = CASE WHEN (@fsFILE_SIZE_H = '' ) THEN fsFILE_SIZE_H ELSE @fsFILE_SIZE_H END,
+				@FILE_PATH_L = CASE WHEN (@fsFILE_PATH_L = '' ) THEN fsFILE_PATH_L ELSE @fsFILE_PATH_L END,
+				@FILE_TYPE_L = CASE WHEN (@fsFILE_TYPE_L = '' ) THEN fsFILE_TYPE_L ELSE @fsFILE_TYPE_L END,
+				@FILE_SIZE_L = CASE WHEN (@fsFILE_SIZE_L = '' ) THEN fsFILE_SIZE_L ELSE @fsFILE_SIZE_L END
+			FROM
+				tbmARC_PHOTO
+			WHERE 
+				(@TYPE = 'P') AND 
+				(fsFILE_NO = @fsFILE_NO)
+				
+			-----
+				
+			UPDATE	
+				tbmARC_PHOTO
+			SET		
+				--fsFILE_PATH_H = @FILE_PATH_H, 
+				--fsFILE_TYPE_H = @FILE_TYPE_H, 
+				--fsFILE_SIZE_H = @FILE_SIZE_H,
+				--fsFILE_PATH_L = @FILE_PATH_L, 
+				--fsFILE_TYPE_L = @FILE_TYPE_L, 
+				--fsFILE_SIZE_L = @FILE_SIZE_L,				
+				fdUPDATED_DATE = GETDATE(), 
+				fsUPDATED_BY = @fsUPDATED_BY
+			WHERE 
+				(@TYPE = 'P') AND 
+				(fsFILE_NO = @fsFILE_NO)
+
+			SET @COUNT = @COUNT + @@ROWCOUNT
+		END
+			
+		--ELSE IF (@TYPE = 'D')
+		--BEGIN
+		--	SELECT
+		--		--@FILE_PATH_H = CASE WHEN (@fsFILE_PATH_H = '' ) THEN fsFILE_PATH_1 ELSE @fsFILE_PATH_H END,
+		--		--@FILE_TYPE_H = CASE WHEN (@fsFILE_TYPE_H = '' ) THEN fsFILE_TYPE_1 ELSE @fsFILE_TYPE_H END,
+		--		--@FILE_SIZE_H = CASE WHEN (@fsFILE_SIZE_H = '' ) THEN fsFILE_SIZE_1 ELSE @fsFILE_SIZE_H END,
+		--		@FILE_PATH_L = CASE WHEN (@fsFILE_PATH_L = '' ) THEN fsFILE_PATH_2 ELSE @fsFILE_PATH_L END,
+		--		@FILE_TYPE_L = CASE WHEN (@fsFILE_TYPE_L = '' ) THEN fsFILE_TYPE_2 ELSE @fsFILE_TYPE_L END,
+		--		@FILE_SIZE_L = CASE WHEN (@fsFILE_SIZE_L = '' ) THEN fsFILE_SIZE_2 ELSE @fsFILE_SIZE_L END
+		--	FROM
+		--		tbmARC_DOC
+		--	WHERE 
+		--		(@TYPE = 'D') AND 
+		--		(fsFILE_NO = @fsFILE_NO)
+				
+		--	-----
+				
+		--	UPDATE	
+		--		tbmARC_DOC
+		--	SET		
+		--		--fsFILE_PATH_1 = @FILE_PATH_H, 
+		--		--fsFILE_TYPE_1 = @FILE_TYPE_H, 
+		--		--fsFILE_SIZE_1 = @FILE_SIZE_H,
+		--		fsFILE_PATH_2 = @FILE_PATH_L, 
+		--		fsFILE_TYPE_2 = @FILE_TYPE_L, 
+		--		fsFILE_SIZE_2 = @FILE_SIZE_L,				
+		--		fdUPDATED_DATE = GETDATE(), 
+		--		fsUPDATED_BY = @fsUPDATED_BY
+		--	WHERE 
+		--		(@TYPE = 'D') AND 
+		--		(fsFILE_NO = @fsFILE_NO)
+
+		--	SET @COUNT = @COUNT + @@ROWCOUNT
+		--END	
+
+		--UPDATE	tbmARC_VIDEO
+		--SET		fsFILE_PATH_H = @fsFILE_PATH_H, fsFILE_TYPE_H = @fsFILE_TYPE_H, fsFILE_SIZE_H = @fsFILE_SIZE_H,
+		--		fsFILE_PATH_L = @fsFILE_PATH_L, fsFILE_TYPE_L = @fsFILE_TYPE_L, fsFILE_SIZE_L = @fsFILE_SIZE_L,				
+		--		fdUPDATED_DATE = GETDATE(), fsUPDATED_BY = @fsUPDATED_BY
+		--WHERE (@TYPE = 'V') AND (fsFILE_NO = @fsFILE_NO)
+		--SET @COUNT = @COUNT + @@ROWCOUNT
+
+		--UPDATE	tbmARC_AUDIO
+		--SET		fsFILE_PATH_H = @fsFILE_PATH_H, fsFILE_TYPE_H = @fsFILE_TYPE_H, fsFILE_SIZE_H = @fsFILE_SIZE_H,
+		--		fsFILE_PATH_L = @fsFILE_PATH_L, fsFILE_TYPE_L = @fsFILE_TYPE_L, fsFILE_SIZE_L = @fsFILE_SIZE_L,				
+		--		fdUPDATED_DATE = GETDATE(), fsUPDATED_BY = @fsUPDATED_BY
+		--WHERE (@TYPE = 'A') AND (fsFILE_NO = @fsFILE_NO)
+		--SET @COUNT = @COUNT + @@ROWCOUNT
+
+		--UPDATE	tbmARC_PHOTO
+		--SET		fsFILE_PATH_H = @fsFILE_PATH_H, fsFILE_TYPE_H = @fsFILE_TYPE_H, fsFILE_SIZE_H = @fsFILE_SIZE_H,
+		--		fsFILE_PATH_L = @fsFILE_PATH_L, fsFILE_TYPE_L = @fsFILE_TYPE_L, fsFILE_SIZE_L = @fsFILE_SIZE_L,				
+		--		fdUPDATED_DATE = GETDATE(), fsUPDATED_BY = @fsUPDATED_BY
+		--WHERE (@TYPE = 'P') AND (fsFILE_NO = @fsFILE_NO)
+		--SET @COUNT = @COUNT + @@ROWCOUNT
+
+		--UPDATE	tbmARC_DOC
+		--SET		fsFILE_PATH_1 = @fsFILE_PATH_H, fsFILE_TYPE_1 = @fsFILE_TYPE_H, fsFILE_SIZE_1 = @fsFILE_SIZE_H,
+		--		fsFILE_PATH_2 = @fsFILE_PATH_L, fsFILE_TYPE_2 = @fsFILE_TYPE_L, fsFILE_SIZE_2 = @fsFILE_SIZE_L,				
+		--		fdUPDATED_DATE = GETDATE(), fsUPDATED_BY = @fsUPDATED_BY
+		--WHERE (@TYPE = 'D') AND (fsFILE_NO = @fsFILE_NO)
+		--SET @COUNT = @COUNT + @@ROWCOUNT
+			
+		SELECT RESULT = @COUNT
+	END TRY
+	
+	BEGIN CATCH
+		-- 發生例外時, 串回'ERROR:'開頭字串 + 錯誤碼 + 錯誤訊息
+		SELECT RESULT = 'ERROR:' + CAST(@@ERROR AS VARCHAR(10)) + '-' + ERROR_MESSAGE()
+	END CATCH
+END
+
+
+
+
+
+
+

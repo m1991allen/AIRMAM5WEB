@@ -1,0 +1,89 @@
+﻿@model AIRMAM5.DBEntity.Models.Booking.BookingDetModel
+
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("DetailModal", "調用狀態內容",
+@<form class="ui form" name="Detail">
+    <div class="four fields">
+        <div class="four wide field">
+            @Html.DisplayName("編號")
+            @Html.TextBoxFor(model => model.WorkId, new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.DisplayName("檔案類型")
+            @Html.TextBoxFor(model => model.ArcTypeName, new { @readonly = "readonly" })
+        </div>
+        <div class="seven wide field">
+            @Html.DisplayName("轉檔開始時間")
+            @Html.TextBox("fdSTIME", string.Format($"{Model.StartTime:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+        </div>
+        <div class="seven wide field">
+            @Html.DisplayName("轉檔結束時間")
+            @Html.TextBox("fdETIME", string.Format($"{Model.EndTime:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+        </div>
+    </div>
+    <div class="field">
+        @Html.DisplayName("進度")
+        @{
+                        int.TryParse(Model.Progress.Replace("%", ""), out int _val);
+                        string _color = string.Empty;
+                        if (_val > 0 && _val <= 20) { _color = "red"; }
+                        else if (_val > 20 && _val <= 40) { _color = "orange"; }
+                        else if (_val > 40 && _val <= 60) { _color = "yellow"; }
+                        else if (_val > 60 && _val <= 80) { _color = "teal"; }
+                        else if (_val > 80) { _color = "green"; }
+        }
+        <div class="ui active indicating inverted small @_color progress" data-value="@_val" data-total="100" id="progress-@Model.WorkId">
+            <div class="bar" style="width:@Model.Progress;">
+                <div class="progress">@Model.Progress </div>
+            </div>
+            <div class="label">@Model.StatusName </div>
+        </div>
+    </div>
+    <div class="field">
+        @Html.DisplayName("標題")
+        @Html.TextBoxFor(model => model.Title, new { @readonly = "readonly" })
+    </div>
+    <div class="field">
+        @Html.DisplayName("調用結果")
+        @Html.TextBoxFor(model => model.Result, new { @readonly = "readonly" })
+    </div>
+    <div class="field">
+        @Html.DisplayName("備註")
+        @Html.TextBoxFor(model => model.NoteStr, new { @readonly = "readonly" })
+    </div>
+
+    <div class="four fields">
+        <div class="four wide field">
+            @Html.DisplayName("新增時間")
+            @Html.TextBox("fdCREATED_DATE", string.Format($"{Model.CreatedDate:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @{ string _createder = string.Format("{0}{1}"
+                      , string.IsNullOrEmpty(Model.CreatedBy) ? string.Empty : Model.CreatedBy
+                      , string.IsNullOrEmpty(Model.CreatedByName) ? string.Empty : string.Format($"({Model.CreatedByName})")); }
+            @Html.DisplayName("新增人員")
+            @Html.TextBox("fsCREATED_BY", _createder, new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.DisplayName("修改時間")
+            @Html.TextBox("fdUPDATED_DATE", string.Format($"{Model.UpdatedDate:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @{ string _updateder = string.Format("{0}{1}"
+                    , string.IsNullOrEmpty(Model.UpdatedBy) ? string.Empty : Model.UpdatedBy
+                    , string.IsNullOrEmpty(Model.UpdatedByName) ? string.Empty : string.Format($"({Model.UpdatedByName})")); }
+            @Html.DisplayName("修改人員")
+            @Html.TextBox("fsUPDATED_BY", _updateder, new { @readonly = "readonly" })
+        </div>
+    </div>
+</form>
+,@<div>
+    <button class="ui  cancel button" type="button">關閉</button>
+</div>
+ )
+
+
+

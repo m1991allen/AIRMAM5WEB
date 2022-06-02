@@ -1,0 +1,38 @@
+﻿@model AIRMAM5.DBEntity.Models.Role.GroupsViewModel
+
+@{
+    Layout = "";
+}
+@HtmlHelper.HtmlModal("EditModal", "編輯群組",
+@<div>
+   @using (Ajax.BeginForm("Edit", "Group",
+      new AjaxOptions { HttpMethod = "POST", OnSuccess = "ShowMessage", OnFailure = "ShowMessage" },
+      new { role = "form", @class = "ui inverted form", @id = "EditForm" }))
+   {
+    @Html.AntiForgeryToken()
+     <div class="two fields">
+         <div class="field">
+             @Html.LabelFor(model => model.RoleId)
+             @Html.DisplayFor(model => model.RoleId, new { })
+             @Html.HiddenFor(model => model.RoleId, new { })
+             @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "" })
+         </div>
+         <div class="field">
+             @Html.LabelFor(model => model.RoleName)
+             @Html.TextBoxFor(model => model.RoleName, new { @readonly = "readonly" })
+             @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "" })
+         </div>
+     </div>
+     <div class="field">
+         @Html.LabelFor(model => model.Description)
+         @Html.TextAreaFor(model => model.Description, new { @rows = "6" })
+         @Html.ValidationMessageFor(model => model.Description, "", new { @class = "" })
+     </div>
+    }
+</div>
+ ,@<div>
+    <button class="ui yellow ok button" type="submit">編輯</button>
+    <button class="ui cancel button" type="reset">取消</button>
+
+</div>
+)

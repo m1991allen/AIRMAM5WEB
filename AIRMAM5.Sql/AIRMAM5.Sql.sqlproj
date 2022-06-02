@@ -1,0 +1,637 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>AIRMAM5.Sql</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{a9582948-6090-43b6-a3b7-68d00eb774f0}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>AIRMAM5.Sql</RootNamespace>
+    <AssemblyName>AIRMAM5.Sql</AssemblyName>
+    <ModelCollation>1028,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Chinese_Taiwan_Stroke_CI_AS</DefaultCollation>
+    <DefaultFilegroup>DATA</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="log\" />
+    <Folder Include="log\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="dbo\Defaults\" />
+    <Folder Include="Storage\" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\Stored Procedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\tbzCONFIG.sql" />
+    <Build Include="dbo\Tables\t_tbmARC_VIDEO.sql" />
+    <Build Include="dbo\Tables\t_tbmARC_INDEX.sql" />
+    <Build Include="log\Tables\tbmARC_AUDIO_D.sql" />
+    <Build Include="dbo\Tables\t_tbmARC_PHOTO.sql" />
+    <Build Include="dbo\Tables\tblLOG.sql" />
+    <Build Include="dbo\Tables\t_tbmARC_DOC.sql" />
+    <Build Include="log\Tables\tbmDIRECTORIES.sql" />
+    <Build Include="dbo\Tables\t_tbmARC_AUDIO.sql" />
+    <Build Include="dbo\Tables\tbmDIRECTORIES.sql" />
+    <Build Include="dbo\Tables\xtblRESTORE.sql" />
+    <Build Include="dbo\Tables\xtblTRANSACTION.sql" />
+    <Build Include="dbo\Tables\tblNO.sql" />
+    <Build Include="dbo\Tables\tbmFUNCTIONS.sql" />
+    <Build Include="dbo\Tables\tblWAIT_VOL.sql" />
+    <Build Include="dbo\Tables\xtblMESSAGE.sql" />
+    <Build Include="dbo\Tables\tbmFUNC_GROUP.sql" />
+    <Build Include="dbo\Tables\tbdARC_VIDEO_DIFFERENT.sql" />
+    <Build Include="dbo\Tables\tbdARC_VIDEO_ATTR.sql" />
+    <Build Include="log\Tables\tbmUSERS.sql" />
+    <Build Include="dbo\Tables\xtbdARC_SUBJECT_DIFFERENT.sql" />
+    <Build Include="dbo\Tables\tbmUSER_GROUP.sql" />
+    <Build Include="dbo\Tables\tbdARC_PHOTO_DIFFERENT.sql" />
+    <Build Include="dbo\Tables\tbdARC_PHOTO_ATTR.sql" />
+    <Build Include="log\Tables\tbmARC_DOC.sql" />
+    <Build Include="dbo\Tables\tbmANNOUNCE.sql" />
+    <Build Include="dbo\Tables\tbdARC_DOC_DIFFERENT.sql" />
+    <Build Include="dbo\Tables\xtblARC_CNT3M.sql" />
+    <Build Include="dbo\Tables\tbmUSERS.sql" />
+    <Build Include="dbo\Tables\tbdARC_DOC_ATTR.sql" />
+    <Build Include="log\Tables\tbmARC_PHOTO.sql" />
+    <Build Include="dbo\Tables\xtblARC_CNT3D.sql" />
+    <Build Include="dbo\Tables\tbdARC_AUDIO_DIFFERENT.sql" />
+    <Build Include="dbo\Tables\tbdARC_AUDIO_ATTR.sql" />
+    <Build Include="dbo\Tables\xtblARC_CNT1Y.sql" />
+    <Build Include="log\Tables\tbmARC_VIDEO.sql" />
+    <Build Include="log\Tables\tbmANNOUNCE.sql" />
+    <Build Include="dbo\Tables\tbmNOTIFY.sql" />
+    <Build Include="dbo\Tables\xtblARC_CNT1W.sql" />
+    <Build Include="log\Tables\tbzCODE.sql" />
+    <Build Include="dbo\Tables\xtblARC_CNT1M.sql" />
+    <Build Include="dbo\Tables\tbmGROUPS_bak.sql" />
+    <Build Include="dbo\Tables\xt_tblARC_CLK.sql" />
+    <Build Include="dbo\Tables\tbzCODE.sql" />
+    <Build Include="dbo\Tables\xtblARC_CLK.sql" />
+    <Build Include="dbo\Tables\xt_tblARC_CNT1M.sql" />
+    <Build Include="dbo\Tables\xtbtVOLUME.sql" />
+    <Build Include="dbo\Tables\tbzCODE_SET.sql" />
+    <Build Include="dbo\Tables\xt_tblARC_CNT1W.sql" />
+    <Build Include="dbo\Tables\tbmUSER_EXTEND.sql" />
+    <Build Include="dbo\Tables\xt_tblARC_CNT1Y.sql" />
+    <Build Include="log\Tables\tbzCODE_SET.sql" />
+    <Build Include="dbo\Tables\xt_tblARC_CNT3D.sql" />
+    <Build Include="dbo\Tables\xt_tblARC_CNT3M.sql" />
+    <Build Include="dbo\Tables\xtblSRH_CNT1M.sql" />
+    <Build Include="log\Tables\tbmDIR_USER.sql" />
+    <Build Include="dbo\Tables\xtbmUSER_APP.sql" />
+    <Build Include="dbo\Tables\xtblSRH_CNT1W.sql" />
+    <Build Include="dbo\Tables\tbmARC_VIDEO.sql" />
+    <Build Include="dbo\Tables\tbmDIR_USER.sql" />
+    <Build Include="dbo\Tables\tbmARC_PRE.sql" />
+    <Build Include="dbo\Tables\xtblSRH_CNT1Y.sql" />
+    <Build Include="dbo\Tables\xtblSRH_CNT3D.sql" />
+    <Build Include="dbo\Tables\tbmREMINDERS.sql" />
+    <Build Include="dbo\Tables\tbmDIR_GROUP.sql" />
+    <Build Include="dbo\Tables\tbmARC_PHOTO.sql" />
+    <Build Include="log\Tables\tbmARC_PRE.sql" />
+    <Build Include="dbo\Tables\xtblSRH_CNT3M.sql" />
+    <Build Include="log\Tables\tbmDIR_GROUP.sql" />
+    <Build Include="dbo\Tables\xtbmSUBTITLE_T.sql" />
+    <Build Include="dbo\Tables\xtbmARC_SET.sql" />
+    <Build Include="dbo\Tables\tbmARC_DOC.sql" />
+    <Build Include="dbo\Tables\xtbt_USER_SYNC.sql" />
+    <Build Include="dbo\Tables\xtbtARC_VIDEO.sql" />
+    <Build Include="dbo\Tables\tblSRH.sql" />
+    <Build Include="dbo\Tables\xtbtVALUE.sql" />
+    <Build Include="dbo\Tables\tbmSUBJECT.sql" />
+    <Build Include="dbo\Tables\tbmUSER_NOTIFY.sql" />
+    <Build Include="log\Tables\tbmSUBJECT.sql" />
+    <Build Include="log\Tables\tbmARC_VIDEO_D.sql" />
+    <Build Include="dbo\Tables\tbmUSERS_bak.sql" />
+    <Build Include="dbo\Tables\tbmSYNONYMS.sql" />
+    <Build Include="log\Tables\tbmTEMPLATE_FIELDS.sql" />
+    <Build Include="log\Tables\tbmSYNONYMS.sql" />
+    <Build Include="dbo\Tables\tbmARC_VIDEO_D.sql" />
+    <Build Include="dbo\Tables\tbmTEMPLATE_FIELDS.sql" />
+    <Build Include="dbo\Tables\tbmTEMPLATE.sql" />
+    <Build Include="dbo\Tables\xt_tbmINCREMENTAL.sql" />
+    <Build Include="log\Tables\tbmTEMPLATE.sql" />
+    <Build Include="dbo\Tables\tbmGROUPS.sql" />
+    <Build Include="dbo\Tables\tbzWORKER.sql" />
+    <Build Include="dbo\Tables\xtbzRESOLUTION.sql" />
+    <Build Include="dbo\Tables\tblLOGIN.sql" />
+    <Build Include="dbo\Tables\tbmUserClaims.sql" />
+    <Build Include="log\Tables\tbmARC_AUDIO.sql" />
+    <Build Include="dbo\Tables\tbzMACHINE_DETAIL.sql" />
+    <Build Include="dbo\Tables\tbmMATERIAL.sql" />
+    <Build Include="dbo\Tables\tbmUserLogins.sql" />
+    <Build Include="dbo\Tables\tbzMACHINE.sql" />
+    <Build Include="dbo\Tables\tbmBOOKING.sql" />
+    <Build Include="dbo\Tables\tbmUSER_DIR.sql" />
+    <Build Include="dbo\Tables\xtbzDEPT.sql" />
+    <Build Include="dbo\Tables\tbmUSER_FAVORITE.sql" />
+    <Build Include="dbo\Tables\__MigrationHistory.sql" />
+    <Build Include="log\Tables\tbmARC_VIDEO_K.sql" />
+    <Build Include="dbo\Tables\tblWORK.sql" />
+    <Build Include="dbo\Tables\tbmARC_AUDIO.sql" />
+    <Build Include="dbo\Tables\tbmARC_VIDEO_K.sql" />
+    <Build Include="dbo\Tables\t_tbmARC_AUDIO_D.sql" />
+    <Build Include="dbo\Tables\tbmARC_AUDIO_D.sql" />
+    <Build Include="dbo\Tables\t_tbmARC_VIDEO_D.sql" />
+    <Build Include="log\Tables\tbmGROUPS.sql" />
+    <Build Include="dbo\Tables\tbmUSER_GROUP_bak.sql" />
+    <Build Include="dbo\Tables\t_tbmARC_VIDEO_K.sql" />
+    <Build Include="dbo\Tables\tblSRH_KW.sql" />
+    <Build Include="dbo\Views\vwSEARCH_VIDEO_L.sql" />
+    <Build Include="dbo\Views\vwSEARCH_AUDIO_L.sql" />
+    <Build Include="dbo\Views\vwSEARCH_PHOTO_L.sql" />
+    <Build Include="dbo\Views\vwSEARCH_DOC_L.sql" />
+    <Build Include="dbo\Views\vwSEARCH_AUDIO.sql" />
+    <Build Include="dbo\Views\vwSEARCH_DOC.sql" />
+    <Build Include="dbo\Views\vwSEARCH_PHOTO.sql" />
+    <Build Include="dbo\Views\xvwSEARCH_SUBJECT.sql" />
+    <Build Include="dbo\Views\vwSEARCH_VIDEO.sql" />
+    <Build Include="dbo\Defaults\dftDATE.sql" />
+    <Build Include="dbo\Defaults\dftNO.sql" />
+    <Build Include="dbo\Defaults\dftNUMBER.sql" />
+    <Build Include="dbo\Defaults\dftORDER.sql" />
+    <Build Include="dbo\Defaults\dftSTATUS.sql" />
+    <Build Include="dbo\Defaults\dftSTRING.sql" />
+    <Build Include="dbo\Defaults\dftTODAY.sql" />
+    <Build Include="dbo\Defaults\dftYES.sql" />
+    <Build Include="Storage\DATA.sql" />
+    <Build Include="Security\AirMAM.sql" />
+    <Build Include="Security\AirMAM_1.sql" />
+    <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="dbo\Functions\fnGET_ARC_USED_CODE_LIST_BY_FILE_NO.sql" />
+    <Build Include="dbo\Functions\fnGET_ARC_USED_NAME_LIST_BY_CODE_LIST.sql" />
+    <Build Include="dbo\Functions\fnGET_CODENAME_FROM_LIST.sql" />
+    <Build Include="dbo\Functions\fnGET_DIR_PATH_BY_DIR_ID.sql" />
+    <Build Include="dbo\Functions\fnGET_DIR_PATH_BY_SUBJECT_ID.sql" />
+    <Build Include="dbo\Functions\fnGET_FILE_INFO_BY_DataType_AND_FILE_NO.sql" />
+    <Build Include="dbo\Functions\fnGET_GROUPNAME_FROM_LIST.sql" />
+    <Build Include="dbo\Functions\fnGET_IMAGE_URL_BY_TYPE_AND_FILE_NO.sql" />
+    <Build Include="dbo\Functions\fnGET_ITEM_BY_INDEX.sql" />
+    <Build Include="dbo\Functions\fnGET_KEYFRAME_IMAGE_URL_BY_FILE_NO_AND_TIME.sql" />
+    <Build Include="dbo\Functions\fnGET_L_SRH_KEYWORD_BY_STATEMENT.sql" />
+    <Build Include="dbo\Functions\fnGET_MEDIA_PATH.sql" />
+    <Build Include="dbo\Functions\fnGET_MEDIA_URL.sql" />
+    <Build Include="dbo\Functions\fnGET_MEDIA_URL_BY_PATH.sql" />
+    <Build Include="dbo\Functions\fnGET_STRING_MATCH.sql" />
+    <Build Include="dbo\Functions\fnGET_SUBJ_PATH_BY_SUBJECT_ID.sql" />
+    <Build Include="dbo\Functions\fnGET_TIMECODE_FROM_SECONDS3.sql" />
+    <Build Include="dbo\Functions\fnGET_TIMECODE_TO_TIMESPAN.sql" />
+    <Build Include="dbo\Functions\fnGET_TSM_PATH_BY_FILE_NO.sql" />
+    <Build Include="dbo\Functions\fnGET_USERNAME_FROM_LIST.sql" />
+    <Build Include="dbo\Functions\fnGET_WORK_PARAMETERS_ANALYZE.sql" />
+    <Build Include="dbo\Functions\fnGET_WORK_PARAMETERS_ANALYZE_BOOKING.sql" />
+    <Build Include="dbo\Functions\fnGET_WORK_PARAMETERS_ANALYZE_UPLOADED_FILE_INFO.sql" />
+    <Build Include="dbo\Functions\fn_SLPIT.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_MEDIAIMPORT_PROGRESS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_TEMPLATE_FIELDS_BY_TEMP_ID.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_VIDEO_MOD_D.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_AUDIO_D.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_L_SRH_KW.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_MEDIAIMPORT_STATUS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_TEMPLATE_FIELDS_RECORDS_FROM_DIFFERENT_TABLES.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ANNOUNCE_BY_ANNID_DATES_TYPE.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_GET_ARC_AUDIO.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_MEDIAIMPORT_STATUS_WITH_CHECK.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_USER_APP.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ANNOUNCE_BY_EFFECTIVE_DATE_AND_USERGROUP_AND_NOT_HIDDEN.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_NEWS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_USER_APP_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ANNOUNCE_PUBLIC.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_GET_ARC_DOC.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_RE_TRANS_CODE.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_USER_APP_BY_FUZZY.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ANNOUNCE_TOP3.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_GET_ARC_PHOTO.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_REMINDERS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_USER_APP_BY_NO_REVIEWED.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_AUDIO.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_GET_ARC_VIDEO.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_RESOLUTION.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_USER_APP_BY_PASSWORD.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_AUDIO_ATTRIBUTE.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_GET_ARC_AUDIO_D.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_SUBJECT.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_USERS_FAVORITE.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_AUDIO_BY_SUBJ_ID.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_GET_ARC_VIDEO_D.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_SUBTITLE_T.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_USERS_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_DOC.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_GET_ARC_VIDEO_K.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_SYNONYMS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_USERS_GROUPS_BY_USERID.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_DOC_ATTRIBUTE.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_GET_ARC_VIDEO_ATTRIBUTE.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_t_tbmARC.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_USERS_GROUP_BY_USER_ID.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_USERS_GROUPS_CNT_BY_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_DOC_BY_SUBJ_ID.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_t_tbmARC_STAUS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_VIDEO_SEARCH_BY_FILE_NOS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_USERS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_ARC_FILE_PATH.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_GET_ARC_AUDIO_ATTRIBUTE.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_T_USER_SYNC.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_USERS_BY_PASSWORD.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_ARC_IMAGE_URLS_AND_FILE_INFOS_BY_TYPES_AND_FILE_NOS.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_GET_ARC_DOC_ATTRIBUTE.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_TEMPLATE.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_AUDIO_SEARCH_BY_FILE_NOS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_USERS_NOTIN_DIR_USER_BY_DIR_ID.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_PHOTO.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_GET_ARC_PHOTO_ATTRIBUTE.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_TEMPLATE_FIELDS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_PHOTO_SEARCH_BY_FILE_NOS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_VIDEO_MOD.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_PHOTO_ATTRIBUTE.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_USER_APP.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_DOC_SEARCH_BY_FILE_NOS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_VIDEO_MOD_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_VIDEO_HL_INFO_222.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_PHOTO_BY_SUBJ_ID.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_USER_APP_BY_STATUS_AND_NOTE.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_VIDEO_MOD_D.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_ARC_SET.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_USERS_GROUPS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_WORK_AVID_BY_DUPLICATE.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_REBOOKING.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_ARC_SET_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_USER_GROUP_BY_TRANS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_WORK_AVID_BY_TYPE.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_L_WORK_RETRAN.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_ARC_TEMPLATE_FIELDS_BY_FILE_NO.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_USERS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_WORK_BOOKING_COPYFILE_STATUS_C.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_ARC_UPLOAD_PARAMETER.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_USERS_PSW.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_WORK_BOOKING_COPYFILE_STATUS_S.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_VIDEO.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_VIDEO_MOD.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_WORK_BOOKING_COPYFILE_STATUS_T.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_VIDEO_ATTRIBUTE.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_VIDEO_MOD_D.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_WORK_BOOKING_COPYFILE_STATUS_U.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_VIDEO_BY_SUBJ_ID.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_WORK_INFO.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_WORK_COPYFILE_BY_TYPE.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_VIDEO_D.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_WORK_INFO_BY_AVID_AND_NAS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_WORK_MEDIAIMPORT.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_ARC_VIDEO_D_BY_FILE_NO.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_WORK_INFO_TMS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_WORK_NAS_BY_TYPE.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_VIDEO_K.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_WORK_INFO2.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_WORK_TRANSCODE_BY_TYPE.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_ARC_VIDEO_K_BY_FILE_NO.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_WORK_PRIORITY_BY_AVID_AND_NAS_AND_BOOKING_AND_COPYFILE_ADMIN.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_ANNOUNCE.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_BOOK_T.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_ARC_AUDIO.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_BOOK_T_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_ARC_DOC.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_TRAN_BY_DATES.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_BOOK_T_BY_TITLE.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_ARC_PHOTO.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_BOOK_T_BY_TITLE_TYPE.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_ARC_SET.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_BOOK_T_DISTINCT.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_ARC_VIDEO.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_BOOK_T_TITLE_LIST.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_ARC_VIDEO_D.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_BOOKING.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_ARC_VIDEO_K.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_BOOKING_BY_USER_DATES.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_ARC_VIDEO_K_BATCH.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_BOOKING_BY_USER_TEMPID_REASON_DESCRIPTION_STATUS.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_BOOK_T.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_CODE.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_BOOKING.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_CODE_BY_FUNC_ID.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_CODE.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_CODE_BY_TEMP_ID.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_CODE_SET.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_CODE_BY_TEMP_ID_AND_PROG_ID_FTV.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_CONFIG.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_CODE_CUSTOM_USED.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_DIFFERENT_DAILY.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_L_WORK_PRIORITY.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_CODE_S_SYSTEM_USED.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_DIR_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_CODE_S_USED_IN_TEMPLATE.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_DIR_GROUP_BY_GROUP_DIR.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_CODE_SET.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_DIR_USER.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_CODE_SET_BY_TYPE_IS_ENABLED.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_DIR_USER_BY_USER_DIR.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_CODE_SET_IS_ENABLED.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_DIRECTORIES.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_CODE_SET_t_USING_CNT_BY_TYPE.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_FUNC_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_CODE_t_USING_CNT_BY_CODEID.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_FUNC_GROUP_BY_FUNC.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_CODE_USED.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_FUNC_GROUP_BY_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_CONFIG.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_FUNCTIONS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_CONFIG_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_GROUPS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_CONFIG_MEDIATYPE_TO.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_L_ARC_CLK.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIR_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_L_ARC_CLK_MULTI_TABLE_BY_DURATION.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIR_GROUP_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_L_LOG_BY_PARAMETERS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIR_GROUP_BY_GROUP_DIR.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_L_LOGIN.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIR_PATH_BY_DIR_ID.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_L_SRH.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIR_PATH_BY_SUBJECT_ID.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_ARC_PRE.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_L_SRH_MULTI_TABLE_BY_TYPES.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIR_USER.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_PRE.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_L_WAIT_VOL.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIR_USER_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_L_WORK.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIR_USER_BY_USER.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_L_WORKER_AS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIR_USER_BY_USER_DIR.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_MATERIAL.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_DIRECTORIES.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_ARC_PRE.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_MEDIAIMPORT.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIRECTORIES_ALL_BY_AUTHORITY.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_PRE.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_MESSAGE.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIRECTORIES_AND_SUBJECTS_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_PRE_ATTRIBUTE.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_NEWS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIRECTORIES_AND_SUBJECTS_ALL_SOON.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_REMINDERS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIRECTORIES_AND_SUBJECTS_AND_VIDEOS_BY_CFG_LEVEL.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_RESOLUTION.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIRECTORIES_AND_SUBJECTS_BY_AUTH.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_RESTORE.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIRECTORIES_AND_SUBJECTS_BY_CFG_LEVEL.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_SUBJECT.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_DIRECTORIES_AND_SUBJECTS_BY_DIR_ID.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_SUBTITLE_T.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_DIRECTORIES_AUTH_BY_LOGIN_ID.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_SYNONYMS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_DIRECTORIES_BY_DIR_ID_AUTHORITY.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_t_tbmARC.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_DIRECTORIES_BY_DIR_ID_AUTHORITY_LOGIN_ID.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_T_USER_SYNC_EMP_NO_EMAIL.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_DIRECTORIES_BY_FILE_ID_LOGIN_ID_AUTHORITY.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_TEMPLATE.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_DIRECTORIES_BY_SUBJ_ID_LOGIN_ID_AUTHORITY.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_TEMPLATE_FIELDS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_DIRECTORIES_BY_TEMP_ID.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_TEMPLATE_TEST.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_DIRECTORIES_LIST_BY_AUTHORITY.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_TSM_TBTVOLUME.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_DIRECTORIES_LOAD_ON_DEMAND.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_USER_APP.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_FUNC_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_USERS_FAVORITE.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_FUNC_GROUP_ALL_FUNCTIONS.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_USERS_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_FUNC_GROUP_ALL_GROUPS.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_USERS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_FUNCTIONS.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_VIDEO_MOD.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_FUNCTIONS_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_VIDEO_MOD_D.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_FUNCTIONS_BY_PARENT_ID.sql" />
+    <Build Include="dbo\Stored Procedures\xspRPT_STD_GET_ARC_LIST_BY_DATES_01.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_FUNCTIONS_BY_TYPE.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_DELETE_ARC.sql" />
+    <Build Include="dbo\Stored Procedures\xspRPT_STD_GET_ARC_LIST_BY_DATES_03.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_GROUPS.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_GET_ARC_INDEX_BY_CONDITION.sql" />
+    <Build Include="dbo\Stored Procedures\xspRPT_STD_GET_ARC_LIST_BY_DATES_06.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_GROUPS_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_RESTORE_ARC.sql" />
+    <Build Include="dbo\Stored Procedures\xspRPT_STD_GET_ARC_LIST_BY_DATES_07.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_GROUPS_BY_FUZZY.sql" />
+    <Build Include="dbo\Stored Procedures\xsp_t_view_GET_ARC_AUDIO_D_BY_FILE_NO.sql" />
+    <Build Include="dbo\Stored Procedures\xspRPT_STD_GET_ARC_LIST_BY_DATES_FTV01.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_GROUPS_NOTIN_DIR_GROUP_BY_DIR_ID.sql" />
+    <Build Include="dbo\Stored Procedures\xsp_t_view_GET_ARC_VIDEO_BY_FILE_NO.sql" />
+    <Build Include="dbo\Stored Procedures\xspRPT_STD_GET_ARC_REPORT_TEMP_02.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_KEYFRAME_INFO_BY_FILE_NO_AND_TIME.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_ANNOUNCE.sql" />
+    <Build Include="dbo\Stored Procedures\xspRPT_STD_GET_CLK_LIST_BY_DATES_01.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_L_ARC_CLK.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_ARC_BY_TYPE_FILE_NO.sql" />
+    <Build Include="dbo\Stored Procedures\xspRPT_STD_GET_CLK_LIST_BY_DATES_02.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_L_INEWS_BY_CONDITION.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_ARC_DOC.sql" />
+    <Build Include="dbo\Stored Procedures\xspRPT_STD_GET_DIR_LIMIT_BY_UID.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_L_INEWS_BY_FSNAME.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_ARC_PHOTO.sql" />
+    <Build Include="dbo\Stored Procedures\xspRPT_STD_GET_ERRTRAN_LIST_BY_DATES_01.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_LOG_BY_LOGID_DATES_LOGINID.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_ARC_SET.sql" />
+    <Build Include="dbo\Stored Procedures\xspRPT_STD_GET_TSM_TAPE_LIST_01.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_LOGIN.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_ARC_VIDEO.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_WORK_BOOKING_BY_TYPE.sql" />
+    <Build Include="dbo\Stored Procedures\xspRPT_TR_GET_ARC_01.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_L_LOGIN_ALIVE.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_ARC_VIDEO_D.sql" />
+    <Build Include="dbo\Stored Procedures\xspRPT_TR_GET_ARC_LIST_BY_DATES_01.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_L_LOGIN_BY_CHECKSTATUS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_FUNC_GROUP_BY_PARENT_ID.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_ARC_VIDEO_K.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ANNOUNCE.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_L_LOGIN_BY_DATES_USERNAME.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_ARC_VIDEO_K_BATCH.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_AUDIO.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_LOGIN_LAST100.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_BOOK_T.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_AUDIO_CHANGE.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_L_MSG_BY_ID.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_BOOKING.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_DOC.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_NO_NEW_NO.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_CODE.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_DOC_CHANGE.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_SRH.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_CODE_SET.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_DOC_EXTRACT_INFO.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_L_SRH_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_VIDEO_CHANGE.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_CODES_BY_CODE_ID.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_VIDEO_BATCH.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_PHOTO.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_L_SRH_BY_USERID_AND_DATES.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_CONFIG.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_PHOTO_CHANGE.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_L_SRH_KEYWORD_LIST.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_DIR_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_AUDIO_BATCH.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_VIDEO.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_L_SRH_MULTI_TABLES_BY_TYPES_AND_DATES.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_VIDEO_K_HEADFRAME.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_DIR_USER.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_PHOTO_BATCH.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_VIDEO_D.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_L_TRAN_BY_DATES_USERNAME_ACTIONTYPE_TABLENAME.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_DIRECTORIES.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_DOC_BATCH.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_VIDEO_HL_INFO.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_WAIT_VOL_ACTIVE_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_FUNC_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_ARC_VIDEO_K.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_WORK.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_FUNCTIONS.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_BOOK_T.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_WORK_IS_TRANSCODE_BY_TYPE_FILENO.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_GROUPS.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_ARC_AUDIO.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_BOOKING.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_MATERIAL.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_L_ARC_CLK.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_BOOKING_STATUS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_MATERIAL_BY_MARKED_BY.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_L_LOG.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_WORK_TRANSCODE_BY_TYPE.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_CODE.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_MATERIAL_BY_MARKED_BY_EP.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_L_LOGIN.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_CODE_SET.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_NEWS.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_L_SRH.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_CODE_SET_BY_TEMPLATE_FIELDS_ADD.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_NEWS_BY_DATES.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_MATERIAL.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_WORK_TRANSCODE_ID_BY_FILENO.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_CODE_SET_BY_TEMPLATE_FIELDS_DEL.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_REMINDERS.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_MATERIAL_BY_MARKED_BY.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_CONFIG.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_RESOL_BY_RATIO.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_NEWS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_LOGIN_ALIVE.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_DIR_BY_PARENT_ID.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_RESOLUTION.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_REMINDERS.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_DIR_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_RESOLUTION_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_RESOLUTION.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_USER_DIR_AUTH_WITH_OUTPUT.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_WORK_BY_TRANSCODE.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_DIR_GROUP_BY_GROUP_DIR.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_RESOLUTION_BY_RATIO_AND_NAME.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_SUBJECT.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_WORK_BY_DAILY_ITP.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_DIR_USER.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_RESOLUTION_NEW.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_SUBTITLE_T.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_L_WORK_BY_BOOKING.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_DIR_USER_BY_USER_DIR.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_SUBJ_IMAGE_URLS_AND_FILE_INFOS_BY_SUBJ_IDS.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_SYNONYMS.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_DIRECTORIES.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_SUBJ_PATH_BY_SUBJECT_ID.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_t_tbmARC.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_FUNC_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_SUBJECT.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_T_USER_SYNC_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_FUNC_GROUP_BY_FUNC.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_SUBTITLE_T_ALL.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_TEMPLATE.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_FUNC_GROUP_BY_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_SYNONYMS.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_TEMPLATE_FIELDS.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_FUNCTIONS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_SYNONYMS_CHECK_INSERT.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_TEMPLATE_FIELDS_BY_TEMP_ID.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_GROUPS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_SYNONYMS_CHECK_INSERT_RAPIDLY.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_TSM_TBTVOLUME.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_L_LOGIN.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_SYNONYMS_CHECK_UPDATE.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_USER_APP.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_ARC_AUDIO_D.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_BOOKING_APPROVE.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_L_LOGIN_BY_CHECKSTATUS.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_SYNONYMS_TYPE_LIST.sql" />
+    <Build Include="dbo\Stored Procedures\spDELETE_USERS_FAVORITE.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_ARC_AUDIO_D.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_L_LOGIN_BY_ETIME.sql" />
+    <Build Include="dbo\Stored Procedures\xsp_t_GET_tbmARC.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_USERS_GROUPS.sql" />
+    <Build Include="dbo\Stored Procedures\xspGET_ARC_AUDIO_D_BY_FILE_NO.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_L_WAIT_VOL.sql" />
+    <Build Include="dbo\Stored Procedures\sp_t_GET_tbmARC_FILE_PATHS.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_USERS_GROUPS_BY_GROUP.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_USERS_RESET_PSW.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_L_WORK.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_TEMP_ID_BY_SUBJECT_ID_BY_EP.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_USERS_GROUPS_BY_USERID.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_L_SRH.sql" />
+    <Build Include="dbo\Stored Procedures\spUPDATE_LDAP_USER_SYNC.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_TEMPLATE.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_USERS.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_ARC_AUDIO_D.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_REMINDERS_FOR_INDEX.sql" />
+    <Build Include="dbo\Stored Procedures\xspUPDATE_MATERIAL.sql" />
+    <Build Include="dbo\Stored Procedures\spINSERT_USER_DIR_AUTH.sql" />
+    <Build Include="dbo\Stored Procedures\spGET_TEMPLATE_FIELDS.sql" />
+    <Build Include="dbo\Stored Procedures\xspINSERT_L_WORK_BY_WORK_ID.sql" />
+    <Build Include="dbo\Stored Procedures\xspDELETE_VIDEO_MOD.sql" />
+    <Build Include="Security\log.sql" />
+  </ItemGroup>
+</Project>

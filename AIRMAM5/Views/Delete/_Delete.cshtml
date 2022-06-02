@@ -1,0 +1,49 @@
+﻿@model AIRMAM5.DBEntity.Models.AcrDelete.DeleteConfirmViewModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("DeleteModal", "您正要刪除實體檔案!請確認！",
+@<div>
+    @using (Html.BeginForm("Delete", "Delete", new { id = Model.IndexId, type = Model.fsTYPE, fileno = Model.fsFILE_NO }, FormMethod.Post, new { role = "form", @class = "ui form", @id = "DeleteForm" }))
+                {
+        <div class="field">
+            <h5 class="ui red header"> 確定要刪除這個檔案嗎?</h5>
+        </div>
+        <div class="three fields">
+            <div class="two wide field">
+                @Html.DisplayNameFor(model => model.fsTYPE)
+                <input type="text" value="@Model.C_sTYPE" readonly />
+            </div>
+            <div class="four wide field">
+                @Html.DisplayNameFor(model => model.fsFILE_NO)
+                @Html.TextBoxFor(model => model.fsFILE_NO, new { @readonly = "readonly" })
+            </div>
+            <div class="ten wide field">
+                @Html.DisplayNameFor(model => model.C_sTITLE)
+                @Html.TextBoxFor(model => model.C_sTITLE, new { @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="field">
+            @Html.DisplayNameFor(model => model.DeleteReason)
+            <input type="text" value="@Model.DeleteReason" readonly />
+        </div>
+        <div class="four fields">
+            <div class="four wide field">
+                @Html.LabelFor(model => model.CreatedDate)
+                @Html.TextBox("CreatedDate", string.Format($"{Model.CreatedDate:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+            </div>
+            <div class="four wide field">
+                @Html.LabelFor(model => model.CreatedBy)
+                @Html.TextBoxFor(m => m.CreatedBy, new { @readonly = "readonly" })
+            </div>
+            <div class="four wide field"> </div>
+            <div class="four wide field"> </div>
+        </div>
+                }
+</div>
+,@<div>
+    <button type = "button" class="ui ok right labeled icon red button">刪除<i class="checkmark icon"></i></button>
+    <button type = "button" class="ui black cancel button">取消</button>
+ </div>
+)

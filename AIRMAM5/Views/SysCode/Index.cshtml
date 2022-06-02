@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+@section Styles{
+    <link href="~/Content/iftame_style/SysCode/SysCodeIndex.min.css" rel="stylesheet" />
+}
+@HtmlHelper.Breadcrumb(new string[] { "系統設定", "系統代碼" })
+<div class="_Filter">
+    @Html.Action("_Search", "SysCode")
+</div>
+<div id="Table"></div>
+
+<!--新增系統代碼-->
+@Html.Action("_Create", "SysCode")
+
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+
+<!--刪除子代碼確認燈箱-->
+@HtmlHelper.ConfirmModal("ConfirmDeleteCodeModal", "刪除子代碼", "確定要刪除此代碼？");
+
+@section Scripts{
+    @Html.Partial("~/Views/Bundle/SysCodeIndex_Js.cshtml")
+    @*<script src="~/Scripts/dist/SysCodeIndex.min.js"></script>*@
+}

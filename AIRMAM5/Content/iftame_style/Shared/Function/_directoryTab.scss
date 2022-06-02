@@ -1,0 +1,34 @@
+﻿@mixin _directoryTab {
+    ._directoryTab {
+        color: #fff;
+        overflow: auto;
+        width: 100%;
+        height: 100%;
+        user-select: text;
+
+        ._styleMarginZero {
+            label:not(.x-hashtag) {
+                background-color: rgba(0,0,0,0.4) !important;
+            }
+
+            label.x-hashtag {
+                margin: 2.5px 3px;
+                margin-left: 0;
+            }
+
+            span {
+                background: #524f4f !important;
+                line-height: initial;
+                flex-wrap: wrap;
+            }
+
+            &:hover {
+                font-size: 1.15rem;
+
+                span {
+                    border-bottom: .5px solid #ccc;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,149 @@
+﻿@model AIRMAM5.DBEntity.Models.SearchResponseVideoModel
+@using AIRMAM5.DBEntity.Models.Enums;
+@using Newtonsoft.Json;
+@*@using AIRMAM5.DBEntity.Models;*@
+@{
+    string pa = JsonConvert.SerializeObject(Model.SearchBase.MetaDataList);
+    string list = pa.Replace("&quot;", @"""");
+}
+<div id="split-pane-1" class="split-pane fixed-left">
+    <div class="split-pane-component _SearchStyleGrid_left" id="left-component">
+        @Html.Action("_Condition", "Search", new { model = Model.SearchBase })
+        <div id="tabV_list" name="list" class="_row_scroll ui relaxed selection list" data-SearchList='@Html.Raw(Json.Encode(list))'>
+            @*
+                @Html.Action("_List", "Search", new { model = Model.SearchBase.MetaDataList, mediaType = FileTypeEnum.V.ToString() })
+                Tips: MVC5 不支援 Partial View的非同步，得在MVC6 也就是現在的 ASP.NET CORE 1.0 後才支援。
+            *@
+        </div>
+        <div class="_SearchStylePaging ui basic center aligned segment">
+            <div class="ui pagination ui inverted menu">
+                <a class="disabled yellow item">
+                    <i class="icon left arrow"></i>
+                </a>
+                <a class="active yellow item">
+                    1
+                </a>
+                <div class="yellow item">
+                    2
+                </div>
+                <a class="yellow  item">
+                    ...
+                </a>
+                <a class="yellow item">
+                    11
+                </a>
+                <a class="yellow item">
+                    12
+                </a>
+            </div>
+        </div>
+    </div>
+    @* 直向拉取 *@
+    <div class="split-pane-divider" id="divider"></div>
+    @{
+        var _mda = Model.SearchBase.MetaDataList.FirstOrDefault();
+        string _fno = _mda == null ? "0" : _mda.fsFILE_NO, _sno = _mda == null ? "0" : _mda.fsSUBJECT_ID;
+    }
+    <div class="split-pane-component  _SearchStyleGrid_right" id="right-component">
+        <div class="split-pane horizontal-percent">
+            <div name="preview" class="split-pane-component" id="top-component2" data-SubjectId="@_sno" data-FileNo="@_fno">
+                @*@Html.Action("_Preview", "Search", new { fileId = 27827, mediaType = FileTypeEnum.V })
+                    預設顯示 列表第一筆資料內容 *@
+                @*@Html.Action("_Preview", "Search", new { fsSUBJECT_ID = _sno, mediaType = FileTypeEnum.V.ToString(), fileNo = _fno })*@
+            </div>
+            <div class="split-pane-divider" id="horizontal-divider2"></div>@* 橫向拉取 *@
+            <div class="split-pane-component" id="bottom-component2">
+                <div class="_right_button">
+                    <div name="dataTabs" class="ui top attached tabular menu tabs">
+                        <a class="active item" data-tab="baseMeta">基本資料</a>
+                        <a class="item" data-tab="detailMeta">詳細資料</a>
+                        <a class="item" data-tab="keyframe">關鍵影格(<span>@Model.KeyFrameList.Count()</span>)</a>
+                        <a class="item" data-tab="document">段落描述</a>
+                    </div>
+                    <div class="_SearchStyleContent">
+                        <div class="ui bottom attached active tab" data-tab="baseMeta">
+                            @*@Html.Action("_BasicMedia", "Search", new { fileId = 27827 })
+                                預設顯示 列表第一筆資料內容 *@
+                            @Html.Action("_BasicMedia", "Search", new { fsSUBJECT_ID = _sno, mediaType = FileTypeEnum.V.ToString(), fileNo = _fno })
+                        </div>
+                        <div class="ui bottom attached tab" data-tab="detailMeta">
+                            @Html.Action("_DynamicMedia", "Search", new { fsSUBJECT_ID = _sno, mediaType = FileTypeEnum.V.ToString(), fileNo = _fno })
+                        </div>
+                        <div class="ui bottom attached tab" data-tab="keyframe" style="overflow: hidden;height: 100%;">
+                            <div class="ui basic segment" style="padding: 0;">
+                                <!--類型欄位-->
+                                <div class="ui icon buttons right floated" style="margin: 9px;">
+                                    <button type="button" class="ui black compact icon button" title="詳細資料"><i class="list icon"></i></button>
+                                    <button type="button" class="ui black compact icon button" title="畫面清單"><i class="th icon"></i></button>
+                                </div>
+                                <div class="ui four stackable cards" style="overflow: auto;height: 100%;margin: 0;">
+                                    <!-- TODO-20191/11/28: 點選關鍵影格或段落描述，player須從設定的起點開始播放 -->
+                                    @foreach (var kf in Model.KeyFrameList)
+                                    {
+                                        @Html.HiddenFor(m => kf.fsFILE_NO) @*關鍵影格檔案編號:如不使用可拿掉 *@
+                                        @Html.HiddenFor(m => kf.FilePath) @*關鍵影格檔案路徑:如不使用可拿掉 *@
+                                        @Html.HiddenFor(m => kf.Time) @*關鍵影格設定的時間: 點擊要播放的起始時間 *@
+                                        <div class="ui raised link card">
+                                            <div class="image">
+                                                <img src="@kf.ImageUrl">@*<img src="~/Images/noImage.png">*@
+                                            </div>
+                                            <div class="content">
+                                                <div class="description">
+                                                    @kf.Title.Trim();
+                                                    @*關鍵影格:TME =<span>000011.506</span>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui bottom attached tab" data-tab="document" style="flex-direction: column;padding: 0 .3em;">
+                            @foreach (var des in Model.ParaDescription)
+                            {
+                                @Html.HiddenFor(m => des.SeqNo) @*段落描述序號:如不使用可拿掉 *@
+                                @Html.HiddenFor(m => des.BegTime) @*段落描述開始時間:如不使用可拿掉 *@
+                                @Html.HiddenFor(m => des.EndTime) @*段落描述結束時間:如不使用可拿掉 *@
+                                <div class="_StyleDescription">
+                                    <span>@des.BegTime~@des.EndTime </span>
+                                    <span>@des.Description </span>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+
+                    @* 修改資料 *@
+                    <button class="_SearchStyleButton ui circular icon button" title="修改">
+                        <i class="pencil alternate large icon"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+@*<script>
+                    var m = '@pa'.replace(/&quot;/ig, "\"");
+                    $.post("../Search/_ListAsync",
+                        { model: JSON.parse(m), mediaType: "@FileTypeEnum.V.ToString()" },
+                        function (res) { $('#tabV_list').html(res); });
+    </script>
+    <script>
+        $(function () {
+            $('div.split-pane').splitPane();//視窗拉取套件
+
+            //詳細關鍵字
+            $('#MoreConditions').click(function () {
+                $('#MoreC').slideToggle();
+            });
+
+            //修改檔案樣版
+            $('._SearchStyleButton').click(function () {
+                $("#ModifyContent").modal('setting', 'closable', false).modal('show');
+            });
+
+        });
+    </script>*@

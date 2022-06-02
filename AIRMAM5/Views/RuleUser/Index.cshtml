@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+@section Styles{
+    @*<link href="~/Content/iftame_style/RuleUser/RuleUserIndex.min.css" rel="stylesheet" />*@
+    <style>
+        .ui.scrolling.dropdown .menu .item.item.item, 
+        .ui.dropdown .scrolling.menu > .item.item.item {
+            color: #fff;
+        }
+    </style>
+}
+
+@HtmlHelper.Breadcrumb(new string[] { "規則庫", "帳號規則" })
+<div class="_Filter">
+    @Html.Action("_Search", "RuleUser")
+</div>
+<table class="ui inverted table">
+    <thead>
+        <tr>
+            <th>帳號</th>
+            <th>顯示名稱</th>
+            <th>最後編輯</th>
+            <th>更新時間</th>
+            <th>套用規則</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int y = 0; y < 8; y++)
+        {
+        <tr>
+            <td>admin</td>
+            <td>Allen</td>
+            <td>KK.Li</td>
+            <td>2018-12-45 12:25:42</td>
+            <td style="width:70%;">
+                <div class="ui multiple dropdown" style="color:#ffffff;">
+                    <input type="hidden" name="filters" value="announcement,1,2,3,15"><!--要塞已選擇的規則,按照優先度排序-->
+                    <i class="filter icon"></i>
+                    <span class="text">套用規則</span>
+                    <div class="menu">
+                        <div class="ui icon search input">
+                            <i class="search icon"></i>
+                            <input type="text" placeholder="規則關鍵字">
+                        </div>
+                        <div class="divider"></div>
+                        <div class="scrolling menu" style="color:#ffffff !important;">
+                            <div class="item" data-value="important">
+                                <div class="ui red empty circular label"></div>
+                                規則a
+                            </div>
+                            <div class="item" data-value="announcement">
+                                <div class="ui blue empty circular label"></div>
+                                規則B
+                            </div>
+                            <div class="item  active filtered" data-value="cannotfix">
+                                <div class="ui black empty circular label"></div>
+                                規則C
+                            </div>
+                            <div class="item" data-value="news">
+                                <div class="ui purple empty circular label"></div>
+                                規則D
+                            </div>
+                            @for (int i = 0; i < 20; i++)
+                            {
+                                string color = (i % 4 == 1) ? "green" : (i % 7 == 2) ? "teal" : (i == 14 || i == 16) ? "red" : "green";
+                                <div class="item" data-value="@i">
+                                    <div class="ui @color empty circular label"></div>
+                                    規則 @i
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

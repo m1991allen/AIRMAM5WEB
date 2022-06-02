@@ -1,0 +1,82 @@
+﻿@model AIRMAM5.DBEntity.Models.License.LicenseCreateModel
+
+@{
+    ViewBag.Title = "_Edit";
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("EditModal", "編輯版權",
+@<div>
+    @using (Ajax.BeginForm("Edit", "License",
+new AjaxOptions { HttpMethod = "POST", OnSuccess = "ShowMessage", OnFailure = "ShowMessage" },
+new { role = "form", @class = "ui form", @id = "EditForm" }))
+    {
+        @Html.AntiForgeryToken()
+         <div class="ui inverted" name="Detail">
+             <div class="two fields">
+                 <div class="two wide field">
+                     @Html.LabelFor(model => model.LicenseCode)
+                     @Html.TextBoxFor(model => model.LicenseCode, new { @readonly = "readonly" })
+                     @Html.ValidationMessageFor(model => model.LicenseCode)
+                 </div>
+                 <div class="eight wide field">
+                     @Html.LabelFor(model => model.LicenseName)
+                     @Html.TextBoxFor(model => model.LicenseName, new { @readonly = "readonly" })
+                     @Html.ValidationMessageFor(model => model.LicenseName)
+                 </div>
+                 <div class="four wide ui calendar field">
+                     @Html.LabelFor(model => model.EndDate)
+                     @Html.TextBoxFor(model => model.EndDate, string.Format("{0:yyyy/MM/dd}", Model.EndDate), new { @autocomplete = "off" })
+                 </div>
+                 <div class="two wide field">
+                     @Html.LabelFor(model => model.Order)
+                     @Html.TextBoxFor(model => model.Order, new { @type = "number", @min = 0, @max = 999, @step = 1 })
+                 </div>
+             </div>
+         </div> 
+         <div class="field">
+             @Html.LabelFor(model => model.LicenseDesc)
+             @Html.TextAreaFor(model => model.LicenseDesc, new { @rows = "2" })
+         </div>
+         <div class="four fields">
+             <div class="two wide field">
+                 @Html.LabelFor(model => model.IsActive)
+                 @{ string isactive = Model.IsActive ? "checked" : ""; }
+                 <div class="ui toggle checkbox">
+                     <input type="checkbox" name="switchActive" value="@Model.IsActive" @isactive />
+                     <label> </label>
+                 </div>
+                 @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "" })
+             </div>
+             <div class="three wide field">
+                 @Html.LabelFor(model => model.IsBookingAlert)
+                 @{ string isalt = Model.IsBookingAlert ? "checked" : "";
+                    string isaltstr = Model.IsBookingAlert ? "提醒" : "不提醒"; }
+                 <div class="ui toggle checkbox">
+                     <input type="checkbox" name="switchBookingAlert" value="@Model.IsNotBooking" @isalt />
+                     <label> </label>
+                 </div>
+             </div>
+             <div class="ten wide field">
+                 @Html.LabelFor(model => model.AlertMessage)
+                 @Html.TextBoxFor(model => model.AlertMessage)
+             </div>
+             <div class="three wide field">
+                 @Html.LabelFor(model => model.IsNotBooking)
+                 @{ string isnotbk = Model.IsNotBooking ? "checked" : "";
+                                 string isnotbkstr = Model.IsNotBooking ? "禁止調用" : "可調用"; }
+                 <div class="ui toggle checkbox">
+                     <input type="checkbox" name="switchNotBooking" value="@Model.IsNotBooking" @isnotbk />
+                     <label> </label>
+                 </div>
+             </div>
+             <div class="two wide field">
+             </div>
+         </div>
+    }
+</div>
+,@<div>
+    <button class="ui yellow ok button" type="button">儲存</button>
+    <button class="ui cancel button" type="reset">取消</button>
+</div>)
+

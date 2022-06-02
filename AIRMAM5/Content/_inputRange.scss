@@ -1,0 +1,261 @@
+﻿@import "_color.scss";
+$unit: 10px;
+$shade-10: #03A9F4 !default;
+$shade-1: #0288D1 !default;
+$shade-0: #2196F3 !default;
+$teal: #536DFE !default;
+$range-width: 100% !default;
+
+$range-handle-color: $shade-10 !default;
+$range-handle-color-hover: $shade-10 !default;
+$range-handle-size: 10px !default;
+$range-handle-init-size: 0px !default;
+$range-track-color: $shade-1 !default;
+$range-track-height: 5px !default;
+
+$range-label-color: $shade-10 !default;
+$range-label-width: 30px !default;
+$max-range-slider__range: 100px;
+/**slider禁止拖曳區塊*/
+@mixin ForbiddenBar {
+    display: inline-block;
+    content: '';
+    width: 0;
+    height: $range-track-height;
+    position: relative;
+    top: -8px;
+    background: rgb(189, 189, 189);
+}
+
+@mixin activethumb() {
+    width: $range-handle-size;
+    height: $range-handle-size;
+    background: $range-handle-color-hover;
+}
+
+@mixin thumb() {
+    appearance: none;
+    width: $range-handle-init-size;
+    height: $range-handle-init-size;
+    border: 0;
+    border-radius: 50%;
+    background: $range-handle-color;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+    z-index:2;
+    &:hover {
+        width: $range-handle-size;
+        height: $range-handle-size;
+        background: $range-handle-color-hover;
+        box-shadow: 0 0 0 3px $shade-0, 0 0 0 6px rgba(255,255,255,.6);
+    }
+}
+/**刻度樣式*/
+.ticks {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    font-size: 0.5rem;
+    height: $unit/2;
+    pointer-events: none;
+
+    &.ticks--bg {
+        background: #555;
+        z-index: 0;
+        position: relative;
+        height: 20px;
+    }
+
+    &:not(.ticks--bg) {
+        height: 20px;
+        position: relative;
+        top: -20px;
+    }
+
+    .tick {
+        position: absolute;
+        top: 0;
+        display: inline-block;
+        content: '';
+        height: 100%;
+        width: 1px;
+        background: $primary;
+        color: #1B1C1D !important;
+        &:nth-of-type(1) {
+            left: 0;
+        }
+
+        &:nth-of-type(2) {
+            right: 0;
+        }
+
+        &:before {
+            display: block;
+            content: '';
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 5px 8.7px 5px;
+            border-color: transparent transparent $primary transparent;
+            position: relative;
+            top: 100%;
+            left: 0;
+            right: 0;
+            transform: translate(-50%,-50%);
+            box-sizing: border-box;
+        }
+
+        &:after {
+            display: block;
+            content: attr(data-time);
+            width: 30px;
+            background: #888;
+            position: absolute;
+            left: -31.5px;
+            top: -20px;
+            width: auto;
+            background: $primary;
+            color:$white !important;
+        }
+    }
+
+    &.slash {
+        /**斜線背景*/
+        /*background: $red;*/
+        height: 10px;
+        top: -10px;
+    }
+}
+
+.range-slider {
+    width: $range-width;
+    height: 20px;
+
+    &--volumn {
+        height: 100%;
+        float: left;
+        width: auto;
+    }
+
+    &__range {
+        -webkit-appearance: none;
+        width: calc(100% - (#{$range-label-width + 13px}));
+        height: $range-track-height;
+        border-radius: 5px;
+        background: $range-track-color;
+        outline: none;
+        padding: 0;
+        margin: 0;
+        /*影片拖曳bar*/
+        &[name="range"] {
+            width: 100%;
+            /*影片左側禁止拖曳區塊,width會由js控制*/
+            &:before {
+                @include ForbiddenBar();
+                left: 0;
+            }
+            /*影片右側禁止拖曳區塊,width會由js控制*/
+            &:after {
+                @include ForbiddenBar();
+                right: 0;
+            }
+        }
+        /*聲音拖曳bar*/
+        &[name="volumnrange"] {
+            max-width: $max-range-slider__range;
+        }
+        /**手柄樣式*/
+        &::-webkit-slider-thumb {
+            @include thumb();
+            -webkit-appearance: none;
+        }
+
+        &::-moz-range-thumb {
+            @include thumb();
+            -moz-appearance: none;
+        }
+
+        &::-ms-thumb {
+            @include thumb();
+            -ms-progress-appearance: bar;
+        }
+
+        &:active::-webkit-slider-thumb {
+            @include activethumb();
+        }
+
+        &:active::-moz-range-thumb {
+            @include activethumb();
+        }
+
+        &:active::-ms-thumb {
+            @include activethumb();
+        }
+        // Focus state
+        &:focus {
+
+            &::-webkit-slider-thumb {
+                box-shadow: 0 0 0 3px $shade-0, 0 0 0 6px rgba(255,255,255,.6);
+            }
+
+            &::-moz-range-thumb {
+                box-shadow: 0 0 0 3px $shade-0, 0 0 0 6px rgba(255,255,255,.6);
+            }
+
+            & &::-ms-thumb {
+                box-shadow: 0 0 0 3px $shade-0, 0 0 0 6px rgba(255,255,255,.6);
+            }
+        }
+    }
+    &__value {
+        display: inline-block;
+        position: relative;
+        width: $range-label-width;
+        color: $white;
+        line-height: 20px;
+        text-align: center;
+        border-radius: 3px;
+        background: $range-label-color;
+        padding: 5px 3px;
+        margin-left: 8px;
+        font-size: 12px;
+    }
+    /*.playerwindow {
+        position: absolute;
+        top: -70px;
+        left: 0;
+        background-color: #222;
+        width: 90px;
+        height: 55px;
+        z-index: 999;
+        max-width: 300px;
+        padding: 5px;
+        background-color: rgba(28,28,28,0.9);
+        border-radius: 2px;
+        visibility: hidden;
+        overflow: hidden;
+
+        canvas {
+            width: 80px;
+            height: 45px;
+            margin: auto;
+        }
+    }*/
+}
+
+
+
+
+
+
+
+// Firefox Overrides
+::-moz-range-track {
+    background: $range-track-color;
+    border: 0;
+}
+
+input::-moz-focus-inner,
+input::-moz-focus-outer {
+    border: 0;
+}

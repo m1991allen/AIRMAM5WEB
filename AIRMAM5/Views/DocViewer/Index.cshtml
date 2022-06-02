@@ -1,0 +1,443 @@
+﻿@*@model AIRMAM5.Controllers.DocViewerController.DocViewModel*@
+@model AIRMAM5.Models.DocViewer.DocViewModel
+@using System.Configuration;
+@{
+    ViewBag.Title = "AIRMAM5文件檢視器";
+    Layout = "~/Views/Shared/_DocViewerLayout.cshtml";
+    string _configUrl = ConfigurationManager.AppSettings["fsUpload_API"].ToString()
+        , _ApiUrl = string.Format($"{_configUrl}api/Upload/RemoveFile");
+}
+@section css {
+    @Html.Raw(Model.ViewerCSS) @*@Html.Raw(ViewBag.ViewerCSS)*@
+    <link href="~/Content/iftame_style/DocumentViwer/Index.min.css" rel="stylesheet" />
+}
+
+<nav class="ui top fixed inverted menu">
+    <div class="item">
+        <img src="~/Images/logo_Horizontal.svg">
+    </div>
+    <div class="ui inverted secondary  right menu">
+        @*<div class="ui dropdown item">
+                導航
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item" href="javascript:void(0)" onclick="objctlDoc.GotoPage(1);">First</a>
+                    <a class="item" href="javascript:void(0)" onclick="objctlDoc.Next(false);">Previous</a>
+                    <a class="item" href="javascript:void(0)" onclick="objctlDoc.Next(true);">Next</a>
+                    <a class="item" href="javascript:void(0)" onclick="objctlDoc.GotoPage(parseInt(objctlDoc.TotalPages()));">Last</a>
+                </div>
+            </div>*@
+        <div class="ui dropdown item">
+            旋轉
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" href="javascript:void(0)" onclick="RotateDocument(1);">90°</a>
+                <a class="item" href="javascript:void(0)" onclick="RotateDocument(2);">180°</a>
+                <a class="item" href="javascript:void(0)" onclick="RotateDocument(3);">270°</a>
+                <a class="item" href="javascript:void(0)" onclick="RotateDocument(0);">預設</a>
+            </div>
+        </div>
+        <div class="ui dropdown item">
+            縮放
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" href="javascript:void(0)" onclick="if (objctlDoc !== null) { objctlDoc.Zoom(true); }">放大</a>
+                <a class="item" href="javascript:void(0)" onclick="if (objctlDoc !== null) { objctlDoc.Zoom(false); }">縮小</a>
+                <a class="item" href="javascript:void(0)" onclick="if (objctlDoc !== null) { objctlDoc.Zoom(25); zoom = 25; }">25%</a>
+                <a class="item" href="javascript:void(0)" onclick="if (objctlDoc !== null) { objctlDoc.Zoom(50); zoom = 50; }">50%</a>
+                <a class="item" href="javascript:void(0)" onclick="if (objctlDoc !== null) { objctlDoc.Zoom(75); zoom = 75; }">75%</a>
+                <a class="item" href="javascript:void(0)" onclick="if (objctlDoc !== null) { objctlDoc.Zoom(100); zoom = 100; }">100%</a>
+                <a class="item" href="javascript:void(0)" onclick="if (objctlDoc !== null) { objctlDoc.FitType('width'); }">適應寬度</a>
+                <a class="item" href="javascript:void(0)" onclick="if (objctlDoc !== null) { objctlDoc.FitType('height'); }">適應高度</a>
+                <a class="item" href="javascript:void(0)" onclick="if (objctlDoc !== null) { objctlDoc.FitType(''); }">不適應</a>
+            </div>
+        </div>
+        <div class="ui dropdown item">
+            側邊縮圖
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" href="javascript:void(0)" onclick="if (objctlDoc !== null) { objctlDoc.ThumbSize('small'); }">小</a>
+                <a class="item" href="javascript:void(0)" onclick="if (objctlDoc !== null) { objctlDoc.ThumbSize('normal'); }">正常</a>
+                <a class="item" href="javascript:void(0)" onclick="if (objctlDoc !== null) { objctlDoc.ThumbSize('large'); }">大</a>
+                @*<a class="item" href="javascript:void(0)" onclick="objctlDoc.HideThumbs(true); $('.docLeftPane').hide();$('#div_ctlDoc_divPreview').css({'width':'100% !important'});">隱藏</a>
+                <a class="item" href="javascript:void(0)" onclick="objctlDoc.HideThumbs(false); $('.docLeftPane').show(); $('#div_ctlDoc_divPreview').css({'width':'calc(100% - 250px) !important'});">顯示</a>*@
+                @*<a class="item" href="javascript:void(0)" onclick="objctlDoc.HideSplitter(true);">關閉拖拉列</a>
+                <a class="item" href="javascript:void(0)" onclick="objctlDoc.HideSplitter(false);">啟用拖拉列</a>*@
+                <!--因為有些檔案載入時的左側選單會過大,所以css固定寬度,但會導致拖拉失效,故關閉拖拉-->
+            </div>
+        </div>
+        @* <a class="item" href="javascript:void(0);" onclick="PrintDocument();">列印檔案</a>*@
+        <a class="item" href="javascript:void(0);" onclick="GoFS();">全螢幕</a>
+        <a class="item" href="javascript:void(0);" onclick="CloseVW();">結束預覽</a>
+    </div>
+</nav>
+<main>
+    <div id="divDocViewer"  data-SubjectId="@Model.fsSUBJECT_ID" data-FileNo= "@Model.fsFILE_NO" data-ViewFileName="@Model.ViewFileName" data-API="@_ApiUrl">
+        <div id="div_@Model.ViewerID"></div>@*<div id="div_@ViewBag.ViewerID"></div>*@  <!-- The viewer instance name -->
+    </div>
+    <!--浮動縮放按鈕-->
+    <div id="FitBtns" class="ui icon buttons">
+        <button class="ui button" name="pluse">
+            <i class="plus icon"></i>
+        </button>
+        <button class="ui button" name="minus">
+            <i class="minus icon"></i>
+        </button>
+    </div>
+</main>
+
+@*<div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+             Modal content
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Upload Document</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div id="dropZoneForm" class="dropzone">
+                        <div class="dz-message">
+                            Click or drop your document here
+                        </div>
+                        <div>
+                            <div class="fallback">
+                                <input name="file" id="file" type="file" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
+
+@section scripts {
+    <!-- Viewer header scripts include-->
+    @Html.Raw(Model.ViewerScripts) @*@Html.Raw(ViewBag.ViewerScripts)*@
+    <script>
+        $('.dropdown').dropdown();
+    </script>
+    <script language="javascript" type="text/javascript">
+      /*  Dropzone.autoDiscover = false;*/ // 如果要啟用doprzone服務
+        var token = "";  // 目前的文件Token
+        var objctlDoc = null; // 服務端物件Id="ctlDoc"
+        var loader = $(".loader");
+        var isMobile = false;
+        var resizing = false;
+        var docViewerDiv = $("#divDocViewer");
+        var w = 0;
+        var h = 0;
+        var zoom = 100;
+        loader.hide();
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            isMobile = true;
+        }
+
+        // optional code start
+        function ctlDoc_OnViewerBusy() {
+            loader.show();
+        }
+
+        function ctlDoc_OnViewerReady() {
+            loader.hide();
+        }
+
+        function ctlDoc_DoubleClick()
+        {
+            if (objctlDoc !== null) {
+                objctlDoc.Zoom(true);
+            }
+          
+        }
+        // optional code ends
+
+        function RotateDocument(iAngle) {
+            if (objctlDoc !== null) {
+                objctlDoc.Rotate(objctlDoc.CurrentPage(), iAngle);
+            }
+        }
+        /*縮放*/
+        function Resize(orientation) {
+            if (resizing) { return; }
+
+            resizing = true;
+
+            w = document.documentElement.clientWidth;
+            h = document.documentElement.clientHeight;
+
+            var xdec = 30;
+            var ydec = 80;
+
+            if (isMobile) {
+                xdec = 30;
+                ydec = 80;
+
+                if (typeof orientation !== 'undefined') {
+                    if (orientation === "landscape") {
+                        w = document.documentElement.clientHeight;
+                        h = document.documentElement.clientWidth;
+                    }
+                }
+            }
+
+            docViewerDiv.width(w - xdec);
+            docViewerDiv.height(h - ydec);
+
+            SetThumbs();
+            resizing = false;
+        }
+        /*設置縮圖 */
+        function SetThumbs() {
+            try {
+                if (objctlDoc !== null) {
+                    objctlDoc.Refit();
+                }
+            } catch (exception) {
+                console.error('設置縮圖錯誤',exception);
+            }
+        }
+        /*開啟文件*/
+        function OpenDocument(fileName) {
+            loader.show();
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Home/OpenFile?name=" + fileName,
+                success: function (data) {
+                    token = data;  //儲存列印需要的TOKEN 
+                    if (objctlDoc !== null) {
+                        objctlDoc.View(token); //使用全域物件[objctlDoc]以檢視任何文件
+                    } else {
+                        toastr.error("無法打開文件。發生未知錯誤");
+                    }
+                },
+                error: function (textStatus, errorThrown, data) {
+                    toastr.error("無法打開文件。錯誤： " + data.responseText);
+                    loader.hide();
+                }
+            });
+        }
+        /*列印檔案 */
+        function PrintDocument() {
+            var link = "/Home/Print?token=" + token + "&printtotal=" + objctlDoc.TotalPages() + "&KeepThis=false&TB_iframe=true&height=150&width=300";
+            tb_show("列印檔案", link);
+        }
+        /*導航 */
+        function GoFS() {
+
+            if (
+                document.fullscreenElement ||
+                    document.webkitFullscreenElement ||
+                    document.mozFullScreenElement ||
+                    document.msFullscreenElement
+            ) {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            } else {
+                var element = $('#divDocViewer').get(0);
+
+                if (element.requestFullscreen) {
+                    element.requestFullscreen();
+                } else if (element.mozRequestFullScreen) {
+                    element.mozRequestFullScreen();
+                } else if (element.webkitRequestFullscreen) {
+                    element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                } else if (element.msRequestFullscreen) {
+                    element.msRequestFullscreen();
+                }
+            }
+        }
+        /*頁面載入時載入所需*/
+        $(window).on("load", function () {
+            /* Init code for viewer */
+            @Html.Raw(Model.ViewerInit) @*@Html.Raw(ViewBag.ViewerInit)*@
+
+            token = '@Model.token'; @*token = '@ViewBag.token';*@
+
+            Resize();
+            if (objctlDoc !== null) {
+                objctlDoc.HideSplitter(true);
+            } else {
+                document.getElementById('divDocViewer').innerHTML = '<div class="nodoc"></div>';
+            }
+        });
+        /*視窗大小變更時*/
+        $(window).resize(function () {
+            Resize();
+        });
+
+        if (isMobile) {
+            $(window).on("orientationchange", function (event) { Resize(event.orientation); });
+        }
+        else {
+            $(window).on("resize", function () { Resize(); });
+        }
+
+        function OpenUpload() {
+            $('#myModal').modal('show');
+        }
+        ///*Dropzone上傳服務*/
+        //$(document).ready(function () {
+        //    $("#dropZoneForm").dropzone({
+        //        url: "/Home/UploadFile",
+        //        maxFiles: 1,
+        //        paramName: "file",
+        //        uploadMultiple: false,
+        //        maxFilesize: 20,
+        //        acceptedFiles:
+        //            ".doc,.docx,.docm,.odt,.xls,.xlsx,.xlsm,.ods,.csv,.ppt,.pptx,.odp,.vsd,.vsdx,.mpp,.mppx,.pdf,.tif,.tiff,.dwg,.dxf,.dgn,.xps,.psd,.jpg,.jpeg,.jpe,.png,.bmp,.gif,.eml,.msg,.txt,.rtf,.xml,.epub,.svg,.html,.htm,.mht,.dcn,.dcm",
+        //        addRemoveLinks: false,
+        //        init: function () {
+        //            var th = this;
+        //            this.on("success",
+        //                function (file, response) {
+        //                    OpenDocument(response);     // Response is the file name.
+        //                    $('#myModal').modal('hide');
+
+        //                }),
+        //                this.on("error",
+        //                    function (file, errorMessage, c) {
+        //                        alert("Error uploading document [[" + file.name +"]]. Technical team has been notified.");
+        //                    }),
+        //                this.on("queuecomplete",
+        //                    function () {
+        //                        setTimeout(function () {
+        //                            th.removeAllFiles();
+        //                        },
+        //                            3000);
+        //                    });
+        //        }
+        //    });
+        //});
+
+        //TODO: 結束預覽通知API移除暫存的檔案
+        function CloseVW() {
+            if ("@Model.FileKind".toUpperCase() == "DEL") {
+                window.top.postMessage({ eventid: 'CloseDocViewer' }, '/');
+                //if (!document.getElementById('confirmationRevertYes')) {
+                //    toastr.info("<button type='button' id='confirmationRevertYes' class='btn yes'>是</button><button onclick='this.closest(\"#toast-container\").remove();' class='btn no'>否</button>", '是否結束預覽?',
+                //        {
+                //            'closeButton': false,
+                //            'ExtendedTimeOut': 0,
+                //            'timeOut': 0,
+                //            'tapToDismiss': false,
+                //            'allowHtml': true,
+                //            'onShown': function (toast) {
+                //                $("#confirmationRevertYes").click(function () {
+                //                    console.log("文件檢視器發送關閉視窗訊息_del");
+                //                    window.top.postMessage({ eventid: 'CloseDocViewer' }, '/');
+                //                });
+                //            }
+                //        });
+                //}
+            }
+            else {
+                    $.ajax({
+                                 url: "@_ApiUrl",
+                                 type: "POST",
+                                 data: JSON.stringify( {
+                                 fsSUBJECT_ID: "@Model.fsSUBJECT_ID",
+                                 fsFILE_NO: "@Model.fsFILE_NO",
+                                 ViewFileName: "@Model.ViewFileName"
+                                }),
+                                 cache: false,
+                                 contentType: "application/json",
+                                 success: function (data) {
+                                  console.log("文件檢視器刪除成功");
+                         
+                                 },
+                                 error: function (error) {
+                                 console.error("文件檢視器刪除失敗");
+                              },
+                              complete: function (data) {
+                                  console.log("文件檢視器發送關閉視窗訊息");
+                                  window.top.postMessage({
+                                      eventid: 'CloseDocViewer',
+                                      }, '/'
+                                  );
+                         
+                               }
+                          });
+                @*if (!document.getElementById('confirmationRevertYes')) {
+                       toastr.info("<button type='button' id='confirmationRevertYes' class='btn yes'>是</button><button onclick='this.closest(\"#toast-container\").remove();' class='btn no'>否</button>", '是否結束預覽?',
+                    {
+                        'closeButton': false,
+                        'ExtendedTimeOut': 0,
+                        'timeOut': 0,
+                        'tapToDismiss': false,
+                        'allowHtml': true,
+                        'onShown': function (toast) {
+                            $("#confirmationRevertYes").click(function () {
+                                $.ajax({
+                                 url: "@_ApiUrl",
+                                 type: "POST",
+                                 data: JSON.stringify( {
+                                 fsSUBJECT_ID: "@Model.fsSUBJECT_ID",
+                                 fsFILE_NO: "@Model.fsFILE_NO",
+                                 ViewFileName: "@Model.ViewFileName"
+                                }),
+                                 cache: false,
+                                 contentType: "application/json",
+                                 success: function (data) {
+                                  console.log("文件檢視器刪除成功");
+                         
+                                 },
+                                 error: function (error) {
+                                 console.error("文件檢視器刪除失敗");
+                              },
+                              complete: function (data) {
+                                  console.log("文件檢視器發送關閉視窗訊息");
+                                  window.top.postMessage({
+                                      eventid: 'CloseDocViewer',
+                                      }, '/'
+                                  );
+                         
+                               }
+                          });
+                            });
+                        }
+                    });
+                }*@
+             
+        
+            }
+        }
+        $("button[name='pluse']").click(function () {
+            if (zoom >= 200) {
+                toastr.info("已達最大尺寸!");
+            } else {
+                zoom = zoom + 10 > 200 ? 200 : zoom + 10;
+                if (objctlDoc !== null) {
+                    objctlDoc.Zoom(zoom);
+                }
+            }
+         
+        });
+        $("button[name='minus']").click(function () {
+            if (zoom <= 10) {
+                toastr.info("已達最小尺寸!");
+            } else {
+                zoom = zoom - 10 < 10 ? 10 : zoom - 10;
+                if (objctlDoc !== null) {
+                    objctlDoc.Zoom(zoom);
+                }
+            }
+           
+        });
+    </script>
+}

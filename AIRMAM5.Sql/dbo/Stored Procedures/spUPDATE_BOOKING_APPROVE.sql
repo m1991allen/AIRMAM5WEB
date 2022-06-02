@@ -1,0 +1,35 @@
+﻿
+
+
+-- =============================================
+-- 描述:	修改BOOKING審核
+-- 記錄:	<2019/09/06><David.Sin><新增本預存>
+-- =============================================
+CREATE PROCEDURE [dbo].[spUPDATE_BOOKING_APPROVE]
+	@fnWORK_ID			BIGINT,
+	@_APPROVE_STATUS	VARCHAR(2),
+	@_APPROVE_BY		NVARCHAR(128)
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+
+	BEGIN TRY
+		UPDATE
+			tblWORK
+		SET
+			fsSTATUS = CASE WHEN @_APPROVE_STATUS = '_C' THEN '00' ELSE @_APPROVE_STATUS END,
+			_APPROVE_STATUS = @_APPROVE_STATUS,
+			_APPROVE_DATE = GETDATE(),
+			_APPROVE_BY = @_APPROVE_BY
+		WHERE
+			(fnWORK_ID = @fnWORK_ID)
+			
+		SELECT RESULT = ''
+	END TRY
+	BEGIN CATCH
+		SELECT RESULT = 'ERROR:' + CAST(@@ERROR AS VARCHAR(10)) + '-' + ERROR_MESSAGE()
+	END CATCH
+END
+
+
+

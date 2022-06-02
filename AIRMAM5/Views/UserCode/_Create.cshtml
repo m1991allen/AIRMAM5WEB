@@ -1,0 +1,41 @@
+﻿@model AIRMAM5.DBEntity.Models.CodeSet.CodeSetEditModel
+
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("CreateModal", "新增自訂代碼",
+@<div><form class="ui inverted form" role="form" id="CreateForm">
+    @*@using (Ajax.BeginForm("Create", "UserCode",
+        new AjaxOptions { HttpMethod = "POST", OnSuccess = "ShowMessage", OnFailure = "ShowMessage" },
+        new { role = "form", @class = "ui inverted form", @id = "CreateForm" }))
+   {*@
+    @*@Html.AntiForgeryToken()*@
+    <div class="three fields">
+        <div class="six wide required field">
+            @Html.LabelFor(model => model.fsCODE_ID)
+            @Html.TextBoxFor(model => model.fsCODE_ID)
+        </div>
+        <div class="six wide required field">
+            @Html.LabelFor(model => model.fsTITLE)
+            @Html.TextBoxFor(model => model.fsTITLE)
+        </div>
+        <div class="four wide field">
+            @Html.LabelFor(model => model.IsEnabled)
+            <div class="ui checkbox" id="Checkenabled">
+                @Html.CheckBoxFor(model => model.IsEnabled)
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.fsNOTE)
+        @Html.TextAreaFor(model => model.fsNOTE, new { @row = 6 })
+    </div>
+    @*}*@
+</form>
+</div>,
+  @<div>
+      <button class="ui yellow ok button" type="submit">新增</button>
+      <button class="ui cancel  button" type="reset">取消</button>
+   </div>
+  )

@@ -1,0 +1,31 @@
+﻿@model AIRMAM5.DBEntity.Models.Subject.SubjectFileSeqmentModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("ParagraphAddModal", "新增段落描述",
+@<form class="ui inverted form" role="form" id="CreateParagraphForm">
+     <div class="ui field required">
+         @Html.LabelFor(model => model.BegTime)
+         <div class="ui action input">
+             @Html.TextBoxFor(model => model.BegTime, new { @readonly = "readonly" })
+             <button type="button" class="ui grey button" name="PlayerDuration">設定</button>
+         </div>
+     </div>
+    <div class="ui field required">
+        @Html.LabelFor(model => model.EndTime)
+        <div class="ui action input">
+            @Html.TextBoxFor(model => model.EndTime, new { @readonly = "readonly" })
+            <button type="button" class="ui grey button" name="PlayerDuration">設定</button>
+        </div>
+    </div>
+    <div class="ui field required">
+        @Html.LabelFor(model => model.Description)
+        @Html.TextAreaFor(model => model.Description, new { @row = "10",@id= "ParaDescription" })
+    </div>
+</form>,
+@<div>
+    <button class="ui yellow approve ok button" type="submit">新增</button>
+    <button class="ui deny  button" type="reset">取消</button>
+</div>,
+ "small")

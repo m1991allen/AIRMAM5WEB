@@ -1,0 +1,87 @@
+﻿@model AIRMAM5.DBEntity.Models.Announce.AnnounceCreateModel
+@{
+    Layout = "";
+}
+@section Styles{
+    <link href="~/Content/iftame_style/Ann/_Edit.min.css" rel="stylesheet" />
+}
+@HtmlHelper.HtmlModal("EditModal", "編輯公告",
+
+@<form class="ui inverted form" id="EditForm" role ="form">
+        <div class="three fields">
+            <div class="two wide field">
+                @Html.LabelFor(model => model.AnnounceId)
+                @Html.DisplayFor(model => model.AnnounceId)
+                @Html.HiddenFor(model => model.AnnounceId)
+            </div>
+            <div class="fourteen wide required field">
+                @Html.LabelFor(model => model.fsTITLE)
+                @Html.EditorFor(model => model.fsTITLE)
+                @Html.ValidationMessageFor(model => model.fsTITLE, "", new { @class = "" })
+            </div>
+        </div>
+
+        <div class="four fields">
+            <div class="five wide ui calendar required field">
+                @Html.LabelFor(model => model.fdSDATE)
+                @Html.TextBoxFor(model => model.fdSDATE, string.Format("{0:yyyy/MM/dd HH:mm}", Model.fdSDATE), new { @type = "text" })
+                @Html.ValidationMessageFor(model => model.fdSDATE, "", new { @class = "" })
+            </div>
+            <div class="five wide ui calendar required field">
+                @Html.LabelFor(model => model.fdEDATE)
+                @Html.TextBoxFor(model => model.fdEDATE, string.Format("{0:yyyy/MM/dd HH:mm}", Model.fdEDATE), new { @type = "text" })
+                @Html.ValidationMessageFor(model => model.fdEDATE, "", new { @class = "" })
+            </div>
+            <div class="six wide required field">
+                @Html.LabelFor(model => model.fsDEPT)
+                @Html.DropDownListFor(model => model.fsDEPT, new SelectList(Model.AnnDeptList, "Value", "Text"), new { @class = "ui search selection dropdown" })
+                @Html.ValidationMessageFor(model => model.fsDEPT, "", new { @class = "" })
+            </div>
+        </div>
+
+        <div class="four fields">
+            <div class="six wide required field">
+                @Html.LabelFor(model => model.fsTYPE)
+                @Html.DropDownListFor(model => model.fsTYPE, Model.AnnTypeList, new { @class = "ui search selection dropdown" })
+                @Html.ValidationMessageFor(model => model.fsTYPE, "", new { @class = "" })
+            </div>
+            <div class="five wide required field">
+                @Html.LabelFor(model => model.fnORDER)
+                @Html.TextBoxFor(model => model.fnORDER,new{ @min = "0" ,@step="1",@type="number"})
+                @Html.ValidationMessageFor(model => model.fnORDER, "", new { @class = "" })
+            </div>
+            <div class="five wide field">
+                @Html.LabelFor(model => model.fsIS_HIDDEN)
+                @Html.DropDownListFor(model => model.fsIS_HIDDEN, Model.HiddenList, new { @class = "ui search selection dropdown" })
+                @Html.ValidationMessageFor(model => model.fsIS_HIDDEN, "", new { @class = "" })
+            </div>
+        </div>
+        <div class="field">
+            <div class="_ArrayFlex">
+                @Html.LabelFor(model => model.GroupList)<span class="">（可複選）</span>
+            </div>
+
+            <div class="ui right action left labeled fluid input">
+                @*<span class="ui basic label left floated">可複選</span>*@
+                @*@Html.DropDownListFor(model => model.GroupList, glist, new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })*@
+                @Html.ListBox("GroupList", new MultiSelectList(Model.GroupListItems, "Value", "Text"), new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+            </div>
+        </div>
+        <div class="required field">
+            @Html.LabelFor(model => model.fsCONTENT)
+            @Html.TextAreaFor(model => model.fsCONTENT, new { @rows = "6" })
+            @Html.ValidationMessageFor(model => model.fsCONTENT, "", new { @class = "" })
+        </div>
+        <div class="two fields">
+            <div class="sixteen wide field">
+                @Html.LabelFor(model => model.fsNOTE)
+                @Html.EditorFor(model => model.fsNOTE)
+                @Html.ValidationMessageFor(model => model.fsNOTE, "", new { @class = "" })
+            </div>
+        </div>
+</form>,
+ @<div>
+    <button type="button" class="ui ok yellow  button">儲存</button>
+    <button class="ui cancel  button" type="button">取消</button>
+</div>
+ )

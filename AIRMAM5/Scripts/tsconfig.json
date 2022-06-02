@@ -1,0 +1,32 @@
+{
+  //NOTICE:如果一直覺得編譯無誤,卻仍有錯誤顯示,可以按ctrl+shift+p並搜尋TypeScript: Restart TS server命令運行
+  "compilerOptions": {
+    /*啟用裝飾器*/
+    "experimentalDecorators": true,
+    //"rootDir": "Script",
+    "moduleResolution" : "node",
+    "allowJs": false,
+    /*總是嚴格模式*/ 
+    "alwaysStrict": true,
+    /*必須顯式添加類型註釋*/
+    // "noImplicitAny":true,
+    "noEmitOnError": true,
+    "removeComments": true,
+    "declaration": false,
+    /*是否需要生成定義文件d.ts*/
+    "sourceMap": true,
+    "target": "es5",
+    "module": "amd",
+    "lib": ["es5", "es2015", "dom", "scripthost"],
+    "baseUrl": "./",
+    "typeRoots": [
+      "node_modules/@types",
+      "Models/@types"
+    ],
+  },
+  "compileOnSave": true,
+  /*儲存時重新編譯*/
+  "exclude": [
+    "node_modules"
+  ]
+}

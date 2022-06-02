@@ -1,0 +1,28 @@
+﻿
+@model IEnumerable<AIRMAM5.DBEntity.Models.Function.FunctionMenuViewModel>
+
+
+<div class="ui accordion inverted _MAMscroll">
+    @foreach(var r in Model)
+
+    {
+
+        if (r.SubList.Count() > 0)
+        {
+            <div class="title">
+                <div class="item">
+                    @r.FuncName
+                    <i class="dropdown icon"></i>
+                </div>
+            </div>
+            <div class="content">
+                @foreach (var item in r.SubList)
+                {
+                    <a id="@item.FuncId" class="item" data-href="@Url.Action(item.ActionName, item.ControllerName)" data-mutiple="false" data-controller="@item.ControllerName" data-action="@item.ActionName"><i class="@item.FuncIcon"></i> @item.FuncName</a>
+                }
+            </div>
+        }
+    }
+
+</div>
+

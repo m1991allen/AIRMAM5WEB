@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "NotifyNew";
+}
+<h2>NotifyNew</h2>
+
+<div id="title">@ViewBag.Title</div>
+<br />
+<div>
+    <div id="test"> _______test_________ </div>
+    <br />
+    <div id="test1"> _______test1_________ </div>
+    <br />
+    <div id="caller"> _______caller_________ </div>
+
+    <input type="button" id="btnGet" value="GET" />
+</div>
+
+@section scripts {
+    @*<script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="~/signalr/hubs"></script>*@
+    <script>
+        $(function () {
+            var mypush = $.connection.broadcastHub;
+
+            // 定義client端的javascript function，供server端hub，透過dynamic的方式，呼叫所有Clients的javascript function
+            mypush.client.sendTest1 = function (json) {
+                $("#test").html(json.UserId + '<span class="badge blue">' + json.Number + '</span>');
+                //console.log(json);
+            };
+            mypush.client.showMyNotify = function (json) {
+                $("#test1").html('<i class="far fa-comment-dots"></i> ' + json.UserId + '<span class="badge badge-light">' + json.Number + '</span>');
+                console.log(json);
+            };
+            //
+
+            $("#btnGet").click(function () {
+                //呼叫server端的Hub物件，將value 傳給server
+                mypush.server.broadcastByUser("6f6a3832-4e47-4f1c-b680-1ea7c355e36b");
+                $('#message').val("");
+            });
+
+            //開啟 connection
+            //$.connection.hub.start();
+            $.connection.hub.start()
+                .done(function () { console.log('Now connected, connection ID=' + $.connection.hub.id); })
+                .fail(function () { console.log('Could not Connect!'); });
+
+            // SignalR error
+            $.connection.hub.error(function (error) {
+                console.log('SignalR error: ' + error)
+            });
+        });
+    </script>
+}

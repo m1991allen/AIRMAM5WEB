@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[xtblSRH_CNT3D] (
+    [fdSDATE]        DATE           NOT NULL,
+    [fdEDATE]        DATE           NOT NULL,
+    [fsKEYWORD]      NVARCHAR (100) NOT NULL,
+    [fnCOUNT]        INT            NOT NULL,
+    [fdCREATED_DATE] DATETIME       NOT NULL,
+    [fsCREATED_BY]   NVARCHAR (50)  NOT NULL,
+    CONSTRAINT [PK_tblSRH_CNT3D] PRIMARY KEY CLUSTERED ([fdEDATE] ASC, [fsKEYWORD] ASC) ON [PRIMARY]
+) ON [PRIMARY];
+

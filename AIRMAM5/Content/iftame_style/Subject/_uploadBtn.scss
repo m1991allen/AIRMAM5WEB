@@ -1,0 +1,114 @@
+﻿
+/*-----------------------------------------
+  上傳進度點擊按鈕
+------------------------------------*/
+._downloading {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 100%;
+    position: fixed;
+    right: 13px;
+    bottom: 8px;
+    z-index: 3;
+
+    &._upload {
+        background: #525252;
+        box-shadow: 0 2px 4px 1px #151515;
+        transition: all .3s;
+
+        &:hover {
+            box-shadow: 0 9px 9px 0px #151515;
+            transform: translate(0, -4px);
+        }
+
+        &:active {
+            box-shadow: 0 0 0px -2px #151515;
+            transform: translate(0, 4px);
+            transition: all .1s;
+        }
+
+        ._arrow {
+            -webkit-animation: uplaod 1s linear infinite;
+            animation: uplaod 1s linear infinite;
+
+            &:after {
+                top: auto;
+                bottom: 100%;
+                border-color: transparent transparent #c2b701 transparent;
+            }
+        }
+
+        & > ._uploadQuantity {
+            border-radius: 50%;
+            left: 56px;
+            top: -8px;
+        }
+    }
+}
+
+/**按鈕雲朵圖示*/
+._cloud {
+    width: 40px;
+    height: 19px;
+    position: relative;
+    background: #fff;
+    display: inline-block;
+    border-radius: 50px;
+    margin: 24px auto 0;
+
+    &::after, &::before {
+        content: '';
+        position: absolute;
+        width: 22px;
+        height: 21px;
+        border-radius: 100%;
+        top: -7px;
+        background: #fff;
+        left: 3px;
+    }
+
+    &::before {
+        width: 16px;
+        height: 16px;
+        left: 20px;
+    }
+}
+
+/**按鈕箭頭圖示*/
+._arrow {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 5;
+    top: 10px;
+    width: 15px;
+    height: 10px;
+    background: #c2b701;
+    display: inline-block;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: -8px;
+        top: 100%;
+        border: 15px solid transparent;
+        border-top-color: #c2b701;
+    }
+}
+
+/**按鈕箭頭動畫*/
+@keyframes uplaod {
+    0% {
+        transform: translateY(20px);
+        transform: translateY(20px);
+    }
+
+    100% {
+        transform: translateY(-20px);
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+}

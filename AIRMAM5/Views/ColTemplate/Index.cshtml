@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+@section Styles{
+    @*<link href="~/Content/semanticUIdatepicker/calendar.min.css" rel="stylesheet" />*@
+    <link href="~/Content/iftame_style/ColTemplate/ColTemplateIndex.min.css" rel="stylesheet" />
+}
+@HtmlHelper.Breadcrumb(new string[] { "系統設定", "自訂欄位樣版" })
+
+    <div class="_Filter">
+        <button type="button" class="ui _darkGrey button" id="CreateTempBtn"><i class="plus icon"></i> 新增自訂欄位樣版 </button>
+        <button type="button" class="ui _darkGrey button" id="ReloadBtn">重載列表 </button>
+    </div>
+
+<div id="Table"></div>
+
+<!--新增自訂欄位樣版-->
+@Html.Action("_Copy", "ColTemplate")
+
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+
+@HtmlHelper.ConfirmModal("ConfirmDeleteCodeModal", "刪除子欄位", "確定要刪除此欄位嗎?")
+@section Scripts{
+    @*<script src="~/Content/semanticUIdatepicker/calendar.min.js"></script>*@
+    <script src="~/Content/dayJS/dayjs.min.js"></script>
+    @Html.Partial("~/Views/Bundle/ColTemplateIndex_Js.cshtml")
+    @*<script src="~/Scripts/dist/ColTemplateIndex.min.js"></script>*@
+}

@@ -1,0 +1,61 @@
+﻿@model AIRMAM5.DBEntity.Models.SearchResponse.SearchResponseAudioModel.AudioInfoModel
+
+<div class="ui bottom attached tab" data-tab="albumInfo" style="flex-direction: column;padding: 0 .3em;">
+    <div class="ui form basic segment" style="width: 100%; padding:0;">
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                <label class="ui black label three wide field">@Html.LabelFor(model => model.Album) </label>
+                <span>@Model.Album </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                <label class="ui black label three wide field">@Html.LabelFor(model => model.AlbumTitle) </label>
+                <span>@Model.AlbumTitle </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                <label class="ui black label three wide field">@Html.LabelFor(model => model.AlbumArtists) </label>
+                <span>@Model.AlbumArtists </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                <label class="ui black label three wide field">@Html.LabelFor(model => model.AlbumPerformers) </label>
+                <span>@Model.AlbumPerformers </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                <label class="ui black label three wide field">@Html.LabelFor(model => model.AlbumComposers) </label>
+                <span>@Model.AlbumComposers </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                <label class="ui black label three wide field">@Html.LabelFor(model => model.AlbumYear) </label>
+                @{ string _year = Model.AlbumYear == 0 ? string.Empty : Model.AlbumYear.ToString(); }
+                <span>@_year </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                <label class="ui black label three wide field">@Html.LabelFor(model => model.AlbumCopyright) </label>
+                <span>@Model.AlbumCopyright </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                <label class="ui black label three wide field">@Html.LabelFor(model => model.AlbumGenres) </label>
+                <span>@Model.AlbumGenres </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                <label class="ui black label three wide field">@Html.LabelFor(model => model.AlbumComment) </label>
+                <span>@Model.AlbumComment </span>
+            </div>
+        </div>
+    </div>
+</div>

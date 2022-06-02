@@ -1,0 +1,112 @@
+﻿@model AIRMAM5.DBEntity.Models.Subject.SubjectFileMetaViewModel
+
+<div class="ui bottom attached active tab" data-tab="baseMeta">
+    <form class="ui form basic segment" style="width: 100%; padding: 1px;">
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(model => model.fsFILE_NO, new { @class = "ui black label three wide field" })
+                <span>@Model.fsFILE_NO @Html.HiddenFor(m => m.fsSUBJECT_ID) </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(model => model.Title, new { @class = "ui black label three wide field" })
+                <span>@Model.Title </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(model => model.Description, new { @class = "ui black label three wide field" })
+                <span>@Model.Description </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(model => model.HashTag, new { @class = "ui black label three wide field" })
+                <span style="flex-wrap:wrap;">
+                    @{
+                        if (!string.IsNullOrEmpty(Model.HashTag))
+                        {
+                            var tags = Model.HashTag.Split(new char[] { '^' });
+                            foreach (string tag in tags)
+                            {
+                                <label class="ui blue x-hashtag label" style="margin: 2.5px 3px;margin-left: 0;">#@tag</label>
+                            }
+                        }
+                    }
+                </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(model => model.FileSecret, new { @class = "ui black label three wide field" })
+                <span>@Model.FileSecretStr </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(model => model.LicenseStr, new { @class = "ui black label three wide field" })
+                @{ string LicenseInfo = string.IsNullOrEmpty(Model.LicenseMessage) ? "" : string.Format("({0})", Model.LicenseMessage);
+                    string LicenseDate = Model.LicenseEndDate == null ? "" : string.Format("[ {0:yyyy-MM-dd} ]", Model.LicenseEndDate);
+                }
+                <span>@Model.LicenseStr @LicenseInfo @LicenseDate</span>
+                @Html.HiddenFor(model => model.IsAlert)<!-- 20210914_ADDED -->
+                @Html.HiddenFor(model => model.IsForBid)<!-- 20210914_ADDED -->
+                @Html.HiddenFor(model => model.LicenseMessage)<!-- 20210914_ADDED -->
+            </div>
+        </div>
+        @if (Model.FileCategory == "A" || Model.FileCategory == "V")
+        {
+            <div class="field _styleMarginZero">
+                <div class="ui labeled input">
+                    @Html.LabelFor(model => model.Voice2TextContent, new { @class = "ui black label three wide field" })
+                    <span>@Model.Voice2TextContent </span>
+                </div>
+            </div>
+        }
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(model => model.FileSubjPath, new { @class = "ui black label three wide field" })
+                <span>@Model.FileSubjPath </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(model => model.UserDateInfo.CreatedDate, new { @class = "ui black label three wide field" })
+                <span>@string.Format($"{Model.UserDateInfo.CreatedDate:yyyy/MM/dd HH:mm:ss}") </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(model => model.UserDateInfo.CreatedByName, new { @class = "ui black label three wide field" })
+                <span>
+                    @{
+                        string _createder = string.Format("{0}{1}"
+                            , string.IsNullOrEmpty(Model.UserDateInfo.CreatedBy) ? string.Empty : Model.UserDateInfo.CreatedBy
+                            , string.IsNullOrEmpty(Model.UserDateInfo.CreatedByName) ? string.Empty : string.Format($"({Model.UserDateInfo.CreatedByName})")); }
+                    @_createder
+                </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(model => model.UserDateInfo.UpdatedDate, new { @class = "ui black label three wide field" })
+                <span>@string.Format($"{Model.UserDateInfo.UpdatedDate:yyyy/MM/dd HH:mm:ss}") </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="field _styleMarginZero">
+                <div class="ui labeled input">
+                    @Html.LabelFor(m => m.UserDateInfo.UpdatedBy, new { @class = "ui black label three wide field" })
+                    <span>
+                        @{
+                            string _updateder = string.Format("{0}{1}"
+                               , string.IsNullOrEmpty(Model.UserDateInfo.UpdatedBy) ? string.Empty : Model.UserDateInfo.UpdatedBy
+                               , string.IsNullOrEmpty(Model.UserDateInfo.UpdatedByName) ? string.Empty : string.Format($"({Model.UserDateInfo.UpdatedByName})")); }
+                        @_updateder
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

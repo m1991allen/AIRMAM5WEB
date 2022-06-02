@@ -1,0 +1,96 @@
+﻿@model AIRMAM5.DBEntity.Models.Booking.BookingViewModel
+
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("EditModal", "調用狀態內容-編輯優先順序",
+@<form class="ui inverted form" name="Edit" id="EditForm">
+    <div class="four fields">
+        <div class="four wide field">
+            @Html.LabelFor(m=>m.WorkId)
+            @Html.TextBoxFor(model => model.WorkId, new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.LabelFor(m => m.ArcTypeName)
+            @Html.TextBoxFor(model => model.ArcTypeName, new { @readonly = "readonly" })
+        </div>
+        <div class="seven wide field">
+            @Html.LabelFor(m => m.StartTime)
+            @Html.TextBox("fdSTIME", string.Format($"{Model.StartTime:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+        </div>
+        <div class="seven wide field">
+            @Html.LabelFor(m => m.EndTime)
+            @Html.TextBox("fdETIME", string.Format($"{Model.EndTime:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+        </div>
+
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Progress)
+        @{
+                        int.TryParse(Model.Progress.Replace("%", ""), out int _val);
+                        string _color = string.Empty;
+                        if (_val > 0 && _val <= 20) { _color = "red"; }
+                        else if (_val > 20 && _val <= 40) { _color = "orange"; }
+                        else if (_val > 40 && _val <= 60) { _color = "yellow"; }
+                        else if (_val > 60 && _val <= 80) { _color = "teal"; }
+                        else if (_val > 80) { _color = "green"; }
+        }
+        <div class="ui active indicating inverted small @_color progress" data-value="@_val" data-total="100" id="progress-@Model.WorkId">
+            <div class="bar" style="width:@Model.Progress;">
+                <div class="progress">@Model.Progress </div>
+            </div>
+            <div class="label">@Model.StatusName </div>
+        </div>
+    </div>
+
+    <div class="field">
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(model => model.Title, new { @readonly = "readonly" })
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Result)
+        @Html.TextBoxFor(model => model.Result, new { @readonly = "readonly" })
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.NoteStr)
+        @Html.TextBoxFor(model => model.NoteStr, new { @readonly = "readonly" })
+    </div>
+    <div class="ui horizontal inverted divider">編輯優先權</div>
+    <div class="required field">
+        @Html.LabelFor(m=>m.Priority, new { @for= "Priority" })
+        @Html.TextBoxFor(model => model.Priority, new { @type = "number", @min = 1, @id = "Priority" })
+    </div>
+</form>
+,@<div>
+    <button class="ui yellow ok button" type="button">儲存</button>
+    <button class="ui cancel  button" type="button">取消</button>
+</div>
+)
+
+@*<script>
+    function _submit(k) {
+        var v = $("#Priority").val();
+        $.ajax({
+            url: "../Booking/Edit",
+            type: "POST",
+            data: JSON.stringify({ workid: k, priority: parseInt(v) }),
+            cache: false,
+            contentType: "application/json",
+            beforeSend: function () { },
+            success: function (data) {
+                if (data.IsSuccess == false) {
+                    toastr.error(data.Message);
+                }
+                else {
+                    toastr.success(data.Message);
+                }
+                console.log(data);
+                console.log("---------success---Done------");
+            },
+            error: function (data) { },
+            complete: function (data) { }
+        });
+    }
+</script>*@
+

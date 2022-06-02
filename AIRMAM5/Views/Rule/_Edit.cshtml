@@ -1,0 +1,107 @@
+﻿@model AIRMAM5.DBEntity.Models.Rule.EditRuleFilterViewModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("EditModal", "規則設定",
+@<form role="form" class="ui inverted form"  id="EditForm">
+    <div class="two fields">
+        <div class="three wide field">
+            @Html.LabelFor(m => m.RuleName)
+            @Html.TextBoxFor(m => m.RuleName, new { @readonly = "readonly" })
+        </div>
+        <div class="thirteen wide field">
+            @Html.LabelFor(m => m.RuleNote)
+            @Html.TextBoxFor(m => m.RuleNote, new { @readonly = "readonly" })
+        </div>
+    </div>
+    <div class="three equal width fields">
+        <div class="field">
+            <!--流程類型-->
+            @Html.LabelFor(m => m.RuleCategory)
+            @Html.TextBoxFor(m => m.RuleCategory, new { @readonly = "readonly" })
+        </div>
+        <div class="field">
+            @Html.LabelFor(m => m.TargetTable)
+            @Html.HiddenFor(m => m.TargetTable)
+            @Html.TextBox("TableName", string.Format($"{Model.TableName}({Model.TargetTable})"), new { @readonly = "readonly" })
+        </div>
+        <div class="field">
+            @Html.LabelFor(m => m.FilterField)
+            @Html.HiddenFor(m => m.FilterField)
+            @Html.TextBox("ColumnName", string.Format($"{Model.ColumnName}({Model.FilterField})"), new { @readonly = "readonly" })
+        </div>
+    </div>
+    <h4 class="ui horizontal inverted divider header">
+        <i class="edit icon"></i>編輯內容
+    </h4>
+    <div class="four  equal width fields">
+        <div class="required field">
+            @Html.LabelFor(m => m.Priority) 
+            @Html.TextBoxFor(m => m.Priority, new { @type = "number", name = "RuleOrder", @min = "1", @step = "1" })
+        </div>
+        <div class="field">
+            @Html.LabelFor(m => m.WhereClause) 
+            @{
+               bool IsAND = Model.WhereClause == "AND";
+             }
+            <select class="ui selection fluid dropdown" name="RuleWhereClause">
+                @if (IsAND)
+                 {
+                    <option value="AND" selected title="and">與(And)</option>
+                    <option value="OR" title="or">或(OR)</option>
+                 }else {
+                    <option value="AND"  title="and">與(And)</option>
+                    <option value="OR" selected title="or">或(OR)</option>
+                }
+            </select>
+        </div>
+        <div class="field">
+            @Html.LabelFor(m => m.Operator) 
+            @Html.DropDownListFor(m => m.Operator, new SelectList(Model.Properties.ListOperator, "Value", "Text"), new { @class = "ui search selection fluid dropdown" })
+        </div>
+        <div class="field">
+            @Html.LabelFor(m => m.IsEnabled) 
+            <div class="ui toggle checkbox" name="RuleEnabled">
+                @{ 
+                    if (Model.IsEnabled) {<input type="checkbox" name="enabled" checked /> }
+                    else { <input type="checkbox" name="enabled" />}
+                }
+                <label></label>
+            </div>
+        </div>
+    </div>
+    <div class="field required">
+        @Html.LabelFor(m => m.FilterValue) 
+        <input type="hidden" name="FieldType" value="@Model.Properties.Type" />
+        <input type="hidden" name="IsCode" value="@Model.Properties.IsCode" />
+        <!--這裡會依照設定顯示input或dropdown或checkbox-->
+        <div name="FilterUI">
+            @{
+                if (Model.Properties.IsCode)
+                {
+                    @Html.HiddenFor(m => m.FilterValue, new { })
+                    if (Model.Properties.IsMultiple)
+                    {
+                        @Html.ListBoxFor(m => m.FilterValueAry, new SelectList(Model.Properties.ListItem, "Value", "Text"), new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+                    }
+                    else
+                    {
+                        @Html.DropDownListFor(m => m.FilterValueAry, new SelectList(Model.Properties.ListItem, "Value", "Text"), new { @class = "ui search selection fluid dropdown" })
+                    }
+                }
+                else
+                {
+                    @Html.TextBoxFor(m => m.FilterValue, new { @name = "RuleInput" })
+                }
+            }
+        </div>
+    </div>
+</form>,
+ @<div>
+     <button type="button" class="ui ok yellow  button">儲存</button>
+     <button class="ui cancel  button" type="button">取消</button>
+ </div>, "large"
+        )
+
+

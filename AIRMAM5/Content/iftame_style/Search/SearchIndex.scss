@@ -1,0 +1,738 @@
+﻿@import "../Shared/style.scss";
+@import "../../_inputRange.scss";
+@import "../../_previewPlayer.scss";
+/*@import "../Subject/_WavesurferPlayer.scss";*/
+
+
+
+@mixin column-list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/*button樣版*/
+@mixin button-style {
+    background-color: #1b1b1b;
+    color: #cacaca;
+    border: 1px solid #cacaca;
+    background: none;
+
+    &.red {
+        background-color:$red;
+        color: $white;
+    }
+
+    &:hover {
+        color: $yellow;
+        border: 1px solid $yellow;
+    }
+}
+
+
+/*******************************
+           拖拉視窗
+*******************************/
+$LeftCompoentWidth:70em;
+$minBottomHeight:40%;
+#left-component {
+    width: $LeftCompoentWidth;
+    overflow: hidden;
+    min-width: 600px;
+    padding-right: 22px; /*22px是divider的寬度*/
+}
+
+#divider {
+    left: $LeftCompoentWidth;
+    padding: 0 6px;
+}
+#divider > .split-pane-divider-inner {
+    position: relative;
+    left: -26px;
+    &:hover{
+        border-left:1px dashed #888;
+    }
+}
+#divider > .split-pane-divider-inner:before {
+    content: "|||";
+    color: #545454;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left:0;
+    right: 0;
+    height: 30px;
+    text-align:center;
+}
+
+#right-component {
+    left: $LeftCompoentWidth;
+    /*margin-left: 23px;*/
+    min-width: $LeftCompoentWidth/2;
+    overflow: -moz-hidden-unscrollable;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    /*min-width:35vw;*/
+}
+#horizontal-divider {
+    bottom: 20em;
+    height: 5px;
+}
+#top-component2 {
+   // bottom: $minBottomHeight;
+    /*margin-bottom: 1.3em;*/
+    text-align: center;
+    min-width:$VideoWidth;
+    background: #222;
+}
+
+#horizontal-divider2 {
+    bottom: $minBottomHeight;
+}
+#horizontal-divider2 > .split-pane-divider-inner {
+    position: relative;
+    top: 0;
+}
+
+#horizontal-divider2 > .split-pane-divider-inner:before {
+    content: "|||";
+    color: #545454;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 6px;
+    right: 0;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    width: 10px;
+}
+#bottom-component2 {
+    width:100%;
+    height: calc(100% - #{$minBottomHeight});
+    overflow: hidden;
+    /*position: absolute;
+    top: $minBottomHeight;*/
+}
+
+
+
+
+/*******************************
+       左側選項內容
+*******************************/
+
+._SearchStyleGrid_left {
+    @include column-list;
+
+    ._row_scroll {
+        height: 100%;
+        /*overflow: auto;*/
+    }
+}
+._SearchStyleLinchpin {
+    color: rgba(255, 255, 255, 0.78);
+    padding:5px 0 0 8px;
+    button {
+        background: none !important;
+        color: rgba(255, 255, 255, 0.78) !important;
+        border: 1px solid rgba(255, 255, 255, 0.73) !important;
+        padding: 4px 7px !important;
+
+        &:hover {
+            border: 1px solid rgb(194, 183, 1) !important;
+            color: rgb(194, 183, 1) !important;
+        }
+    }
+}
+._SearchStyleTabs {
+    margin: 0 !important;
+
+    a {
+        letter-spacing: 1px;
+    }
+
+}
+.ui.secondary.pointing.menu .item {
+    color: rgba(255, 255, 255, 0.9);
+}
+#Table {
+    padding-bottom: 60px; //因為這裡scrollbar不啟用table的virtualDom,否則會在使用者下拉卷軸時,出現卡頓問題,padding-bottom:60px是為了避免footer阻擋最後一列內容的問題所設
+}
+
+div[name="list"] {
+    width: 100%;
+
+    .tabulator-tableHolder {
+        height: inherit;
+        overflow: auto;
+        padding-bottom: 1em;
+    }
+
+    .tabulator-table {
+        width: 100%;
+        display: inline !important
+    }
+
+    .x-license-group {
+        display: flex;
+        position: relative;
+        top: -10px;
+        justify-content: end;
+        color: #b7b7b7;
+
+        span {
+            color: #ffff00;
+            border: 0.5px solid #ffff00;
+            padding: 0 10px;
+        }
+    }
+
+    .tabulator-placeholder {
+        width: 100% !important;
+    }
+
+    .tabulator-row.ui.items {
+        cursor: context-menu;
+        padding: 0;
+        margin: 0 !important;
+        white-space: normal;
+        word-break: break-word;
+
+        &.tabulator-row-even {
+            background: #2d2d2d;
+        }
+
+        &.tabulator-row-odd {
+            background: #333;
+        }
+
+        &:hover, &.cusactive, &.tabulator-selected {
+            border: 1px solid yellow;
+            background: #222 !important;
+        }
+
+        .tabulator-cell {
+            height: auto !important;
+            white-space: normal;
+            overflow: unset;
+        }
+
+        .item {
+            padding: 0.05em 0.3em !important;
+            color: rgba(255,255,255,.74);
+            &:first-child, &:last-child {
+                border: 1px solid rgba(255,255,0,0);
+            }
+
+            button[name="addMateria"] {
+                margin-left: auto;
+                @include button-style;
+                white-space: nowrap;
+
+                .x-tooltip {
+                    background: darken(#e05e09,10%);
+                    color: $white;
+                    position: relative;
+                    transform: translate(-120%,-30%);
+                    word-break: keep-all;
+                    position: absolute;
+                    padding: 10px;
+                    border-radius: 5px;
+                    font-size: 1em;
+                    line-height: 1.3;
+                    height: 50px;
+                    display: none;
+                    align-items: center;
+
+                    &::after {
+                        content: '';
+                        display: flex;
+                        width: 0;
+                        height: 0;
+                        border-style: solid;
+                        border-width: 12.5px 0 12.5px 21.7px;
+                        border-color: transparent transparent transparent darken(#e05e09,10%);
+                        position: relative;
+                        right: 0;
+                        transform: translateX(100%);
+                        top: 0;
+                    }
+                    //  display: none;
+                }
+
+                &:hover {
+                    .x-tooltip {
+                        display: flex;
+                    }
+                }
+            }
+
+            .header {
+                color: rgba(255,255,255,.74);
+            }
+
+            div[name="fileStatus"] {
+                background-color: transparent;
+
+                span {
+                    &.red {
+                        color: #db2828;
+                    }
+
+                    &.orange {
+                        color: #f2711c;
+                    }
+
+                    &.yellow {
+                        color: #fbbd08;
+                    }
+
+                    &.olive {
+                        color: #b5cc18;
+                    }
+
+                    &.green {
+                        color: #21ba45;
+                    }
+
+                    &.teal {
+                        color: $primary;
+                    }
+
+                    &.blue {
+                        color: #2185d0;
+                    }
+
+                    &.violet {
+                        color: #6435c9;
+                    }
+
+                    &.purple {
+                        color: #a333c8;
+                    }
+
+                    &.pink {
+                        color: #e03997;
+                    }
+
+                    &.brown {
+                        color: #a5673f;
+                    }
+
+                    &.grey {
+                        color: #767676;
+                    }
+
+                    &.black {
+                        color: #1b1c1d;
+                    }
+                }
+            }
+
+            ._styleImg {
+                position: relative;
+                height: 90px;
+                width: auto;
+                min-width: 140px;
+
+                img {
+                    height: 100%;
+                    width: auto;
+                    margin: auto;
+                    /*width: 100% !important;*/
+                }
+            }
+
+            .image {
+                display: flex;
+                align-items: end;
+                padding: 6px 7px 0 7px;
+                max-width: 150px;
+                min-width: 150px;
+            }
+
+            .content {
+                padding: 8px 0;
+                min-height: 103px;
+
+                .header {
+                    color: rgba(255, 255, 255, 0.74) !important;
+                }
+
+                .meta, .description {
+                    line-height: 1.3;
+                    color: rgba(255, 255, 255, 0.74);
+                }
+
+                .extra {
+                    margin: 0;
+                }
+
+                ._time {
+                    display: flex;
+                    align-items: center;
+                    color: rgba(255, 255, 255, 0.51);
+                    font-size: .9em;
+                    /*button {
+                        margin-left: auto;
+                        @include button-style;
+                    }*/
+                }
+
+                span.keypoint {
+                    color: $yellow;
+                }
+            }
+
+            .x-license-label {
+                color: #bdbd26;
+            }
+
+            .x-hashtag {
+                margin: 1px;
+            }
+        }
+    }
+
+    .tabulator-footer {
+        position: fixed;
+        bottom: 0;
+        width: inherit;
+        background: #333333;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+}
+div[name="filter"] {
+    font-size: 0.8em !important;
+    font-weight: normal !important;
+    color: #aaa !important;
+    margin: 0 !important;
+    padding: 5px !important;
+    height: 40px !important;
+    display:flex !important;
+    .input{
+        height:100%;
+    }
+}
+/*******************************
+       右側選項內容
+*******************************/
+._SearchStyleGrid_right ._right_button {
+    @include column-list;
+    padding: 1% 0 0 0;
+
+    ._SearchStyleContent {
+        height: 100%;
+        overflow: auto;
+        /*.tab >.ui.basic.segment{
+            padding:2px;
+        }*/
+        /*----基本資料修改完成後---*/
+        .ui.form .field .ui.input > span {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            background: #434343;
+            line-height: initial;
+            padding-left: 1rem;
+            color: #fff;
+            word-break: break-all;
+        }
+
+        ._styleMarginZero {
+            margin: 0 0 .2em !important;
+            .input label{
+                text-align:center;
+            }
+        }
+    }
+}
+._RightTop {
+    height: 100%;
+
+    img {
+        height: 100%;
+        /*margin: auto;
+        height: 100%;
+        width: 100%;*/
+    }
+}
+
+
+._SearchStyleButton {
+    /*background: #525252;*/
+    box-shadow: 0 2px 4px 1px #151515;
+    transition: all .3s;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 100%;
+    position: fixed;
+    right: 13px;
+    bottom: 8px;
+    z-index: 3;
+    padding: 1.1em;
+    color: #fff;
+    z-index:9999999;
+    &:hover {
+        box-shadow: 0 9px 9px 0px #151515;
+        transform: translate(0, -4px);
+    }
+
+    &:active {
+        box-shadow: 0 0 0px -2px #151515;
+        transform: translate(0, 4px);
+        transition: all .1s;
+    }
+}
+.ui.form .field .ui.input > input {
+    width: 100%;
+    flex: 1;
+}
+
+.ui.attached.tabular.menu {
+    overflow: auto;
+}
+
+
+.ui.form input[type="text"] {
+    border-radius: 0 !important;
+}
+
+/*******************************
+   右側選項內容 --- 關鍵影格card
+*******************************/
+._SearchStyleContent {
+    .ui.cards {
+        position: relative;
+        top: 1em;
+
+        .card {
+            margin-top: 0.3em;
+            margin-bottom: 0.3em;
+        }
+    }
+
+
+    .card {
+        background: #222 !important;
+        box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        border: 1px solid #c2b701;
+
+
+        &:hover {
+            border: 3px solid $yellow !important;
+        }
+
+
+        .content > .description {
+            color: #fff !important;
+            word-break: break-all;
+        }
+    }
+}
+
+/*******************************
+   右側選項內容 --- 段落描述
+*******************************/
+._StyleDescription {
+    text-align: left;
+    margin: .5em 0;
+    width: 100%;
+    color: #fff;
+}
+
+._StyleDescription span:first-child {
+    background: #222;
+}
+
+._StyleDescription span:last-child {
+    background: rgb(99, 99, 99);
+}
+
+._StyleDescription span {
+    padding: .8em;
+    margin: 0;
+    display: block;
+}
+._Custom {
+    margin: .5em 0 0 0 !important;
+    display: inline-flex;
+
+    ._filter {
+        border-radius: 100px;
+        background: #151515;
+        margin: 0 0.5em;
+    }
+}
+
+
+/*._styleImg {
+            position: relative;
+        }*/
+
+._timeLong {
+    position: absolute;
+    right: .4em;
+    bottom: .4em;
+    font-size: .6em;
+    color: rgba(255, 255, 255, 0.68);
+    background: rgba(0, 0, 0, 0.34);
+    padding: .1em .5em;
+    border-radius: 100px;
+}
+
+._contentDoc {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    line-height: 1.3;
+}
+
+._time {
+    ._status {
+        background: #018e87;
+        margin-left: 1em;
+        color: #ececec;
+        padding: 0 .5em;
+        border-radius: 3px;
+        font-size: .7em;
+
+        /*&.error {
+            background:$red !important;
+        }
+        &.hidden{
+            display:none;
+        }
+        &.red{
+            background:$red;
+        }
+        &.teal{
+            background:$teal;
+        }
+        &.purple{
+            background:$purple;
+        }*/
+    }
+}
+
+.ui.bottom.attached.inverted.tab {
+    height: 100%;
+}
+
+#EditMediaModal {
+    .field {
+        label {
+            float: left;
+            margin-left: 5px;
+        }
+        .checkbox.disabled{
+            visibility:hidden;
+        }
+        .checkbox:after {
+            display: none;
+        }
+    }
+}
+
+/**調整preview*/
+div[name="preview"] {
+    .cusrow {
+        height: auto;
+    }
+
+    #videoMenu {
+        position: relative;
+        min-height: 60px;
+    }
+}
+
+/*關鍵影格檢視詳細按鈕*/
+button[name="cardInfo"] {
+    position: fixed;
+    right: 1em;
+    bottom: 15em;
+    z-index: 99;
+}
+button.x-imgslider-btn {
+    position: absolute;
+    top: 0em;
+    z-index: 99;
+    bottom: 0;
+    height: 330px;
+    background: transparent;
+    color: #fff;
+
+    &[name="preImg"] {
+        left: 0;
+    }
+
+    &[name="nextImg"]{
+        right:-3px;
+    }
+}
+/**圖片燈箱*/
+img[name="lightbox"] {
+    cursor: zoom-in;
+}
+.x-lightbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 9999;
+
+    img {
+        height: 90%;
+        width: auto;
+        margin: auto;
+        display: inline-block;
+        left: 0;
+        right: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        cursor: zoom-out;
+    }
+}
+
+/**匯出樣板的下拉選單*/
+.menu[name='templeteMenu'] {
+    .dropdown.item .menu {
+        background: #333 !important;
+        color: $white !important;
+    }
+}
+/**調光器寬度*/
+.ui.dimmer{
+ width:inherit;
+}
+
+
+@media screen and (min-height:700px) and (max-height: 850px) {
+
+    #bottom-component2 {
+        height: calc(100% -#{$minBottomHeight}) !important;
+    }
+}
+@media  screen and (min-height:550px) and (max-height: 700px){
+    #bottom-component2 {
+        height: calc(100% -#{$minBottomHeight}- #{$minBottomHeight/2}) !important;
+    }
+}
+@media screen  and (max-height:550px) {
+    #bottom-component2 {
+        height: calc(100% -#{$minBottomHeight} - #{$minBottomHeight/4*3}) !important;
+    }
+}

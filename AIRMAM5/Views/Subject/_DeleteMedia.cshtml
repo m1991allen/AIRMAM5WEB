@@ -1,0 +1,23 @@
+﻿@model AIRMAM5.DBEntity.Models.Subject.DeleteMetadataViewModel
+@{
+    string _typenm = Model.FileCategory == "V" ? "影片" :
+            Model.FileCategory == "A" ? "聲音" :
+                Model.FileCategory == "P" ? "圖片" :
+                    Model.FileCategory == "D" ? "文件" : "檔案";
+ }
+@HtmlHelper.HtmlModal("DeleteMediaModal", "刪除主題-"+ _typenm + "檔案資料【編號:" + Model.FileNo+ "】",       //刪除"影.音.圖.文" 共用確認頁面
+    @<form role="form" class="ui inverted form" id="DeleteForm" method="post" changed="false">
+         <div class="required field">
+             @Html.HiddenFor(m => m.FileNo)
+             @Html.HiddenFor(m => m.FileCategory)
+             @Html.LabelFor(m => m.Reason)
+             @Html.TextAreaFor(m => m.Reason,new { @rows=10})
+             @*<label for="Reason"></label>
+             <textarea rows="10" name="Reason"></textarea>*@
+         </div>
+    </form>,
+ @<div>
+     <button type="button" class="ui approve right labeled icon red button">刪除<i class="checkmark icon"></i></button>
+     <button type="button" class="ui deny  button">取消</button>
+ </div>,
+ "tiny")

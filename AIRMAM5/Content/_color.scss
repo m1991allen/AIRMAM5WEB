@@ -1,0 +1,33 @@
+﻿@import "_variable.scss";
+
+.cards.inverted, .card.inverted {
+    border: 0;
+    border-radius: 0;
+    box-shadow: 0;
+    font-size: 0.7rem;
+    /*margin:0;*/
+    background-color: $black;
+
+    & .extra, .content {
+        border: 0;
+        border-radius: 0;
+        &.extra {
+            color: $grey;
+        }
+
+        .header, .meta, .description {
+            color: $white;
+        }
+    }
+}
+.cards.inverted .card, .card.inverted {
+    &.link:hover {
+        background-color: $black;
+        opacity: .8;
+    }
+
+    &:first-child, &:last-child {
+        border: 0;
+        border-radius: 0;
+    }
+}

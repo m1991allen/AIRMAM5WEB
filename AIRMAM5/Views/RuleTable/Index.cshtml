@@ -1,0 +1,209 @@
+﻿
+@{
+    ViewBag.Title = "規則資料表";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+@section Styles{
+    <style>
+        .ui.vertical.tabular.menu .item {
+            box-shadow: none;
+            border: none;
+            background-image: none;
+            border-right: 1px solid #222;
+        }
+    </style>
+}
+@*<h2 class="ui inverted grey small header">@HtmlHelper.Breadcrumb(new string[] { "規則庫", "規則設定" })</h2>*@
+<div class="ui stackable grid" style="height:95%;width:100%;margin:auto;margin-top:0;">
+    <!--加載tbmRULE START-->
+    <div class="three wide column nopadding" style="padding:0;">
+        <div class="ui relaxed selection inverted list">
+            <div class="item">
+                <div class="content">
+                    <div class="header">
+                        調用條件 <label class="ui label">優先權1</label>
+                        <button type="button" class="ui inverted icon  green button right floated"><i class="edit icon"></i></button>
+                    </div>
+                    <div class="description">
+                        無
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="content">
+                    <div class="header">
+                        上傳入庫規則 <label class="ui label">優先權0</label>
+                        <button type="button" class="ui inverted icon  green button right floated"><i class="edit icon"></i></button>
+                    </div>
+                    <div class="description">
+                        測試資料，這是備註欄位.postman測試
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--加載tbmRULE END-->
+    <!--選擇的資料欄位編輯區域 START-->
+    <div class="eight wide computer eight wide tablet column" style="padding-left:0;">
+        <div class="ui inverted center aligned segment">
+            <form role="form" class="ui inverted fluid form">
+                <div class="two fields">
+                    <div class="eight wide column field">
+                        <label>選擇表</label>
+                        <div class="ui action input">
+                            <input type="text" placeholder="請選擇資料表名稱..." readonly>
+                            <button class="ui basic yellow icon button"> <i class="hand pointer outline icon"></i> </button>
+                        </div>
+                    </div>
+                    <div class="eight wide column field">
+                        <label>欄位名稱</label>
+                        <div class="ui action input">
+                            <input type="text" placeholder="請選擇欄位名稱..." readonly>
+                            <button class="ui basic yellow icon button"> <i class="hand pointer outline icon"></i> </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="two fields">
+                    <div class="eight wide column field">
+                        <label>選擇欄</label>
+                        <input type="text" placeholder="請輸入資料表名稱...">
+                    </div>
+                    <div class="eight wide column field">
+                        <label>欄位名稱</label>
+                        <input type="text" placeholder="請輸入欄位名稱...">
+                    </div>
+                </div>
+                <div class="two fields">
+                    <div class="inline field">
+                        <label>資料表優先權</label>
+                        <input type="number" placeholder="優先權...">
+                    </div>
+                    <div class="inline field">
+                        <label>欄位優先權</label>
+                        <input type="number" placeholder="優先權...">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <!--選擇的資料欄位編輯區域 END-->
+    <div class="two wide column nopadding" style="padding:0;">
+        <div class="ui secondary vertical pointing fluid menu">
+            <div class="item">
+                <div class="ui fluid inverted input"><input type="text" placeholder="資料表名稱..." style="background:#222;color:#fff;"></div>
+                <div class="ui inverted grey sub header"> 【可選擇資料表】</div>
+            </div>
+            <!--動態取資料庫的資料表名 START-->
+            <a class="item">tbmARC_AUDIO</a>
+            <a class="active item">tbmARC_VIDEO</a>
+            <a class="item">tbmRULE</a>
+            <a class="item">tbzCODE</a>
+            <a class="item">tbmUSERS</a>
+            <!--動態取資料庫的資料表名 END-->
+        </div>
+    </div>
+
+    <!--依照選擇的資料表,動態加載該資料表欄位資訊 START-->
+    <div class="three wide computer four wide tablet column nopadding" style="padding:0;overflow-y:auto;max-height: 100%;">
+        <div class="ui secondary vertical pointing fluid menu">
+            <div class="item">
+                <div class="ui inverted grey sub horizontal divider"> 【可選欄位】</div>
+            </div>
+            <a class="item active" data-type="string"> <i class="font icon blue"></i> fsFILE_NO </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsTITLE </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsDESCRIPTION </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsSUBJECT_ID</a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsFILE_STATUS </a>
+            <a class="item" data-type="int"> <i class="bordered  blue icon blue">123</i>fnFILE_SECRET</a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsFILE_TYPE</a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsFILE_TYPE_H</a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsFILE_TYPE_L</a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsFILE_SIZE </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsFILE_SIZE_H </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsFILE_SIZE_L </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsFILE_PATH </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsFILE_PATH_H</a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsFILE_PATH_L </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fxMEDIA_INFO </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsHEAD_FRAME</a>
+            <a class="item" data-type="int"> <i class="bordered  blue icon blue">123</i>fdBEG_TIME</a>
+            <a class="item" data-type="int"> <i class="bordered  blue icon blue">123</i>fdEND_TIME</a>
+            <a class="item" data-type="int"> <i class="bordered  blue icon blue">123</i>fdDURATION</a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsRESOL_TAG</a>
+            <a class="item" data-type="datetime"> <i class="clock icon blue"></i>  fdCREATED_DATE</a>
+            <a class="item" data-type="string">  <i class="font icon blue"></i> fsCREATED_BY</a>
+            <a class="item" data-type="datetime"> <i class="clock icon blue"></i> fdUPDATED_DATE </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsUPDATED_BY </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE1</a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE2 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE3 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE4 </a>
+            <a class="item" data-type="string">  <i class="font icon blue"></i> fsATTRIBUTE5 </a>
+            <a class="item" data-type="string">  <i class="font icon blue"></i> fsATTRIBUTE6 </a>
+            <a class="item" data-type="string">   <i class="font icon blue"></i> fsATTRIBUTE7 </a>
+            <a class="item" data-type="string">    <i class="font icon blue"></i> fsATTRIBUTE8 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE9 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE10 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE11 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE12 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE13 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE14 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE15 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE16 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE17 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE18 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE19 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE20 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE21 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE22 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE23 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE24 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE25 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE26 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE27 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE28 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE29 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE30 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE31 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE32 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE33 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE34 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE35 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE36 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE37 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE38 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE39 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE40 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE41 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE42 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE43 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE44 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE45 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE46 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE47 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE48 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE49 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE50 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE51 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE52 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE53 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE54 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE55 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE56 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE57 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE58 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE59 </a>
+            <a class="item" data-type="string"> <i class="font icon blue"></i> fsATTRIBUTE60 </a>
+        </div>
+    </div>
+    <!--依照選擇的資料表,動態加載該資料表欄位資訊END-->
+
+</div>
+
+@section Scripts{
+    <script>
+
+    </script>
+
+}

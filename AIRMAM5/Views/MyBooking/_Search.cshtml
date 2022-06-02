@@ -1,0 +1,33 @@
+﻿@model AIRMAM5.DBEntity.Models.Shared.BookingDateSearchModel
+
+<form class="ui inverted form" role="form" id="SearchForm">
+    <div class="six fields">
+        <div class="field">
+            @Html.LabelFor(model => model.WorkStatus)
+            @Html.DropDownListFor(model => model.WorkStatus, Model.WorkStatusList, new { @class = "ui search selection dropdown", @id = "WorkStatus" })
+        </div>
+        <div class="ui calendar two wide field">
+            <label>調用日期(起)</label>
+            @Html.TextBoxFor(model => model.StartDate, new { type = "text", placeholder = "調用日期(起)", @id = "sdate" })
+        </div>
+        <div class="ui calendar two wide field">
+            <label>調用日期(迄)</label>
+            @Html.TextBoxFor(model => model.EndDate, new { type = "text", placeholder = "調用日期(迄)", @id = "edate" })
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.WorkId)
+            @Html.TextBoxFor(model => model.WorkId, new { type = "text", placeholder = "轉檔編號", @id = "workid" })
+        </div>
+        <div class="field">
+            <label style="visibility:hidden;">查詢</label>
+            <button type="submit" class="ui yellow button">查詢</button>
+            <button type="button" name="reset" class="ui button">清空</button>
+        </div>
+    </div>
+    @*<div class="field">
+        <button type="button" class="ui red button right floated"><i class="redo icon"></i>重設調用</button>
+        <button type="button" class="ui _darkGrey button right floated"><i class="print icon"></i>匯出勾選項目</button>
+        <button type="button" class="ui _darkGrey button right floated"><i class="print icon"></i>待審項目印表 </button>
+    </div>*@
+</form>
+

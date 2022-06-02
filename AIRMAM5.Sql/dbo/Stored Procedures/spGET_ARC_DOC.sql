@@ -1,0 +1,48 @@
+﻿
+
+-- =============================================
+-- 描述:	取出ARC_DOC 入庫項目-圖片檔 資料
+-- 記錄:	<2011/09/15><Eric.Huang><新增本預存>
+--     	<2011/11/17><Eric.Huang><新增欄位>
+--		<2012/07/24><Eric.Huang><新增欄位 fnRESP_ID/fnRELA_ID/fnCHRO_ID>
+--		<2012/07/24><Eric.Huang><新增欄位 _sEXTRACT>
+--		<2014/08/21><Eric.Huang><新增 fsKEYWORD/fsOTHINFO/fsOTHTYPE1/fsOTHTYPE2/fsOTHTYPE3>
+--		<2016/11/14><David.Sin><增加需要欄位>
+-- =============================================
+CREATE PROCEDURE [dbo].[spGET_ARC_DOC]
+	@fsFILE_NO		VARCHAR(16),
+	@fsSUBJ_ID		VARCHAR(12)
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+
+	DECLARE @fsMEDIA_PREVIEW_URL VARCHAR(100) = (SELECT fsVALUE FROm tbzCONFIG WHERE fsKEY = 'MEDIA_PREVIEW_URL')
+
+	;WITH reADMIN(fnDIR_ID,fsPATH_NAME) AS
+		(
+			SELECT fnDIR_ID,CAST(fsNAME AS VARCHAR(MAX)) FROM tbmDIRECTORIES WHERE fnDIR_ID = 1
+			UNION ALL
+			SELECT A.fnDIR_ID,CAST(B.fsPATH_NAME + '>' + A.fsNAME AS VARCHAR(MAX)) FROM tbmDIRECTORIES A JOIN reADMIN B ON A.fnPARENT_ID = B.fnDIR_ID
+		)
+
+		SELECT 
+				
+			tbmARC_DOC.*,
+			ISNULL(USERS_CRT.fsNAME,'') AS fsCREATED_BY_NAME,
+			ISNULL(USERS_UPD.fsNAME,'') AS fsUPDATED_BY_NAME,
+			_sSUBJ_PATH = A.fsPATH_NAME,
+			--_sFILE_URL_L = dbo.fnGET_FILE_URL_BY_TYPE_AND_FILE_NO('P',fsFILE_NO,'L')
+			_sFILE_URL_L = @fsMEDIA_PREVIEW_URL + 'D/' + REPLACE(REPLACE(tbmARC_DOC.fsFILE_PATH,(SELECT fsVALUE FROM tbzCONFIG WHERE fsKEY = 'MEDIA_FOLDER_D'),''),'\','/') +
+							+ [fsFILE_NO] + '.' + fsFILE_TYPE
+		FROM
+			tbmARC_DOC 
+				JOIN tbmSUBJECT ON tbmARC_DOC.fsSUBJECT_ID = tbmSUBJECT.fsSUBJ_ID
+				JOIN reADMIN A ON tbmSUBJECT.fnDIR_ID = A.fnDIR_ID
+				LEFT JOIN tbmUSERS USERS_CRT ON tbmARC_DOC.fsCREATED_BY = USERS_CRT.fsLOGIN_ID
+				LEFT JOIN tbmUSERS USERS_UPD ON tbmARC_DOC.fsUPDATED_BY = USERS_UPD.fsLOGIN_ID
+		WHERE
+			(@fsFILE_NO = '' OR fsFILE_NO = @fsFILE_NO) AND
+			(@fsSUBJ_ID = '' OR fsSUBJECT_ID = @fsSUBJ_ID)
+END
+
+

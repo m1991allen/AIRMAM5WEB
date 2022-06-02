@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AIRMAM5.Tsm.S3.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="fsAWS_CMD" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Amazon\AWSCLI\aws.exe</Value>
+    </Setting>
+    <Setting Name="fsBUCKET" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">ftvtest</Value>
+    </Setting>
+    <Setting Name="fsLOG_PATH" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\AIRMAM5LOG\S3\</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

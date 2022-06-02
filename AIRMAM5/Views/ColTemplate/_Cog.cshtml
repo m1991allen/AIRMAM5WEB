@@ -1,0 +1,63 @@
+﻿@model AIRMAM5.DBEntity.Models.TemplateFields.TemplateFieldsEditModel
+@using AIRMAM5.DBEntity.Models.Enums
+@{
+    Layout = "";
+}
+
+ @HtmlHelper.HtmlModal("CogModal", "編輯樣版【"+Model.TemplateMain.fsNAME+ "】",
+ @<div class="ui inverted form" id="CogForm">
+    <div class="three fields">
+        <div class="six wide required field">
+            @Html.LabelFor(model => model.TemplateMain.fsNAME)
+            @Html.TextBoxFor(model => model.TemplateMain.fsNAME, new { @readonly = "readonly" })
+            @Html.HiddenFor(model => model.TemplateMain.fnTEMP_ID)
+        </div>
+        <div class="six wide required field">
+            @Html.LabelFor(model => model.TemplateMain.fsTABLE)
+            @foreach (var type in Model.TableList)
+            {
+                if (type.Value == Model.TemplateMain.fsTABLE)
+                {<input type="text" value="@type.Text" readonly />}
+            }
+        </div>
+        <div class="four wide field">
+            <label style="visibility:hidden;">操作</label>
+            <div class="ui checkbox disabled">
+                @Html.CheckBoxFor(model => model.TemplateMain.IsSearch, new { @checked = (Model.TemplateMain.IsSearch) ? "checked" : "", @disabled = "disabled" })
+                @Html.LabelFor(model => model.TemplateMain.fcIS_SEARCH)
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.TemplateMain.fsDESCRIPTION)
+        @Html.TextAreaFor(model => model.TemplateMain.fsDESCRIPTION, new { @readonly = "readonly", @rows = 2 })
+    </div>
+    <div class="ui inverted horizontal divider">
+        <div class="ui right labeled input required">
+            <div class="ui label">
+                @Html.Label("選擇欄位類型")
+            </div>
+            @Html.DropDownListFor(model => model.TemplateMain.fsTABLE, Model.FieldTypes, new { @class = "ui inverted dropdown black label", @id = "ChooseType" })
+        </div>
+
+    </div>
+    <div id="ChooseTypeArea">
+        @*@using (Ajax.BeginForm("AddField", "ColTemplate",
+            new AjaxOptions { HttpMethod = "POST", OnSuccess = "ShowMessage", OnFailure = "ShowMessage" },
+            new { role = "form", @class = "ui inverted form"}))
+            {
+              @Html.AntiForgeryToken()*@
+        <form role="form" class="ui inverted form" id="ChooseTypeForm" name="ChooseTypeForm">
+            @Html.Action("_ChooseType", "ColTemplate", new { fnTEMP_ID = Model.fnTEMP_ID, FieldType = CodeTEMP002Enum.NVARCHAR.ToString() })
+        </form>
+        @*}*@
+    </div>
+    @*<div id="SaveData" data-json='@Html.Raw(Json.Encode(Model.TemplateFieldList))' data-fieldtype='@Html.Raw(Json.Encode(Model.FieldTypes))'></div>*@
+    <div id="SaveData" data-json='@Html.Raw(Json.Encode(Model.CustomFieldList))' data-fieldtype='@Html.Raw(Json.Encode(Model.FieldTypes))'></div>
+    <div id="SubTable"></div>
+</div>,
+ @<div>
+     @*<button class="ui yellow ok button" type="submit">儲存</button>*@
+     <button class="ui cancel  button" type="button">關閉</button>
+ </div>, "large")
+

@@ -1,0 +1,39 @@
+﻿
+
+
+-- =============================================
+-- 描述:	取出檢索要呈現的影片檔資料
+-- =============================================
+CREATE PROCEDURE [dbo].[spGET_ARC_VIDEO_SEARCH_BY_FILE_NOS]
+	@fsFILE_NOs		VARCHAR(MAX)
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+
+	DECLARE @fsURL VARCHAR(50) = (SELECT fsVALUE FROM tbzCONFIG WHERE fsKEY = 'MEDIA_PREVIEW_URL') 
+
+		SELECT
+			V.fsFILE_NO,
+			V.fsTITLE,
+			S.fsTITLE AS fsSUBJECT_TITLE,
+			CONVERT(VARCHAR(10),V.fdCREATED_DATE,111) AS fdCREATED_DATE,
+			V.fsFILE_TYPE_H AS fsFILE_TYPE,
+			[dbo].[fnGET_TIMECODE_FROM_SECONDS3](V.fdDURATION) AS fdDURATION,
+			CASE 
+				WHEN (SELECT TOP 1 fsSTATUS FROM tblWORK WHERE _item_id = fsFILE_NO and fsTYPE IN ('TRANSCODE','DAILY_ITP') order by fnWORK_ID desc) = '90' THEN 
+					CASE 
+						WHEN (SELECT COUNT(1) FROM tbmARC_VIDEO_K WHERE fsFILE_NO = V.fsFILE_NO AND fcHEAD_FRAME = 'Y') = 0 THEN REPLACE(@fsURL,'Media','Images') + 'Template_IMG/video.png?t=' + SUBSTRING(CONVERT(VARCHAR(50),NEWID()),1,5)
+						ELSE (SELECT TOP 1 @fsURL + 'V/K/' + REPLACE(REPLACE([fsFILE_PATH],(SELECT [fsVALUE] FROM tbzCONFIG WHERE fsKEY = 'MEDIA_FOLDER_V_K'),''),'\','/') + [fsFILE_NO] + '_' + [fsTIME] + '.jpg?t=' + SUBSTRING(CONVERT(VARCHAR(50),NEWID()),1,5) FROM [dbo].[tbmARC_VIDEO_K] WHERE fsFILE_NO = V.fsFILE_NO AND fcHEAD_FRAME = 'Y' ORDER BY fsTIME)
+					END
+				WHEN (SELECT TOP 1 fsSTATUS FROM tblWORK WHERE _item_id = fsFILE_NO and fsTYPE IN ('TRANSCODE','DAILY_ITP') order by fnWORK_ID desc) LIKE 'E%' THEN REPLACE(@fsURL,'Media','Images') + 'tran_error.png?t=' + SUBSTRING(CONVERT(VARCHAR(50),NEWID()),1,5)
+				ELSE REPLACE(@fsURL,'Media','Images') + 'transcoding.png?t=' + SUBSTRING(CONVERT(VARCHAR(50),NEWID()),1,5)
+			END AS fsHEAD_FRAME
+		FROM
+			tbmARC_VIDEO V 
+				JOIN tbmSUBJECT S ON V.fsSUBJECT_ID = S.fsSUBJ_ID
+				JOIN (SELECT ID,COL1 FROM dbo.fn_SLPIT(@fsFILE_NOs,',')) T ON V.fsFILE_NO = T.COL1
+		ORDER BY
+			T.ID
+END
+
+

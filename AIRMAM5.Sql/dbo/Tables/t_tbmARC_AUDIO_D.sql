@@ -1,0 +1,14 @@
+﻿CREATE TABLE [dbo].[t_tbmARC_AUDIO_D] (
+    [fnINDEX]        BIGINT          NOT NULL,
+    [fsFILE_NO]      VARCHAR (16)    NOT NULL,
+    [fnSEQ_NO]       INT             NOT NULL,
+    [fsDESCRIPTION]  NVARCHAR (MAX)  NOT NULL,
+    [fdBEG_TIME]     DECIMAL (13, 3) NOT NULL,
+    [fdEND_TIME]     DECIMAL (13, 3) NOT NULL,
+    [fdCREATED_DATE] DATETIME        NOT NULL,
+    [fsCREATED_BY]   VARCHAR (50)    NOT NULL,
+    [fdUPDATED_DATE] DATETIME        NULL,
+    [fsUPDATED_BY]   VARCHAR (50)    NULL,
+    CONSTRAINT [PKt_tbmARC_AUDIO_D] PRIMARY KEY CLUSTERED ([fnINDEX] ASC, [fsFILE_NO] ASC, [fnSEQ_NO] ASC)
+);
+

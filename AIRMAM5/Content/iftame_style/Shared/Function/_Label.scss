@@ -1,0 +1,59 @@
+﻿@import '../../../_variable.scss';
+/*透明的標籤背景*/
+@mixin _transparentLabel {
+    .image.tansparent.label {
+        background-color: transparent !important;
+
+        &.red {
+            color: #db2828 !important;
+        }
+
+        &.orange {
+            color: #f2711c !important;
+        }
+
+        &.yellow {
+            color: #fbbd08 !important;
+        }
+
+        &.olive {
+            color: #b5cc18 !important;
+        }
+
+        &.green {
+            color: #21ba45 !important;
+        }
+
+        &.teal {
+            color: $primary !important;
+        }
+
+        &.blue {
+            color: #2185d0 !important;
+        }
+
+        &.violet {
+            color: #6435c9 !important;
+        }
+
+        &.purple {
+            color: #a333c8 !important;
+        }
+
+        &.pink {
+            color: #e03997 !important;
+        }
+
+        &.brown {
+            color: #a5673f !important;
+        }
+
+        &.grey {
+            color: #767676 !important;
+        }
+
+        &.black {
+            color: #1b1c1d !important;
+        }
+    }
+}

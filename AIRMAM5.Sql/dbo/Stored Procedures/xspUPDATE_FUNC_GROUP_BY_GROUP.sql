@@ -1,0 +1,40 @@
+﻿
+
+-- =============================================
+-- 描述:	修改FUNC_GROUP主檔資料-BY GROUP
+-- 記錄:	<2012/06/29><Mihsiu.Chiu><新增預存>
+-- =============================================
+CREATE PROCEDURE [dbo].[xspUPDATE_FUNC_GROUP_BY_GROUP]
+	@fsFUNC_ID		VARCHAR(50),
+	@fsGROUP_ID		VARCHAR(50),
+	@fsUPDATED_BY	NVARCHAR(50)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+		
+		BEGIN TRANSACTION
+
+		INSERT INTO [log].[tbmFUNC_GROUP]
+		SELECT *,'U',@fsUPDATED_BY FROM tbmFUNC_GROUP WHERE (fsFUNC_ID = @fsFUNC_ID) AND (fsGROUP_ID = @fsGROUP_ID)
+
+		UPDATE
+			tbmFUNC_GROUP
+		SET			
+			fdUPDATED_DATE = GETDATE(), 
+			fsUPDATED_BY = @fsUPDATED_BY
+		WHERE 
+			(fsFUNC_ID = @fsFUNC_ID) AND (fsGROUP_ID = @fsGROUP_ID)
+						
+		COMMIT
+
+		SELECT RESULT = @@ROWCOUNT
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+		SELECT RESULT = 'ERROR:' + CAST(@@ERROR AS VARCHAR(10)) + '-' + ERROR_MESSAGE()
+	END CATCH
+END
+
+

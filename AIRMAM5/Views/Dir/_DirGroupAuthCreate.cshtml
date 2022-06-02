@@ -1,0 +1,65 @@
+﻿@*@model AIRMAM5.DBEntity.DBEntity.tbmDIR_GROUP
+@using AIRMAM5.DBEntity.Models.Enums
+@using AIRMAM5.DBEntity.Services*@
+@model AIRMAM5.DBEntity.Models.Directory.CreateGroupDirAuthModel
+@{
+    Layout = "";
+    //var _ddlOpera = GetEnums.GetOperationAuthority();
+    //var _ddlrole = new GroupsService().GetRolesByDirId(Model.fnDIR_ID);
+}
+
+@HtmlHelper.HtmlModal("CreateGroupModal", "新增目錄角色群組權限",
+ @<form class="ui inverted form" role="form" id="CreateGroupForm">
+    @if (!Html.ViewData.ModelState.IsValid) {<div class="ui error message" style="padding:0;"> @Html.ValidationSummary("", new { @class = "list" })  </div>}
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.fnDIR_ID)
+            @Html.TextBoxFor(model => model.fnDIR_ID, new { @type = "text", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.fnDIR_ID)
+        </div>
+        <div class="required field">
+            @Html.LabelFor(model => model.fsGROUP_ID)
+            @Html.DropDownListFor(model => model.fsGROUP_ID, Model.RoleList, new { @class = "ui search selection  dropdown" })
+            @Html.ValidationMessageFor(model => model.fsGROUP_ID)
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.fsLIMIT_SUBJECT)
+            @Html.DropDownListFor(model => model.fsLIMIT_SUBJECT, Model.OperationList, new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+            @Html.ValidationMessageFor(model => model.fsLIMIT_SUBJECT)
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.fsLIMIT_VIDEO)
+            @Html.DropDownListFor(model => model.fsLIMIT_VIDEO, Model.OperationList, new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+            @Html.ValidationMessageFor(model => model.fsLIMIT_VIDEO)
+        </div>
+
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.fsLIMIT_AUDIO)
+            @Html.DropDownListFor(model => model.fsLIMIT_AUDIO, Model.OperationList, new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+            @Html.ValidationMessageFor(model => model.fsLIMIT_AUDIO)
+        </div>
+
+        <div class="field">
+            @Html.LabelFor(model => model.fsLIMIT_PHOTO)
+            @Html.DropDownListFor(model => model.fsLIMIT_PHOTO, Model.OperationList, new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+            @Html.ValidationMessageFor(model => model.fsLIMIT_PHOTO)
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.fsLIMIT_DOC)
+            @Html.DropDownListFor(model => model.fsLIMIT_DOC, Model.OperationList, new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+            @Html.ValidationMessageFor(model => model.fsLIMIT_DOC)
+        </div>
+    </div>
+    </form>,
+            @<div>
+                <button class="ui yellow ok button" type="submit">新增</button>
+                <button class="ui cancel  button" type="reset">取消</button>
+            </div>)
+

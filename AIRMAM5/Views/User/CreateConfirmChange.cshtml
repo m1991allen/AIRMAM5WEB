@@ -1,0 +1,54 @@
+﻿@model AIRMAM5.Models.ResetPasswordViewModel
+@{
+    ViewBag.Title = "--確認電子郵件--";
+    //ViewBag.Title = "CreateConfirmChange";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<hgroup class="title">
+    <h1 style="color:navajowhite;">@ViewBag.Title </h1>
+</hgroup>
+<div style="text-align: center;">
+    <p>
+        感謝您確認電子郵件，請接著設定您登入系統的密碼。
+    </p>
+</div>
+<br />
+<hr />
+
+<div class="ui stackable one column centered grid _ResrtPass">
+    <div class="_backgroundImg"></div>
+    <div class="ui card six wide column">
+        <div class="ui basic segment">
+            @using (Html.BeginForm("CreateConfirmChange", "User", FormMethod.Post, new { @class = "ui inverted form", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="field">
+                    @Html.LabelFor(m => m.Password)
+                    <div class="ui icon input">
+                        @Html.HiddenFor(model => model.Code)
+                        @Html.HiddenFor(model => model.UserId)
+                        @Html.PasswordFor(m => m.Password)
+                        <i class="grey eye slash link icon"></i>
+                    </div>
+                </div>
+                <div class="field">
+                    @Html.LabelFor(m => m.ConfirmPassword)
+                    <div class="ui icon input">
+                        @Html.PasswordFor(m => m.ConfirmPassword)
+                        <i class="grey eye slash link icon"></i>
+                    </div>
+                </div>
+                <div class="inline fields">
+                    <button class="ui fluid cancel grey button" type="reset">清除</button>
+                    <button type="submit" class="ui fluid yellow button">確認</button>
+                </div>
+                <div class="field">
+                    <span class="right">@Html.ValidationMessageFor(m => m.UserId, "", new { @class = "valid" })</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

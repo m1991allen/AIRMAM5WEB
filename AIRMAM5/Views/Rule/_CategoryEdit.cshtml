@@ -1,0 +1,42 @@
+﻿@model  AIRMAM5.DBEntity.Models.Rule.EditRuleModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("EditCategoryModal", "規則--流程代碼",
+@<form role="form" class="ui inverted form" , id="EditCategoryForm">
+     <div class="four fields">
+         <div class="three wide field">
+             @Html.LabelFor(m => m.IsEnabled) @*<label>是否啟用</label>*@
+             @{ string checkedStyle = (Model.IsEnabled) ? "checked" : "";}
+             <div class="ui toggle checkbox @checkedStyle" name="RuleEnabled">
+                 @{ if (Model.IsEnabled)
+                     {<input type="checkbox" name="enabled" checked="checked" disabled /> }
+                     else
+                     { <input type="checkbox" name="enabled"  disabled/>}
+                 }
+                 <label></label>
+             </div>
+         </div>
+         <div class="three wide field">
+             @Html.LabelFor(model => model.RuleCategory)
+             @Html.TextBoxFor(model => model.RuleCategory, new { @readonly = "readonly" })
+         </div>
+         <div class="three wide field">
+             @Html.LabelFor(m => m.RuleName)
+             @Html.EditorFor(m => m.RuleName)
+         </div>
+         <div class="ten wide field">
+             @Html.LabelFor(m => m.Note)
+             @Html.EditorFor(m => m.Note)
+         </div>
+     </div>
+ 
+</form>,
+  @<div>
+      <button type="button" class="ui ok yellow  button">儲存</button>
+      <button class="ui cancel  button" type="button">取消</button>
+  </div> )
+
+
+

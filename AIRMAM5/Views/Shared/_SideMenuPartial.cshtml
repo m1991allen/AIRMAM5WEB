@@ -1,0 +1,55 @@
+﻿@using AIRMAM5.DBEntity.Services
+@using System.Configuration;
+@{
+    string userName = string.Empty;
+    string brandLogo= ConfigurationManager.AppSettings["brandLogo"]?? "~/Images/noImage.png";
+    string version = ConfigurationManager.AppSettings["version"];
+    string verDescription = ConfigurationManager.AppSettings["versionDescription"];
+    IHtmlString verhtml = new HtmlString(verDescription);
+}
+<!--側邊選單-->
+<aside>
+    <div class="ui inverted vertical menu">
+        <div class="_MAMuser_logo">
+            @*<div class="item">
+                <img src="~/Images/logo_Horizontal-w-a50.svg" alt="AIRMAM LOGO" class="ui medium  fluid centered image">
+            </div>*@
+            <div class="item">
+                <img src="@brandLogo" alt="公司 Logo" class="ui medium  fluid centered image" />
+            </div>
+            <div class="item">
+                @if (Request.IsAuthenticated)
+                {
+                    UsersService _usersService = new UsersService();
+                    var _uInof = _usersService.GetUserInfo();
+                    userName = _uInof.fsLOGIN_ID;
+
+                    <h2 class="ui inverted center aligned medium  header">
+                        <div class="content">
+                            @User.Identity.Name @_uInof.RealName
+                            <div class="sub header"><span class="ui label">@string.Join(", ", _uInof.UserRoles)</span><span class="ui label"> @_uInof.DeptName</span></div>
+                        </div>
+                    </h2>
+
+
+
+                }
+            </div>
+            @*<div class="ui horizontal divider inverted header">
+                    媒體資產管理系統
+                </div>*@
+        </div>
+        @if (Request.IsAuthenticated)
+        {
+            @Html.Action("WebFunctionMenu", "Home", new { area = "", username = @userName })
+        }
+        else
+        {
+            <div class="item"> 驗證失敗! </div>
+        }
+            <div class="bottom fixed item">
+                <img src="~/Images/logo_Horizontal-w-a50.svg" alt="AIRMAM LOGO" class="ui small fluid centered image">
+                <div class="x-version">@verhtml @version </div>
+            </div>
+    </div>
+</aside>

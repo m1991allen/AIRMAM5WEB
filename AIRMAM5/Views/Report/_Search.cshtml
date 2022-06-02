@@ -1,0 +1,26 @@
+﻿@model AIRMAM5.DBEntity.Models.Shared.ReportParameterModel
+
+@{ 
+    string[] InArray = new string[] { "rptGET_ARC_LIST_SUM", "rptGET_ARC_LIST_DETAIL" };
+    string StartStr = InArray.Contains(Model.RptItem) ? "入庫日期(起)" : "調用日期(起)";
+    string EndStr = InArray.Contains(Model.RptItem) ? "入庫日期(迄)" : "調用日期(迄)";
+}
+
+<form class="ui inverted form" role="form" id="SearchForm">
+    <div class="ten fields">
+        @Html.HiddenFor(model => model.RptItem, new { @id = "rptItem" })
+        <div class="two wide ui calendar required field">
+            <label>@StartStr</label>
+            @Html.TextBoxFor(model => model.StartDate, new { type = "text", placeholder = "起", @id = "sdate" })
+        </div>
+        <div class="two wide ui calendar required field">
+            <label>@EndStr</label>
+            @Html.TextBoxFor(model => model.EndDate, new { type = "text", placeholder = "迄", @id = "edate" })
+        </div>
+        <div class="twelve wide field">
+            <label style="visibility:hidden;">查詢</label>
+            <button type="submit" class="ui yellow button">查詢</button>
+            <button type="button" name="reset" class="ui button">清空</button>
+        </div>
+    </div>
+</form>

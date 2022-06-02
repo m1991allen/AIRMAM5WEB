@@ -1,0 +1,53 @@
+﻿@model AIRMAM5.DBEntity.DBEntity.spGET_DIRECTORIES_Result
+
+<div class="ui grid inverted segment _directoryTab" style="max-height:80vh;overflow:auto;height:100%;">
+    @*<div class="ui divided items">*@
+    <div class="ui right aligned grid row1 _styleMarginZero">
+        @Html.LabelFor(model => model.fsNAME, new { @class = "center aligned three wide column" })
+        <span class="left aligned thirteen wide column">@Model.fsNAME</span>
+    </div>
+    <div class="ui right aligned grid row1 _styleMarginZero">
+        @Html.LabelFor(model => model.fsDIRTYPE, new { @class = "center aligned three wide column" })
+        <span class="left aligned thirteen wide column">@Model.fsDIRTYPE</span>
+    </div>
+    <div class="ui right aligned grid row1 _styleMarginZero">
+        @Html.LabelFor(model => model.fnORDER, new { @class = "center aligned three wide column" })
+        <span class="left aligned thirteen wide column">@Model.fnORDER</span>
+    </div>
+    <div class="ui right aligned grid row1 _styleMarginZero">
+        @Html.LabelFor(model => model.fnTEMP_ID_SUBJECT, new { @class = "center aligned three wide column" })
+        <span class="left aligned thirteen wide column">@Model.C_SUBJECT_NAME</span>
+    </div>
+    <div class="ui right aligned grid row1 _styleMarginZero">
+        @Html.LabelFor(model => model.fnTEMP_ID_VIDEO, new { @class = "center aligned three wide column" })
+        <span class="left aligned thirteen wide column">@Model.C_VIDEO_NAME</span>
+    </div>
+    <div class="ui right aligned grid row1 _styleMarginZero">
+        @Html.LabelFor(model => model.fnTEMP_ID_AUDIO, new { @class = "center aligned three wide column" })
+        <span class="left aligned thirteen wide column">@Model.C_AUDIO_NAME</span>
+    </div>
+    <div class="ui right aligned grid row1 _styleMarginZero">
+        @Html.LabelFor(model => model.fnTEMP_ID_PHOTO, new { @class = "center aligned three wide column" })
+        <span class="left aligned thirteen wide column">@Model.C_PHOTO_NAME</span>
+    </div>
+    <div class="ui right aligned grid row1 _styleMarginZero">
+        @Html.LabelFor(model => model.fnTEMP_ID_DOC, new { @class = "center aligned three wide column" })
+        <span class="left aligned thirteen wide column">@Model.C_DOC_NAME</span>
+    </div>
+    <div class="ui right aligned grid row1 _styleMarginZero">
+        @Html.LabelFor(model => model.fsSHOWTYPE, new { @class = "center aligned three wide column" })
+        <span class="left aligned thirteen wide column">@Model.fsSHOWTYPE</span>
+    </div>
+    <div class="ui right aligned grid row1 _styleMarginZero">
+        @Html.LabelFor(model => model.fsADMIN_GROUP, new { @class = "center aligned three wide column" })
+        <span class="left aligned thirteen wide column">@Model.C_sGROUP_NAME_LIST</span>
+    </div>
+    <div class="ui right aligned grid row1 _styleMarginZero">
+        @Html.LabelFor(model => model.fsADMIN_USER, new { @class = "center aligned three wide column" })
+        <span class="left aligned thirteen wide column">@Model.C_sUSER_NAME_LIST</span>
+    </div>
+    <div class="ui right aligned grid row1 _styleMarginZero">
+        @Html.LabelFor(model => model.fsDESCRIPTION, new { @class = "center aligned three wide column" })
+        <span class="left aligned thirteen wide column">@Model.fsDESCRIPTION</span>
+    </div>
+</div>

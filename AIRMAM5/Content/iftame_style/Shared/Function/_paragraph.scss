@@ -1,0 +1,41 @@
+﻿/*
+    段落描述列表
+*/
+@mixin _paragraph {
+    .cuslist.list {
+        width: 100%;
+
+        .item {
+            background-color: darken($darkgrey,5);
+            margin: 15px 0;
+            padding-top: 0 !important;
+            color: $white;
+
+            &:hover {
+                border: 3px solid $yellow;
+                font-size: 1.2rem;
+                background-color: darken($darkgrey,10);
+            }
+
+            .extra {
+                .button {
+                    margin: 5px;
+                }
+            }
+
+            p {
+                padding: .8em;
+                text-align: left;
+            }
+
+            .header {
+                padding: 9px;
+                width: 100%;
+                min-width: 100%;
+                text-align: left;
+                /*background-color: #222222;*/
+                background-color: darken($black,5);
+            }
+        }
+    }
+}

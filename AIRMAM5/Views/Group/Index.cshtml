@@ -1,0 +1,27 @@
+﻿@model IEnumerable<AIRMAM5.DBEntity.Models.Role.GroupsCounterModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+@* Group 專屬CSS *@
+<link href="~/Content/iftame_style/Group/GroupIndex.min.css" rel="stylesheet" />
+@HtmlHelper.Breadcrumb(new string[] { "系統設定", "角色群組維護" })
+
+@*<div class="ui inverted segment right aligned">*@
+<div class="_Filter">
+    <button type="button" class="ui _darkGrey button" name="create"><i class="plus icon"></i> 新增群組 </button>
+</div>
+<div id="Table"></div>
+<!--新增群組燈箱-->
+@Html.Action("_Create", "Group")
+<!--帳號列表資訊,資料content由Json產生-->
+@HtmlHelper.HtmlModal("UserListModal", "角色帳號資訊", @<div></div>, @<button class="ui cancel  button" type="button">關閉</button>)
+
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+
+@section Scripts{
+    @Html.Partial("~/Views/Bundle/GroupIndex_Js.cshtml")
+    @*<script src="~/Scripts/dist/GroupIndex.min.js"></script>*@
+}

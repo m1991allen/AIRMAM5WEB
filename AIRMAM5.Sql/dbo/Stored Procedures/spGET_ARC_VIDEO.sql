@@ -1,0 +1,66 @@
+﻿
+
+-- =============================================
+-- 描述:	取出ARC_VIDEO 入庫項目-影片檔主檔 資料
+-- 記錄:	<2011/09/15><Eric.Huang><新增本預存>
+-- 記錄:	<2011/09/16><Eric.Huang><將50個自訂欄位拿掉>
+--      <2011/11/17><Eric.Huang><新增欄位>
+--		<2012/05/09><Eric.Huang><增加 _sKF_PATH 欄位>
+--		<2012/05/21><Dennis.Wen><一堆欄位調整>
+--		<2012/07/24><Eric.Huang><新增欄位 fnRESP_ID/fnRELA_ID/fnCHRO_ID>
+-- 記錄:<2014/08/21><Eric.Huang><新增 fsKEYWORD/fsOTHINFO/fsOTHTYPE1/fsOTHTYPE2/fsOTHTYPE3>
+--		<2015/01/12><Eric.Huang><新增欄位fsSUBTITLE>
+--		<2016/11/14><David.Sin><增加需要欄位>
+-- =============================================
+CREATE PROCEDURE [dbo].[spGET_ARC_VIDEO]
+	@fsFILE_NO	VARCHAR(16),
+	@fsSUBJ_ID	VARCHAR(12)
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+
+	DECLARE @fsMEDIA_PREVIEW_URL VARCHAR(100) = (SELECT fsVALUE FROm tbzCONFIG WHERE fsKEY = 'MEDIA_PREVIEW_URL')
+
+	;WITH reADMIN(fnDIR_ID,fsPATH_NAME) AS
+	(
+		SELECT fnDIR_ID,CAST(fsNAME AS VARCHAR(MAX)) FROM tbmDIRECTORIES WHERE fnDIR_ID = 1
+		UNION ALL
+		SELECT A.fnDIR_ID,CAST(B.fsPATH_NAME + '>' + A.fsNAME AS VARCHAR(MAX)) FROM tbmDIRECTORIES A JOIN reADMIN B ON A.fnPARENT_ID = B.fnDIR_ID
+	)
+	--\\172.20.142.35\media\V\L\2019\03\11\
+	--\\172.20.142.35\media\V\L\
+	SELECT 
+			
+		tbmARC_VIDEO.*,
+		ISNULL(USERS_CRT.fsNAME,'') AS fsCREATED_BY_NAME,
+		ISNULL(USERS_UPD.fsNAME,'') AS fsUPDATED_BY_NAME,
+		_sSUBJ_PATH = A.fsPATH_NAME,
+		--_sDIR_PATH = dbo.fnGET_DIR_PATH_BY_SUBJECT_ID(fsSUBJECT_ID),
+		--_sSUBJ_PATH = dbo.fnGET_SUBJ_PATH_BY_SUBJECT_ID(fsSUBJECT_ID),
+		--_sKF_PATH	= dbo.fnGET_ARC_FILE_PATH(fsSUBJECT_ID,fsFILE_NO,'','K'),
+		--_sFILE_URL_L = dbo.fnGET_FILE_URL_BY_TYPE_AND_FILE_NO('V',fsFILE_NO,'L')
+		_sFILE_URL_L = @fsMEDIA_PREVIEW_URL + 'V/L/' + REPLACE(REPLACE(tbmARC_VIDEO.fsFILE_PATH_L,(SELECT fsVALUE FROM tbzCONFIG WHERE fsKEY = 'MEDIA_FOLDER_V_L'),''),'\','/') +
+							+ [fsFILE_NO] + '_L.' + fsFILE_TYPE,
+		CASE 
+			WHEN (SELECT TOP 1 fsSTATUS FROM tblWORK WHERE _item_id = fsFILE_NO and fsTYPE IN ('TRANSCODE','DAILY_ITP') order by fnWORK_ID desc) = '90' THEN 
+				CASE 
+					WHEN (SELECT COUNT(1) FROM tbmARC_VIDEO_K WHERE fsFILE_NO = tbmARC_VIDEO.fsFILE_NO AND fcHEAD_FRAME = 'Y') = 0 THEN REPLACE(@fsMEDIA_PREVIEW_URL,'Media','Images') + 'Template_IMG/video.png?t=' + SUBSTRING(CONVERT(VARCHAR(50),NEWID()),1,5)
+					ELSE (SELECT TOP 1 @fsMEDIA_PREVIEW_URL + 'V/K/' + REPLACE(REPLACE([fsFILE_PATH],(SELECT [fsVALUE] FROM tbzCONFIG WHERE fsKEY = 'MEDIA_FOLDER_V_K'),''),'\','/') + [fsFILE_NO] + '_' + [fsTIME] + '.jpg?t=' + SUBSTRING(CONVERT(VARCHAR(50),NEWID()),1,5) FROM [dbo].[tbmARC_VIDEO_K] WHERE fsFILE_NO = tbmARC_VIDEO.fsFILE_NO AND fcHEAD_FRAME = 'Y' ORDER BY fsTIME)
+				END
+			WHEN (SELECT TOP 1 fsSTATUS FROM tblWORK WHERE _item_id = fsFILE_NO and fsTYPE IN ('TRANSCODE','DAILY_ITP') order by fnWORK_ID desc) LIKE 'E%' THEN REPLACE(@fsMEDIA_PREVIEW_URL,'Media','Images') + 'tran_error.png?t=' + SUBSTRING(CONVERT(VARCHAR(50),NEWID()),1,5)
+			ELSE REPLACE(@fsMEDIA_PREVIEW_URL,'Media','Images') + 'transcoding.png?t=' + SUBSTRING(CONVERT(VARCHAR(50),NEWID()),1,5)
+		END AS fsHEAD_FRAME
+		
+	FROM
+		tbmARC_VIDEO 
+			JOIN tbmSUBJECT ON tbmARC_VIDEO.fsSUBJECT_ID = tbmSUBJECT.fsSUBJ_ID
+			JOIN reADMIN A ON tbmSUBJECT.fnDIR_ID = A.fnDIR_ID
+			LEFT JOIN tbmUSERS USERS_CRT ON tbmARC_VIDEO.fsCREATED_BY = USERS_CRT.fsLOGIN_ID
+			LEFT JOIN tbmUSERS USERS_UPD ON tbmARC_VIDEO.fsUPDATED_BY = USERS_UPD.fsLOGIN_ID
+		
+	WHERE
+		(@fsFILE_NO = '' OR fsFILE_NO = @fsFILE_NO) AND
+		(@fsSUBJ_ID = '' OR fsSUBJECT_ID = @fsSUBJ_ID)
+END
+
+

@@ -1,0 +1,191 @@
+﻿@import "./_variable.scss";
+
+$VideoWidth:480px;
+$VideoHeight:270px;
+
+@mixin FullScreen() {
+    video {
+        width: 100%;
+        height: 100%;
+    }
+
+    .ui.embed {
+        width: 100%;
+        height: 100%;
+    }
+
+    #videoMenu {
+        position: relative;
+        top: -60px;
+        left: 0;
+        opacity: 0;
+        background: #1b1c1d;
+        min-height: 60px;
+        padding-top: 5px;
+
+        &:hover {
+            opacity: .8;
+        }
+    }
+}
+div[name="preview"] {
+    width: 100%;
+    background-color: #1B1C1D;
+    padding: 0 !important;
+
+    .cusgrid {
+        height: 100%;
+        width: 100%;
+        background: #1B1C1D;
+    }
+
+    .cusrow {
+        display: block;
+        width: 100%;
+        height: 50%;
+        background: #1B1C1D;
+
+        .cuscolumn {
+            display: inline-block;
+            float: left;
+            height: 100%;
+
+            button {
+                background: #1B1C1D;
+            }
+        }
+
+        &:nth-of-type(1) {
+            .cuscolumn {
+                span, div {
+                    margin: auto;
+                    color: $white;
+                }
+
+                &:nth-of-type(1), &:nth-of-type(3) {
+                    width: 20%;
+                    text-align: center;
+                }
+
+                &:nth-of-type(2) {
+                    width: 60%;
+                }
+            }
+        }
+
+        &:nth-of-type(2) .cuscolumn {
+            width: calc(100% / 3);
+
+            span, div {
+                margin: auto;
+            }
+
+            &:nth-of-type(1) > button {
+                float: right;
+            }
+
+            &:nth-of-type(3) > button {
+                float: left;
+            }
+        }
+    }
+
+    div[name="audio"] {
+        .cusrow {
+            &:nth-of-type(2) .cuscolumn {
+                width: calc(100% / 2);
+            }
+        }
+    }
+    /*.ui.segment {
+        padding: 0 !important;
+    }*/
+    .ui.embed {
+        background-color: #000;
+        height: $VideoHeight;
+        padding: 0 !important;
+    }
+    /*& > div, & > video {
+        z-index: inherit;
+    }*/
+    video {
+        object-fit: fill;
+    }
+
+    video, audio {
+        height: 100% !important;
+        width: auto !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        /*width: 100% !important;
+        height: auto;*/
+    }
+
+    .ui.image {
+        height: 100% !important;
+        width: auto !important;
+        margin: auto;
+    }
+
+    img {
+        max-height: $VideoHeight;
+    }
+    /*.ui.grid {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }*/
+    #videoMenu {
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #1b1c1d;
+        /*height: 60px;*/
+        .row {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+        /*音量*/
+        .column.row.left.aligned {
+            padding-left: 0;
+            padding-right: 0;
+            transition: width 0.5s;
+
+            &:hover {
+                width: 100px;
+            }
+        }
+    }
+    /*全螢幕時videoMenu位置調整*/
+    #fullScreenContainer {
+        &:fullscreen {
+            width: 100%;
+            height: 100%;
+
+            @include FullScreen();
+        }
+
+        &:-moz-full-screen {
+            width: 100%;
+            height: 100%;
+            @include FullScreen();
+        }
+
+        &:-webkit-full-screen {
+            width: 100%;
+            height: 100%;
+            @include FullScreen();
+        }
+
+        &:-ms-fullscreen {
+            width: 100%;
+            height: 100%;
+            @include FullScreen();
+        }
+    }
+}

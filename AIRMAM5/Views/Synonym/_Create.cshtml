@@ -1,0 +1,44 @@
+﻿@model AIRMAM5.DBEntity.Models.Synonym.SynonymCreateModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("CreateModal", "新增同義詞",
+@<form role="form" class="ui form" id="CreateForm">
+    <div class="sixteen wide required field">
+        @Html.LabelFor(m => m.fsTYPE) 
+        @Html.DropDownListFor(model => model.fsTYPE, new SelectList(Model.SynonymTypeList, "Value", "Text"), new { @class = "ui search selection dropdown" })
+    </div>
+    <div class="sixteen wide four field">
+        <table class="ui inverted selectable stackable table">
+            <thead>
+                <tr>
+                    <th>@Html.LabelFor(m => m.fsTEXT_LIST) @*同義詞詞彙*@</th>
+                    <th>
+                        <div class="ui action transparent inverted input">
+                            <input type="text" placeholder="請輸入同義詞..." name="SynonymWord" autofocus>
+                            <button type="button" class="ui yellow button" name="InsertSynonym" data-type="Create"><i class="add icon"></i>新增</button>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="ShowSynonymList">
+                @Html.HiddenFor(m => m.fsTEXT_LIST, new { @id = "fsTEXT_LIST" })
+            </tbody>
+        </table>
+    </div>
+    <div class="sixteen wide field">
+        <label>備註</label>
+        @Html.TextAreaFor(model => model.fsNOTE, new { @rows = "4" })
+    </div>
+
+    <div class="field">
+        @Html.ValidationSummary(true, "", new { @class = "" })
+    </div>
+</form>,
+ @<div>
+    <button type="button" class="ui ok yellow button">儲存</button>
+    <button class="ui cancel  button" type="button">取消</button>
+</div>
+ )
+

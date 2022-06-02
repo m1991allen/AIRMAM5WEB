@@ -1,0 +1,42 @@
+﻿@model AIRMAM5.DBEntity.DBEntity.tbmGROUPS
+@{
+    Layout = "";
+}
+@HtmlHelper.HtmlModal("DetailModal", "fmp6yj3" +
+    "群組內容",
+@<form class="ui form">
+     <div class="three fields">
+         <div class="field">
+             @Html.DisplayNameFor(model => model.fsGROUP_ID)
+             @Html.DisplayFor(model => model.fsGROUP_ID)
+         </div>
+         <div class="field">
+             @Html.DisplayNameFor(model => model.fsNAME)
+             @Html.DisplayFor(model => model.fsNAME)
+         </div>
+         <div class="field">
+             @Html.DisplayNameFor(model => model.fsDESCRIPTION)
+             @Html.DisplayFor(model => model.fsDESCRIPTION)
+         </div>
+     </div>
+    <div class="three fields">
+        <div class="field">
+            @Html.DisplayNameFor(model => model.fsTYPE)
+            @Html.DisplayFor(model => model.fsTYPE)
+        </div>
+        <div class="field">
+            @Html.DisplayNameFor(model => model.fdCREATED_DATE)
+            @Html.DisplayFor(model => string.Format("{0:yyyy/MM/dd HH:mm:ss}", model.fdCREATED_DATE))
+        </div>
+        <div class="field">
+            @Html.DisplayNameFor(model => model.fsCREATED_BY)
+            @Html.DisplayFor(model => model.fsCREATED_BY)
+        </div>
+    </div>
+    <div class="field">
+        @Html.DisplayFor(model => model.fdUPDATED_DATE)
+        @Html.DisplayNameFor(model => model.fsUPDATED_BY)
+    </div>
+</form>
+,@<button class="ui yellow cancel button" type="button">關閉</button>
+ )

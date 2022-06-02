@@ -1,0 +1,57 @@
+﻿@model Dictionary<string,string>
+
+
+    
+    @if (string.IsNullOrEmpty(Model["fsFILE_URL"]))
+    {
+        <img src="@Model["fsIMAGE_URL"]"/>
+
+    }
+    else
+    {
+        <link rel="stylesheet" href="Content/player/style.css" />
+        <script src="~/Scripts/player/video.js"></script>
+        <div class="videoContainer" style="">
+            <div class="Volume_adjustment">
+
+
+                <div class="volume" title="音量">
+
+                    <span class="volumeBar"></span>
+                </div>
+                <div class="sound" title="喇叭"></div>
+            </div>
+            <video id="myVideo" width="100%" height="100%" data-framerate="29.97" poster="">
+                <source src="@Model["fsFILE_URL"]" type="video/mp4" />
+            </video>
+            <div class="p-control">
+
+                <div class="topControl">
+                    <span class="current"></span>
+                    <div class="p-progress">
+                        <span class="timeBar"></span>
+                    </div>
+                    <span class="duration"></span>
+                </div>
+
+                <div class="btmControl">
+
+                    <div class="btm">
+                        <div class="btnPrevF p-btn" title="上一格"></div>
+                        <div class="btnPlay p-btn" title="播放/暫停"></div>
+                        <div class="btnNextF p-btn" title="下一格"></div>
+                        <div class="btnx3 p-btn text" title="播放速度"><p>1</p></div>
+                    </div>
+                    <div class="btnStop p-btn" title="停止"></div>
+                    <div class="btnFS p-btn" title="全螢幕"></div>
+                </div>
+
+            </div>
+        </div>
+    }
+
+
+
+<script>
+
+</script>

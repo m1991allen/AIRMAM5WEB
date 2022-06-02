@@ -1,0 +1,91 @@
+﻿@using System.Configuration;
+@{
+    string title = ConfigurationManager.AppSettings["Title"];
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>@title</title>
+    <link href="~/Content/semanticUI/css/semantic.css" rel="stylesheet" />
+    <link href="~/Content/common.min.css" rel="stylesheet" />
+    <link href="~/Content/toastrJS/toastr.min.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="~/Images/favicon-16x16.png">
+    <script src="~/Content/jQuery/jquery-3.6.0.min.js"></script>
+    @{
+        string Browser = Request.Browser.Browser;
+        if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
+        {
+            <script src="~/Content/IE_Compatible/ie11.polyfill.min.js"></script>
+        }
+
+    }
+    @RenderSection("Styles", false)
+</head>
+<body>
+    <!--側邊選單(與_LoginPartial有關)-->
+    <div id="Sidebar" class="ui right sidebar inverted vertical menu">
+        <div class="inside" subIndex="0"> <!--線上人數--></div>
+        <div class="inside" subIndex="1"> <!--儲存工作紀錄sideba插入點--></div>
+        <div class="inside" subIndex="2">
+            <!--提醒訊息sidebar-->
+            <div class="ui fluid one item top fixed menu">
+                <div class="item">
+                    <button type="button" name="readall" class="ui yellow  button"><i class="book icon"></i> 全部已讀</button>
+                </div>
+            </div>
+            <div id="MessageSide"></div>
+        </div>
+        <div class="inside" subIndex="3"><div name="inside-scroll" class="inside-scroll"> <!--目前視窗插入點--></div></div>
+    </div>
+    <!--主面板-->
+
+    <div class="pusher" style="height: 100%;">
+        @Html.Partial("~/Views/Shared/_SideMenuPartial.cshtml")
+        @*@Html.Partial("~/Views/Shared/_LoginPartial.cshtml")*@
+        @{
+            Html.RenderAction("SearchParamData", "Shared");
+        }
+        <!--用於傳替訊息的中間iframe-->
+        <iframe name="postMessage" width="0" height="0" frameborder="0" style="height:0;width:0;margin:0;padding:0;position:fixed;bottom:0;"></iframe>
+        <main class="_mainBody">
+            <div class="rack">
+                @RenderBody()
+            </div>
+        </main>
+        <footer></footer>
+        <div id="DocumentViewer" class="ui basic fullscreen modal">
+            @*<i class="close blue icon"></i>*@<!--如果要啟用,要記得將刪除事件綁定在close icon-->
+            <div class="content"></div>
+        </div>
+    </div>
+    <!--右鍵選單-->
+
+    @HtmlHelper.ContextMenu()
+    <!--分頁關閉確認視窗-->
+    @HtmlHelper.ConfirmModal("LeaveConfirm", "您確定要離開此頁面嗎?", "您有未保存的更改：您可以保存更改，放棄更改或取消以繼續編輯。")
+    <script src="~/Content/semanticUI/js/sidebar.min.js"></script>
+    <script src="~/Content/semanticUI/js/accordion.min.js"></script>
+    <script src="~/Content/semanticUI/js/checkbox.min.js"></script>
+    <script src="~/Content/semanticUI/js/dimmer.js"></script>
+    <script src="~/Content/semanticUI/js/dropdown.min.js"></script>
+    <script src="~/Content/semanticUI/js/transition.min.js"></script>
+    <script src="~/Content/semanticUI/js/modal.min.js"></script>
+    <script src="~/Content/semanticUI/js/popup.min.js"></script>
+    <script src="~/Content/semanticUI/js/tab.min.js"></script>
+    <script src="~/Content/toastrJS/toastr.min.js"></script>
+    <!--Notice:Chart.js目前使用2.5版本,2.6~2.9版本在交互與動態資料同步上有已知的奇怪Bug-->
+    <script src="~/Content/chartJS/Chart.min.js"></script>
+    <script src="~/Content/dayJS/dayjs.min.js"></script>
+    @Html.Partial("~/Views/Bundle/SubjectFormPlugin_Js.cshtml")
+    @Html.Partial("~/Views/Bundle/Layout_Js.cshtml")
+
+
+    @RenderSection("Scripts", required: false)
+
+
+</body>
+</html>

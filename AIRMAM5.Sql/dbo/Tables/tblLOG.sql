@@ -1,0 +1,12 @@
+﻿CREATE TABLE [dbo].[tblLOG] (
+    [fnlLOG_ID]      BIGINT         IDENTITY (1, 1) NOT NULL,
+    [fsTYPE]         VARCHAR (50)   NOT NULL,
+    [fsGROUP]        VARCHAR (50)   NOT NULL,
+    [fsDESCRIPTION]  NVARCHAR (MAX) NOT NULL,
+    [fsNOTE]         NVARCHAR (MAX) NOT NULL,
+    [fsDATA_KEY]     NVARCHAR (MAX) NOT NULL,
+    [fdCREATED_DATE] DATETIME       NOT NULL,
+    [fsCREATED_BY]   VARCHAR (50)   NOT NULL,
+    CONSTRAINT [PK_tblLOG] PRIMARY KEY CLUSTERED ([fnlLOG_ID] ASC)
+);
+

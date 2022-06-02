@@ -1,0 +1,31 @@
+﻿@using AIRMAM5.Utility.Common;
+@model IEnumerable<AIRMAM5.DBEntity.Models.Subject.SubjectFileSeqmentModel>
+
+<div class="ui bottom attached tab" data-tab="paraDescription" style="flex-direction: column;padding: 0 .3em;">
+    @if (Model == null || !Model.Any())
+    {
+        <div class="ui basic padded segment center aligned" style="min-height:100%;width:100%;">
+            <div class="ui icon inverted yellow large header" style="margin:20px;">
+                <i class="database icon"></i>
+                <div class="content">
+                    沒有資料可以顯示
+                    <div class="sub header">Nothing to show</div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        foreach (var des in Model)
+        {
+            string BegKeyTime = CommonTimeCode.FarmeToTimeCode((double.Parse(des.BegTime.ToString())) * 29.97);
+            string EndKeyTime = CommonTimeCode.FarmeToTimeCode((double.Parse(des.EndTime.ToString())) * 29.97);
+
+            <div class="_StyleDescription" data-begtime="@des.BegTime" data-endtime="@des.EndTime" data-seqno="@des.SeqNo">
+                <span>@BegKeyTime~@EndKeyTime </span>
+                <span>@des.Description </span>
+            </div>
+        }
+    }
+
+</div>

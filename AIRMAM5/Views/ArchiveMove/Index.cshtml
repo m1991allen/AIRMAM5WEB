@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+
+}
+@section Styles{
+    <link href="~/Content/iftame_style/ArchiveMove/ArchiveMoveIndex.min.css" rel="stylesheet" />
+    <link href="~/Content/inspireTreeJS/inspire-tree-dark.min.css" rel="stylesheet" />
+}
+<div class="ui stackable grid x-main-grid">
+    <div class="row" style="height:100%;">
+        <!--樹狀圖 START-->
+        <div id="treeSidebar" class="three wide column">
+            @HtmlHelper.Breadcrumb(new string[] { "媒資管理", "歸檔搬遷" })
+            <!--樹狀圖--> @HtmlHelper.Tree(false)   <!--樹狀圖-->
+        </div>
+        <!--樹狀圖 END-->
+        <div id="FileContainer" class="thirteen wide column row">
+            <div class="sixteen wide black column">
+                <div id="DirectonaryPath" class="ui large label">請先選擇目錄節點</div>
+                <div id="TipResult">
+                    <div class="ui image">
+                        <img src="~/Images/archiveExplanation.png" alt="Alternate Text" />
+                    </div>
+                </div>
+                <div id="ShowResult">
+                    <div class="ui grid">
+                        <div class="three wide column x-subjectlist" id="SourceSubjectList">
+                            <div class="ui items"><!--來源主題列表--> </div>
+                        </div>
+                        <div class="thirteen wide column" id="FileAreaCover">
+                            <div class="ui basic padded grey placeholder segment center aligned" style="min-height: 100%; width: 100%;background:#333;border:0.5px dashed #fff !important;">
+                                <div class="ui icon inverted large header">
+                                    <i class="mouse pointer circle icon"></i>
+                                    <div class="content">
+                                        請先選擇主題列
+                                        @*<div class="sub header">小秘訣:可以去【主題與檔案】新增段落描述</div>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="thirteen wide column" id="FileArea" style="display:none;">
+                            <!--顯示路徑或查詢區域 START-->
+                            <div class="ui left icon inverted transparent big input" id="DirectonaryMenu" style="float:right;">
+                                <i class="tags icon inverted small"></i>
+                                <input id="SearchFile" type="text" placeholder="檔案關鍵字" style="height:30px;">
+                            </div>
+                            <!--顯示路徑或查詢區域 END-->
+                            <!--檔案選擇區域 START-->
+                            @{
+                                string[] XAreaId = { "VideoFiles", "AudioFiles", "PhotoFiles", "DocFiles" };
+                                string[] XType = { "V", "A", "P", "D" };
+                                string[] XTypeStr = { "影", "音", "圖", "文" };
+                                string[] XTitle = { "影片", "聲音", "圖片", "文件" };
+                                string[] XCardId = { "VideoCards", "AudioCards", "PhotoCards", "DocCards" };
+                                for (int i = 0; i < 4; i++)
+                                {
+                                    <!--區域-->
+                                    <div id="@XAreaId[i]" class="x-area" data-type="@XType[i]">
+                                        <div class="x-fileheader">
+                                            <i class="angle down icon"></i>@XTypeStr[i] (<span name="count">0</span>)
+                                        </div>
+                                        <button name="move" class="ui basic inverted icon right floated button" type="button" title="@XTitle[i]"><i class="arrow circle right icon"></i></button>
+                                        <div class="ui inverted divider"></div>
+                                        <div class="ui stackable five cards x-filelist" id="@XCardId[i]"><!--影片檔案--> </div>
+                                    </div>
+                                    <!--區域-->
+                                }
+
+                            }
+
+                        </div>
+                        <!--目標拖拉區塊-->
+                        <div id="FileDropArea" class="seven wide column row" style="display:none;">
+                            <div class="six wide column x-subjectlist" id="TargetSubjectList" style="display:none;overflow-y:auto;height:100%;">
+                                <div class="ui items"><!--目標主題列表--> </div>
+                            </div>
+                            <div class="eight wide column" style="overflow-y:auto;height:90vh;">
+                                <div class="ui transparent labeled fluid input" style="margin-bottom: .5em;">
+                                    <button type="button" class="ui mini icon yellow button inverted black"><i class="icon undo inverted black"></i></button>
+                                    <input type="text" placeholder="節點關鍵字查詢" id="SearchDropNode" style="color:#fff;line-height: 2;max-width: 100% !important;border-radius: 3px !important;">
+                                </div>
+                                <label for="SearchDropNode" class="ui label">※選擇目標節點>主題列表後，就可以開始進行檔案搬遷</label>
+                                <div id="treeDropList" class="tree"><!--目標樹狀--></div>
+                            </div>
+                        </div>
+                        <!--目標拖拉區塊-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@HtmlHelper.ConfirmModal("DropConfirm", "檔案搬遷確認", "確認是否要將檔案搬遷至此?")
+@HtmlHelper.ConfirmModal("SubjectDropConfirm", "主題搬遷確認", "確認是否要將主題搬遷至此目錄或節點?")
+@HtmlHelper.ConfirmModal("DirDropConfirm", "目錄/節點搬遷確認", "確認是否要將目錄/節點搬遷至此?")
+
+@section Scripts{
+    <script src="~/Content/selectableJS/selectable.min.js"></script>
+    @Html.Partial("~/Views/Bundle/SubjectTreePlugin_Js.cshtml")
+    @Html.Partial("~/Views/Bundle/ArchiveMoveIndex_Js.cshtml")
+    @*<script src="~/Scripts/dist/ArchiveMoveIndex.min.js"></script>*@
+}

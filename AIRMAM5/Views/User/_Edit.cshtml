@@ -1,0 +1,121 @@
+﻿@model AIRMAM5.DBEntity.Models.User.UserEditViewModel
+
+@HtmlHelper.HtmlModal("EditModal", "使用者帳號編輯",
+@<div>
+    @using (Ajax.BeginForm("Edit", "User", 
+            new AjaxOptions { HttpMethod = "POST", OnSuccess = "ShowMessage", OnFailure = "ShowMessage" },
+           new { role = "form", @class = "ui form", @id = "EditForm" }))
+    {
+        @Html.AntiForgeryToken()
+     <div class="ui inverted" name="Detail">
+         <div class="two fields">
+             <div class="two wide field">
+                 @Html.LabelFor(model => model.fsIS_ACTIVE)
+                 @if (Model.fsIS_ACTIVE == true)
+                {<span class="ui green fluid label">啟用</span> }
+                else
+                { <span class="ui red fluid label">停用</span>
+                }
+                 @Html.ValidationMessageFor(model => model.fsIS_ACTIVE, "", new { @class = "" })
+             </div>
+             <div class="field">
+                 @Html.LabelFor(model => model.fsUSER_ID)
+                 @Html.TextBoxFor(model => model.fsUSER_ID, new { @readonly = "readonly" })
+                 @Html.ValidationMessageFor(model => model.fsUSER_ID)
+             </div>
+             <div class="field">
+                 @Html.LabelFor(model => model.fsLOGIN_ID)
+                 @Html.TextBoxFor(model => model.fsLOGIN_ID, new { @readonly = "readonly" })
+                 @Html.ValidationMessageFor(model => model.fsLOGIN_ID)
+             </div>
+         </div>
+     </div>  
+     <div class="ui horizontal divider inverted header" style="font-size: 1em;">可編輯帳號資料</div>
+        @Html.ValidationSummary(true, "", new { @class = "" })
+         <div class="four fields">
+             <div class="field required">
+                 @Html.LabelFor(model => model.fsNAME)
+                 @Html.TextBoxFor(model => model.fsNAME)
+                 @Html.ValidationMessageFor(model => model.fsNAME)
+             </div>
+             <div class="field">
+                 @Html.LabelFor(model => model.fsENAME)
+                 @Html.TextBoxFor(model => model.fsENAME)
+                 @Html.ValidationMessageFor(model => model.fsENAME)
+             </div>
+             <div class="field">
+                 @Html.LabelFor(model => model.fsTITLE)
+                 @Html.TextBoxFor(model => model.fsTITLE)
+                 @Html.ValidationMessageFor(model => model.fsTITLE)
+             </div>
+             <div class="field">
+                 @Html.LabelFor(model => model.fsDEPT_ID)
+                 @Html.DropDownList("fsDEPT_ID", new SelectList(Model.DeptSelect, "Value", "Text"), new { @class = "ui search selection fluid dropdown" })
+                 @Html.ValidationMessageFor(model => model.fsDEPT_ID)
+             </div>
+         </div>
+         @*<div class="two fields">*@
+             <div class="field required">
+                 @Html.LabelFor(model => model.fsEMAIL)
+                 @*@Html.TextBoxFor(model => model.fsEMAIL, new { @readonly = "readonly" })
+                 @Html.ValidationMessageFor(model => model.fsEMAIL)*@
+                 <div class="fields">
+                     <div class="four wide field">
+                         @Html.TextBoxFor(model => model.fsEMAIL, new { @readonly = "readonly" })
+                     </div>
+                     <div class="two wide field">
+                         <button class="ui tiny orange button" type="button" name="changeEmail">變更</button>
+                         <button class="ui tiny yellow button" type="button" name="saveEmail" style="display:none;">儲存</button>
+                         @*  TODO_2020.3.13: 電子郵件異動另開metohd處理. *@
+                     </div>
+                     <div class="ten wide field">
+                         <div style="color: mediumaquamarine;">※變更電子郵件,會需要重新驗證電子郵件。 </div>
+                     </div>
+                 </div>
+             </div>
+         @*</div>*@
+        <div class="two fields">
+            <div class="field">
+                @Html.LabelFor(model => model.fsPHONE)
+                @Html.TextBoxFor(model => model.fsPHONE)
+                @Html.ValidationMessageFor(model => model.fsPHONE, "", new { @class = "" })
+            </div>
+            <div class="required field">
+                <div class="_ArrayFlex">
+                    @Html.LabelFor(model => model.FSecretList)<span class="">（可複選)*</span>
+                </div>
+                <div class="ui right action left labeled fluid input required">
+                    @Html.ListBox("FSecretList", Model.FileSecretSelect, new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+                    @*@Html.DropDownList("FSecretList", new SelectList(Model.FileSecretSelect, "Value", "Text"), new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })*@
+                </div>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                @Html.LabelFor(model => model.fsDESCRIPTION)
+                @Html.TextBoxFor(model => model.fsDESCRIPTION)
+                @Html.ValidationMessageFor(model => model.fsDESCRIPTION, "", new { @class = "" })
+            </div>
+            <div class="field">
+                @Html.LabelFor(model => model.fsBOOKING_TARGET_PATH)
+                @Html.TextBoxFor(model => model.fsBOOKING_TARGET_PATH, new { @placeholder = "(如：\\SERVER\\FOLDER)" })
+                @Html.ValidationMessageFor(model => model.fsBOOKING_TARGET_PATH, "", new { @class = "" })
+            </div>
+
+        </div>
+        <div class="required field">
+            <div class="_ArrayFlex">
+                @Html.LabelFor(model => model.GroupList)<span class=""><sup class="ui red header">*</sup>（可複選,至少選擇一個)</span>
+            </div>
+            <div class="ui right action left labeled fluid input required">
+                @Html.ListBox("GroupList", Model.RoleGroupSelect, new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })
+                @*@Html.DropDownList("GroupList", new SelectList(Model.RoleGroupSelect, "Value", "Text"), new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })*@
+            </div>
+        </div>
+     }
+</div>,
+@<div>
+     <button class="ui yellow ok button" type="button">儲存</button>
+  <button class="ui cancel button" type="reset">取消</button>
+</div>)
+

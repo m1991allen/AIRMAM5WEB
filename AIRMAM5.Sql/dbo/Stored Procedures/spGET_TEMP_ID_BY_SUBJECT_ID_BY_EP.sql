@@ -1,0 +1,26 @@
+﻿
+
+-- =============================================
+-- 描述:	取出fnTEMP_ID_SUBJECT
+-- 記錄:	<2013/09/18><Albert.Chen><新增本預存>
+-- =============================================
+CREATE PROCEDURE [dbo].[spGET_TEMP_ID_BY_SUBJECT_ID_BY_EP]
+	@fnSUBJECT_ID VARCHAR(12)
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+
+	SELECT 
+		tbmDIRECTORIES.fnTEMP_ID_SUBJECT ,
+		_nVideo	= (SELECT COUNT(fsFILE_NO) FROM tbmARC_VIDEO AS V WHERE (V.fsSUBJECT_ID = tbmSUBJECT.fsSUBJ_ID)),
+	    _nAudio = (SELECT COUNT(fsFILE_NO) FROM tbmARC_AUDIO AS A WHERE (A.fsSUBJECT_ID = tbmSUBJECT.fsSUBJ_ID)),
+		_nPhoto = (SELECT COUNT(fsFILE_NO) FROM tbmARC_PHOTO AS P WHERE (P.fsSUBJECT_ID = tbmSUBJECT.fsSUBJ_ID)),
+		_nDocument	= (SELECT COUNT(fsFILE_NO) FROM tbmARC_DOC AS D WHERE (D.fsSUBJECT_ID = tbmSUBJECT.fsSUBJ_ID))		
+	FROM 
+		tbmSUBJECT LEFT JOIN 
+			tbmDIRECTORIES ON tbmSUBJECT.fnDIR_ID = tbmDIRECTORIES.fnDIR_ID 
+	WHERE 
+		fsSUBJ_ID =@fnSUBJECT_ID
+END
+
+

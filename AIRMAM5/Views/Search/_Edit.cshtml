@@ -1,0 +1,100 @@
+﻿<!--與主題/媒體編輯頁面共用表單-->
+<form class="ui form">
+    <div class="three fields" name="Detail">
+        <div class="field">
+            <label>
+                檔案標號
+            </label>
+            <input readonly="readonly" type="text" value="123445_2114144">
+        </div>
+        <div class="field">
+            <label>
+                檔案資訊
+            </label>
+            <input readonly="readonly" type="text" value="123445_2114144">
+        </div>
+        <div class="field">
+            <label>是否列入檢索</label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="gender">
+                <i class="dropdown icon"></i>
+                <div class="default text">是</div>
+                <div class="menu">
+                    <div class="item" data-value="1">是</div>
+                    <div class="item" data-value="0">否</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="required field">
+        <label>標題</label>
+        <input type="text" name="first-name" placeholder="First Name">
+    </div>
+    <div class="field">
+        <label>描述</label>
+        <textarea rows="2"></textarea>
+    </div>
+    <div class="field">
+        <label>字幕</label>
+        <textarea rows="2"></textarea>
+    </div>
+    <div class="ui horizontal divider inverted header" style="font-size: 1em;">詮釋資料</div>
+    <div class="three fields">
+        <div class="required field">
+            <label>節目版本</label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="gender">
+                <i class="dropdown icon"></i>
+                <div class="default text">請選擇</div>
+                <div class="menu">
+                    <div class="item" data-value="1">普通版</div>
+                    <div class="item" data-value="0">A 3</div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label>影片類別</label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="gender">
+                <i class="dropdown icon"></i>
+                <div class="default text">請選擇</div>
+                <div class="menu">
+                    <div class="item" data-value="1">有字幕</div>
+                    <div class="item" data-value="0">無字幕</div>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label>語言</label>
+            <div class="ui selection dropdown">
+                <input type="hidden" name="gender">
+                <i class="dropdown icon"></i>
+                <div class="default text">請選擇</div>
+                <div class="menu">
+                    <div class="item" data-value="1">國語</div>
+                    <div class="item" data-value="0">台語</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="three fields">
+        <div class="field">
+            <label>影片編號</label>
+            <input type="text" name="">
+        </div>
+        <div class="field">
+            <label>關鍵字</label>
+            <input type="text" name="">
+        </div>
+        <div class="field">
+            <label>副名</label>
+            <input type="text" name="">
+        </div>
+    </div>
+    <div class="field">
+        <label>備註</label>
+        <input type="text" name="">
+    </div>
+
+</form>

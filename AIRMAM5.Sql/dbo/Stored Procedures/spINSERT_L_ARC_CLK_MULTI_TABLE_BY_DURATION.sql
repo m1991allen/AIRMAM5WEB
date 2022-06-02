@@ -1,0 +1,179 @@
+﻿
+-- =============================================
+-- 描述:	點閱記錄 各統計資料表SQL排程用SP
+-- 記錄:	<2012/07/13><Mihsiu.Chiu><新增本預存>
+-- =============================================
+CREATE PROCEDURE [dbo].[spINSERT_L_ARC_CLK_MULTI_TABLE_BY_DURATION]
+	
+	@sDURATION         VARCHAR(50)
+	
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+	BEGIN TRY
+
+	DECLARE @fdSDATE	DATE
+	DECLARE @fdEDATE	DATE
+	
+    DECLARE @fsCREATED_BY NVARCHAR(50)
+    
+    SET @fsCREATED_BY = 'SYSTEM'
+	
+		
+		IF (@sDURATION = '3D')
+		BEGIN
+			SET @fdSDATE = DATEADD(DD,-3,GETDATE())
+			SET @fdEDATE = DATEADD(DD,-1,GETDATE())		
+		END
+		ELSE IF (@sDURATION = '1W')
+		BEGIN
+			SET @fdSDATE = DATEADD(DD,-7,GETDATE())
+			SET @fdEDATE = DATEADD(DD,-1,GETDATE())		
+		END
+		ELSE IF (@sDURATION = '1M')
+		BEGIN
+			SET @fdSDATE = DATEADD(DD,-30,GETDATE())
+			SET @fdEDATE = DATEADD(DD,-1,GETDATE())		
+		END
+		ELSE IF (@sDURATION = '3M')
+		BEGIN
+			SET @fdSDATE = DATEADD(DD,-90,GETDATE())
+			SET @fdEDATE = DATEADD(DD,-1,GETDATE())		
+		END
+		ELSE IF (@sDURATION = '1Y')
+		BEGIN
+			SET @fdSDATE = DATEADD(DD,-365,GETDATE())
+			SET @fdEDATE = DATEADD(DD,-1,GETDATE())		
+		END						
+		
+		--DECLARE CSR5 CURSOR FOR SELECT fsKEYWORD, COUNT(fsKEYWORD) AS CNT_KEYWORD FROM tblSRH_KW WHERE (fdCREATED_DATE >= @fdSDATE) AND (fdCREATED_DATE <= @fdEDATE) GROUP BY fsKEYWORD													
+		--下一行的做法才能確保沒有時跟分的問題 ref=> http://havebb.com/b/post/tsql-get-date-part.aspx
+		DECLARE CSR5 CURSOR FOR SELECT fsTYPE, fsFILE_NO, fsSUBJECT_ID, COUNT(fnARC_CLK_ID) FROM tblARC_CLK WHERE DATEADD(dd, 0, DATEDIFF(dd, 0, fdCREATED_DATE)) BETWEEN @fdSDATE AND @fdEDATE GROUP BY fsTYPE, fsFILE_NO, fsSUBJECT_ID
+
+		DECLARE @fsTYPE VARCHAR(50), @fsFILE_NO VARCHAR(16), @fsSUBJECT_ID VARCHAR(12),  @CNT INT, @fsIDENTIFIER VARCHAR(16)
+		
+		OPEN CSR5
+		FETCH NEXT FROM CSR5 INTO @fsTYPE, @fsFILE_NO, @fsSUBJECT_ID, @CNT
+		WHILE (@@FETCH_STATUS=0)
+			BEGIN 
+			---------開始處理每一筆資料
+	
+				IF (@fsFILE_NO = '') BEGIN SET @fsIDENTIFIER = @fsSUBJECT_ID  END
+				ELSE BEGIN SET @fsIDENTIFIER = @fsFILE_NO END
+				
+				IF	 (@fsTYPE = '3D') 
+				BEGIN	
+					--IF EXISTS()
+					IF EXISTS(	SELECT * FROM [dbo].[tblARC_CNT3D] WHERE fdEDATE = @fdEDATE AND fsTYPE = @fsTYPE AND fsIDENTIFIER = @fsIDENTIFIER )
+						BEGIN
+							DELETE FROM [dbo].[tblARC_CNT3D] WHERE fdEDATE = @fdEDATE AND fsTYPE = @fsTYPE AND fsIDENTIFIER = @fsIDENTIFIER
+							--新增資料
+							INSERT INTO [dbo].[tblARC_CNT3D](fdSDATE, fdEDATE, fsTYPE, fsIDENTIFIER, fnCOUNT, fdCREATED_DATE, fsCREATED_BY) VALUES( @fdSDATE, @fdEDATE, @fsTYPE, @fsIDENTIFIER, @CNT, GETDATE(), @fsCREATED_BY)
+						END
+					ELSE
+						BEGIN
+							--新增資料
+							INSERT INTO [dbo].[tblARC_CNT3D](fdSDATE, fdEDATE, fsTYPE, fsIDENTIFIER, fnCOUNT, fdCREATED_DATE, fsCREATED_BY) VALUES( @fdSDATE, @fdEDATE, @fsTYPE, @fsIDENTIFIER, @CNT, GETDATE(), @fsCREATED_BY)
+						END
+				END
+
+
+				IF	    (@fsTYPE = '1W') 
+				BEGIN	
+					--IF EXISTS()
+					IF EXISTS(	SELECT * 
+								FROM [dbo].[tblARC_CNT1W] 
+								WHERE fdEDATE = @fdEDATE AND fsTYPE = @fsTYPE AND fsIDENTIFIER = @fsIDENTIFIER
+							  )
+						BEGIN
+							DELETE FROM [dbo].[tblARC_CNT1W] WHERE fdEDATE = @fdEDATE AND fsTYPE = @fsTYPE AND fsIDENTIFIER = @fsIDENTIFIER
+							--新增資料
+							INSERT INTO [dbo].[tblARC_CNT1W](fdSDATE, fdEDATE, fsTYPE, fsIDENTIFIER, fnCOUNT, fdCREATED_DATE, fsCREATED_BY) VALUES( @fdSDATE, @fdEDATE, @fsTYPE, @fsIDENTIFIER, @CNT, GETDATE(), @fsCREATED_BY)
+						END
+					ELSE
+						BEGIN
+							--新增資料
+							INSERT INTO [dbo].[tblARC_CNT1W](fdSDATE, fdEDATE, fsTYPE, fsIDENTIFIER, fnCOUNT, fdCREATED_DATE, fsCREATED_BY) VALUES( @fdSDATE, @fdEDATE, @fsTYPE, @fsIDENTIFIER, @CNT, GETDATE(), @fsCREATED_BY)
+						END
+				END
+
+				
+				IF	    (@fsTYPE = '1M') 
+				BEGIN	
+					--IF EXISTS()
+					IF EXISTS(	SELECT * 
+								FROM [dbo].[tblARC_CNT1M] 
+								WHERE fdEDATE = @fdEDATE AND fsTYPE = @fsTYPE AND fsIDENTIFIER = @fsIDENTIFIER
+							  )
+						BEGIN
+							DELETE FROM [dbo].[tblARC_CNT1M] WHERE fdEDATE = @fdEDATE AND fsTYPE = @fsTYPE AND fsIDENTIFIER = @fsIDENTIFIER
+							--新增資料
+							INSERT INTO [dbo].[tblARC_CNT1M](fdSDATE, fdEDATE, fsTYPE, fsIDENTIFIER, fnCOUNT, fdCREATED_DATE, fsCREATED_BY) VALUES( @fdSDATE, @fdEDATE, @fsTYPE, @fsIDENTIFIER, @CNT, GETDATE(), @fsCREATED_BY)
+						END
+					ELSE
+						BEGIN
+							--新增資料
+							INSERT INTO [dbo].[tblARC_CNT1M](fdSDATE, fdEDATE, fsTYPE, fsIDENTIFIER, fnCOUNT, fdCREATED_DATE, fsCREATED_BY) VALUES( @fdSDATE, @fdEDATE, @fsTYPE, @fsIDENTIFIER, @CNT, GETDATE(), @fsCREATED_BY)
+						END
+				END
+
+
+				IF	    (@fsTYPE = '3M') 
+				BEGIN	
+					--IF EXISTS()
+					IF EXISTS(	SELECT * 
+								FROM [dbo].[tblARC_CNT3M] 
+								WHERE fdEDATE = @fdEDATE AND fsTYPE = @fsTYPE AND fsIDENTIFIER = @fsIDENTIFIER
+							  )
+						BEGIN
+							DELETE FROM [dbo].[tblARC_CNT3M] WHERE fdEDATE = @fdEDATE AND fsTYPE = @fsTYPE AND fsIDENTIFIER = @fsIDENTIFIER
+							--新增資料
+							INSERT INTO [dbo].[tblARC_CNT3M](fdSDATE, fdEDATE, fsTYPE, fsIDENTIFIER, fnCOUNT, fdCREATED_DATE, fsCREATED_BY) VALUES( @fdSDATE, @fdEDATE, @fsTYPE, @fsIDENTIFIER, @CNT, GETDATE(), @fsCREATED_BY)
+						END
+					ELSE
+						BEGIN
+							--新增資料
+							INSERT INTO [dbo].[tblARC_CNT3M](fdSDATE, fdEDATE, fsTYPE, fsIDENTIFIER, fnCOUNT, fdCREATED_DATE, fsCREATED_BY) VALUES( @fdSDATE, @fdEDATE, @fsTYPE, @fsIDENTIFIER, @CNT, GETDATE(), @fsCREATED_BY)
+						END
+				END
+
+
+				IF	    (@fsTYPE = '1Y') 
+				BEGIN	
+					--IF EXISTS()
+					IF EXISTS(	SELECT * 
+								FROM [dbo].[tblARC_CNT1Y] 
+								WHERE fdEDATE = @fdEDATE AND fsTYPE = @fsTYPE AND fsIDENTIFIER = @fsIDENTIFIER
+							  )
+						BEGIN
+							DELETE FROM [dbo].[tblARC_CNT1Y] WHERE fdEDATE = @fdEDATE AND fsTYPE = @fsTYPE AND fsIDENTIFIER = @fsIDENTIFIER
+							--新增資料
+							INSERT INTO [dbo].[tblARC_CNT1Y](fdSDATE, fdEDATE, fsTYPE, fsIDENTIFIER, fnCOUNT, fdCREATED_DATE, fsCREATED_BY) VALUES( @fdSDATE, @fdEDATE, @fsTYPE, @fsIDENTIFIER, @CNT, GETDATE(), @fsCREATED_BY)
+						END
+					ELSE
+						BEGIN
+							--新增資料
+							INSERT INTO [dbo].[tblARC_CNT1Y](fdSDATE, fdEDATE, fsTYPE, fsIDENTIFIER, fnCOUNT, fdCREATED_DATE, fsCREATED_BY) VALUES( @fdSDATE, @fdEDATE, @fsTYPE, @fsIDENTIFIER, @CNT, GETDATE(), @fsCREATED_BY)
+						END
+				END
+
+			---------處理完畢每一筆資料
+			FETCH NEXT FROM CSR5 INTO @fsTYPE, @fsFILE_NO, @fsSUBJECT_ID, @CNT
+			END
+		CLOSE CSR5
+		DEALLOCATE CSR5
+	    
+		
+	END TRY
+	
+	BEGIN CATCH
+		SELECT RESULT = 'ERROR:' + CAST(@@ERROR AS VARCHAR(10)) + '-' + ERROR_MESSAGE()
+		CLOSE CSR5
+		DEALLOCATE CSR5
+	END CATCH
+END
+
+
+
+
+

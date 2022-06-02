@@ -1,0 +1,13 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "系統未知錯誤";
+    Layout = "~/Views/Shared/_ErrorLayout.cshtml";
+}
+
+<h1>500</h1>
+<p>系統發生未知錯誤</p>
+<p class="quotething"> “抱歉，我們最終出了問題。我們正在努力解決這個問題.”</p><br>
+<div align="center">
+    <a id="backbtn" class="button404" href="@Url.Action("Index","Home")">回首頁</a>
+</div>

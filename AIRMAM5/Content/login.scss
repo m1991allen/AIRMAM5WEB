@@ -1,0 +1,518 @@
+﻿@import "./cssreset.scss";
+$turquoise: hsl(171, 100%, 41%);
+$tq-shadow: #40e0d0;
+$grey: #979797;
+$black: #303436;
+$lightyellow: #fadeb2;
+$primary: #2b9cc9;
+$white: #fff;
+$red: hsl(348, 100%, 61%);
+$lightblue: #2b9cc9;
+$formWidth:360px;
+$formPadding:6vw;
+$fontWeight:500;
+$cardMargin:60px;
+$btnMargin:10px;
+// 1. Text Align
+//==================================
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.fluid {
+    width: 100%;
+}
+// 2. Structer
+//==================================
+body {
+    width: 100%;
+    overflow-x: hidden;
+    font-family: "Avenir Next", "Helvetica Neue", Arial,-apple-system, Roboto, sans-serif,'Microsoft JhengHei';
+    background: url('../Images/login.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+}
+
+main {
+    /*width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 2fr 1fr;*/
+    width: 100vw;
+    /*height: 100vh;*/
+    display: inline-block;
+}
+
+.img-sec {
+    width: calc(100% - #{$formWidth} - #{$formPadding *2});
+    /*width: 100%;*/
+    height: 100%;
+    background: linear-gradient(to bottom,rgba(198, 198, 198, 0.48),rgba(255,255,255,0.48),rgba(17, 17, 17, 0.48));
+    background-size: cover;
+    background-position: center;
+    filter: blur(.5px);
+    position: absolute;
+    top: 0;
+    left: 0
+}
+
+.form-sec {
+    /*width: $formWidth;*/
+
+    /*width: 100%;*/
+    /*padding: 0px 6vw;*/
+    box-sizing: border-box;
+    height: 100%;
+    max-height: 100vh;
+    background-color: rgba(0,0,0,0.7);
+    position:absolute;
+    right:0;
+    top:0;
+}
+.form-main {
+    margin: auto;
+    height: 50%;
+    max-height: 100vh;
+    margin-top: 25%;
+    min-width: $formWidth;
+    margin-left: $formPadding;
+    margin-right: $formPadding;
+    width: $formWidth;
+}
+
+// 3. Form
+//====================================
+
+form {
+    text-align: left;
+    margin: auto;
+}
+/*取消chrome瀏覽器自動完成樣式 */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    /*-webkit-box-shadow: 0 0 0 30px white inset !important;*/
+    -webkit-box-shadow: none !important;
+}
+/*變更樣式*/
+input:-webkit-autofill {
+    -webkit-text-fill-color: $primary !important;
+}
+
+input {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid $grey;
+    border-radius: 3px;
+    padding: 0 0 10px 10px;
+    text-indent: 10px;
+    color: $white;
+    opacity: .7;
+    font-size: 19px;
+    line-height:19px;
+    background: transparent;
+
+    &:focus, &:active, &:hover, &:active:focus {
+        outline-style: none;
+        background-color: $white;
+        box-shadow: none;
+        border: 0;
+        border-bottom: 1px solid rgba(255,255,255,.5);
+        color: $white;
+        opacity: .7;
+        background: transparent;
+    }
+}
+
+.group {
+    width: 100%;
+    /*margin: 100px 0;*/
+
+    .forgot, .check {
+        width:50%;
+    }
+     a{
+         float:right;
+     }
+   
+    /*display: flex;
+    justify-content: center;
+    align-items: center;
+    color:$white;
+    .forgot, .check {
+        width: 50%;
+    }*/
+}
+
+.forgot {
+    padding: 15px;
+    font-size: .8rem;
+    text-align: right;
+    color:$white;
+}
+
+.buttons {
+    width: 100%;
+    margin: auto;
+    min-height: 43px;
+    margin-top: 0 !important;
+
+    .btn {
+        display: inline-block;
+        font-size: 1.2rem;
+        width: calc((100% - #{$btnMargin}) / 2);
+        /*width: calc((100% - 56px) / 2 );*/
+        float: left;
+        padding: 8px;
+        background-color: transparent;
+        border: 1px solid $white;
+        color: $white;
+        border-radius: 4px;
+        text-align: center;
+        font-family: "Avenir Next", "Helvetica Neue", Arial,-apple-system, Roboto, sans-serif,'Microsoft JhengHei';
+        font-size: 19px;
+        cursor:pointer;
+        &.active, &:active, &:hover {
+            background-color: $white !important;
+            color: #3a3b3a !important;
+            font-weight: bold;
+        }
+
+        &:nth-of-type(1) {
+            margin-right: $btnMargin/2;
+        }
+
+        &:last-of-type {
+            margin-left: $btnMargin/2;
+        }
+    }
+}
+
+
+.field {
+    margin-bottom: 20px;
+    /*height: 56px;*/
+    border: #303436;
+
+    label {
+        display: inline-block;
+        padding-bottom: 5px;
+        font-weight: 500;
+        font-size: 15px;
+        color: $white;
+        letter-spacing: 0.2px;
+        text-align: left;
+        margin-top: -30px;
+        transition: 0.2s ease-in-out;
+        z-index: 0;
+        user-select: none;
+
+        &.active {
+            font-weight: 500;
+            font-size: 12px;
+            color: $primary;
+            letter-spacing: 0.14px;
+            text-align: left;
+        }
+    }
+}
+// 4. Checkbox
+//=================================
+.check {
+    display: block;
+    position: relative;
+    top: 0px;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    line-height: 27px;
+
+    label {
+        display: inline-block;
+        font-size: 15px;
+        color: $white;
+    }
+}
+
+/* Hide the browser's default checkbox */
+.check input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    /*height: 25px;
+    width: 25px;*/
+    height: 15px;
+    width: 15px;
+    background-color: $white;
+    border: 1px solid $lightblue;
+
+    &:after {
+        left:3px;
+        top:0px;
+        /*left: 9px;
+        top: 5px;*/
+        width: 5px;
+        height: 10px;
+        border: solid $lightblue;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+        content: "";
+        position: absolute;
+        display: none;
+    }
+}
+
+.check:hover input ~ .checkmark {
+    border: 1px solid $lightblue;
+}
+
+/* When the checkbox is checked, add a blue background */
+.check input:checked ~ .checkmark {
+    background-color: lightblue;
+}
+
+
+/* Show the checkmark when checked */
+.check input:checked ~ .checkmark:after {
+    display: block;
+}
+
+
+// 5. Select
+select {
+    position: relative;
+    font-family: inherit;
+    background-color: transparent;
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid $grey;
+    padding: 0 0 10px 10px;
+
+    &:focus {
+        outline: none;
+        border-bottom: 1px solid $primary;
+    }
+
+    option {
+        padding: 0 0 10px;
+    }
+}
+// 6. Title
+//==================================
+h1, h2 {
+    color: $black;
+}
+
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    padding: 30px 0px;
+}
+
+h2 {
+    font-size: 1.3rem;
+}
+
+.field > label, p {
+    color: $grey;
+    margin: 10px;
+}
+
+span.valid {
+    color: $red;
+    font-size: .7rem;
+    float: right;
+    padding: 10px;
+    width:100%;
+}
+a {
+    color: $white;
+    text-decoration: none;
+    cursor: pointer;
+    font-size:15px;
+}
+/*a {
+    color: $white;
+    text-decoration: none;
+    cursor: pointer;
+
+    .inputs {
+        display: grid;
+        grid-gap: 10px;
+        padding-top: 30px;
+    }
+}*/
+
+.validation-summary-errors {
+    color: $red;
+    font-size: .6rem;
+
+    ul {
+        list-style-type: none;
+
+        li {
+            padding: 5px 0;
+        }
+    }
+}
+
+// 7. Logo Image
+//==============================
+img.logo {
+    height: 20vh;
+    width: auto;
+    align-self: center;
+}
+// 8. bulletin 公告樣式
+//===========================
+.x-bulletin {
+    /*padding: 20px;*/
+    /*width: 70%;*/
+    padding:0 6vw;
+    margin: auto;
+    margin-top: 20vh;
+    max-height:60vh;
+    overflow-y:auto;
+}
+.card {
+    width: 100%;
+    /*margin: 40px 0;*/
+    margin-bottom: $cardMargin;
+
+    &:nth-of-type(1) {
+    }
+
+    .title {
+        font-weight: $fontWeight + 300;
+        color: #ff8200;
+        font-size: 19px;
+        clear: both;
+    }
+
+    .divider {
+        width: 100%;
+        height: 2px;
+        background-color: $white;
+        opacity: 0.35;
+        margin: 5px 0 10px 0;
+    }
+
+    &:nth-of-type(3n+2) {
+        .title {
+            color: #e4557a !important;
+        }
+    }
+
+    &:nth-of-type(3n+3) {
+        .title {
+            color: $lightblue !important;
+        }
+    }
+
+    .content {
+        padding: 4px 0;
+        font-weight: $fontWeight + 100;
+        color: #303030;
+        font-size: 16px;
+        width: 100%;
+        line-height: initial;
+    }
+
+    .extra {
+        width: 100%;
+        font-weight: normal;
+        font-size: 14px;
+
+        .meta {
+            float: left !important;
+            padding: 5px 8px 5px 0;
+
+            span {
+                border-radius: 4px;
+                background-color: #6a6a6a;
+                color: $white;
+                /*padding: 0 5px;*/
+                padding: 2px 10px;
+                margin: 0 5px;
+            }
+        }
+    }
+}
+
+//9.版號
+//=================================
+.x-version {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+    color: $white;
+    font-size: 10px;
+}
+
+//10.裝置尺寸
+//===========================
+@media screen and (max-width:1000px){
+    .form-main{
+        margin-top:15%;
+    }
+}
+@media screen and (max-width:750px) {
+    main {
+        display: block;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    .img-sec {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        top: 100vh;
+        left: 0;
+    }
+
+    .form-sec {
+        width: 100vw;
+        height: 100vh;
+        padding: 0px 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .form-main{
+        min-width:100%;
+        margin-left:0;
+    }
+
+    .x-bulletin {
+        margin-top: 0;
+
+        .card:nth-of-type(1) {
+            margin-top: $cardMargin;
+        }
+    }
+    .x-version{
+       bottom:28px;
+    }
+}

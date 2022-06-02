@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AIRMAM5.Search</name>
+    </assembly>
+    <members>
+        <member name="M:AIRMAM5.Search.Controllers.SearchController.PostSearchCount(AIRMAM5.Search.Models.clsPARAMETER)">
+            <summary>
+            檢索各類型筆數
+            </summary>
+            <param name="clsPARAMETER">檢索參數</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIRMAM5.Search.Controllers.SearchController.PostSearchMeta(AIRMAM5.Search.Models.clsPARAMETER)">
+            <summary>
+            檢索各類型
+            </summary>
+            <param name="clsPARAMETER">檢索參數</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIRMAM5.Search.Controllers.SearchController.GetSynonym(System.String)">
+            <summary>
+            取得同義詞
+            </summary>
+            <param name="fsSYNONYM">同義詞彙</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIRMAM5.Search.Controllers.SearchController.PostRebuildSynonym(System.Collections.Generic.List{System.Collections.Generic.List{AIRMAM5.Search.Models.clsSYNONYM}})">
+            <summary>
+            重建同義詞
+            </summary>
+            <param name="lstSYNONYMs">所有同義詞組</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIRMAM5.Search.Controllers.SearchController.PostInsertSynonym(System.Collections.Generic.List{AIRMAM5.Search.Models.clsSYNONYM})">
+            <summary>
+            新增同義詞
+            </summary>
+            <param name="lstSYNONYM">單一同義詞組</param>
+            <returns></returns>
+        </member>
+        <member name="M:AIRMAM5.Search.Controllers.SearchController.PostDeleteSynonym(System.Collections.Generic.List{AIRMAM5.Search.Models.clsSYNONYM})">
+            <summary>
+            刪除同義詞
+            </summary>
+            <param name="lstSYNONYM">同義詞(可為詞組或詞彙)</param>
+            <returns></returns>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsHOTKEYWORD.fsKEYWORD">
+            <summary>
+            熱門關鍵字
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsHOTKEYWORD.fnCOUNT">
+            <summary>
+            次數
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.fsINDEX">
+            <summary>
+            要查詢的索引庫名稱，以逗號分隔
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.fsKEYWORD">
+            <summary>
+            關鍵字
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.clsDATE">
+            <summary>
+            日期區間查詢
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.lstCOLUMN_SEARCH">
+            <summary>
+            欄位查詢
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.fnSEARCH_MODE">
+            <summary>
+            搜尋模式(0:一般模式、1:模糊搜尋、2:同義詞搜尋)
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.fnHOMO">
+            <summary>
+            同音(0:關閉、1:開啟)
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.fsTREE">
+            <summary>
+            樹狀節點
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.lstCOLUMN_ORDER">
+            <summary>
+            欄位排序(1:升冪、2:降冪)
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.fnPAGE_SIZE">
+            <summary>
+            每頁筆數
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.fnSTART_INDEX">
+            <summary>
+            開始筆數
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.fsAUTH_DIR">
+            <summary>
+            可查詢節點權限(以分號分開)
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.fsSECRET">
+            <summary>
+            可查詢機密權限(以分號分開)
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.fbIS_ADMIN">
+            <summary>
+            是否為管理者
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.fnTEMP_ID">
+            <summary>
+            樣板編號
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Search.Models.clsPARAMETER.clsDATE_SEARCH">
+            <summary>
+            日期查詢
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.clsDATE_SEARCH.fsCOLUMN">
+            <summary>
+            日期欄位
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.clsDATE_SEARCH.fdSDATE">
+            <summary>
+            日期(起)
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.clsDATE_SEARCH.fdEDATE">
+            <summary>
+            日期(迄)
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Search.Models.clsPARAMETER.clsCOLUMN_SEARCH">
+            <summary>
+            欄位檢索類別
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.clsCOLUMN_SEARCH.fbIS_FULLTEXT">
+            <summary>
+            是否全文檢索(true:檢索、false:區間或比對)
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.clsCOLUMN_SEARCH.fsCOLUMN">
+            <summary>
+            欄位名稱
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.clsCOLUMN_SEARCH.fsVALUE">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Search.Models.clsPARAMETER.clsCOLUMN_ORDER">
+            <summary>
+            排序類別
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.clsCOLUMN_ORDER.fsCOLUMN">
+            <summary>
+            欄位名稱
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsPARAMETER.clsCOLUMN_ORDER.fsVALUE">
+            <summary>
+            值(1:升冪、2:降冪)
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsRETURN.IsSuccess">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsRETURN.Message">
+            <summary>
+            錯誤訊息
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsRETURN.Data">
+            <summary>
+            回傳資訊
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsRETURN.ResponseTime">
+            <summary>
+            回傳時間
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsRETURN.ErrorException">
+            <summary>
+            例外訊息
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsCOUNT">
+            <summary>
+            結果筆數
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsARC">
+            <summary>
+            查詢結果
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsARC.fsFILE_NO">
+            <summary>
+            檔案編號
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsARC.fsMATCH">
+            <summary>
+            符合關鍵字附近的字
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsSUBJ">
+            <summary>
+            主題結果
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsSUBJ.fsSUBJ_ID">
+            <summary>
+            主題編號
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsSUBJ.fsMATCH">
+            <summary>
+            符合關鍵字附近的字
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsVIDEO">
+            <summary>
+            影片結果
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsVIDEO.fsFILE_NO">
+            <summary>
+            檔案編號
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsVIDEO.fsMATCH">
+            <summary>
+            符合關鍵字附近的字
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsAUDIO">
+            <summary>
+            聲音結果
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsAUDIO.fsFILE_NO">
+            <summary>
+            檔案編號
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsAUDIO.fsMATCH">
+            <summary>
+            符合關鍵字附近的字
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsPHOTO">
+            <summary>
+            圖片結果
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsPHOTO.fsFILE_NO">
+            <summary>
+            檔案編號
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsPHOTO.fsMATCH">
+            <summary>
+            符合關鍵字附近的字
+            </summary>
+        </member>
+        <member name="T:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsDOC">
+            <summary>
+            文件結果
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsDOC.fsFILE_NO">
+            <summary>
+            檔案編號
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsSEARCH_RESULT.clsDOC.fsMATCH">
+            <summary>
+            符合關鍵字附近的字
+            </summary>
+        </member>
+        <member name="P:AIRMAM5.Search.Models.clsSYNONYM.fsSYNONYM">
+            <summary>
+            同義詞
+            </summary>
+        </member>
+    </members>
+</doc>

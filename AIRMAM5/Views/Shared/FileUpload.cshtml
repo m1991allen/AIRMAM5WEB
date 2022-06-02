@@ -1,0 +1,359 @@
+﻿@model string
+<style>
+    .btnUpload {
+        color: #000;
+        margin: 0px 11px 8px 0px;
+        border: 0px;
+        padding: 10px 20px 10px 20px;
+        background: rgb(194, 183, 1);
+        float: right;
+    }
+
+        .btnUpload:hover {
+            background: #d9cd09;
+        }
+</style>
+<div class="k-widget k-upload k-header k-upload-sync" style="width: 99%; max-height: 80%; overflow: auto;">
+    <div id="selectFile" class="k-button k-upload-button">
+        <span>選擇檔案</span>
+    </div>
+    <ul class="k-upload-files k-reset" id="SelectedFile"></ul>
+
+</div>
+<script>
+
+    UploadAction = "@Model.Split('-')[0]";
+    MaxFileSizeMB = "@Model.Split('-')[1]";
+    FileCount = "@Model.Split('-')[2]";
+</script>
+<script src="~/Scripts/fileupload/resumable.js"></script>
+@*<script src="~/Scripts/fileupload/FileUpload.js"></script>---把這支移動到下面--*@
+
+<script>
+
+
+    let r = new Resumable({
+        target: UploadAction,
+        chunkSize: MaxFileSizeMB * 1024 * 1024,
+        testChunks: false,
+        fileType: fileExt,
+        simultaneousUploads: 1
+    });
+    //console.log(r);
+    let result = false;
+    let totalCount = 0;
+
+    r.assignBrowse($("#selectFile"));//分配瀏覽
+    r.assignDrop($(".k-upload-sync"));
+    //r = temp[index];
+    index++;
+    temp[index] = r;
+    //console.log(r);
+    //index++;
+    //console.log(temp[index]);
+    //console.log('2 :' + UploadAction)
+    //按了"選擇檔案鈕"後執行
+    r.on('fileAdded', function (file, event) {
+
+        $(event.target).closest('.pure-g').find('.btnUpload-btn').html('<button id="btnUpload" class="btnUpload">上傳檔案</span>');
+        var block = "";
+        block += "<li class='' data-uniqueid='" + file.uniqueIdentifier + "' style='position: relative;padding-bottom: 20px;background: #222222;box-shadow: 0 -7px 29px 8px #000 inset;'>";
+        block += "<span class='' style='padding: 8px;'>";
+        block += "<span class=''>" + file.fileName + "</span>";
+        block += "</span>";
+        block += "<p id='Loading' style='position: absolute;right: 36px;top: 8px;font-size: 9pt;color: #d9cd09;'></p>";
+        block += "<strong class='k-upload-status'>";
+        block += "<button type='button' class='k-button k-button-bare k-upload-action deleteFile'>";
+        block += "<span class='k-icon k-i-close k-i-delete' title='移除' aria-label='Remove'></span>";
+        block += "</button>";
+        block += "</strong>";
+        block += "<div class='progress' style='width: 0%; height: 2px;bottom: 0;background: #d9cd09;position: absolute;'>";
+        //block += "<div class='progress-bar progress-bar-striped active' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width: 0%;'></div>";
+        block += "</div>";
+        block += "</li>";
+        $("#SelectedFile").append(block);
+        let VodLi = $(event.target).closest('.VodLi');
+        let btnUpload_btn = $(event.target).closest('.pure-g').find('.btnUpload-btn');
+        let btnUpload = $(event.target).closest('.pure-g').find('#btnUpload');//上傳檔案鈕
+        let SelectedFile = $(event.target).parent().next();
+        let divupload = $(event.target).closest('#divupload');
+        let VodIndex = $(event.target).closest('.VodLi').attr('index');
+        let fsTITLE_DEFINE = $(event.target).closest('.pure-g').find('#fsTITLE_DEFINE');
+        let fsTITLE = $(event.target).closest('.pure-g').find('#fsTITLE');
+        let fnPRE_ID = $(event.target).closest('.pure-g').find('#fnPRE_ID');
+        //SelectedFile.unbind('click');
+        //SelectedFile.on('click', '.btnUpload', function () {
+        console.log(temp)
+        //console.log(r)
+        btnUpload.click(function () {
+            let Vodmap = VodLi.attr('index');
+            //console.log(Vodmap)
+            //r = temp[Vodmap];  
+            //console.log(temp)
+           
+            if (fsTITLE_DEFINE.val() == "3" &&fsTITLE.val() == "") {
+                alert("請輸入標題!");
+            } else {
+                //console.log('2 :' + UploadAction)
+                //console.log(temp[Vodmap])
+                //let target = r.opts.target;
+                //console.log(fsTITLE)
+                let target = temp[Vodmap].opts.target;
+                //console.log(target)
+                let one = target.indexOf("fsTITLE=") + 8;
+                let two = one;
+                let value = target.substring(one, two);
+                //let value2 = target.substring(target.indexOf("=", target.indexOf("fsTITLE_DEFINE")) + 1, target.indexOf("=", target.indexOf("fsTITLE_DEFINE")) + 2);
+                //let value3 = target.substring(target.indexOf("=", target.indexOf("fnPRE_ID")) + 1, target.indexOf("=", target.indexOf("fnPRE_ID")) + 2);
+
+                //console.log(value3)
+                UploadAction = target.replace("fsTITLE=" + value, "fsTITLE=" + fsTITLE.val());
+                //UploadAction = target.replace("fsTITLE_DEFINE=" + value2, "fsTITLE_DEFINE=" + fsTITLE_DEFINE.val());
+                //UploadAction = target.replace("fnPRE_ID=" + value3, "fnPRE_ID=" + fnPRE_ID.val());
+                console.log('3 :' + UploadAction)
+                
+                //上傳前重新設定一次Action
+                //r.opts.target = UploadAction;
+                //console.log('4 :' + UploadAction)
+                r.upload();
+                $(this).remove();
+            }
+
+            //if (r != null && r.files != null && r.files.length > 0) {
+            //    if ($("#fsTITLE_DEFINE").val() == "3" && $("#fsTITLE").val() == "") {
+            //        alert("請輸入標題!");
+            //        return false;
+            //    }
+            //    //totalCount = r.files.length;
+            //    r.upload();
+            //    VodLi.attr('completeVodD', result);
+
+            //    //let Obj = $(event.target).closest('.VodLi').attr('index');
+            //    //console.log(Obj)
+              
+            //    //VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".k-upload-status").html('<button type="button" class="k-button k-button-bare k-upload-action cancelFile" onclick="cancelFile(' + r + ',' + file.uniqueIdentifier + ',$(this))"><span class="k-icon k-i-close k-i-deletel" title="取消" aria-label="Cancel"></span></button>');
+                ////VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".k-upload-status").html("<button type='button' class='k-button k-button-bare k-upload-action cancelFile' onclick=\"cancelFile(" + VodIndex +",'" + file.uniqueIdentifier + "',$(this))\"><span class='k-icon k-i-close k-i-deletel' title='取消' aria-label='Cancel'></span></button>");
+            //    $(this).remove();
+            
+            //}
+            //else {
+            //    alert("請選擇檔案!");
+            //}
+        });
+
+        r.on('uploadStart', function () {
+        //console.log('開始');
+        });
+
+        r.on('complete', function () {
+            //totalCount = r.files.length;
+            let Vodmap = VodLi.attr('index');
+            //r = temp[Vodmap];
+            console.log(r);
+            if (temp[Vodmap]) {
+                if (r.files.length == 0) {             
+                    result = true;
+                    let completevodd = SelectedFile.closest('.VodLi').attr('completeVodD', result);
+                    completevodd.remove();
+                    
+                    $("#Subject").data().kendoGrid.dataSource.read();
+                    delete temp[Vodmap];
+                //    //if (totalCount > 0) {
+                //    //alert("上傳完成!");
+                //    result = true;
+                //    if (result) {
+                //        $("#Subject").data().kendoGrid.dataSource.read();
+                //        let completevodd = SelectedFile.closest('.VodLi').attr('completeVodD', result);
+                //        completevodd.remove();
+                //    }
+                //    //}
+
+
+                //    return false;
+                }
+            }
+        });
+
+
+
+    ////(5)檔案都完成後
+    ////r.unbind('complete');
+    //r.on('complete', function () {
+          
+    //        //totalCount = r.files.length;
+    //    let Vodmap = VodLi.attr('index');
+    //    r = temp[Vodmap] ;
+    //    console.log(r);
+    //    if (r.files.length == 0) {
+
+    //        //if (totalCount > 0) {
+    //            //alert("上傳完成!");
+    //            result = true;
+    //            if (result) {
+    //                $("#Subject").data().kendoGrid.dataSource.read();
+    //                let completevodd = SelectedFile.closest('.VodLi').attr('completeVodD', result);
+    //                completevodd.remove();
+    //            }
+    //        //}
+
+    //        //$('.L_container').fadeOut('close');
+    //        //$('.Lightbox').fadeOut('close');
+    //        //$('.L_container').html('');
+
+    //        return false;
+    //    }
+    //});
+
+    r.on('error', function (message, file) {
+
+    });
+
+    r.on('cancel', function () {
+            console.log('取消');
+        $.each(r.files, function (idx, file) {
+            r.removeFile(file);
+        });
+        SelectedFile.html("");
+    });
+
+    //(2)跑讀取條
+    r.on('fileProgress', function (file) {
+        //console.log(r)
+        //顯示取消
+        //VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".k-upload-status").html('<button type="button" class="k-button k-button-bare k-upload-action cancelFile" onclick="cancelFile("' + r +'",' + file.uniqueIdentifier + ',$(this))"><span class="k-icon k-i-close k-i-deletel" title="取消" aria-label="Cancel"></span></button>');
+        //VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".k-upload-status").html("<button type='button' class='k-button k-button-bare k-upload-action cancelFile' onclick=\"cancelFile('" + file.uniqueIdentifier + "',$(this))\"><span class='k-icon k-i-close k-i-deletel' title='取消' aria-label='Cancel'></span></button>");
+        VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".k-upload-status").html("<button type='button' class='k-button k-button-bare k-upload-action cancelFile' onclick=\"cancelFile(" + VodIndex + ",'" + file.uniqueIdentifier + "',$(this))\"><span class='k-icon k-i-close k-i-deletel' title='取消' aria-label='Cancel'></span></button>");
+        VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".progress").css('width', Math.floor(file.progress() * 100) + '%');
+        VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find("#Loading").text(Math.floor(file.progress() * 100) + '%');
+    });
+
+    //(3)跑讀取條-完成100%
+r.on('fileSuccess', function (file, message) {
+
+        //顯示完成並移除在r中
+        VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".k-upload-status").html("<button type='button' class='k-button k-button-bare k-upload-action deleteCompleteFile' onclick=\"deleteCompleteFile('" + file.uniqueIdentifier + "')\"><span class='k-icon k-i-close k-i-tick' title='完成' aria-label='Remove'></span></button>");
+        //$('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".progress-bar").removeClass("progress-bar-striped").addClass("progress-bar-success");
+        VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".progress").css('background', 'none');
+        VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find("#Loading").text('100%');
+        r.removeFile(file);
+    });
+
+    //(4)跑讀取條-失敗紅色樣式
+r.on('fileError', function (file, message) {
+        //顯示失敗
+        VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".k-upload-status").html("<button type='button' class='k-button k-button-bare k-upload-action retryFile' onclick=\"retryFile(" + VodIndex + ",'" + file.uniqueIdentifier + "',$(this))\"><span class='k-icon k-i-close k-i-refresh' title='重新上傳' aria-label='Refresh'></span></button>");
+        //$('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".progress-bar").removeClass("progress-bar-striped").addClass("progress-bar-danger");
+        VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".progress").css('background', '#720000');
+    });
+
+        //刪除-X
+        SelectedFile.unbind('click');
+        SelectedFile.on('click', '.deleteFile', function () {
+            let self = $(this),
+                parent = self.parent().parent(),
+                identifier = parent.data('uniqueid'),
+                fileTthis = r.getFromUniqueIdentifier(identifier);
+            //console.log(fileTthis);
+            r.removeFile(fileTthis);
+            //console.log(r.files.length);
+            parent.remove();
+            //let Vodmap = VodLi.attr('index');
+            //temp[Vodmap] = r;
+            if (r == null || r.files == null || r.files.length == 0) {
+                btnUpload_btn.html("");
+                //$("#btnUpload").css("display", "none");
+            }
+            //self.unbind('click');
+        });
+
+
+    ////(4-1)重新上傳
+    //function retryFile(identifier) {
+    //    file = r.getFromUniqueIdentifier(identifier);
+    //    VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".progress-bar").removeClass("progress-bar-danger").addClass("progress-bar-striped active").css('width', '0%');
+    //    VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".k-upload-status").html("<button type='button' class='k-button k-button-bare k-upload-action deleteFile'><span class='k-icon k-i-close k-i-cancel' title='取消' aria-label='Remove'></span></button>");
+
+    //    file.retry();
+    //}
+    //完成-多個檔案可使用它
+    function deleteCompleteFile(identifier) {
+        VodLi.find('[data-uniqueId=' + identifier + ']').remove();
+        }
+
+
+
+
+
+    });//event => <input type="file"> ----結尾
+
+
+    //(4-1)重新上傳
+    function retryFile(RIndex, identifier, This) {
+        let Index = parseInt(RIndex);
+        let VodLi = This.closest('.VodLi');
+        r = temp[Index];
+        console.log(r)
+        file = r.getFromUniqueIdentifier(identifier);
+        VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".progress-bar").removeClass("progress-bar-danger").addClass("progress-bar-striped active").css('width', '0%');
+        VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').find(".k-upload-status").html("<button type='button' class='k-button k-button-bare k-upload-action deleteFile'><span class='k-icon k-i-close k-i-cancel' title='取消' aria-label='Remove'></span></button>");
+
+        file.retry();
+    }
+
+
+    function cancelFile(RIndex,identifier, This) {
+        //console.log(This)
+        //console.log(identifier)
+        let Index = parseInt(RIndex);
+        //console.log(temp[Index - 1])
+        r = temp[Index];
+        console.log(r)
+        //delete temp[Index - 1];
+        //file = r.getFromUniqueIdentifier(identifier);
+        //if (file) {
+        //    file.cancel();
+        //}
+        if (confirm("確定要取消上傳?")) {
+            let self = This.closest('li'),
+                //parent = self.parent().parent(),
+                identifier = self.data('uniqueid')
+                ,filethis = r.getFromUniqueIdentifier(identifier);
+            //file = r.getFromUniqueIdentifier(identifier);
+            if (filethis) {
+                //delete temp[Index];
+                This.closest('li').remove();
+                filethis.cancel();
+                //VodLi.find('[data-uniqueId=' + file.uniqueIdentifier + ']').remove();
+                //totalCount -= 1;
+                //r.upload();
+                //result = false;
+            }
+        }
+    }
+
+
+    //(5)檔案都完成後
+    //r.unbind('complete');
+    //r.on('complete', function () {
+    //    //totalCount = r.files.length;
+    //    //let Vodmap = VodLi.attr('index');
+    //    //r = temp[Vodmap];
+    //    console.log(r);
+    //    if (r.files.length == 0) {
+    //        $("#Subject").data().kendoGrid.dataSource.read();
+
+    //    //    //if (totalCount > 0) {
+    //    //    //alert("上傳完成!");
+    //    //    result = true;
+    //    //    if (result) {
+    //    //        $("#Subject").data().kendoGrid.dataSource.read();
+    //    //        let completevodd = SelectedFile.closest('.VodLi').attr('completeVodD', result);
+    //    //        completevodd.remove();
+    //    //    }
+    //    //    //}
+
+
+    //    //    return false;
+    //    }
+    //});
+</script>

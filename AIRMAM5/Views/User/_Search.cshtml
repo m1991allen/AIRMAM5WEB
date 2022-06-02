@@ -1,0 +1,24 @@
+﻿@{ 
+    Layout = "";
+}
+<form class="ui inverted form" role="form" id="SearchForm">
+    <div class="two fields">
+        <div class="three wide field">
+            <label for="keyword">關鍵字</label>
+            <div class="ui right labeled left action input">
+                <select name="condition" class="ui compact selection dropdown">
+                    <option value="account">帳號</option>
+                    <option value="name">顯示名稱</option>
+                </select>
+                <input type="text" name="keyword" placeholder="請輸入帳號或顯示名稱" />
+            </div>
+        </div>
+        <div class="thirteen wide field">
+            <label style="visibility:hidden;">查詢</label>
+            <button type="submit" class="ui yellow button">查詢</button>
+            <button type="reset" class="ui button">清空</button>
+            <button name="create" type="button" class="ui _darkGrey button"> <i class="plus icon"></i> 新增帳號 </button>
+            <button name="reload" type="button" class="ui _darkGrey button">重載列表</button>
+        </div>
+    </div>
+</form>

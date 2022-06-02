@@ -1,0 +1,393 @@
+﻿@{
+    ViewBag.Title = "AIRMAM5文件檢視器";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #divDocViewer {
+        width: 100%;
+        border-radius: 6px;
+        background-color: whitesmoke;
+        border: 1px grey;
+    }
+
+    /* IMP: This css is required to prevent bootstrap css from shrinking the main viewer */
+
+    .row {
+        margin-right: 0;
+        margin-left: 0
+    }
+
+    .loader {
+        border: 5px solid #f3f3f3;
+        border-top: 5px solid #3498db;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 2s linear infinite;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="https://doconut.com" target="_blank">@ViewBag.Title</a>&nbsp;<div class="loader"></div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="nav navbar-nav ml-auto">
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                      範例檔案
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="OpenDocument('Sample.doc');">Word Doc</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="OpenDocument('Sample.xls');">Excel File Doc</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="OpenDocument('Sample.ppt');">Power Point</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="OpenDocument('Sample.pdf');">Acrobat Pdf</a></li>
+                        <li><div class="dropdown-divider"></div></li>
+                        <li><a class="dropdown-item" href="/Home/Grid"><strong>Grid Demo</strong></a></li>
+                        <li><div class="dropdown-divider"></div></li>
+                        <li><a class="dropdown-item" target="_blank" href="http://try.doconut.com/viewer.aspx">更多格式...</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="javascript:void(0);" onclick="OpenUpload();">上傳檔案</a>
+                </li>
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        導航(Navigation)
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.GotoPage(1);">First</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.Next(false);">Previous</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.Next(true);">Next</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.GotoPage(parseInt(objctlDoc.TotalPages()));">Last</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        旋轉
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="RotateDocument(1);">90</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="RotateDocument(2);">180</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="RotateDocument(3);">270</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="RotateDocument(0);">None</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        縮放
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.Zoom(true);">In</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.Zoom(false);">Out</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.Zoom(25);">25 %</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.Zoom(100);">100 %</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.FitType('width');">Fit Width</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.FitType('height');">Fit Height</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.FitType('');">Fit None</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                      側邊縮圖
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.ThumbSize('small');">Small</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.ThumbSize('normal');">Normal</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.ThumbSize('large');">Large</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.HideThumbs(true);">Hide Thumbs</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.HideThumbs(false);">Show Thumbs</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.HideSplitter(true);">Splitter Off</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0)" onclick="objctlDoc.HideSplitter(false);">Splitter On</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="javascript:void(0);" onclick="PrintDocument();">列印檔案</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);" onclick="GoFS();">全螢幕</a>
+                </li>
+               
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Upload Document</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+
+                <div id="dropZoneForm" class="dropzone">
+                    <div class="dz-message">
+                        Click or drop your document here
+                    </div>
+                    <div>
+                        <div class="fallback">
+                            <input name="file" id="file" type="file" />
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Page Content -->
+
+<div class="row">
+
+    <div class="col-lg-12 text-center">
+        <div id="divDocViewer">
+            <div id="div_@ViewBag.ViewerID"></div>  <!-- The viewer instance name -->
+        </div>
+    </div>
+</div>
+
+
+@section css {
+    @* CSS for the Viewer *@
+
+    @Html.Raw(ViewBag.ViewerCSS)
+
+
+}
+
+
+@section scripts {
+    <!-- Viewer header scripts include-->
+    @Html.Raw(ViewBag.ViewerScripts)
+
+
+    <script language="javascript" type="text/javascript">
+
+        Dropzone.autoDiscover = false; // required
+
+        var token = "";  // current document's token
+        var objctlDoc = null;     // Server object id is "ctlDoc"
+        var loader = $(".loader");
+        var isMobile = false;
+        var resizing = false;
+        var docViewerDiv = $("#divDocViewer");
+        var w = 0;
+        var h = 0;
+
+        loader.hide();
+
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            isMobile = true;
+        }
+
+        // optional code start
+        function ctlDoc_OnViewerBusy() {
+            loader.show();
+        }
+
+        function ctlDoc_OnViewerReady() {
+            loader.hide();
+        }
+
+        function ctlDoc_DoubleClick()
+        {
+            objctlDoc.Zoom(true);
+        }
+        // optional code ends
+
+        function RotateDocument(iAngle) {
+            objctlDoc.Rotate(objctlDoc.CurrentPage(), iAngle);
+        }
+
+        function Resize(orientation) {
+
+            if (resizing) { return; }
+
+            resizing = true;
+
+            w = document.documentElement.clientWidth;
+            h = document.documentElement.clientHeight;
+
+
+            var xdec = 30;
+            var ydec = 80;
+
+            if (isMobile) {
+                xdec = 30;
+                ydec = 80;
+
+                if (typeof orientation !== 'undefined') {
+                    if (orientation === "landscape") {
+                        w = document.documentElement.clientHeight;
+                        h = document.documentElement.clientWidth;
+                    }
+                }
+            }
+
+            docViewerDiv.width(w - xdec);
+            docViewerDiv.height(h - ydec);
+
+            SetThumbs();
+            resizing = false;
+        }
+
+
+        function SetThumbs() {
+            try {
+                objctlDoc.Refit();
+            } catch (exception) {
+
+            }
+        }
+
+
+        function OpenDocument(fileName) {
+
+            loader.show();
+
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "/Home/OpenFile?name=" + fileName,
+                success: function (data) {
+                    token = data;          // store token for print
+                    objctlDoc.View(token); // use global object [objctlDoc] to view any document
+                },
+                error: function (textStatus, errorThrown, data) {
+                    alert("Unable to open document. Error: " + data.responseText);
+                    loader.hide();
+                }
+            });
+        }
+
+        function PrintDocument() {
+            var link = "/Home/Print?token=" + token + "&printtotal=" + objctlDoc.TotalPages() + "&KeepThis=false&TB_iframe=true&height=150&width=300";
+            tb_show("Print File", link);
+        }
+
+        function GoFS() {
+
+            if (
+                document.fullscreenElement ||
+                    document.webkitFullscreenElement ||
+                    document.mozFullScreenElement ||
+                    document.msFullscreenElement
+            ) {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            } else {
+                var element = $('#divDocViewer').get(0);
+
+                if (element.requestFullscreen) {
+                    element.requestFullscreen();
+                } else if (element.mozRequestFullScreen) {
+                    element.mozRequestFullScreen();
+                } else if (element.webkitRequestFullscreen) {
+                    element.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                } else if (element.msRequestFullscreen) {
+                    element.msRequestFullscreen();
+                }
+            }
+        }
+
+        $(window).on("load", function () {
+
+            /* Init code for viewer */
+            @Html.Raw(ViewBag.ViewerInit)
+
+            token = '@ViewBag.token';
+
+            Resize();
+        });
+
+
+        $(window).resize(function () {
+            Resize();
+        });
+
+        if (isMobile) {
+            $(window).on("orientationchange", function (event) { Resize(event.orientation); });
+        }
+        else {
+            $(window).on("resize", function () { Resize(); });
+        }
+
+
+        function OpenUpload() {
+            $('#myModal').modal('show');
+        }
+
+        $(document).ready(function () {
+
+            $("#dropZoneForm").dropzone({
+                url: "/Home/UploadFile",
+                maxFiles: 1,
+                paramName: "file",
+                uploadMultiple: false,
+                maxFilesize: 20,
+                acceptedFiles:
+                    ".doc,.docx,.docm,.odt,.xls,.xlsx,.xlsm,.ods,.csv,.ppt,.pptx,.odp,.vsd,.vsdx,.mpp,.mppx,.pdf,.tif,.tiff,.dwg,.dxf,.dgn,.xps,.psd,.jpg,.jpeg,.jpe,.png,.bmp,.gif,.eml,.msg,.txt,.rtf,.xml,.epub,.svg,.html,.htm,.mht,.dcn,.dcm",
+                addRemoveLinks: false,
+                init: function () {
+                    var th = this;
+                    this.on("success",
+                        function (file, response) {
+                            OpenDocument(response);     // Response is the file name.
+                            $('#myModal').modal('hide');
+
+                        }),
+                        this.on("error",
+                            function (file, errorMessage, c) {
+                                alert("Error uploading document [[" + file.name +"]]. Technical team has been notified.");
+                            }),
+                        this.on("queuecomplete",
+                            function () {
+                                setTimeout(function () {
+                                    th.removeAllFiles();
+                                },
+                                    3000);
+                            });
+                }
+            });
+        });
+
+    </script>
+}

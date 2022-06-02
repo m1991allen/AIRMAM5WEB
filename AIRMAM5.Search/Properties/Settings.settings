@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AIRMAM5.Search.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="fsTS50" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Program Files\Tornado\Tornado Search Platform SDK\Config\TSPSDK.ini</Value>
+    </Setting>
+    <Setting Name="fsLOG" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\INDEX\Log\</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

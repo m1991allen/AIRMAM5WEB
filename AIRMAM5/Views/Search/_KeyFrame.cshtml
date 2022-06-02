@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AIRMAM5.DBEntity.Models.Subject.VideoKeyFrameModel>
+
+<div class="ui bottom attached tab" data-tab="keyframe" style="height: 100%;width:100%;min-width:100%;">
+    @if (Model == null || !Model.Any())
+    {
+        <div class="ui basic padded segment center aligned" style="min-height:100%;width:100%;">
+            <div class="ui icon inverted yellow large header" style="margin:20px;">
+                <i class="database icon"></i>
+                <div class="content">
+                    沒有資料可以顯示
+                    <div class="sub header">Nothing to show</div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="ui basic segment">
+            <!--類型欄位-->
+            <button type="button" class="ui black icon button right floated" name="cardInfo" title="影格資訊顯示/隱藏"><i class="eye slash icon"></i></button>
+            <div style="width:100%;height:100%;">
+                <div class="ui three stackable cards">
+                    <!-- TODO-20191/11/28: 點選關鍵影格或段落描述，player須從設定的起點開始播放 -->
+                    @foreach (var kf in Model)
+                    {
+                        @Html.HiddenFor(m => kf.fsFILE_NO) @*關鍵影格檔案編號:如不使用可拿掉 *@
+                        @Html.HiddenFor(m => kf.FilePath) @*關鍵影格檔案路徑:如不使用可拿掉 *@
+                        @Html.HiddenFor(m => kf.Time) @*關鍵影格設定的時間: 點擊要播放的起始時間 *@
+                        <div class="ui link card" data-time="@kf.Time">
+                            <div class="image">
+                                <img src="@kf.ImageUrl" onerror="this.src='@Url.Content("~/Images/noImage.png")'">@*<img src="~/Images/noImage.png">*@
+                                @*<span class="ui bottom right attached label" name="format">@kf.Time</span>*@ @*這裡的時間格式沒有轉換*@
+                            </div>
+                            <div class="content" style="display:none;">
+                                <div class="description" style="display:none;">
+                                    @kf.Title.Trim()
+                                    @*關鍵影格:TME =<span>000011.506</span>*@
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

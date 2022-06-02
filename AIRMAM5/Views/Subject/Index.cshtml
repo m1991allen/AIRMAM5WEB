@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+@section Styles{
+    <link href="~/Content/semanticUIdatepicker/calendar.min.css" rel="stylesheet" />
+    <link href="~/Content/iftame_style/Subject/SubjectIndex.min.css" rel="stylesheet" />
+    <link href="~/Content/inspireTreeJS/inspire-tree-dark.min.css" rel="stylesheet" />
+    @*<link href="~/Content/split-pane/split-pane.css" rel="stylesheet" /><!--載入拖拉視窗--> *@
+}
+
+<div class="ui stackable grid x-main-grid x-overflow">
+    <div class="four wide column">
+        @HtmlHelper.Breadcrumb(new string[] { "媒資管理", "主題與檔案維護" })
+        <!--樹狀圖--> @HtmlHelper.Tree(false)<!--樹狀圖-->
+    </div>
+    <div class="twelve wide column">
+        <div class="ui grid">
+            <div class="sixteen wide column">
+                <button id="CreateSubjectBtn" type="button" class="ui _darkGrey button" data-nodeId="" style="margin-top:20px;"><i class="plus icon"></i> 新增主題</button>
+            </div>
+            <div class="sixteen wide column" id="TipResult">
+                <div class="ui placeholder inverted segment">
+                    <p style="color:#585858;font-size: 2em;text-align: center;">請選擇樹狀結構末端之Queue以維護主題資料</p>
+                </div>
+            </div>
+            <div id="ShowResult">
+                <div id="Table"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--上傳進度點擊按鈕-->
+<div class="_downloading _upload" id="UploadProgressBtn" style="display:none;">
+    <div class="_cloud">
+        <div class="_arrow"></div>
+    </div>
+    <div id="" class="floating ui red label _uploadQuantity">0</div>
+</div>
+
+
+
+<!--上傳進度Modal-->
+<div class="ui modal" id="UploadContent" style="">
+    <i class="close icon"></i>
+    <div class="header">
+        上傳清單佇列
+    </div>
+    <div class="scrolling content"></div>
+    <div class="actions">
+        <button class="ui cancel button" type="reset">關閉</button>
+    </div>
+</div>
+
+
+<!--客製化影音圖文Modal-->
+<div class="cusmodal" id="CusModal" name="cusmodal">
+    <div class="content">
+        <div class="x-left-component" id="left-component">
+            <div class="x-top-component" id="top-component">
+                <div id="preview" name="preview"><!--影音圖文預覽圖--></div>
+            </div>
+            @*<div class="x-divider horizontal"></div>*@
+            <div class="x-bottom-component" id="bottom-component">
+                <div class="subtable _table" name="list" style="background-color:#333;"> <!--檔案列表區域--> </div>
+            </div>
+        </div>
+        @*<div class="x-divider vertical"></div>*@
+        <div class="x-right-component" id="right-component">
+            <div name="dataview"> </div>
+            <div name="docsystemview">  @Html.Action("_DocSystem", "Subject")</div>
+            @*<div class="pathlabel">
+                    <div class="ui tiny grey header" name="showpath"></div>
+                </div>*@
+            <!--刪除MediaData確認燈箱-->
+            @HtmlHelper.ConfirmModal("DeleteMediaConfirm", "確認是否要刪除資料", "確定要刪除指定檔案?", "mini")
+            <!--重轉確認燈箱-->
+            @HtmlHelper.ConfirmModal("RetransferConfirm", "重轉確認", "確定要重轉此檔案?", "mini")
+            <!--置換確認燈箱-->
+            @HtmlHelper.ConfirmModal("ReplacementConfirm", "置換確認", "確定要置換此檔案?", "mini")
+            <!--刪除段落描述確認燈箱-->
+            @HtmlHelper.ConfirmModal("DeleteParagraphConfirm", "確認是否要刪除段落描述", "確定要刪除指定的段落描述?", "mini")
+            <!--刪除關鍵影格確認燈箱-->
+            @HtmlHelper.ConfirmModal("DeleteKeyFrameConfirm", "確認是否要刪除關鍵影格", "確定要刪除指定的關鍵影格?", "mini")
+            <!--第三方系統(文稿或公文等確認燈箱)-->
+            @HtmlHelper.ConfirmModal("DraftConfirm", "文稿對應設定", "確定要設置此文稿至此媒體檔案?")
+            <!--新增關鍵影格-->
+            @Html.Action("_KeyFrameAdd", "Subject")
+            <!--新增段落描述-->
+            @Html.Action("_ParagraphAdd", "Subject")
+        </div>
+    </div>
+</div>
+
+
+<!--顯示加載中-->
+<div class="ui segment" id="LoadingModel" style="display:none;width:100%;height:100%;z-index:9999;position:absolute;top:0;left:0;border:0;opacity:0.7;">
+    <div class="ui active dimmer">
+        <div class="ui medium text loader">加載中，請稍後</div>
+    </div>
+</div>
+
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+@HtmlHelper.ConfirmModal("ChangeRowConfirm", "確認切換", "還有在編輯中的表單,確定要切換檔案資料?", "mini")
+
+@section Scripts{
+    <script src="~/Content/wavesurfer/wavesurfer.js"></script>
+    <script src="~/Content/resumableJS/resumable.js"></script>
+    <script src="~/Content/dayJS/dayjs.min.js"></script>
+    <script src="~/Content/semanticUIdatepicker/calendar.min.js" type="text/javascript"></script>
+    @Html.Partial("~/Views/Bundle/SubjectTreePlugin_Js.cshtml")
+    @Html.Partial("~/Views/Bundle/SuhjectDocSystem_Js.cshtml")
+    @Html.Partial("~/Views/Bundle/SubjectIndex_Js.cshtml")
+
+}

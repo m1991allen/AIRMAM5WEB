@@ -1,0 +1,47 @@
+﻿
+
+
+
+-- =============================================
+-- 描述:	取出INEWS資料
+-- 記錄:	<2013/02/27><Dennis.Weng><新增本預存>
+-- =============================================
+CREATE PROCEDURE [dbo].[xspGET_L_INEWS_BY_CONDITION]
+	@SLUG		NVARCHAR(50),
+	@CONTENT	NVARCHAR(50),
+	@REPORTER	NVARCHAR(50),
+	@STYLE		VARCHAR(50),
+	@GROUP		NVARCHAR(10),
+	@SDATE		VARCHAR(10),
+	@EDATE		VARCHAR(10) 
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+
+	BEGIN TRY
+		SELECT
+			fsSTORY_ID, fsFILE_NAME, fsSLUG, fsTITLE, fsCONTENT,fsCONTENT_LINE = REPLACE(REPLACE(REPLACE(LTrim(RTrim(fsCONTENT)),CHAR(9),''),CHAR(10),''),CHAR(13),''),
+			fsCG, fsREPORTER, fsSTYLE, fsGROUP, fsFILE_NO, 
+			fsSELECTED, fsPATH, fsVIDEO_ID, fdPLAY_DATE, 
+			fdCREATED_DATE, fsCREATED_BY, fdUPDATED_DATE, fsUPDATED_BY
+		
+
+		FROM
+			[tblINEWS]
+		WHERE
+			(@SLUG = ''		OR fsSLUG LIKE '%' + @SLUG + '%')
+		AND	(@CONTENT = ''	OR fsCONTENT LIKE '%' + @CONTENT + '%')
+		AND	(@REPORTER = ''	OR fsREPORTER LIKE '%' + @REPORTER + '%') 
+		AND	(@STYLE = ''	OR fsSTYLE LIKE '%' + @STYLE + '%') 
+		AND	(@GROUP = ''	OR fsGROUP LIKE '%' + @GROUP + '%') 
+		AND	(@SDATE = ''	OR CONVERT(VARCHAR(10), fdCREATED_DATE, 111) >= @SDATE)
+		AND	(@EDATE = ''	OR CONVERT(VARCHAR(10), fdCREATED_DATE, 111) <= @EDATE) 
+	END TRY
+	BEGIN CATCH
+		SELECT RESULT = 'ERROR:' + CAST(@@ERROR AS VARCHAR(10)) + '-' + ERROR_MESSAGE()
+	END CATCH
+END
+
+
+
+

@@ -1,0 +1,66 @@
+﻿@model AIRMAM5.DBEntity.Models.SearchResponse.SearchResponsePhotoModel.ExifInfo
+
+<div class="ui bottom attached tab" data-tab="exifInfo" style="flex-direction: column;padding: 0;">
+    <div class="ui form basic segment" style="width: 100%; padding: 1px;">
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(m=>m.PhotoWidth, new { @class = "ui black label three wide field" })
+                <span>@Model.PhotoWidth</span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(m => m.PhotoHeight, new { @class = "ui black label three wide field" })
+                <span>@Model.PhotoHeight </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(m => m.PhotoXdpi, new { @class = "ui black label three wide field" })
+                <span>@Model.PhotoXdpi </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(m => m.PhotoYdpi, new { @class = "ui black label three wide field" })
+                <span>@Model.PhotoYdpi </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(m => m.CameraMake, new { @class = "ui black label three wide field" })
+                <span>@Model.CameraMake </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(m => m.CameraModel, new { @class = "ui black label three wide field" })
+                <span>@Model.CameraModel </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(m => m.CameraModel, new { @class = "ui black label three wide field" })
+                <span>@Model.FocalLength </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(m => m.ExposureTime, new { @class = "ui black label three wide field" })
+                <span>@Model.ExposureTime </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(m => m.Aperture, new { @class = "ui black label three wide field" })
+                <span>@Model.Aperture </span>
+            </div>
+        </div>
+        <div class="field _styleMarginZero">
+            <div class="ui labeled input">
+                @Html.LabelFor(m => m.ISO, new { @class = "ui black label three wide field" })
+                <span>@Model.ISO </span>
+            </div>
+        </div>
+    </div>
+</div>

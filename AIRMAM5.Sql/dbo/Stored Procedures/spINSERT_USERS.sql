@@ -1,0 +1,61 @@
+﻿
+
+-- =============================================
+-- 描述:	新增USERS主檔資料
+-- 記錄:	<2011/08/22><Mihsiu.Chiu><新增預存>
+-- 記錄:	<2011/08/22><Eric.Huang><修改預存>舊寫法的result取出值不正確,改新寫法SELECT RESULT = IDENT_CURRENT('tbmUSERS')
+-- 記錄:	<2019/05/14><David.Sin><修改預存>增加所屬群組參數
+-- =============================================
+CREATE PROCEDURE [dbo].[spINSERT_USERS]
+	@fsUSER_ID				NVARCHAR(128),
+	@fsLOGIN_ID				VARCHAR(50),
+	@fsPASSWORD				VARCHAR(255),
+	@fsNAME					NVARCHAR(50),
+	@fsENAME				VARCHAR(50)  = NULL,
+	@fsTITLE				NVARCHAR(50)  = NULL,
+	@fsDEPT_ID				VARCHAR(10) = NULL,
+	@fsEMAIL				VARCHAR(50) = NULL,
+	@fsPHONE				VARCHAR(20) = NULL,		
+	@fsDESCRIPTION			NVARCHAR(MAX)  = NULL,
+	@fsFILE_SECRET			VARCHAR(30) = '0;1;2',
+	@fsBOOKING_TARGET_PATH	VARCHAR(500) = NULL,
+	@fsIS_ACTIVE			BIT,
+	@fsCREATED_BY			VARCHAR(50),
+	@fsGROUP_IDs			NVARCHAR(2048)
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+		
+		BEGIN TRANSACTION
+
+		INSERT
+			tbmUSERS
+			(fsLOGIN_ID, fsPASSWORD, fsNAME, fsENAME, fsTITLE, fsDEPT_ID, fsEMAIL, fsPHONE, fsDESCRIPTION,fsFILE_SECRET,fsBOOKING_TARGET_PATH, fsIS_ACTIVE,fdCREATED_DATE, fsCREATED_BY)
+		VALUES
+			(@fsLOGIN_ID, @fsPASSWORD, @fsNAME, @fsENAME, @fsTITLE, @fsDEPT_ID, @fsEMAIL, @fsPHONE, @fsDESCRIPTION,@fsFILE_SECRET,@fsBOOKING_TARGET_PATH, @fsIS_ACTIVE, GETDATE(), @fsCREATED_BY)
+		
+		--DECLARE @fsUSER_ID BIGINT = IDENT_CURRENT('tbmUSERS')
+
+		IF(@fsGROUP_IDs <> '')
+		BEGIN
+			
+			INSERT INTO [dbo].[tbmUSER_GROUP]([fsUSER_ID],[fsGROUP_ID],[fdCREATED_DATE],[fsCREATED_BY])
+			SELECT @fsUSER_ID, COL1,GETDATE(), @fsCREATED_BY FROM [dbo].[fn_SLPIT](@fsGROUP_IDs,';')
+
+		END
+
+		COMMIT
+
+		SELECT RESULT = ''
+
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+		-- 發生例外時, 串回'ERROR:'開頭字串 + 錯誤碼 + 錯誤訊息
+		SELECT RESULT = 'ERROR:' + CAST(@@ERROR AS VARCHAR(10)) + '-' + ERROR_MESSAGE()
+	END CATCH
+END
+
+

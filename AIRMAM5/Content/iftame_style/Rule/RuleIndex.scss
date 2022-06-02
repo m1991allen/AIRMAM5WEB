@@ -1,0 +1,118 @@
+﻿@import "../Shared/style.scss";
+@import "../../_variable.scss";
+@import '../Shared/Function/_Switching.scss';
+@include Switching();
+
+$primary-btn-color: #49506c;
+$primary-text-color: #e8e9ee;
+
+.tabulator-group-level-0 {
+    .ui.toggle.checkbox {
+        float: right;
+        margin:auto;
+        margin-left:20px;
+        margin-top:3px;
+        label {
+            color: $white;
+
+            &:before {
+                color: $grey;
+            }
+        }
+        input:checked ~ label,
+        input:focus:checked~ .box:before,
+        input:focus:checked ~ label:before {
+            color: $white !important;
+        }
+    }
+}
+.tabulator-row {
+    /*border-bottom: 1px solid #2f3545;*/
+    &.tabulator-selected {
+    }
+
+    .group-header {
+        position: relative;
+        top: -20px;
+        left: 20px;
+        width: 100%;
+        padding: 0 20px 0 0;
+    }
+
+    .tabulator-cell {
+        &:nth-of-type(1) {
+            padding-top: 25px;
+        }
+
+        .list .item .content.button {
+            background-color: $primary-btn-color;
+            color: $primary-text-color;
+            cursor: default;
+            box-shadow: none !important;
+
+            &.green {
+                border: 1px solid #21ba45 !important;
+                color: #21ba45 !important;
+            }
+
+            &.red {
+                border: 1px solid #DB2828 !important;
+                color: #DB2828 !important;
+            }
+        }
+    }
+
+    .tabulator-data-tree-branch {
+        padding-left: 20px;
+    }
+}
+
+#RuleInput {
+    padding: 15px 0px;
+    margin: auto;
+    .fields {
+        margin: auto;
+
+        .checkbox {
+            label {
+                color: $white !important;
+            }
+        }
+    }
+}
+/**新增規則表單區域*/
+.x-keyaddboard {
+    background: $greyPrimary !important;
+}
+/**新增規則表單區域--右側按鈕區域*/
+.x-keyadd {
+    height: 100%;
+    background: $greyPrimary !important;
+    border: 3px dashed #888 !important;
+}
+/**新增規則列表元素的篩選值*/
+.x-filterlabel {
+    max-width: 300px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    position:absolute;
+}
+
+.fields, .field {
+    &.nopadding {
+        padding: 0 !important;
+    }
+}
+
+.list {
+    .label.basic.transparent {
+        background:none transparent !important;
+    }
+}
+
+
+/* 標題列位置調整*/
+.tabulator-group-toggle {
+    display: inline-block;
+}

@@ -1,0 +1,64 @@
+﻿
+
+-- =============================================
+-- 描述:	取出MATERIAL主檔資料-BY_MARKED_BY
+-- 記錄:	<2012/05/09><Mihsiu.Chiu><新增本預存>
+--			<2012/05/21><Dennis.Wen><一堆欄位調整>
+--			<2012/05/23><Dennis.Wen><增加取出圖片位置>
+--			<2019/07/02><David.Sin><修改語法>
+-- =============================================
+CREATE PROCEDURE [dbo].[spGET_MATERIAL_BY_MARKED_BY]
+	@fsMARKED_BY	nvarchar(50)
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+
+	DECLARE @fsMEDIA_PREVIEW_URL VARCHAR(100) = (SELECT fsVALUE FROm tbzCONFIG WHERE fsKEY = 'MEDIA_PREVIEW_URL')
+
+	SELECT 
+		M.fnMATERIAL_ID, 
+		M.fsMARKED_BY, 
+		M.fsTYPE,
+		M.fsFILE_NO,
+		CASE M.fsTYPE
+			WHEN 'V' THEN V.fsTITLE
+			WHEN 'A' THEN A.fsTITLE
+			WHEN 'P' THEN P.fsTITLE
+			WHEN 'D' THEN D.fsTITLE
+		END AS fsTITLE,
+		M.fsDESCRIPTION, 
+		M.fsNOTE, 
+		M.fsPARAMETER,
+		M.fsCREATED_BY, 
+		M.fdCREATED_DATE, 
+		M.fsUPDATED_BY, 
+		M.fdUPDATED_DATE,
+		_sTYPE = (CASE WHEN (M.fsTYPE = '') THEN '(未選擇)' ELSE ISNULL(T.fsNAME, '錯誤代碼: '+ M.fsTYPE) END),
+		_sVIDEO_MAX_TIME = CASE WHEN (M.fsTYPE = 'V') THEN CAST(V.fdDURATION AS VARCHAR(10))
+								WHEN (M.fsTYPE = 'A') THEN CAST(A.fdDURATION AS VARCHAR(10))
+								ELSE '' END,
+		--_sFILE_URL= dbo.fnGET_FILE_URL_BY_TYPE_AND_FILE_NO(M.fsTYPE,M.fsFILE_NO,'L'),
+		_sFILE_URL= CASE M.fsTYPE
+			WHEN 'V' THEN @fsMEDIA_PREVIEW_URL + 'V/L/' + SUBSTRING(M.fsFILE_NO,1,4) + '/' + SUBSTRING(M.fsFILE_NO,5,2) + '/' + SUBSTRING(M.fsFILE_NO,7,2) + '/' + M.fsFILE_NO + '_L.' + V.fsFILE_TYPE_L
+			WHEN 'A' THEN @fsMEDIA_PREVIEW_URL + 'A/' + SUBSTRING(M.fsFILE_NO,1,4) + '/' + SUBSTRING(M.fsFILE_NO,5,2) + '/' + SUBSTRING(M.fsFILE_NO,7,2) + '/' + M.fsFILE_NO + '_L.' + A.fsFILE_TYPE_L
+			WHEN 'P' THEN @fsMEDIA_PREVIEW_URL + 'P/' + SUBSTRING(M.fsFILE_NO,1,4) + '/' + SUBSTRING(M.fsFILE_NO,5,2) + '/' + SUBSTRING(M.fsFILE_NO,7,2) + '/' + M.fsFILE_NO + '_L.' + P.fsFILE_TYPE_L
+			WHEN 'D' THEN @fsMEDIA_PREVIEW_URL + 'D/' + SUBSTRING(M.fsFILE_NO,1,4) + '/' + SUBSTRING(M.fsFILE_NO,5,2) + '/' + SUBSTRING(M.fsFILE_NO,7,2) + '/' + M.fsFILE_NO + '.' + D.fsFILE_TYPE
+		END,
+		ISNULL(USERS_CRT.fsNAME,'') AS fsCREATED_BY_NAME,
+		ISNULL(USERS_UPD.fsNAME,'') AS fsUPDATED_BY_NAME
+	FROM
+		tbmMATERIAL	AS M		
+			LEFT JOIN tbzCODE T ON M.fsTYPE = T.fsCODE AND T.fsCODE_ID = 'MTRL001'	
+			LEFT JOIN tbmARC_VIDEO V ON M.fsTYPE = 'V' and M.fsFILE_NO = V.fsFILE_NO		
+			LEFT JOIN tbmARC_AUDIO A ON M.fsTYPE = 'A' and M.fsFILE_NO = A.fsFILE_NO
+			LEFT JOIN tbmARC_PHOTO P ON M.fsTYPE = 'P' and M.fsFILE_NO = P.fsFILE_NO
+			LEFT JOIN tbmARC_DOC D ON M.fsTYPE = 'D' and M.fsFILE_NO = D.fsFILE_NO
+			LEFT JOIN tbmUSERS USERS_CRT ON M.fsCREATED_BY = USERS_CRT.fsLOGIN_ID
+			LEFT JOIN tbmUSERS USERS_UPD ON M.fsUPDATED_BY = USERS_UPD.fsLOGIN_ID
+	WHERE
+		M.fsMARKED_BY = @fsMARKED_BY
+	ORDER BY
+		fnMATERIAL_ID DESC
+END
+
+

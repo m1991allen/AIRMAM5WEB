@@ -1,0 +1,49 @@
+﻿
+
+-- =============================================
+-- 描述:	取出ARC_VIDEO_K 入庫項目-影片關鍵影格檔 資料
+-- 記錄:	<2011/11/25><Mihsiu.Chiu><新增本預存>
+--		<2012/05/21><Dennis.Wen><一堆欄位調整>
+--		<2012/07/24><Eric.Huang><新增欄位 fnRESP_ID>
+-- =============================================
+CREATE PROCEDURE [dbo].[spGET_ARC_VIDEO_K]
+	@fsFILE_NO		VARCHAR(16),
+	@fsTIME			VARCHAR(16)
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+
+	DECLARE @fsURL VARCHAR(50) = (SELECT fsVALUE FROM tbzCONFIG WHERE fsKEY = 'MEDIA_PREVIEW_URL') 
+
+		SELECT 
+			tbmARC_VIDEO_K.fsFILE_NO,
+			tbmARC_VIDEO_K.fsTITLE ,
+			tbmARC_VIDEO_K.fsDESCRIPTION,
+			tbmARC_VIDEO_K.fsFILE_PATH	, 
+			tbmARC_VIDEO_K.fsFILE_SIZE, 
+			tbmARC_VIDEO_K.fsFILE_TYPE, 
+			CASE tbmARC_VIDEO_K.fcHEAD_FRAME WHEN 'Y' THEN 'Y' ELSE 'N' END AS fcHEAD_FRAME,
+			tbmARC_VIDEO_K.fdCREATED_DATE, 
+			tbmARC_VIDEO_K.fsCREATED_BY , 
+			tbmARC_VIDEO_K.fdUPDATED_DATE, 
+			tbmARC_VIDEO_K.fsUPDATED_BY,
+			tbmARC_VIDEO_K.fsTIME,
+			_sIMAGE_URL = 
+				CASE
+					WHEN fsFILE_PATH = '' THEN ''
+					ELSE dbo.fnGET_KEYFRAME_IMAGE_URL_BY_FILE_NO_AND_TIME(fsFILE_NO, fsTIME) + '?t=' + SUBSTRING(CONVERT(VARCHAR(50),NEWID()),1,5)
+				END,
+			_sFILE_INFO	= dbo.fnGET_FILE_INFO_BY_DataType_AND_FILE_NO('K',fsFILE_NO),
+			_sVIDEO_MAX_TIME = (SELECT fdDURATION FROM tbmARC_VIDEO WHERE (fsFILE_NO = @fsFILE_NO)),
+			ISNULL(USERS_CRT.fsNAME,'') AS fsCREATED_BY_NAME,
+			ISNULL(USERS_UPD.fsNAME,'') AS fsUPDATED_BY_NAME
+		FROM
+			tbmARC_VIDEO_K
+				LEFT JOIN tbmUSERS USERS_CRT ON tbmARC_VIDEO_K.fsCREATED_BY = USERS_CRT.fsLOGIN_ID
+				LEFT JOIN tbmUSERS USERS_UPD ON tbmARC_VIDEO_K.fsUPDATED_BY = USERS_UPD.fsLOGIN_ID
+		WHERE
+			(@fsFILE_NO = '' OR fsFILE_NO = @fsFILE_NO) AND
+			(@fsTIME = '' OR fsTIME  = @fsTIME)
+END
+
+

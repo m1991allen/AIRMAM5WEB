@@ -1,0 +1,96 @@
+﻿@using AIRMAM5.DBEntity.Services
+@using AIRMAM5.DBEntity.DBEntity
+@using System.Configuration;
+@{
+    Layout = null;
+    var annRecords = new AnnounceService().GetLoginAnn();
+    string version = ConfigurationManager.AppSettings["version"];
+    string verDescription = ConfigurationManager.AppSettings["versionDescription"];
+    string title = ConfigurationManager.AppSettings["Title"];
+    IHtmlString verhtml = new HtmlString(verDescription);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@title</title>
+    <link rel="icon" type="image/png" href="~/Images/favicon-16x16.png">
+    <link href="~/Content/cssreset.min.css" rel="stylesheet" />
+    <link href="~/Content/login.min.css" rel="stylesheet" />
+    <link href="~/Content/mCustomScrollbar/jquery.mCustomScrollbar.css" rel="stylesheet" />
+    @RenderSection("Styles", false)
+    <script src="~/Content/jQuery/jquery-3.6.0.min.js"></script>
+    @RenderSection("Styles", false)
+    @{
+        string Browser = Request.UserAgent;
+        if (Browser.IndexOf("MSIE") > -1
+            || Browser.IndexOf("Trident/6.0") > -1
+            || Browser.IndexOf("Trident/5.0") > -1
+            || Browser.IndexOf("Trident/4.0") > -1)
+        {
+            Response.Redirect("~/Error/NotSupportBrowser");
+        }
+    }
+</head>
+<body>
+
+    <main>
+        <div class="img-sec">
+            <div id="content-m" class="x-bulletin">
+                @if (annRecords.Count() > 0)
+                {
+                    foreach (var itm in annRecords)
+                    {
+                        IHtmlString anncontent = new HtmlString(@itm.fsCONTENT.TrimStart());
+                        <div class="card">
+                            <h2 class="title">@itm.fsTITLE </h2>
+                            <div class="divider"></div>
+                            <div class="content">  @anncontent</div>
+                            <div class="extra">
+                                <div class="meta"><span>公告時間</span>@string.Format($"{itm.fdCREATED_DATE:yyyy/MM/dd}")</div>
+                                <div class="meta"><span>發佈單位</span>@itm.fsDEPT_NAME</div>
+                                <div class="meta"><span>公告分類</span>@itm.fsTYPE_NAME</div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+
+                    <div class="card">
+                        <h2 class="title">歡迎使用媒體資產管理系統</h2>
+                        <div class="divider"></div>
+                        <div class="content">登錄以訪問儀錶板、檢索與其他管理功能，讓您更有效率運用資料影片!</div>
+                        <div class="extra">
+                            <div class="meta">客製化開發請洽<label style="color:orangered;">02-8511-8888</label></div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <div class="form-sec">
+            <div class="form-main">
+                <h1><img class="logo" src="~/Images/logo_Straight.svg" alt="AIRMAM LOGO" /></h1>
+                @RenderBody()
+            </div>
+            <div class="x-version">@version @verhtml</div>
+        </div>
+    </main>
+    <script src="~/Content/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script>
+        $(function () {
+            $(".x-bulletin").mCustomScrollbar({ theme: "minimal" });
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+
+
+</body>
+</html>

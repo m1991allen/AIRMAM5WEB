@@ -1,0 +1,72 @@
+﻿@model AIRMAM5.DBEntity.Models.Synonym.SynonymViewModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("DeleteModal", "您正要刪除同義詞資料!請確認！",
+@<div>
+    @using (Html.BeginForm("Delete", "Synonym", new { id = Model.fnINDEX_ID }, FormMethod.Post, new { role = "form", @class = "ui form", @id = "DeleteForm" }))
+                {
+        <div class="field">
+            <h5 class="ui red header">確定要刪除這筆資料嗎?</h5>
+        </div>
+        <div class="two fields">
+            <div class="three wide field">
+                @Html.LabelFor(model => model.fnINDEX_ID)
+                @Html.TextBoxFor(model => model.fnINDEX_ID, new { @readonly = "readonly" })
+            </div>
+            <div class="thirteen wide field">
+                @Html.LabelFor(model => model.fsTYPE)
+                @Html.TextBoxFor(model => model.fsTYPE_NAME, new { @readonly = "readonly" })
+            </div>
+        </div>
+        <div class="sixteen wide four field">
+            <table class="ui inverted selectable stackable table">
+                <thead>
+                    <tr>
+                        <th>@Html.LabelFor(m => m.fsTEXT_LIST) @*同義詞詞彙*@</th>
+                    </tr>
+                </thead>
+                <tbody id="ShowSynonymList">
+                    @{
+                        //var _list = Model.fsTEXT_LIST.Split(new char[] { ';' });
+                        foreach (var r in Model.TextList)
+                        {
+                            if (string.IsNullOrEmpty(r)) { continue; }
+                            @:<tr>
+                                @:<td>@r</td>
+                            @:</tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="sixteen wide field">
+            @Html.LabelFor(model => model.fsNOTE)
+            @Html.TextAreaFor(model => model.fsNOTE, new { @readonly = "readonly", @rows = "4" })
+        </div>
+        <div class="four fields">
+            <div class="four wide field">
+                @Html.LabelFor(model => model.CreatedDate)
+                @Html.TextBox("CreatedDate", string.Format($"{Model.CreatedDate:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+            </div>
+            <div class="four wide field">
+                @Html.LabelFor(model => model.CreatedBy)
+                @Html.TextBoxFor(m => m.CreatedBy, new { @readonly = "readonly" })
+            </div>
+            <div class="four wide field">
+                @Html.LabelFor(model => model.UpdatedDate)
+                @Html.TextBox("UpdatedDate", string.Format($"{Model.UpdatedDate:yyyy/MM/dd HH:mm:ss}"), new { @readonly = "readonly" })
+            </div>
+            <div class="four wide field">
+                @Html.LabelFor(model => model.UpdatedBy)
+                @Html.TextBoxFor(m => m.UpdatedBy, new { @readonly = "readonly" })
+            </div>
+        </div>
+                }
+</div>
+  ,@<div>
+    <button type="button" class="ui ok right labeled icon red button">刪除<i class="checkmark icon"></i></button>
+    <button type="button" class="ui black cancel button">取消</button>
+</div>
+   )

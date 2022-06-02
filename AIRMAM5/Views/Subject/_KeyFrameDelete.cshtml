@@ -1,0 +1,22 @@
+﻿@model AIRMAM5.DBEntity.Models.Subject.VideoKeyFrameModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("KeyFrameDeleteModal", "刪除關鍵影格【"+Model.Time+"】",
+@<form class="ui inverted form" role="form">
+    <div class="ui field">
+        @Html.LabelFor(model => model.Title)
+        @Html.TextBoxFor(model => model.Title,new { @readonly="readonly"})
+    </div>
+    <div class="ui field">
+        @Html.LabelFor(model => model.Description)
+        @Html.TextAreaFor(model => model.Description, new { @row = "10", @readonly = "readonly" })
+    </div>
+</form>,
+@<div>
+    <button type="button" class="ui approve right labeled icon red button">刪除<i class="checkmark icon"></i></button>
+    <button type="button" class="ui deny  button">取消</button>
+</div>,
+"small")
+

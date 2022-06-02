@@ -1,0 +1,852 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5E27F271-C859-4E7F-B7BA-EE2BD6C3FCA2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AIRMAM5.DBEntity</RootNamespace>
+    <AssemblyName>AIRMAM5.DBEntity</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ftvnews|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ftvnews\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.2.9.0\lib\net46\Serilog.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.File, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.File.4.1.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
+    </Reference>
+    <Reference Include="Serilog.Sinks.RollingFile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
+      <HintPath>..\packages\Serilog.Sinks.RollingFile.3.3.0\lib\net45\Serilog.Sinks.RollingFile.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.7.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.7.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Config.cs" />
+    <Compile Include="DBEntity\AIRMAM5db.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AIRMAM5db.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\AIRMAM5db.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\AIRMAM5db.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AIRMAM5db.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\Partial\spGET_DIRECTORIES_Result.cs" />
+    <Compile Include="DBEntity\Partial\spGET_L_LOGIN_Result.cs" />
+    <Compile Include="DBEntity\Partial\spGET_L_LOG_BY_LOGID_DATES_LOGINID_Result.cs" />
+    <Compile Include="DBEntity\Partial\spGET_USERS_Result.cs" />
+    <Compile Include="DBEntity\Partial\tbmANNOUNCE.cs" />
+    <Compile Include="DBEntity\Partial\tbmARC_AUDIO_D.cs" />
+    <Compile Include="DBEntity\Partial\tbmARC_DOC.cs" />
+    <Compile Include="DBEntity\Partial\tbmARC_PHOTO.cs" />
+    <Compile Include="DBEntity\Partial\tbmARC_PRE.cs" />
+    <Compile Include="DBEntity\Partial\tbmARC_VIDEO.cs" />
+    <Compile Include="DBEntity\Partial\tbmARC_VIDEO_D.cs" />
+    <Compile Include="DBEntity\Partial\tbmARC_VIDEO_K.cs" />
+    <Compile Include="DBEntity\Partial\tbmBOOKING.cs" />
+    <Compile Include="DBEntity\Partial\tbmBOOKING_T.cs" />
+    <Compile Include="DBEntity\Partial\tbmDIRECTORIES.cs" />
+    <Compile Include="DBEntity\Partial\tbmDIR_GROUP.cs" />
+    <Compile Include="DBEntity\Partial\tbmDIR_USER.cs" />
+    <Compile Include="DBEntity\Partial\tbmGROUPS.cs" />
+    <Compile Include="DBEntity\Partial\tbmLICENSE.cs" />
+    <Compile Include="DBEntity\Partial\tbmMATERIAL.cs" />
+    <Compile Include="DBEntity\Partial\tbmRULE.cs" />
+    <Compile Include="DBEntity\Partial\tbmRULE_FILTER.cs" />
+    <Compile Include="DBEntity\Partial\tbmSUBJECT.cs" />
+    <Compile Include="DBEntity\Partial\tbmSYNONYMS.cs" />
+    <Compile Include="DBEntity\Partial\tbmTEMPLATE.cs" />
+    <Compile Include="DBEntity\Partial\tbmTEMPLATE_FIELDS.cs" />
+    <Compile Include="DBEntity\Partial\tbmUSERS.cs" />
+    <Compile Include="DBEntity\Partial\tbmUSER_EXTEND.cs" />
+    <Compile Include="DBEntity\Partial\tbmUSER_GROUP.cs" />
+    <Compile Include="DBEntity\Partial\tbzCODE.cs" />
+    <Compile Include="DBEntity\Partial\tbzCODE_SET.cs" />
+    <Compile Include="DBEntity\Partial\tbzCONFIG.cs" />
+    <Compile Include="DBEntity\spGET_ANNOUNCE_BY_ANNID_DATES_TYPE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ANNOUNCE_BY_EFFECTIVE_DATE_AND_USERGROUP_AND_NOT_HIDDEN_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ANNOUNCE_BY_LOGIN_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ANNOUNCE_PUBLIC_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_AUDIO_ATTRIBUTE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_AUDIO_BY_SUBJ_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_AUDIO_D_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_AUDIO_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_AUDIO_SEARCH_BY_FILE_NOS_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_DOC_ATTRIBUTE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_DOC_BY_SUBJ_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_DOC_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_DOC_SEARCH_BY_FILE_NOS_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_LIST_DETAIL_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_LIST_SUM_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_PHOTO_ATTRIBUTE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_PHOTO_BY_SUBJ_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_PHOTO_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_PHOTO_SEARCH_BY_FILE_NOS_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_PRE_ATTRIBUTE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_PRE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_VIDEO_ATTRIBUTE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_VIDEO_BY_SUBJ_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_VIDEO_D_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_VIDEO_K_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_VIDEO_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_ARC_VIDEO_SEARCH_BY_FILE_NOS_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_BOOKING_LIST_DETAIL_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_BOOKING_LIST_SUM_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_BOOKING_TODAY_TOP_10_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_CODE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_CODE_SET_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_CONFIG_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_DIRECTORIES_AND_SUBJECTS_BY_DIR_ID_FILTER_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_DIRECTORIES_AND_SUBJECTS_BY_DIR_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_DIRECTORIES_BY_DIR_ID_AUTHORITY_LOGIN_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_DIRECTORIES_BY_DIR_ID_AUTHORITY_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_DIRECTORIES_BY_FILE_ID_LOGIN_ID_AUTHORITY_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_DIRECTORIES_BY_FILE_NO_LOAD_ON_DEMAND_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_DIRECTORIES_BY_SUBJ_ID_LOAD_ON_DEMAND_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_DIRECTORIES_BY_SUBJ_ID_LOGIN_ID_AUTHORITY_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_DIRECTORIES_LOAD_ON_DEMAND_ALL_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_DIRECTORIES_LOAD_ON_DEMAND_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_DIRECTORIES_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_DIRECTORIES_TEMPLATE_BY_DIR_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_FUNCTIONS_ALL_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_FUNCTIONS_BY_PARENT_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_FUNCTIONS_BY_TYPE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_FUNC_GROUP_BY_PARENT_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_FUNC_GROUP_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_GROUPS_NOTIN_DIR_GROUP_BY_DIR_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_GROUPS_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_INEWS_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_L_LOGIN_ALIVE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_L_LOGIN_LAST100_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_L_LOGIN_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_L_LOG_BY_LOGID_DATES_LOGINID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_L_SRH_HOT_KW_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_L_SRH_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_L_TRAN_BY_DATES_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_L_WORK_BY_BOOKING_APPROVE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_L_WORK_BY_BOOKING_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_L_WORK_BY_TRANSCODE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_L_WORK_MERGE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_MATERIAL_BY_MARKED_BY_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_RULE_BY_RULE_TABLE_COLUMN_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_SUBJECT_ATTRIBUTE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_SYNONYMS_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_TEMPLATE_FIELDS_BY_TEMP_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_TEMPLATE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_USERS_GROUP_BY_USER_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_USERS_NOTIN_DIR_USER_BY_DIR_ID_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_USERS_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_WORK_ARC_CURRENT_QTY_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spGET_WORK_BOOK_CURRENT_QTY_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spRPT_GET_ARC_LIST_DETAIL_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spRPT_GET_ARC_LIST_SUM_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spRPT_GET_BOOKING_LIST_DETAIL_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spRPT_GET_BOOKING_LIST_SUM_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spRPT_GET_SEARCH_EXPORT_DATA_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spTSM_GET_FILE_UNCPATH_TO_TSMPATH_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\spTSM_GET_L_WAIT_VOL_ACTIVE_ALL_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_t_GET_ARC_AUDIO_ATTRIBUTE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_t_GET_ARC_AUDIO_D_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_t_GET_ARC_AUDIO_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_t_GET_ARC_DOC_ATTRIBUTE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_t_GET_ARC_DOC_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_t_GET_ARC_INDEX_BY_CONDITION_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_t_GET_ARC_PHOTO_ATTRIBUTE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_t_GET_ARC_PHOTO_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_t_GET_ARC_VIDEO_ATTRIBUTE_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_t_GET_ARC_VIDEO_D_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_t_GET_ARC_VIDEO_K_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\sp_t_GET_ARC_VIDEO_Result.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tblHUBCONNECTION.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tblLOGIN.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tblNO.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tblSRH.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tblSRH_KW.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tblWORK.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmANNOUNCE.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmARC_AUDIO.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmARC_AUDIO_D.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmARC_DOC.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmARC_PHOTO.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmARC_PRE.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmARC_VIDEO.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmARC_VIDEO_D.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmARC_VIDEO_K.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmBOOKING.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmBOOKING_T.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmCOLUMN_MAPPING.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmDIRECTORIES.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmDIR_GROUP.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmDIR_USER.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmFUNCTIONS.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmFUNC_GROUP.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmGROUPS.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmLICENSE.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmMATERIAL.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmNOTIFY.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmRULE.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmRULE_FILTER.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmRULE_TABLE.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmSUBJECT.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmSYNONYMS.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmTEMPLATE.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmTEMPLATE_FIELDS.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmUSERS.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmUSER_DIR.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmUSER_EXTEND.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmUSER_FAVORITE.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmUSER_GROUP.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbmUSER_NOTIFY.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbzCODE.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbzCODE_SET.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\tbzCONFIG.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\t_tbmARC_DOC.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBEntity\t_tbmARC_INDEX.cs">
+      <DependentUpon>AIRMAM5db.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Interface\IAnnounceService.cs" />
+    <Compile Include="Interface\ICodeService.cs" />
+    <Compile Include="Interface\IFunctionsService.cs" />
+    <Compile Include="Interface\IGenericInterface.cs" />
+    <Compile Include="Interface\ILicenseService.cs" />
+    <Compile Include="Interface\ISerilogService.cs" />
+    <Compile Include="Interface\ISubjectService.cs" />
+    <Compile Include="Interface\ITblLogService.cs" />
+    <Compile Include="Models\AcrDelete\DeleteArcViewModel.cs" />
+    <Compile Include="Models\AcrDelete\DeleteConfirmViewModel.cs" />
+    <Compile Include="Models\AcrDelete\SP_TDeleteARC.cs" />
+    <Compile Include="Models\AcrDelete\SP_TGetARCIndexByCondition.cs" />
+    <Compile Include="Models\AcrDelete\SP_TRestoreARC.cs" />
+    <Compile Include="Models\AcrDelete\TtbmARCIndexIdModel.cs" />
+    <Compile Include="Models\Announce\AnnounceCreateModel.cs" />
+    <Compile Include="Models\Announce\AnnounceDetailViewModel.cs" />
+    <Compile Include="Models\Announce\AnnounceIdModel.cs" />
+    <Compile Include="Models\Announce\AnnouncePublicViewModel.cs" />
+    <Compile Include="Models\Announce\AnnounceSearchModel.cs" />
+    <Compile Include="Models\ArcBasicMetaModel.cs" />
+    <Compile Include="Models\ArchiveMove\DirMoveSaveModel.cs" />
+    <Compile Include="Models\ArchiveMove\MoveSaveModel.cs" />
+    <Compile Include="Models\ArchiveMove\SubjectFilesViewModel.cs" />
+    <Compile Include="Models\ArchiveMove\SubjFileModel.cs" />
+    <Compile Include="Models\ArchiveMove\SubjMoveSaveModel.cs" />
+    <Compile Include="Models\ArcPre\ArcPreAttributeModel.cs" />
+    <Compile Include="Models\ArcPre\ArcPreAttributePostModel.cs" />
+    <Compile Include="Models\ArcPre\ArcPreCreateModel.cs" />
+    <Compile Include="Models\ArcPre\ArcPreMainModel.cs" />
+    <Compile Include="Models\ArcPre\ArcPreModel.cs" />
+    <Compile Include="Models\ArcPre\ArcPrePostModel.cs" />
+    <Compile Include="Models\ArcPre\ArcPreSearchModel.cs" />
+    <Compile Include="Models\ArcPre\ArcPreViewModel.cs" />
+    <Compile Include="Models\ArcPre\spGET_ARC_PRE_ATTRIBUTE_Param.cs" />
+    <Compile Include="Models\ArcPre\spGET_ARC_PRE_Param.cs" />
+    <Compile Include="Models\ArcPre\TbmArcPreIdModel.cs" />
+    <Compile Include="Models\Directory\CreateGroupDirAuthModel.cs" />
+    <Compile Include="Models\Directory\CreateUserDirAuthModel.cs" />
+    <Compile Include="Models\Directory\RoleOrUserDirAuthResponse.cs" />
+    <Compile Include="Models\Directory\GetDirAndSubjectsByDirFilter.cs" />
+    <Compile Include="Models\Enums\ColorsEnum.cs" />
+    <Compile Include="Models\Enums\SubjExtendTypeEnum.cs" />
+    <Compile Include="Models\Enums\SysNumberConfigEnum.cs" />
+    <Compile Include="Models\License\LicenseCodeModel.cs" />
+    <Compile Include="Models\License\LicenseCreateModel.cs" />
+    <Compile Include="Models\License\LicenseDetailModel.cs" />
+    <Compile Include="Models\License\LicenseListModel.cs" />
+    <Compile Include="Models\Procedure\Get_INews_Param.cs" />
+    <Compile Include="Models\Procedure\Update_INews_Param.cs" />
+    <Compile Include="Models\SubjExtend\SearchParamModel.cs" />
+    <Compile Include="Models\SubjExtend\SearchResultModel.cs" />
+    <Compile Include="Models\SubjExtend\SubjExtendColModel.cs" />
+    <Compile Include="Models\SubjExtend\SubjExtendSearchModel.cs" />
+    <Compile Include="Models\SubjExtend\SubjExtendUpdateModel.cs" />
+    <Compile Include="Models\TemplateFields\ChooseTypeViewModel.cs" />
+    <Compile Include="Models\TemplateFields\TemplateFieldsEditModel.cs" />
+    <Compile Include="Models\TemplateFields\TemplateFieldsModel.cs" />
+    <Compile Include="Models\TemplateFields\TemplateFieldsViewModel.cs" />
+    <Compile Include="Models\Template\TemplateBaseModel.cs" />
+    <Compile Include="Models\Template\TemplateCreateModel.cs" />
+    <Compile Include="Models\Template\TemplateEditModel.cs" />
+    <Compile Include="Models\Template\TemplateIdModel.cs" />
+    <Compile Include="Models\Template\TemplateNewCopy.cs" />
+    <Compile Include="Models\Template\TemplateNewCopyModel.cs" />
+    <Compile Include="Models\Template\TemplateSearchModel.cs" />
+    <Compile Include="Models\Template\TemplateViewModel.cs" />
+    <Compile Include="Models\BatchBooking\BatchBookingCreateModel.cs" />
+    <Compile Include="Models\BatchBooking\BatchBookingShowListModel.cs" />
+    <Compile Include="Models\Booking\BookingDetModel.cs" />
+    <Compile Include="Models\Booking\BookingIdModel.cs" />
+    <Compile Include="Models\Booking\BookingViewModel.cs" />
+    <Compile Include="Models\Booking\GetLWorkByBookingParam.cs" />
+    <Compile Include="Models\Booking\MyBookingModel.cs" />
+    <Compile Include="Models\Booking\VerifyBookingListModel.cs" />
+    <Compile Include="Models\CodeSet\CodeDataModel.cs" />
+    <Compile Include="Models\CodeSet\CodeEditViewModel.cs" />
+    <Compile Include="Models\CodeSet\CodeSetEditModel.cs" />
+    <Compile Include="Models\CodeSet\CodeSetIdModel.cs" />
+    <Compile Include="Models\CodeSet\CodeSetViewModel.cs" />
+    <Compile Include="Models\CodeSet\MainSubCodeListModel.cs" />
+    <Compile Include="Models\Directory\DirAuthEditModel.cs" />
+    <Compile Include="Models\Directory\DirectoriesAuthorithModel.cs" />
+    <Compile Include="Models\Directory\DirectoriesItemModel.cs" />
+    <Compile Include="Models\Directory\DirectoryEditModel.cs" />
+    <Compile Include="Models\Directory\DirIdModel.cs" />
+    <Compile Include="Models\Directory\GetDirAuthoritySearchModel.cs" />
+    <Compile Include="Models\Directory\GetDirByFileNoLoadOnDemand.cs" />
+    <Compile Include="Models\Directory\GetDirBySubjIdLoadOnDemand.cs" />
+    <Compile Include="Models\Directory\GetDirLoadOnDemandSearchModel.cs" />
+    <Compile Include="Models\Directory\UserUseDirAuthModel.cs" />
+    <Compile Include="Models\Enums\AnnounceTypeEnum.cs" />
+    <Compile Include="Models\Enums\BookingTranTypeEnum.cs" />
+    <Compile Include="Models\Enums\CodeSetTypeEnum.cs" />
+    <Compile Include="Models\Enums\CodeTEMP002Enum.cs" />
+    <Compile Include="Models\Enums\FileDirectionEnum.cs" />
+    <Compile Include="Models\Enums\FileTypeEnum.cs" />
+    <Compile Include="Models\Enums\FormatString.cs" />
+    <Compile Include="Models\Enums\FunctionTypeEnum.cs" />
+    <Compile Include="Models\Enums\IsTrueFalseEnum.cs" />
+    <Compile Include="Models\Enums\NotifyCategoryEnum.cs" />
+    <Compile Include="Models\Enums\OperationAuthorityEnum.cs" />
+    <Compile Include="Models\Enums\OperatorEnum.cs" />
+    <Compile Include="Models\Enums\SearchTypeEnum.cs" />
+    <Compile Include="Models\Enums\SerilogLevelEnum.cs" />
+    <Compile Include="Models\Enums\TbzCodeIdEnum.cs" />
+    <Compile Include="Models\Enums\WorkApproveEnum.cs" />
+    <Compile Include="Models\Common\MediaDetailsViewModel.cs" />
+    <Compile Include="Models\Function\FunctionIdModel.cs" />
+    <Compile Include="Models\Function\FunctionMenuViewModel.cs" />
+    <Compile Include="Models\Function\FunctionViewModel.cs" />
+    <Compile Include="Models\Function\RoleFuncMenuViewModel.cs" />
+    <Compile Include="Models\Function\RoleFuncUpdateModel.cs" />
+    <Compile Include="Models\Function\UserFavoriteModel.cs" />
+    <Compile Include="Models\Hub\OnlineDataModel.cs" />
+    <Compile Include="Models\Hub\OnlineMembersModel.cs" />
+    <Compile Include="Models\Hub\SignalrClientUpdateModel.cs" />
+    <Compile Include="Models\Hub\SignalrUserConnectId.cs" />
+    <Compile Include="Models\Hub\UserOnlineInfo.cs" />
+    <Compile Include="Models\Enums\Enum.cs" />
+    <Compile Include="Models\Material\BookingCreateModel.cs" />
+    <Compile Include="Models\Material\BookingOptionModel.cs" />
+    <Compile Include="Models\Material\MaterialCreateModel.cs" />
+    <Compile Include="Models\Material\MaterialFilmModel.cs" />
+    <Compile Include="Models\Material\MaterialIdModel.cs" />
+    <Compile Include="Models\Material\MaterialListModel.cs" />
+    <Compile Include="Models\Notify\NotifyCreateModel.cs" />
+    <Compile Include="Models\Notify\NotifyDataModel.cs" />
+    <Compile Include="Models\Notify\UserNotifyModel.cs" />
+    <Compile Include="Models\Role\GroupsCounterModel.cs" />
+    <Compile Include="Models\Role\GroupsViewModel.cs" />
+    <Compile Include="Models\Rule\CreateRuleModel.cs" />
+    <Compile Include="Models\Rule\CreateRuleViewModel.cs" />
+    <Compile Include="Models\Rule\EditRuleFilterModel.cs" />
+    <Compile Include="Models\Rule\EditRuleFilterViewModel.cs" />
+    <Compile Include="Models\Rule\EditRuleModel.cs" />
+    <Compile Include="Models\Rule\FieldInfo.cs" />
+    <Compile Include="Models\Rule\FilterTableModel.cs" />
+    <Compile Include="Models\Rule\RuleCategoryModel.cs" />
+    <Compile Include="Models\Rule\RuleFilterActiveModel.cs" />
+    <Compile Include="Models\Rule\RuleFilterKeyModel.cs" />
+    <Compile Include="Models\Rule\RuleListFilterModel.cs" />
+    <Compile Include="Models\Rule\RuleListModel.cs" />
+    <Compile Include="Models\Rule\RuleTableModel.cs" />
+    <Compile Include="Models\SearchResponse\GetArcSearchResult.cs" />
+    <Compile Include="Models\SearchResponse\SearchResponseAudioModel.cs" />
+    <Compile Include="Models\SearchResponse\SearchResponseBaseModel.cs" />
+    <Compile Include="Models\SearchResponse\SearchResponseDocModel.cs" />
+    <Compile Include="Models\SearchResponse\SearchResponsePhotoModel.cs" />
+    <Compile Include="Models\SearchResponse\SearchResponseVideoModel.cs" />
+    <Compile Include="Models\Search\PopularKeywordsViewModel.cs" />
+    <Compile Include="Models\Search\SearchApiParameterModel.cs" />
+    <Compile Include="Models\Search\SearchColumnViewModel.cs" />
+    <Compile Include="Models\Search\SearchCountResponseModel.cs" />
+    <Compile Include="Models\Search\SearchMetaResponseModel.cs" />
+    <Compile Include="Models\Search\SearchParameterViewModel.cs" />
+    <Compile Include="Models\Shared\DashboardViewModel.cs" />
+    <Compile Include="Models\Shared\LoginPartialModel.cs" />
+    <Compile Include="Models\Shared\SearchModel.cs" />
+    <Compile Include="Models\Shared\SerilogModel.cs" />
+    <Compile Include="Models\Shared\TableUserDateModel.cs" />
+    <Compile Include="Models\Shared\VerifyResultModels.cs" />
+    <Compile Include="Models\SubjectUpload\ChangeUploadViewModel.cs" />
+    <Compile Include="Models\SubjectUpload\FileExtensionViewModel.cs" />
+    <Compile Include="Models\SubjectUpload\SubjectUploadViewModel.cs" />
+    <Compile Include="Models\SubjectUpload\UploadConfigViewModel.cs" />
+    <Compile Include="Models\Subject\DeleteMetadataViewModel.cs" />
+    <Compile Include="Models\Subject\KeyFrameCUViewModel.cs" />
+    <Compile Include="Models\Subject\ParagraphCUViewModel.cs" />
+    <Compile Include="Models\Subject\ReTransferViewModel.cs" />
+    <Compile Include="Models\Subject\ShowListsModel.cs" />
+    <Compile Include="Models\Subject\ShowViewerModel.cs" />
+    <Compile Include="Models\Subject\SubjectCreateModel.cs" />
+    <Compile Include="Models\Subject\SubjectFileMetaViewModel.cs" />
+    <Compile Include="Models\Subject\SubjectFileSeqmentModel.cs" />
+    <Compile Include="Models\Subject\SubjectIdModel.cs" />
+    <Compile Include="Models\Subject\SubjectListViewModel.cs" />
+    <Compile Include="Models\Subject\SubjectViewModel.cs" />
+    <Compile Include="Models\Subject\SubjFileNoModel.cs" />
+    <Compile Include="Models\Subject\VideoKeyFrameModel.cs" />
+    <Compile Include="Models\Synonym\SynonymCreateModel.cs" />
+    <Compile Include="Models\Synonym\SynonymEditModel.cs" />
+    <Compile Include="Models\Synonym\SynonymListModel.cs" />
+    <Compile Include="Models\Synonym\SynonymViewModel.cs" />
+    <Compile Include="Models\Synonym\SynonymStrModel.cs" />
+    <Compile Include="Models\User\UserCreateViewModel.cs" />
+    <Compile Include="Models\User\UserDetailViewModel.cs" />
+    <Compile Include="Models\User\UserEditViewModel.cs" />
+    <Compile Include="Models\User\UserIdModel.cs" />
+    <Compile Include="Models\User\UserListViewModel.cs" />
+    <Compile Include="Models\User\UserLoginInfoViewModel.cs" />
+    <Compile Include="Models\Works\GetLWorkByTranscodeParam.cs" />
+    <Compile Include="Models\Works\LWorkIdModel.cs" />
+    <Compile Include="Models\Works\LWorkProgressModel.cs" />
+    <Compile Include="Models\Works\UpdateLWorkReTranResult.cs" />
+    <Compile Include="Models\Works\UploadWorkEditModel.cs" />
+    <Compile Include="Models\Works\UploadWorkViewModel.cs" />
+    <Compile Include="Procedure\ProcedureDeleteService.cs" />
+    <Compile Include="Procedure\ReportGetService.cs" />
+    <Compile Include="Services\AnnounceService.cs" />
+    <Compile Include="Services\ArcDocService.cs" />
+    <Compile Include="Services\ArcPhotoService.cs" />
+    <Compile Include="Services\ArcAudioService.cs" />
+    <Compile Include="Services\ArcVideoService.cs" />
+    <Compile Include="Services\BookingService.cs" />
+    <Compile Include="Services\BookingTService.cs" />
+    <Compile Include="Services\ConfigService.cs" />
+    <Compile Include="Services\DirectoriesGroupService.cs" />
+    <Compile Include="Services\DirectoriesService.cs" />
+    <Compile Include="Services\GroupsService.cs" />
+    <Compile Include="Services\LicenseService.cs" />
+    <Compile Include="Services\MaterialService.cs" />
+    <Compile Include="Services\NotifyService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\IGenericRepository.cs" />
+    <Compile Include="Services\FunctionsService.cs" />
+    <Compile Include="Procedure\ProcedureGetService.cs" />
+    <Compile Include="Services\RuleService.cs" />
+    <Compile Include="Services\SerilogService.cs" />
+    <Compile Include="Services\SubjectService.cs" />
+    <Compile Include="Services\TblHubConnectionService.cs" />
+    <Compile Include="Services\TblLoginService.cs" />
+    <Compile Include="Services\TblLogService.cs" />
+    <Compile Include="Services\TblNoService.cs" />
+    <Compile Include="Services\TblWorkService.cs" />
+    <Compile Include="Services\DirectoriesUserService.cs" />
+    <Compile Include="Services\ArcPreService.cs" />
+    <Compile Include="Services\TblSRHService.cs" />
+    <Compile Include="Services\SynonymsService.cs" />
+    <Compile Include="Services\UsersService.cs" />
+    <Compile Include="Services\TemplateFieldsService.cs" />
+    <Compile Include="Services\TemplateService.cs" />
+    <Compile Include="Services\CodeService.cs" />
+    <Compile Include="Services\T_tbmARC_IndexService.cs" />
+    <Compile Include="Services\UserExtendService.cs" />
+    <Compile Include="Services\UserFavoriteService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DBEntity\AIRMAM5db.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AIRMAM5db.edmx</DependentUpon>
+      <LastGenOutput>AIRMAM5db.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DBEntity\AIRMAM5db.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AIRMAM5db.edmx</DependentUpon>
+      <LastGenOutput>AIRMAM5db.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="DBEntity\AIRMAM5db.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AIRMAM5db.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DBEntity\AIRMAM5db.edmx.diagram">
+      <DependentUpon>AIRMAM5db.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AIRMAM5.Utility\AIRMAM5.Utility.csproj">
+      <Project>{c0f99ecd-fe34-4860-92be-9b38a4702d1c}</Project>
+      <Name>AIRMAM5.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,129 @@
+﻿@model AIRMAM5.DBEntity.Models.User.UserDetailViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+@HtmlHelper.HtmlModal("DetailModal", "使用者帳號檢視",
+@<form class="ui inverted form" role="form">
+     <div class="two fields">
+         <div class="two wide field">
+             @Html.LabelFor(model => model.fsIS_ACTIVE)
+             @if (Model.fsIS_ACTIVE == true)
+             { <span class="ui green fluid label">啟用</span> }
+             else
+             { <span class="ui red fluid label">停用</span> }
+             @Html.ValidationMessageFor(model => model.fsIS_ACTIVE, "")
+         </div>
+         <div class="field">
+             @Html.LabelFor(model => model.fsUSER_ID)
+             @Html.TextBoxFor(model => model.fsUSER_ID, new { @readonly = "readonly" })
+             @Html.ValidationMessageFor(model => model.fsUSER_ID)
+         </div>
+         <div class="field">
+             @Html.LabelFor(model => model.fsLOGIN_ID)
+             @Html.TextBoxFor(model => model.fsLOGIN_ID, new { @readonly = "readonly" })
+             @Html.ValidationMessageFor(model => model.fsLOGIN_ID)
+         </div>
+     </div>
+    <div class="four fields">
+        <div class="field">
+            @Html.LabelFor(model => model.fsNAME)
+            @Html.TextBoxFor(model => model.fsNAME, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.fsNAME)
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.fsENAME)
+            @Html.TextBoxFor(model => model.fsENAME, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.fsENAME)
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.fsTITLE)
+            @Html.TextBoxFor(model => model.fsTITLE, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.fsTITLE)
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.fsDEPT_ID)
+            @Html.DropDownList("fsDEPT_ID", new SelectList(Model.DeptSelect, "Value", "Text"), new { @class = "ui search selection fluid dropdown disabled" })
+            @Html.ValidationMessageFor(model => model.fsDEPT_ID)
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="ten wide field">
+            @Html.LabelFor(model => model.fsEMAIL)
+            @Html.TextBoxFor(model => model.fsEMAIL, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.fsEMAIL)
+        </div>
+        <div class="six wide field">
+            @Html.LabelFor(model => model.fsEmailConfirmed)
+            <span class="ui orange label">@Model.EmailConfirmed </span>
+            @if (Model.fsEmailConfirmed != true)
+            {
+               <button class="ui tiny brown emailVerify active button" type="button" name="emailVerify">
+                   <i class="paper plane icon"></i> 寄驗證信
+               </button>
+            }
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.fsPHONE)
+            @Html.TextBoxFor(model => model.fsPHONE, new { @readonly = "readonly", @class = "" })
+            @Html.ValidationMessageFor(model => model.fsPHONE, "")
+        </div>
+        <div class="field">
+            <div class="_ArrayFlex">
+                @Html.LabelFor(model => model.fsFILE_SECRET)<span class="">（可複選）</span>
+            </div>
+            <div class="ui right action left labeled fluid input">
+                @Html.ListBox("FSecretList", new MultiSelectList(Model.FileSecretSelect, "Value", "Text"), new { @readonly = "readonly", @class = "ui multiple disabled fluid dropdown" })
+            </div>
+            @Html.ValidationMessageFor(model => model.fsFILE_SECRET, "")
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.fsDESCRIPTION)
+            @Html.TextBoxFor(model => model.fsDESCRIPTION, new { @readonly = "readonly", @class = "" })
+            @Html.ValidationMessageFor(model => model.fsDESCRIPTION, "")
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.fsBOOKING_TARGET_PATH)
+            @Html.TextBoxFor(model => model.fsBOOKING_TARGET_PATH, new { @readonly = "readonly", @class = "", @placeholder = "(如：\\SERVER\\FOLDER)" })
+            @Html.ValidationMessageFor(model => model.fsBOOKING_TARGET_PATH, "")
+        </div>
+
+    </div>
+    <div class="field">
+        <div class="_ArrayFlex">
+            @Html.DisplayNameFor(model => model.fsGROUPs)<span class="">（可複選）</span>
+        </div>
+        @Html.ListBox("GroupList", new MultiSelectList(Model.RoleGroupSelect, "Value", "Text"), new { @class = "ui multiple fluid dropdown", @multiple = "", @disabled = "disabled" })
+    </div>
+    <div class="field">
+        @Html.DisplayNameFor(model => model.C_sIS_ADMINS)
+        @if (@Model.C_sIS_ADMINS == "Y") {<span class="ui green label">是</span>} else { <span class="ui teal label">否</span>}
+    </div>
+    <div class="four fields">
+        <div class="field">
+            @Html.DisplayNameFor(model => model.fdCREATED_DATE)
+            @Html.TextBoxFor(model => model.fdCREATED_DATE, string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.fdCREATED_DATE), new { @readonly = "readonly" })
+        </div>
+        <div class="field">
+            @Html.DisplayNameFor(model => model.fsCREATED_BY)
+            @Html.TextBoxFor(model => model.fsCREATED_BY, new { @readonly = "readonly" })
+        </div>
+        <div class="field">
+            @Html.DisplayNameFor(model => model.fdUPDATED_DATE)
+            @Html.TextBoxFor(model => model.fdUPDATED_DATE, string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.fdUPDATED_DATE), new { @readonly = "readonly" })
+        </div>
+        <div class="field">
+            @Html.DisplayNameFor(model => model.fsUPDATED_BY)
+            @Html.TextBoxFor(model => model.fsUPDATED_BY, new { @readonly = "readonly" })
+        </div>
+    </div>
+</form>,
+        @<button class="ui cancel button" type="button">關閉</button>
+  )
+

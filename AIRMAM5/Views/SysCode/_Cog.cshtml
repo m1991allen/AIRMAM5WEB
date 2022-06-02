@@ -1,0 +1,80 @@
+﻿@model AIRMAM5.DBEntity.Models.CodeSet.CodeEditViewModel
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("CogModal", "編輯系統代碼群組[代碼編號:" + Model.CodeSet.fsCODE_ID + "]",
+@<div>
+    @using (Ajax.BeginForm("CreateCode", "SysCode",
+        new AjaxOptions { HttpMethod = "POST", OnSuccess = "ShowMessage", OnFailure = "ShowMessage" },
+        new { role = "form", @class = "ui inverted form", @id = "CogForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="three fields">
+            <div class="four wide field">
+                @Html.LabelFor(model => model.CodeSet.fsCODE_ID)
+                @Html.TextBoxFor(model => model.CodeSet.fsCODE_ID, new { @readonly = "readonly", @id= "GroupCode" })
+            </div>
+            <div class="four wide field">
+                @Html.LabelFor(model => model.CodeSet.fsTITLE)
+                @Html.TextBoxFor(model => model.CodeSet.fsTITLE, new { @readonly = "readonly" })
+            </div>
+            <div class="eight wide field">
+                @Html.LabelFor(model => model.CodeSet.fsNOTE)
+                @Html.TextAreaFor(model => model.CodeSet.fsNOTE, new { @readonly = "readonly", @row = 1 })
+            </div>
+        </div>
+        <div class="ui inverted horizontal divider">編輯子代碼</div>
+        <div class="ui inverted segment">
+            <div class="four fields">
+                <div class="required four wide field">
+                    <label>子代碼</label>
+                    @*@Html.LabelFor(model => model.Code.fsCODE_ID)*@
+                    @Html.TextBoxFor(model => model.Code.fsCODE_ID, new { @type = "text", @placeholder = "代碼編號", @id = "subCode" })
+                </div>
+                <div class="required four wide field">
+                    @Html.LabelFor(model => model.Code.fsNAME)
+                    @Html.TextBoxFor(model => model.Code.fsNAME, new { @type = "text", @placeholder = "名稱", @id = "subCodeName" })
+                </div>
+                <div class="four wide field">
+                    @Html.LabelFor(model => model.Code.fsENAME)
+                    @Html.TextBoxFor(model => model.Code.fsENAME, new { @type = "text", @placeholder = "英文名稱", @id = "subCodeEName" })
+                </div>
+                <div class="required four wide field">
+                    @Html.LabelFor(model => model.Code.fnORDER)
+                    @Html.TextBoxFor(model => model.Code.fnORDER, new { @type = "number", @min = "0", @step = "1", @placeholder = "顯示順序", @id = "subCodeSort" })
+                </div>
+            </div>
+            <div class="four fields">
+                <div class="eight wide field">
+                    @Html.LabelFor(model => model.Code.fsNOTE)
+                    @Html.TextAreaFor(model => model.Code.fsNOTE, new { @type = "text", @placeholder = "備註", @id = "subCodeCommit", @row = 1 })
+                </div>
+                <div class="five wide field">
+                    @Html.LabelFor(model => model.Code.fsSET)
+                    @Html.TextBoxFor(model => model.Code.fsSET, new { @type = "text", @placeholder = "設定", @id = "subCodeSetting" })
+                </div>
+                <div class="one wide field">
+                    <label>可選</label>
+                    <div class="ui checkbox checked" id="subCodeEnabled">
+                        @Html.CheckBoxFor(model => model.Code.IsEnabled, new { @class = "" })
+                        <label></label>
+                    </div>
+                </div>
+                <div class="three wide field">
+                    <label style="visibility:hidden;">操作</label>
+                    <button id="createSubCode" type="button" class="ui yellow button">新增子代碼</button>
+                </div>
+            </div>
+        </div>
+        <div id="SaveData" data-json='@Html.Raw(Json.Encode(Model.CodeList))'></div>
+        <div id="SubTable"></div>
+    }
+
+</div>,
+ @<div>
+     @*<button class="ui yellow ok button" type="submit">儲存</button>*@
+     <button class="ui cancel  button" type="button">關閉</button>
+ </div>,
+ "large")
+

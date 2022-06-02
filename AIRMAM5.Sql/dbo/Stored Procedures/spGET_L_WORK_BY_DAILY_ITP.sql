@@ -1,0 +1,40 @@
+﻿-- =============================================
+-- 描述:	取出每日入庫轉檔主檔資料 
+-- 記錄:	<2019/09/06><David.Sin><新增本預存>
+-- =============================================
+CREATE PROCEDURE [dbo].[spGET_L_WORK_BY_DAILY_ITP]
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+
+	SELECT 
+		fnWORK_ID, 
+		fsTYPE, 
+		fsSTATUS, 
+		fsPROGRESS, 
+		fsPRIORITY,
+		fdSTIME, 
+		fdETIME, 
+		fsRESULT, 
+		fsNOTE, 
+		fdCREATED_DATE, 
+		fsCREATED_BY, 
+		fdUPDATED_DATE, 
+		fsUPDATED_BY, 
+		ISNULL(CODE_TYPE.fsNAME, '錯誤') AS _sTYPENAME,
+		ISNULL(CODE_STATUS.fsNAME, '錯誤') AS _sSTATUSNAME,
+		fsPARAMETERS AS _sPARAMETERS2,
+		(dbo.fnGET_WORK_PARAMETERS_ANALYZE(fsPARAMETERS)) fsPARAMETERS,
+		(dbo.fnGET_WORK_PARAMETERS_ANALYZE_UPLOADED_FILE_INFO(fsPARAMETERS)) _sFILE_INFO,
+		(Case when CONVERT(VARCHAR(10),fdSTIME,111) = '1900/01/01' then '-' else CONVERT(VARCHAR(10),fdSTIME,111)+' '+CONVERT(VARCHAR,fdSTIME,108) end) _sSTIME, 
+		(Case when CONVERT(VARCHAR(10),fdETIME,111) = '1900/01/01' then '-' else CONVERT(VARCHAR(10),fdETIME,111)+' '+CONVERT(VARCHAR,fdETIME,108) end) _sETIME,
+		fnGROUP_ID
+	FROM
+		tblWORK 			
+			LEFT JOIN (select fsCODE, fsNAME from tbzCODE where fsCODE_ID = 'WORK_TC') AS CODE_STATUS ON (fsSTATUS = CODE_STATUS.fsCODE)			
+			LEFT JOIN (select fsCODE, fsNAME from tbzCODE where fsCODE_ID = 'WORK001') AS CODE_TYPE ON (fsTYPE = CODE_TYPE.fsCODE)						
+	WHERE
+		tblWORK.fsTYPE = 'DAILY_ITP'
+	ORDER BY
+		[fnWORK_ID] DESC
+END

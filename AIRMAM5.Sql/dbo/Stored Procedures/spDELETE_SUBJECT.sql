@@ -1,0 +1,67 @@
+﻿
+
+
+-- =============================================
+-- 描述:	刪除SUBJECT 媒資主檔 資料
+-- 記錄:	<2011/09/15><Eric.Huang><新增本預存>
+-- 記錄:	<2016/11/04><David.Sin><增加判斷是否有影音圖文>
+-- =============================================
+CREATE PROCEDURE [dbo].[spDELETE_SUBJECT]
+	@fsSUBJ_ID		VARCHAR(12),
+	@fsDELETED_BY	VARCHAR(50)
+AS
+BEGIN
+ 	SET NOCOUNT ON;
+
+	BEGIN TRY
+		
+		DECLARE @fnCOUNT BIGINT = 0
+		--檢查是否還有影音圖文
+		--SET @fnCOUNT = @fnCOUNT + (SELECT COUNT(1) FROM tbmARC_VIDEO WHERE fsSUBJECT_ID = @fsSUBJ_ID)
+		--SET @fnCOUNT = @fnCOUNT + (SELECT COUNT(1) FROM tbmARC_AUDIO WHERE fsSUBJECT_ID = @fsSUBJ_ID)
+		--SET @fnCOUNT = @fnCOUNT + (SELECT COUNT(1) FROM tbmARC_PHOTO WHERE fsSUBJECT_ID = @fsSUBJ_ID)
+		--SET @fnCOUNT = @fnCOUNT + (SELECT COUNT(1) FROM tbmARC_DOC WHERE fsSUBJECT_ID = @fsSUBJ_ID)
+		SET @fnCOUNT = ((SELECT COUNT(1) FROM tbmARC_VIDEO WHERE fsSUBJECT_ID = @fsSUBJ_ID) +
+						(SELECT COUNT(1) FROM tbmARC_AUDIO WHERE fsSUBJECT_ID = @fsSUBJ_ID) +
+						(SELECT COUNT(1) FROM tbmARC_PHOTO WHERE fsSUBJECT_ID = @fsSUBJ_ID) +
+						(SELECT COUNT(1) FROM tbmARC_DOC WHERE fsSUBJECT_ID = @fsSUBJ_ID) + 
+						(SELECT COUNT(1) FROM t_tbmARC_VIDEO A JOIN t_tbmARC_INDEX B ON A.fsFILE_NO = B.fsFILE_NO WHERE B.fsSTATUS IN ('','R') AND fsSUBJECT_ID = @fsSUBJ_ID) +
+						(SELECT COUNT(1) FROM t_tbmARC_AUDIO A JOIN t_tbmARC_INDEX B ON A.fsFILE_NO = B.fsFILE_NO WHERE B.fsSTATUS IN ('','R') AND fsSUBJECT_ID = @fsSUBJ_ID) +
+						(SELECT COUNT(1) FROM t_tbmARC_PHOTO A JOIN t_tbmARC_INDEX B ON A.fsFILE_NO = B.fsFILE_NO WHERE B.fsSTATUS IN ('','R') AND fsSUBJECT_ID = @fsSUBJ_ID) + 
+						(SELECT COUNT(1) FROM t_tbmARC_DOC A JOIN t_tbmARC_INDEX B ON A.fsFILE_NO = B.fsFILE_NO WHERE B.fsSTATUS IN ('','R') AND fsSUBJECT_ID = @fsSUBJ_ID))
+
+		IF (@fnCOUNT = 0)
+		BEGIN
+
+			BEGIN TRANSACTION
+
+			DECLARE @context_info VARBINARY(128)
+			SET @context_info = CAST(@fsDELETED_BY AS VARBINARY(128))
+			SET CONTEXT_INFO @context_info
+
+			DELETE
+				tbmSUBJECT
+			WHERE
+				(fsSUBJ_ID = @fsSUBJ_ID)
+
+			COMMIT
+
+			SELECT RESULT = ''
+		END	
+		ELSE
+		BEGIN
+
+			SELECT RESULT = 'ERROR:此主題尚有影音圖文!'
+
+		END
+	END TRY
+	BEGIN CATCH
+		ROLLBACK
+		SELECT RESULT = 'ERROR:' + CAST(@@ERROR AS VARCHAR(10)) + '-' + ERROR_MESSAGE()
+	END CATCH
+END
+
+
+
+
+

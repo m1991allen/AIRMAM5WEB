@@ -1,0 +1,11 @@
+﻿main{
+    .img-sec{
+        min-width:275px;
+        max-width:calc(100%/3 *2);
+        width:calc(100%/3 *2);
+      }
+    .form-sec{
+          max-width:calc(100%/3);
+          width:calc(100%/3);
+    }
+}

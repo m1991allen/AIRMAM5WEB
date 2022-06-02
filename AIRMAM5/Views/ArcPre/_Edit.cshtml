@@ -1,0 +1,120 @@
+﻿@model AIRMAM5.DBEntity.Models.ArcPre.ArcPreModel
+<link href="~/Content/iftame_style/Subject/SubjectEditMedia.min.css" rel="stylesheet" />
+@HtmlHelper.HtmlModal("EditModal", "編輯詮釋資料",
+@<form role="form" class="ui inverted form" id="EditForm">
+
+    <div class="required field">
+        @Html.LabelFor(model => model.fsNAME)
+        @Html.TextBoxFor(model => model.fsNAME, new { @type = "text" })
+        @Html.HiddenFor(model => model.fnPRE_ID)
+    </div>
+    <dvi class="two fields">
+        <div class="field">
+            @Html.LabelFor(model => model.fsTYPE)
+            @Html.TextBoxFor(model => model.fsTYPE_NAME, new { @type = "text", @readonly = "readonly" })
+            @Html.HiddenFor(model => model.fsTYPE)
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.fsTEMP_NAME)
+            @Html.TextBoxFor(model => model.fsTEMP_NAME, new { @type = "text", @readonly = "readonly" })
+            @Html.HiddenFor(model => model.fnTEMP_ID)
+        </div>
+    </dvi>
+    <div class="ui horizontal inverted divider">編輯詮釋資料</div>
+    <div class="required field">
+        @Html.LabelFor(model => model.fsTITLE)
+        @Html.TextBoxFor(model => model.fsTITLE, new { @type = "text" })
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.fsDESCRIPTION)
+        @Html.TextAreaFor(model => model.fsDESCRIPTION, new { @rows = 6 })
+    </div>
+    <div class="field">
+        @{ string HashTag = string.Join("^", Model.HashTag);}
+        @Html.LabelFor(model => model.HashTag)
+        @Html.HiddenFor(model => @HashTag)
+        <div class="ui fluid multiple search selection  x-hashtag dropdown" name="x-hashtag">
+            <input name="tags" type="hidden" value="@HashTag.Replace("^",",")">
+            <i class="dropdown icon"></i>
+            <div class="default text">輸入後按下Enter，可以創建新的標籤</div>
+            <div class="menu"></div>
+        </div>
+    </div>
+    @{
+                    var _cser = new AIRMAM5.DBEntity.Services.CodeService();
+                    List<string> fieldList = new List<string>();
+                    int num = 0;
+        //自訂欄位, 判斷型態決定顯示控制項
+        foreach (var itm in Model.ArcPreAttributes)
+                    {
+                        fieldList.Add(itm.Field);
+                        int.TryParse(itm.Field.Replace("fsATTRIBUTE", ""), out int _num);
+                        if (_num > num) { num = _num; }/*fsATTRIBUTE編號不一定會按照順序,取fsATTRIBUTE最大編號記錄*/
+                        string _req = itm.IsNullable ? "" : "required";
+                        string defaultValue = string.IsNullOrEmpty(itm.FieldValue) ? itm.FieldDef : itm.FieldValue;
+                        if (itm.FieldType == "NVARCHAR")
+                        {
+                            if (itm.IsMultiline)
+                            {
+                    <div class="@_req field">
+                        @Html.Label(itm.Field, itm.FieldName)
+                        @Html.TextArea(itm.Field, defaultValue, new { @rows = 3, @maxlength = itm.FieldLen, data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType, Id = itm.Field })
+                    </div>
+                            }
+                            else
+                            {
+                    <div class="@_req field">
+                        @Html.Label(itm.Field, itm.FieldName)
+                        @Html.TextBox(itm.Field, defaultValue, new { @type = "text", @maxlength = itm.FieldLen, data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType, Id = itm.Field })
+                    </div>
+                            }
+
+                        }
+                        else if (itm.FieldType == "INTEGER")
+                        {
+                <div class="@_req field">
+                    @Html.Label(itm.Field, itm.FieldName)
+                    @Html.TextBox(itm.Field, defaultValue, new { @type = "number", @min = 0, @setp = 1, data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType, Id = itm.Field })
+                </div>
+
+                        }
+                        else if (itm.FieldType == "DATETIME")
+                        {
+                <div class="@_req ui calendar field">
+                    @Html.Label(itm.Field, itm.FieldName)
+                    @Html.TextBox(itm.Field, defaultValue, new { @type = "text", data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType, Id = itm.Field })
+                </div>
+
+                        }
+                        else if (itm.FieldType == "CODE")
+                        {
+                <div class="@_req field">
+                    @Html.Label(itm.Field, itm.FieldName)
+                    @{
+                                    var _ddlCode = _cser.GetCodeItemList(itm.FieldCodeId, true);
+                    }
+                    @if (itm.FieldCodeCnt == 1)
+                                {
+                        @Html.DropDownList(itm.Field, new SelectList(_ddlCode, "Value", "Text"), new { @class = "ui search selection fluid dropdown", data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType, Id = itm.Field })
+
+                                }
+                                else
+                                {
+                                    var _clist = _cser.CodeListItemSelected(itm.FieldCodeId, itm.FieldDef);/*Tips: 選單欄位值 */
+                        @Html.DropDownList(itm.Field, _clist, new { @class = "ui search multiple selection fluid dropdown", @multiple = "", data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType, Id = itm.Field })
+                        @*@Html.ListBox("List", new MultiSelectList(_clist, "Value", "Text"), new { @class = "ui search multiple selection fluid dropdown", @multiple = "" })*@
+                                }
+                </div>
+
+                        }
+                    }
+
+        @Html.Hidden("fieldList", (fieldList.Count > 0 ? String.Join("^", fieldList) : ""))
+        @Html.Hidden("fieldNumber", num)/* fsATTRIBUTE最大編號記錄*/
+    }
+</form>,
+        @<div>
+            <button class="ui yellow ok button" type="button">儲存</button>
+            <button class="ui cancel  button" type="button">取消</button>
+        </div>
+               )

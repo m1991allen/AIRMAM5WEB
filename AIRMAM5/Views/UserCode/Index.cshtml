@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+
+@section Styles{
+    <link href="~/Content/iftame_style/UserCode/UserCodeIndex.min.css" rel="stylesheet" />
+}
+@HtmlHelper.Breadcrumb(new string[] { "系統設定", "自訂代碼" })
+<div class="_Filter">
+    @Html.Action("_Search", "UserCode")
+</div>
+<div id="Table"></div>
+
+<!--新增自訂代碼-->
+@Html.Action("_Create", "UserCode")
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+<!--刪除子代碼確認燈箱-->
+@HtmlHelper.ConfirmModal("ConfirmDeleteCodeModal", "刪除子代碼", "確定要刪除此代碼？");
+
+@section Scripts{
+    @Html.Partial("~/Views/Bundle/UserCodeIndex_Js.cshtml")
+    @*<script src="~/Scripts/dist/UserCodeIndex.min.js"></script>*@
+}

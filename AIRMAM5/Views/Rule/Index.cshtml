@@ -1,0 +1,30 @@
+﻿@model IEnumerable<AIRMAM5.DBEntity.Models.Rule.RuleListModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+@section Styles{
+    <link href="~/Content/iftame_style/Rule/RuleIndex.min.css" rel="stylesheet" />
+}
+
+@HtmlHelper.Breadcrumb(new string[] { "規則庫", "規則設定" })
+<div class="_Filter">
+    @Html.Action("_Search", "Rule")
+</div>
+<div id="Table"></div>
+
+@*@Html.Raw(Json.Encode(Model))*@
+@Html.Action("_Create", "Rule")
+@Html.Action("_SubCreate", "Rule")
+<!--啟用流程確認燈箱-->
+@HtmlHelper.ConfirmModal("CategoryConfirm", "規則啟用確認", "確定要關閉此流程的所屬規則?")
+
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+
+@HtmlHelper.ConfirmModal("SwitchFullsiteRuleModal", "全站審啟用與停用", "確定要變更全站審規則?")
+
+@section Scripts{
+    @Html.Partial("~/Views/Bundle/RuleIndex_Js.cshtml")
+    @*<script src="~/Scripts/dist/RuleIndex.min.js"></script>*@
+}

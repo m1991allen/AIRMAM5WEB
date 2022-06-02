@@ -1,0 +1,61 @@
+﻿@model AIRMAM5.DBEntity.Models.Synonym.SynonymViewModel
+
+@HtmlHelper.HtmlModal("DetailModal", "同義詞內容",
+@<form class="ui form" name="Detail">
+    <div class="two fields">
+        <div class="three wide field">
+            @Html.LabelFor(m => m.fnINDEX_ID) @*<label>ID</label>*@
+            @Html.TextBoxFor(model => model.fnINDEX_ID, new { @readonly = "readonly" })
+        </div>
+        <div class="thirteen wide required field">
+            @Html.LabelFor(m => m.fsTYPE) @*<label>分類</label>*@
+            @Html.TextBoxFor(model=>model.fsTYPE_NAME, new { @readonly = "readonly" })
+        </div>
+    </div>
+    <div class="sixteen wide four field">
+        <table class="ui inverted selectable stackable table">
+            <thead>
+                <tr>
+                    <th>@Html.LabelFor(m => m.fsTEXT_LIST) @*同義詞詞彙*@</th>
+                </tr>
+            </thead>
+            <tbody id="ShowSynonymList">
+                @{ 
+                    //var _list = Model.fsTEXT_LIST.Split(new char[] {';' });
+                    foreach (var r in Model.TextList)
+                    {
+                        @:<tr>
+                            @:<td>@r</td>
+                        @:</tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="sixteen wide field">
+        @Html.LabelFor(m => m.fsNOTE)
+        @Html.TextAreaFor(model => model.fsNOTE, new { @readonly = "readonly", rows = "4" })
+    </div>
+    <div class="four fields">
+        <div class="four wide field">
+            @Html.LabelFor(model => model.CreatedDate)
+            @Html.TextBoxFor(model => model.CreatedDate, string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.CreatedDate), new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.LabelFor(model => model.CreatedBy)
+            @Html.TextBoxFor(m => m.CreatedBy, new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.LabelFor(model => model.UpdatedDate)
+            @*@Html.TextBoxFor(m => m.UpdatedTime, new { @readonly = "readonly" })*@
+            @Html.TextBoxFor(model => model.UpdatedDate, string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.UpdatedDate), new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.LabelFor(model => model.UpdatedBy)
+            @Html.TextBoxFor(m => m.UpdatedBy, new { @readonly = "readonly" })
+        </div>
+    </div>
+</form>
+ ,@<button class="ui yellow cancel button" type="button">關閉</button>
+ )
+

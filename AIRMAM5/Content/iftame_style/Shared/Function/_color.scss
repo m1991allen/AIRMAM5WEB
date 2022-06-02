@@ -1,0 +1,6 @@
+﻿
+/*hexcolor轉為rgba函數*/
+@mixin backgroundOpacity($color, $opacity: 0.3) {
+    background: $color; /* The Fallback */
+    background: rgba($color, $opacity);
+}

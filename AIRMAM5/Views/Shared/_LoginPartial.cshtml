@@ -1,0 +1,222 @@
+﻿@model AIRMAM5.DBEntity.Models.Shared.LoginPartialModel
+@{
+    var _uInof = Model.UserInfo;
+}
+<style>
+    ._adjustDown {
+        background: #efefef !important;
+        border-radius: 0 5px 5px 0 !important;
+    }
+
+    ._SearchFocus {
+        overflow-y: auto;
+        position: absolute;
+        left: 0;
+        top: 32px;
+        background: olive;
+        z-index: 6;
+        width: 100%;
+        border-radius: 6px;
+        text-align: left;
+        max-height: 29vh;
+    }
+
+    .ui.menu .ui.dropdown ._SearchFocus .item {
+        align-items: flex-start;
+    }
+
+    .ui.menu .ui.dropdown ._SearchFocus > .item:hover {
+        background: rgba(255, 255, 255, 0.07) !important;
+    }
+</style>
+<nav>
+    <div class="ui tiny secondary pointing labeled icon menu">
+        @*@if (Request.IsAuthenticated)
+            {*@
+        <button class="ui icon black button item" id="menutoggle">
+            <i class="align justify icon"></i>
+        </button>
+        <div class="right menu">
+            <div style="display: flex;align-items: center;">
+                <div class="ui action input">
+                    <div class="ui dropdown right action left icon input" id="SearchHot">
+                        <i class="search icon"></i>
+                        <input type="text" placeholder="輸入全文檢索關鍵字" title="說明 : 空格 = AND 、| = OR、! = NOT、* = 萬用符號">
+
+                        <div class="transition hidden menu _SearchFocus" style="overflow-y:auto;">
+                            <p style="border-bottom: 1px solid #3a3a3a;color: #aaa !important;padding: 0.78571429em 1.14285714em;margin: 0;"> 熱搜關鍵:</p>
+                            <div id="SearchFocus" style="width:auto;max-width:250px;"> </div>
+                        </div>
+                    </div>
+                    <div class="ui floating dropdown button _adjustDown" id="SearchDrop">
+                        <i class="mini filter icon" style="margin: 0;" title="進階篩選"></i>
+                    </div>
+                    @* -------下拉內容篩選區------ *@
+                    <div class="ui popup bottom left transition hidden" style="max-height:80vh;overflow-y:auto;">
+                        <form class="ui inverted form" id="FullTextForm" method="post" target="searchframe">
+                            <div class="field left aligned">
+                                <span class="ui pink sub inverted header">說明 : 空格 = AND 、| = OR、! = NOT、* = 萬用符號</span>
+                            </div>
+                            <div class="inline fields">
+                                <label>檢索類型</label>
+                                @{
+                                    foreach (var o in Model.SearchColumn.SearchType)
+                                    {
+                                        <div class="field">
+                                            <div class="ui checkbox">
+                                                <input type="checkbox" name="searchtype" checked="checked" id="@o.Value" value="@o.Value">
+                                                <label for="@o.Value">@o.Text</label>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <div class="inline fields">
+                                <label>查詢方式</label>
+                                <div class="field">
+                                    <select class="ui fluid dropdown" id="EngineMode">
+                                        @{
+                                            foreach (var i in Model.SearchColumn.QueryType)
+                                            {
+                                                <option value="@i.Value">@i.Text</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox">
+                                        <input type="checkbox" name="HomoMode" id="HomoMode">
+                                        <label for="HomoMode">同音</label>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui checkbox">
+                                        <input type="checkbox" name="SynonymousMode" id="SynonymousMode">
+                                        <label for="SynonymousMode">同義</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inline fields">
+                                <div class="four wide column field">
+                                    <select class="ui fluid dropdown" id="DateType">
+                                        @{
+                                            foreach (var i in Model.SearchColumn.DateType)
+                                            {
+                                                <option value="@i.Value">@i.Text</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="six wide ui calendar field">
+                                    <input type="text" name="dateRange" placeholder="起" />
+                                </div>
+                                <div class="six wide ui calendar field">
+                                    <input type="text" name="dateRange" placeholder="迄" />
+                                </div>
+                            </div>
+                            <!--排序方式(1:升冪、2:降冪)-->
+                            <div class="inline fields" style="padding-left: 5em;">
+                                <div class="ui radio checkbox" style="margin-right: .5em;">
+                                    <input type="radio" name="datesort" id="DataAmount_1" checked="checked" value="2">
+                                    <label for="DataAmount_1">新到舊</label>
+                                </div>
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="datesort" id="DataAmount_2" value="1">
+                                    <label for="DataAmount_2">舊到新</label>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="ui accordion" style="min-width:350px;">
+                                    <div class="title" style="text-align:center;">
+                                        <i class="dropdown icon"></i>
+                                        更多篩選
+                                    </div>
+                                    <div class="content">
+                                        <div class="field">
+                                            <select id="DynamicTemplete" class="ui fluid search dropdown">
+                                                <option value="-1" selected>請選擇樣版</option>
+                                                @{
+                                                    foreach (var i in Model.SearchColumn.SearchTemplate)
+                                                    {
+                                                        <option value="@i.fnTEMP_ID" data-searchtype="@i.SearchType">@i.fsNAME</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                        <div id="DynamicField" data-FieldLength="@Model.SearchColumn.SearchMaxColumn"><!--動態欄位顯示區域--></div>
+                                    </div>
+                                    <div class="extra content" id="DynamicMessage">
+                                        <h6 class="ui inverted header">搜尋條件已達上限</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inline fields">
+                                <button class="ui fluid grey button" type="reset">清空</button>
+                                <button class="ui fluid yellow button" type="submit">搜尋</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu" name="fastMenu">
+            @*<a class="item" id="MateriaCart" href="#">
+                    <i class="shopping cart icon"></i>
+                    我的調用清單
+                </a>*@
+            @{
+                foreach (var f in Model.QuickMenu)
+                {
+                    <a class="item" id="@f.FuncId" href="#" data-controller="@f.ControllerName" data-action="@f.ActionName" data-url="@Url.Action(f.ActionName,f.ControllerName)" data-mutiple="false">
+                        <i class="@f.Icon"></i>
+                        @f.FunctionName
+                    </a>
+                }
+            }
+        </div>
+        <div class="menu" id="nav_but">
+            <a class="item" index="1">
+                <i class="star icon"></i>
+                常用功能
+            </a>
+            <a class="item" index="3">
+                <i class="history icon"></i>
+                目前視窗
+            </a>
+            <a class="item" index="2">
+                <i class="envelope  icon"></i>
+                <div id="UserNotify" class="floating ui red label" style="top:0;display:none;">0</div>
+                提醒訊息
+            </a>
+            <a class="item" index="0">
+                <i class="user icon"></i>
+                <div id="OnlineUsers" class="floating ui red label" style="top:0;display:none;">0</div>
+                線上人數
+            </a>
+        </div>
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a class="item" onclick="document.getElementById('logoutForm').submit();">
+                <i class="sign-out icon"></i>
+                登出
+            </a>
+        }
+    </div>
+    @*} else
+         {
+             <div class="right menu">
+                 <a class="item" href="@Url.Action("Login","Account")" id = "loginLink">
+                     <i class="sign-in icon"></i>
+                     登入
+                 </a>
+             </div>
+        }*@
+</nav>
+<div id="UserInfoJson" data-JSON='@Html.Raw(Json.Encode(@_uInof))'></div>
+
+
+<script src="~/Content/jQuerySignalR/jquery.signalR-2.4.1.min.js"></script>
+@Html.Partial("~/Views/Bundle/OnlineSignalR_Js.cshtml")

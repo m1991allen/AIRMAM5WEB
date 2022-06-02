@@ -1,0 +1,31 @@
+﻿@model IEnumerable<AIRMAM5.DBEntity.Models.User.UserListViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BlankLayout.cshtml";
+}
+@section Styles{
+    <link href="~/Content/iftame_style/User/UserIndex.min.css" rel="stylesheet" />
+}
+
+@HtmlHelper.Breadcrumb(new string[] { "系統設定", "系統帳號維護" })
+<div class="_Filter">
+    @Html.Action("_Search", "User")
+</div>
+<div id="Table"></div>
+
+
+<!--新增帳號燈箱-->
+
+@Html.Action("_Create", "User")
+
+<!--燈箱區域-->
+@Html.Partial("~/Views/Shared/_ModalArea.cshtml")
+
+@HtmlHelper.ConfirmModal("SwitchAccountModal", "帳號啟用與停權", "確定要變更此帳號?")
+@HtmlHelper.ConfirmModal("RestorePasswordModal", "帳號還原密碼", "確定要還原此帳號的密碼?")
+
+@section Scripts{
+    @Html.Partial("~/Views/Bundle/UserIndex_Js.cshtml")
+    @*<script src="~/Scripts/dist/UserIndex.min.js"></script>*@
+}

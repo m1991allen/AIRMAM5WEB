@@ -1,0 +1,25 @@
+﻿
+@{
+    //ViewBag.Title = "CreateConfirmChangeInvalid";
+    ViewBag.Title = "--新帳號驗證失敗--";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<hgroup class="title">
+    <h1 style="color:navajowhite;">@ViewBag.Title </h1>
+</hgroup>
+<div class="field">
+    @*<p>Invalid Token. </p>*@
+    <p>
+        抱歉!! 驗證失敗, 無法進行密碼設定。　
+    </p>
+    <p>
+        請洽系統管理員, 並重寄電子郵件驗證信。
+    </p>
+
+    <p class="right">
+        @Model
+        按一下 @Html.ActionLink("這裡回到首頁", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+    </p>
+</div>
+

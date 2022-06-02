@@ -1,0 +1,49 @@
+﻿@model AIRMAM5.DBEntity.Models.Announce.AnnounceSearchModel
+
+<form class="ui inverted form" role="form" id="SearchForm">
+    <div class="fields">
+        <div class="two wide field">
+            <label>公告分類</label>
+            <select class="ui search selection  dropdown" id="annLevel" name="annLevel">
+                <option value="*" selected> -全部</option>
+                @{
+                    foreach (var item in Model.AnnTypeList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="three wide field">
+            <label>發布單位</label>
+            <select class="ui search selection dropdown" id="annUnit" name="annUnit">
+                <option value="*" selected> -全部</option>
+                @{
+                    foreach (var item in Model.AnnDeptList)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="ui calendar two wide field">
+            <label>上架日期(起)</label>
+            <div class="ui action input">
+                <input type="text" name="sdate" id="sdate"/>
+            </div>
+        </div>
+        <div class="ui calendar two wide field">
+            <label>上架日期(迄)</label>
+            <input type="text" name="edate" id="edate" />
+        </div>
+
+        <div class="five wide field center aligned">
+            <label style="visibility:hidden;">查詢</label>
+            <button type="submit" class="ui yellow button">查詢</button>
+            <button type="button" name="reset" class="ui button">清空</button>
+            @*<button type="reset" class="ui button">清空</button>*@
+            <button type="button" class="ui _darkGrey button" onclick="$('#CreateModal').modal('show');"><i class="plus icon"></i> 新增公告 </button>
+        </div>
+    </div>
+    <div class="ui error message"></div>
+</form>

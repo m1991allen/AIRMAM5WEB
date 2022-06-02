@@ -1,0 +1,34 @@
+﻿@import "../Shared/Function/_directoryTab.scss";
+/*******************************
+    右側影片資料樣版
+*******************************/
+div[data-tab="metadata"] {
+    overflow: auto;
+    height: 100%;
+    padding: 10px;
+
+    .ui.grid {
+        width: 100%;
+    }
+
+    .x-fixed {
+        text-align: left;
+        bottom: 0;
+        margin: 0;
+        padding-bottom: 0 !important;
+    }
+
+    .x-dataview {
+        width: 100%;
+        display: block;
+        max-height: inherit;
+        overflow: auto;
+        height: 100%;
+    }
+
+    @include _directoryTab();
+
+    div[data-tab="metadata"] ._directoryTab span {
+        background: #524f4f !important;
+    }
+}

@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("CreateSubModal", "新增子規則",
+@<form role="form" class="ui inverted form" , id="CreateSubForm">
+     <div id="SubCreateInput">
+         <div class="four fields">
+             <div class="two required field">
+                 <label>序</label>
+                 <input type="number" name="RuleOrder" min="1" step="1" />
+             </div>
+             <div class="four wide  field">
+                 <label>條件</label>
+                 <select class="ui selection fluid dropdown" name="RuleWhereClause">
+                     <option value="AND" selected title="and">與(And)</option>
+                     <option value="OR" title="or">或(OR)</option>
+                 </select>
+             </div>
+             <div class="four wide field">
+                 <label>套用規則表</label>
+                 <select class="ui selection fluid dropdown" name="RuleTable"></select>
+             </div>
+             <div class="six wide field">
+                 <label>是否啟用</label>
+                 <div class="ui toggle checkbox" name="RuleEnabled">
+                     <input type="checkbox" name="enabled" checked />
+                     <label>啟用規則</label>
+                 </div>
+             </div>
+         </div>
+         <div class="three fields">
+             <div class="four wide field">
+                 <label>欄位</label>
+                 <select class="ui selection fluid dropdown" name="RuleColumn"> </select>
+             </div>
+             <div class="two wide field">
+                 <label>運算子</label>
+                 <select class="ui selection fluid dropdown" name="RuleOperator"> </select>
+             </div>
+             <div class="ten wide field">
+                 <label>篩選值</label>
+                 <div name="FilterUI"> </div>
+             </div>
+         </div>
+     </div>
+
+</form>,
+ @<div>
+     <button type="button" class="ui ok yellow  button">儲存</button>
+     <button class="ui cancel  button" type="button">取消</button>
+ </div>)
+
+

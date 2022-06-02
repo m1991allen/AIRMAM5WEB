@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "無權限";
+    Layout = "~/Views/Shared/_ErrorLayout.cshtml";
+}
+<h1>403</h1>
+<p>沒有權限，存取遭拒</p>
+<p class="quotething"> “抱歉，您無權限使用此網頁”</p><br>
+<div align="center">
+    <a id="backbtn" class="button404" href="@Url.Action("Login","Account")">回首頁</a>
+</div>

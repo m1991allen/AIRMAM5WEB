@@ -1,0 +1,49 @@
+﻿@import "../Shared/style.scss";
+@import "../../_variable.scss";
+@import "../../_inputRange.scss";
+@import "../Shared/Function/_directoryTab.scss";
+@import "../Shared/Function/_keyframe.scss";
+@import "../Shared/Function/_paragraph.scss";
+@import "../../_previewPlayer.scss";
+@import "../Shared/Function/_DetailModalPlayer.scss";
+@import "../Shared/Function/_Label.scss";
+@include _transparentLabel;
+@include _DetailModalPlayer($VideoWidth);
+@include _directoryTab;
+
+#videoMenu {
+    display: flex;
+    position: relative !important;
+    top: 0;
+}
+
+._directoryTab {
+    max-height: 55vh;
+    overflow: auto;
+}
+
+div[data-tab="keyframe"] {
+    @include _keyframe;
+}
+
+div[data-tab="paraDescription"] {
+    padding: 0;
+    border: 0 !important;
+    background-color: transparent !important;
+    background: none !important;
+    @include _paragraph;
+}
+.x-tabs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: unset !important;
+}
+
+div.or{
+    &:before{
+        background-color:$black !important;
+            color:$white !important;
+            border:0.5px solid $white;
+    }
+}

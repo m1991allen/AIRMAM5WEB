@@ -1,0 +1,129 @@
+﻿div[name="docsystemview"] {
+    height: calc(100% - 16px);
+    width: 100%;
+    background: #333;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 99;
+    text-align: left;
+
+    label.x-factor {
+        background: transparent;
+        border: 2px solid #64bd3e;
+        color: #64bd3e;
+    }
+
+    .x-time-label {
+        display: flex;
+        align-items: center;
+    }
+
+    .field.x-calendar-input{
+        display:inline-flex;
+    }
+    .x-doc-top, .x-doc-bottom {
+        display: inline-flex;
+        width: inherit;
+    }
+
+    .x-doc-bottom {
+        height: 60%;
+        height: -webkit-fill-available;
+        max-height: 60%;
+    }
+
+    .x-doc-top {
+        height: auto;
+        max-height: 25%;
+    }
+
+    .x-delete.icon {
+        float: right;
+        font-size: 1.5em !important;
+    }
+
+    .x-input {
+        background: #313131;
+        color: #fff;
+
+        &:focus, &:active {
+            background: #222;
+        }
+    }
+
+    .x-doc-list {
+        width: inherit;
+        height: initial;
+        overflow-y: auto;
+        padding: 10px;
+
+        .x-doc-item {
+            width: inherit;
+            display: inline-flex;
+            padding: 10px 5px;
+            background: #464545;
+            margin: 4px 0px;
+            text-align: left;
+            align-items: center;
+            color: #fff;
+        }
+
+        .x-doc-type {
+            background: rgba(80,136,167, 0.35);
+            color: #7dd1ff;
+            padding: 5px;
+            font-size: 8px;
+            margin: 0px 10px 0px 0px;
+        }
+
+        .x-doc-column {
+            border-right: 2px solid #fff;
+            width: 15%;
+            overflow-wrap: normal;
+            margin-right: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .x-doc-delete {
+            width: 15px;
+            cursor: pointer;
+            height: inherit;
+            clear: both;
+            position: relative;
+            left: calc(100% - 20px);
+        }
+    }
+
+    .tabulator-row .tabulator-cell .tabulator-responsive-collapse-toggle {
+        font-size: inherit;
+        background: #0288d1;
+        padding: 5px;
+    }
+}
+ul.x-ul {
+    list-style: none;
+    padding: 0;
+
+    li.x-li {
+        white-space: initial;
+        line-height: initial;
+        text-align: justify;
+        padding: 5px 0;
+    }
+
+    .x-li-title {
+        background: rgba(80, 136, 167, 0.35);
+        color: rgb(125, 209, 255);
+        padding: 5px;
+        margin: 0px 10px 0px 0px;
+        line-height: 2.5em;
+    }
+}
+.ui.items.x-docsystem{
+    background:#222;
+    padding:10px;
+}

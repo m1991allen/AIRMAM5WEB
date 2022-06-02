@@ -1,0 +1,56 @@
+﻿@model AIRMAM5.DBEntity.DBEntity.spGET_L_LOG_BY_LOGID_DATES_LOGINID_Result
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("DetailModal", "系統操作紀錄內容",
+@<form class="ui form" name="Detail">
+     <div class="four fields">
+         <div class="two wide field">
+             @Html.DisplayNameFor(model => model.fnlLOG_ID)
+             @Html.TextBoxFor(model => model.fnlLOG_ID, new { @readonly = "readonly" })
+         </div>
+         <div class="four wide field">
+             @Html.DisplayNameFor(model => model.fsTYPE)
+             @Html.TextBoxFor(model => model.C_sTYPE_NAME, new { @readonly = "readonly" })
+         </div>
+         <div class="four wide field">
+             @Html.DisplayNameFor(model => model.fsGROUP)
+             @Html.TextBoxFor(model => model.C_sGROUP_NAME, new { @readonly = "readonly" })
+         </div>
+         <div class="six wide field">
+             @{ string _createder = string.Format("{0}{1}"
+                    , string.IsNullOrEmpty(Model.fsCREATED_BY) ? string.Empty : Model.fsCREATED_BY
+                    , string.IsNullOrEmpty(Model.fsCREATED_BY_NAME) ? string.Empty : string.Format($"({Model.fsCREATED_BY_NAME})")); }
+             @Html.DisplayNameFor(model => model.fsCREATED_BY)
+             @Html.TextBox("CreatedByName", _createder, new { @readonly = "readonly" })
+         </div>
+     </div>
+    <div class="two fields">
+        <div class="eight wide field">
+            @Html.DisplayNameFor(model => model.fsDESCRIPTION)
+            @Html.TextBoxFor(model => model.fsDESCRIPTION, new { @readonly = "readonly" })
+        </div>
+        <div class="eight wide field">
+            @Html.DisplayNameFor(model => model.fsNOTE)
+            @Html.TextBoxFor(model => model.fsNOTE, new { @readonly = "readonly" })
+        </div>
+    </div>
+    <div class="field">
+        @Html.DisplayNameFor(model => model.fsDATA_KEY)
+        @Html.TextBoxFor(model => model.fsDATA_KEY, new { @readonly = "readonly" })
+    </div>
+    <div class="two fields">
+        <div class="four wide field">
+            @Html.DisplayNameFor(model => model.fdCREATED_DATE)
+            @Html.TextBoxFor(model => model.fdCREATED_DATE, string.Format("{0:yyyy/MM/dd HH:mm:ss}", Model.fdCREATED_DATE), new { @readonly = "readonly" })
+        </div>
+        <div class="four wide field">
+            @Html.DisplayNameFor(model => model.fsCREATED_BY)
+            @Html.TextBoxFor(model => _createder, new { @readonly = "readonly" })
+        </div>
+    </div>
+</form>
+ ,@<button class="ui yellow cancel button" type="button">關閉</button>
+  )
+

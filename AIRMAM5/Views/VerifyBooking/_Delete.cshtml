@@ -1,0 +1,39 @@
+﻿
+@HtmlHelper.HtmlModal("DeleteModal", "調用審核:拒絕原因", 
+ @<form role="form" class="ui inverted form" id="DeleteForm">
+      <div class="required field">
+          <label for="VerifyReason">拒絕原因</label>
+      </div>
+    <div class="grouped fields">
+        <div class="field">
+            <div class="ui radio checkbox checked">
+                <input type="radio" name="VerifyReason" required checked="checked" value="1">
+                <label>權限不符合，請先經過主管同意</label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="VerifyReason" value="2">
+                <label>未經過申請，須補書面申請或電子郵件</label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="VerifyReason" value="3">
+                <label>請與片庫聯絡，領取帳號申請單</label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="ui radio checkbox">
+                <input type="radio" name="VerifyReason" value="4">
+                <label>其它說明</label>
+            </div>
+            <textarea rows="5" name="Reason"></textarea>
+        </div>
+    </div>
+</form>,
+ @<div>
+     <button type="button" class="ui approve right labeled icon red button">確定拒絕<i class="checkmark icon"></i></button>
+     <button type="button" class="ui deny  button">取消</button>
+ </div>,
+ "tiny")

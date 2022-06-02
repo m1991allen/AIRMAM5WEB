@@ -1,0 +1,144 @@
+﻿@model AIRMAM5.DBEntity.Models.SearchResponseAudioModel
+@using AIRMAM5.DBEntity.Models.Enums;
+@using Newtonsoft.Json;
+@{
+    string pa = JsonConvert.SerializeObject(Model.SearchBase.MetaDataList);
+    string list = pa.Replace("&quot;", @"""");
+}
+<div id="split-pane-1" class="split-pane fixed-left">
+    <div class="split-pane-component _SearchStyleGrid_left" id="left-component">
+        @Html.Action("_Condition", "Search", new { model = Model.SearchBase })
+
+        <div id="tabA_list" name="list" class="_row_scroll ui relaxed selection list" data-SearchList='@Html.Raw(Json.Encode(list))'>
+            @*@Html.Action("_List", "Search", new { model = Model.SearchBase.MetaDataList, mediaType = FileTypeEnum.A.ToString() })*@
+        </div>
+        <div class="_SearchStylePaging"> 分頁</div>
+    </div>
+    @* 直向拉取 *@
+    <div class="split-pane-divider" id="divider"></div>
+    @{
+        var _mda = Model.SearchBase.MetaDataList.FirstOrDefault();
+        string _fno = _mda == null ? "0" : _mda.fsFILE_NO, _sno = _mda == null ? "0" : _mda.fsSUBJECT_ID;
+    }
+    <div class="split-pane-component  _SearchStyleGrid_right" id="right-component">
+        <div class="split-pane horizontal-percent">
+            <div name="preview" class="split-pane-component" id="top-component2">
+                @Html.Action("_Preview", "Search", new { fsSUBJECT_ID = _sno, mediaType = FileTypeEnum.A.ToString(), fileNo = _fno })
+            </div>
+            <div class="split-pane-divider" id="horizontal-divider2"></div>@* 橫向拉取 *@
+            <div class="split-pane-component" id="bottom-component2">
+                <div class="_right_button">
+                    <div name="dataTabs" class="ui top attached tabular menu tabs">
+                        <a class="active item" data-tab="baseMeta">基本資料</a>
+                        <a class="item" data-tab="detailMeta">詳細資料</a>
+                        <a class="item" data-tab="albumInfo">專輯資訊</a>
+                        <a class="item" data-tab="document">段落描述</a>
+                    </div>
+                    <div class="_SearchStyleContent">
+                        @*<div class="ui bottom attached active tab" data-tab="baseMeta">
+                            @Html.Action("_BasicMedia", "Search", new { fsSUBJECT_ID = _sno, mediaType = FileTypeEnum.A.ToString(), fileNo = _fno })
+                        </div>*@
+                        @*<div class="ui bottom attached tab" data-tab="detailMeta">
+                            @Html.Action("_DynamicMedia", "Search", new { fsSUBJECT_ID = _sno, mediaType = FileTypeEnum.A.ToString(), fileNo = _fno })
+                        </div>*@
+                        @*<div class="ui bottom attached tab" data-tab="albumInfo" style="flex-direction: column;padding: 0 .3em;">
+                            @{ var _ab = Model.AudioAlbumInfo; }
+                            <div class="ui form basic segment" style="width: 100%;">
+                                <div class="field _styleMarginZero">
+                                    <div class="ui labeled input">
+                                        <label class="ui black label three wide field">專輯名稱 :</label>
+                                        <span>@_ab.Album </span>
+                                    </div>
+                                </div>
+                                <div class="field _styleMarginZero">
+                                    <div class="ui labeled input">
+                                        <label class="ui black label three wide field">專輯標題 :</label>
+                                        <span>@_ab.AlbumTitle </span>
+                                    </div>
+                                </div>
+                                <div class="field _styleMarginZero">
+                                    <div class="ui labeled input">
+                                        <label class="ui black label three wide field">專輯演出者 :</label>
+                                        <span>@_ab.AlbumArtists </span>
+                                    </div>
+                                </div>
+                                <div class="field _styleMarginZero">
+                                    <div class="ui labeled input">
+                                        <label class="ui black label three wide field">歌曲演出者 :</label>
+                                        <span>@_ab.AlbumPerformers </span>
+                                    </div>
+                                </div>
+                                <div class="field _styleMarginZero">
+                                    <div class="ui labeled input">
+                                        <label class="ui black label three wide field">歌曲作曲者 :</label>
+                                        <span>@_ab.AlbumComposers </span>
+                                    </div>
+                                </div>
+                                <div class="field _styleMarginZero">
+                                    <div class="ui labeled input">
+                                        <label class="ui black label three wide field">專輯年份 :</label>
+                                        @{ string _year = _ab.AlbumYear == 0 ? "" : _ab.AlbumYear.ToString(); }
+                                        <span>@_year </span>
+                                    </div>
+                                </div>
+                                <div class="field _styleMarginZero">
+                                    <div class="ui labeled input">
+                                        <label class="ui black label three wide field">著作權 :</label>
+                                        <span>@_ab.AlbumCopyright </span>
+                                    </div>
+                                </div>
+                                <div class="field _styleMarginZero">
+                                    <div class="ui labeled input">
+                                        <label class="ui black label three wide field">內容類型 :</label>
+                                        <span>@_ab.AlbumGenres </span>
+                                    </div>
+                                </div>
+                                <div class="field _styleMarginZero">
+                                    <div class="ui labeled input">
+                                        <label class="ui black label three wide field">備註 :</label>
+                                        <span>@_ab.AlbumComment </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                        <div class="ui bottom attached tab" data-tab="document" style="flex-direction: column;padding: 0 .3em;">
+                            @foreach (var des in Model.ParaDescription)
+                            {
+                                @Html.HiddenFor(m => des.SeqNo) @*段落描述序號:如不使用可拿掉 *@
+                                @Html.HiddenFor(m => des.BegTime) @*段落描述開始時間:如不使用可拿掉 *@
+                                @Html.HiddenFor(m => des.EndTime) @*段落描述結束時間:如不使用可拿掉 *@
+                                <div class="_StyleDescription">
+                                    <span>@des.BegTime~@des.EndTime </span>
+                                    <span>@des.Description </span>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+
+                    @* 修改資料 *@
+                    <button class="_SearchStyleButton ui circular icon button" title="修改">
+                        <i class="pencil alternate large icon"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('div.split-pane').splitPane();//視窗拉取套件
+
+        //詳細關鍵字
+        $('#MoreConditions').click(function () {
+            $('#MoreC').slideToggle();
+        });
+
+        //修改檔案樣版
+        $('._SearchStyleButton').click(function () {
+            $("#ModifyContent").modal('setting', 'closable', false).modal('show');
+        });
+    });
+</script>

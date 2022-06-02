@@ -1,0 +1,60 @@
+﻿@model AIRMAM5.DBEntity.Models.Template.TemplateNewCopy
+@{
+    Layout = "";
+}
+
+@HtmlHelper.HtmlModal("SelectTempleteModal", "新增自訂樣版",
+@<form class="ui inverted form" role="form" id="CreateForm">
+    <div class="three fields">
+        <div class="six wide required field">
+            @Html.LabelFor(model => model.fsNAME)
+            @Html.TextBoxFor(model => model.fsNAME)
+        </div>
+        <div class="six wide required field">
+            @Html.LabelFor(model => model.fsTABLE)
+            @Html.DropDownListFor(model => model.fsTABLE, Model.TempTableList, new { @class = "ui search selection dropdown" })
+        </div>
+        <div class="four wide field">
+            <label style="visibility:hidden;">操作</label>
+            <div class="ui checkbox" name="issearch">
+                @Html.CheckBoxFor(model => model.IsSearch, new { @checked = (Model.IsSearch) ? "checked" : "" })
+                @Html.LabelFor(model => model.IsSearch)
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        @Html.LabelFor(model => model.fsDESCRIPTION)
+        @Html.TextAreaFor(model => model.fsDESCRIPTION, new { @rows = 2 })
+    </div>
+    <div class="sixteen wide field">
+        <div class="ui radio checkbox templetetype checked" id="newtemplate">
+            <input type="radio" name="templetetype" checked="checked" value="new">
+            <label for="newtemplate">新增一個全新的自訂欄位樣版</label>
+        </div>
+    </div>
+    <div class="sixteen wide field">
+        <div class="ui radio checkbox templetetype" id="copytemplate">
+            <input type="radio" name="templetetype" value="copy">
+            <label for="copytemplate">複製一個既有的自訂欄位樣版：(欄位繼承)</label>
+        </div>
+    </div>
+    <div class="ui grid">
+        @foreach (var listItem in Model.TemplateList)
+                    {
+            <div class="four wide column">
+                <div class="ui inverted segment">
+                    <div class="ui radio checkbox disabled templetelayout" data-templatetype="@listItem.fsTABLE">
+                        <input type="radio" value="@listItem.fnTEMP_ID" name="templetelayout">
+                        <label>@listItem.fsNAME</label>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</form>
+,
+ @<div>
+     <button class="ui yellow ok button" type="submit">新增</button>
+     <button class="ui cancel  button" type="reset">取消</button>
+ </div>
+ )

@@ -1,0 +1,234 @@
+﻿[
+  {
+    "outputFile": "Content/login.css",
+    "inputFile": "Content/login.scss"
+  },
+  {
+    "outputFile": "Content/cssreset.css",
+    "inputFile": "Content/cssreset.scss"
+  },
+  {
+    "outputFile": "Content/common.css",
+    "inputFile": "Content/common.scss"
+  },
+  {
+    "outputFile": "Content/_variable.css",
+    "inputFile": "Content/_variable.scss"
+  },
+  {
+    "outputFile": "Content/_struct.css",
+    "inputFile": "Content/_struct.scss"
+  },
+  {
+    "outputFile": "Content/_color.css",
+    "inputFile": "Content/_color.scss"
+  },
+  {
+    "outputFile": "Content/ie-login.css",
+    "inputFile": "Content/ie-login.scss"
+  },
+  {
+    "outputFile": "Content/errorpage.css",
+    "inputFile": "Content/errorpage.scss"
+  },
+  {
+    "outputFile": "Content/MergeVariables/_login.css",
+    "inputFile": "Content/MergeVariables/_login.scss"
+  },
+  {
+    "outputFile": "Content/tabulatorJS/css/semantic-ui/tabulator_semantic-ui.css",
+    "inputFile": "Content/tabulatorJS/css/semantic-ui/tabulator_semantic-ui.scss"
+  },
+  {
+    "outputFile": "Content/_iframe.css",
+    "inputFile": "Content/_iframe.scss"
+  },
+  {
+    "outputFile": "Content/_contextmenu.css",
+    "inputFile": "Content/_contextmenu.scss"
+  },
+  {
+    "outputFile": "Content/toastrJS/toastr.css",
+    "inputFile": "Content/toastrJS/toastr.scss"
+  },
+  {
+    "outputFile": "Content/tabulatorJS/css/tabulator_semantic-ui.css",
+    "inputFile": "Content/tabulatorJS/css/tabulator_semantic-ui.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Ann/AnnIndex.css",
+    "inputFile": "Content/iftame_style/Ann/AnnIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Ann/AnnMatain.css",
+    "inputFile": "Content/iftame_style/Ann/AnnMatain.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Shared/style.css",
+    "inputFile": "Content/iftame_style/Shared/style.scss"
+  },
+  {
+    "outputFile": "Content/semanticUIdatepicker/calendar.css",
+    "inputFile": "Content/semanticUIdatepicker/calendar.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/L_Login/L_LoginIndex.css",
+    "inputFile": "Content/iftame_style/L_Login/L_LoginIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Group/GroupIndex.css",
+    "inputFile": "Content/iftame_style/Group/GroupIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/User/UserIndex.css",
+    "inputFile": "Content/iftame_style/User/UserIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/L_Search/L_SearchIndex.css",
+    "inputFile": "Content/iftame_style/L_Search/L_SearchIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/L_Log/L_LogIndex.css",
+    "inputFile": "Content/iftame_style/L_Log/L_LogIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/L_Tran/L_TranIndex.css",
+    "inputFile": "Content/iftame_style/L_Tran/L_TranIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/L_Upload/L_UploadIndex.css",
+    "inputFile": "Content/iftame_style/L_Upload/L_UploadIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Delete/DeleteIndex.css",
+    "inputFile": "Content/iftame_style/Delete/DeleteIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Ann/_Edit.css",
+    "inputFile": "Content/iftame_style/Ann/_Edit.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Ann/_Details.css",
+    "inputFile": "Content/iftame_style/Ann/_Details.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Subject/SubjectIndex.css",
+    "inputFile": "Content/iftame_style/Subject/SubjectIndex.scss"
+  },
+  {
+    "outputFile": "Content/inspireTreeJS/inspire-tree-dark.css",
+    "inputFile": "Content/inspireTreeJS/inspire-tree-dark.scss"
+  },
+  {
+    "outputFile": "Content/inspireTreeJS/inspire-tree-light.css",
+    "inputFile": "Content/inspireTreeJS/inspire-tree-light.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/SysCode/SysCodeIndex.css",
+    "inputFile": "Content/iftame_style/SysCode/SysCodeIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Synonym/SynonymIndex.css",
+    "inputFile": "Content/iftame_style/Synonym/SynonymIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/ArcPre/ArcPreIndex.css",
+    "inputFile": "Content/iftame_style/ArcPre/ArcPreIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/L_Log/_Details.css",
+    "inputFile": "Content/iftame_style/L_Log/_Details.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Dir/DirIndex.css",
+    "inputFile": "Content/iftame_style/Dir/DirIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/UserCode/UserCodeIndex.css",
+    "inputFile": "Content/iftame_style/UserCode/UserCodeIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/ColTemplate/ColTemplateIndex.css",
+    "inputFile": "Content/iftame_style/ColTemplate/ColTemplateIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Account/UserPassword.css",
+    "inputFile": "Content/iftame_style/Account/UserPassword.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Search/SearchIndex.css",
+    "inputFile": "Content/iftame_style/Search/SearchIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/VerifyBooking/VerifyBookingIndex.css",
+    "inputFile": "Content/iftame_style/VerifyBooking/VerifyBookingIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Booking/BookingIndex.css",
+    "inputFile": "Content/iftame_style/Booking/BookingIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/MyBooking/MyBookingIndex.css",
+    "inputFile": "Content/iftame_style/MyBooking/MyBookingIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Materia/MateriaIndex.css",
+    "inputFile": "Content/iftame_style/Materia/MateriaIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Subject/_Video.css",
+    "inputFile": "Content/iftame_style/Subject/_Video.scss"
+  },
+  {
+    "outputFile": "Content/semanticUIrange/range.css",
+    "inputFile": "Content/semanticUIrange/range.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Report/commonReport.css",
+    "inputFile": "Content/iftame_style/Report/commonReport.scss"
+  },
+  {
+    "outputFile": "Content/semanticUI/css/table.css",
+    "inputFile": "Content/semanticUI/css/table.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Home/HomeDashBoard.css",
+    "inputFile": "Content/iftame_style/Home/HomeDashBoard.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/DocumentViwer/Index.css",
+    "inputFile": "Content/iftame_style/DocumentViwer/Index.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Rule/RuleIndex.css",
+    "inputFile": "Content/iftame_style/Rule/RuleIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/ArchiveMove/ArchiveMoveIndex.css",
+    "inputFile": "Content/iftame_style/ArchiveMove/ArchiveMoveIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Home/HomeIndex.css",
+    "inputFile": "Content/iftame_style/Home/HomeIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Error/NotSupportBrowser.css",
+    "inputFile": "Content/iftame_style/Error/NotSupportBrowser.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Tsm/TsmCheckout.css",
+    "inputFile": "Content/iftame_style/Tsm/TsmCheckout.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Tsm/TsmCheckin.css",
+    "inputFile": "Content/iftame_style/Tsm/TsmCheckin.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/BatchBooking/BatchBookingIndex.css",
+    "inputFile": "Content/iftame_style/BatchBooking/BatchBookingIndex.scss"
+  },
+  {
+    "outputFile": "Content/iftame_style/Subject/SubjectEditMedia.css",
+    "inputFile": "Content/iftame_style/Subject/SubjectEditMedia.scss"
+  }
+]

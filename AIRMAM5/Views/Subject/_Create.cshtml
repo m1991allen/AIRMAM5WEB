@@ -1,0 +1,120 @@
+﻿@model AIRMAM5.DBEntity.Models.Subject.SubjectCreateModel
+@using AIRMAM5.DBEntity.Models.Enums;
+
+@HtmlHelper.HtmlModal("CreateSubjectModal", "新增主題",
+@<div>
+     <form class="ui inverted form" role="form" id="CreateForm">
+         <div class="field">
+             @Html.HiddenFor(m => m.DirId)
+             @Html.HiddenFor(m => m.TemplateId)
+             <label for="SubjectPreId">預編詮釋資料</label>
+             @*@Html.DropDownList("SubjectPreId", Model.ArcPreList, new { @class = "ui dropdown search" })*@
+             <select class="ui dropdown search" id="SubjectPreId" name="SubjectPreId">
+                 @{
+                                 foreach (var itm in Model.ArcPreList)
+                                 {
+                                     string _title = itm.fsTITLE ?? "", _descr = itm.fsDESCRIPTION ?? "";
+                         <option value="@itm.fnPRE_ID" data-title="@_title" data-descr="@_descr">@itm.fsNAME</option>
+                                 }
+                 }
+             </select>
+         </div>
+         <div class="required ui calendar field">
+             @Html.LabelFor(m => m.DateInSubjId)
+             @Html.TextBoxFor( m=> m.DateInSubjId, new { @type = "text",@placeholder="請選擇主題編號日期" })
+         </div>
+ 
+         <div class="field required">
+             @Html.LabelFor(m => m.Title)
+             @Html.TextBoxFor(m => m.Title, new { @type = "text", @placeholder = "主題標題" })
+         </div>
+         <div class="field">
+             @Html.LabelFor(m => m.Description)
+             @Html.TextAreaFor(m => m.Description, new { @type = "text", @placeholder = "主題描述" })
+         </div>
+         <div class="dynamicFields" id="ArcPreAttrFields">
+             @*目錄節點的主題樣版欄位*@
+             @*<div class="field">*@
+             @{
+                             var _cser = new AIRMAM5.DBEntity.Services.CodeService();
+                             foreach (var itm in Model.ArcPreAttributes)
+                             {
+                                 string _req = itm.IsNullable ? "" : "required";
+                                 var _typ = (CodeTEMP002Enum)Enum.Parse(typeof(CodeTEMP002Enum), itm.FieldType);
+                                 switch (_typ)
+                                 {
+                                     case CodeTEMP002Enum.NVARCHAR:
+                                         if (itm.IsMultiline)
+                                         {
+                                 <div class="@_req field">
+                                     @Html.Label(itm.Field, itm.FieldName)
+                                     @Html.TextArea(itm.Field, new { @rows = 3, @maxlength = itm.FieldLen, data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                                 </div>
+                                         }
+                                         else
+                                         {
+                                 <div class="@_req field">
+                                     @Html.Label(itm.Field, itm.FieldName)
+                                     @Html.TextBox(itm.Field, string.Empty, new { @type = "text", @maxlength = itm.FieldLen, data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                                 </div>
+                                         }
+                                         break;
+                                     case CodeTEMP002Enum.INTEGER:
+                             <div class="@_req field">
+                                 @Html.Label(itm.Field, itm.FieldName)
+                                 @Html.TextBox(itm.Field, string.Empty, new { @type = "number", @min = 0, @setp = 1, data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                             </div>
+                                         break;
+                                     case CodeTEMP002Enum.DATETIME:
+                             <div class="@_req ui calendar field">
+                                 @Html.Label(itm.Field, itm.FieldName)
+                                 @Html.TextBox(itm.Field, string.Empty, new { @type = "text", data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                             </div>
+                                         break;
+
+                                     case CodeTEMP002Enum.CODE:
+                             <div class="@_req field">
+                                 @Html.Label(itm.Field, itm.FieldName)
+                                 @{
+                                                 var _ddlCode = _cser.GetCodeItemList(itm.FieldCodeId, true, false);}
+                                 @if (itm.FieldCodeCnt == 1)
+                                             {
+                                     @Html.DropDownList(itm.Field, new SelectList(_ddlCode, "Value", "Text"), new { @class = "ui search selection fluid dropdown", data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                                             }
+                                             else
+                                             {
+                                                 var _clist = _cser.GetCodeItemList(itm.FieldCodeId, true, false);
+                                     @Html.DropDownList(itm.Field, _clist, new { @class = "ui search multiple selection fluid dropdown", @multiple = "", data_nullable = itm.IsNullable, data_field = itm.Field, data_fieldname = itm.FieldName, data_fieldtype = itm.FieldType })
+                                             }
+                             </div>
+                                         break;
+                                     default:
+                                         break;
+                                 };
+                             }
+             }
+             @*</div>*@
+         </div>
+     </form>
+    @*}*@
+</div>
+,@<div>
+    <button class="ui yellow ok button" type="button">新增</button>
+    <button class="ui red cancel  button" type="reset">取消</button>
+</div>,"small")
+@*<script>
+    $("#SubjectPreId").on('change', function () {
+        let idx = this.selectedIndex;
+        if (idx > 0) {
+            $("#Title").val(this[idx].dataset.title);
+            $("#Description").val(this[idx].dataset.Descr);
+            $('.dynamicFields').hide();
+            //console.log(this.value);
+        }
+        else {
+            $("#Title").val("");
+            $("#Description").val("");
+            $('.dynamicFields').show();
+        }
+    });
+</script>*@

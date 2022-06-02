@@ -1,0 +1,215 @@
+﻿@model AIRMAM5.DBEntity.Models.TemplateFields.ChooseTypeViewModel
+@using AIRMAM5.DBEntity.Models.Enums
+
+@switch (Model.FieldTypeEnum)
+{
+    case CodeTEMP002Enum.NVARCHAR:
+        <div class="ui inverted segment">
+            <div class="four fields">
+                <div class="required four wide field">
+                    @Html.LabelFor(model => model.FieldName)
+                    @Html.TextBoxFor(model => model.FieldName, new { @class = "", @placeholder = "欄位名稱..." })
+                    @Html.HiddenFor(model => model.Field)
+                    @Html.HiddenFor(model => model.FieldType)
+                    @Html.HiddenFor(model => model.FieldWidth)
+                </div>
+                <div class="four wide field">
+                    @Html.LabelFor(model => model.FieldDesc)
+                    @Html.TextBoxFor(model => model.FieldDesc, new { @class = "", @placeholder = "欄位描述..." })
+                </div>
+                <div class="required four wide field">
+                    @Html.LabelFor(model => model.FieldOrder)
+                    @Html.TextBoxFor(model => model.FieldOrder, new { @type = "number", @min = "0", @step = "1", @placeholder = "顯示順序..." })
+                </div>
+                <div class="five wide field required">
+                    @Html.LabelFor(model => model.FieldLen)
+                    <div class="ui right labeled input">
+                        @Html.TextBoxFor(model => model.FieldLen, new { @type = "number", @min = "0", @step = "1", @placeholder = "內容上限..." })
+                        <span class="ui black label">個字</span>
+                    </div>
+                </div>
+            </div>
+            <div class="five fields">
+                <div class="seven wide field">
+                    @Html.LabelFor(model => model.FieldDef)
+                    @Html.TextBoxFor(model => model.FieldDef, new { @placeholder = "預設值..." })
+                </div>
+                <div class="two wide field">
+                    <div class="ui checkbox" name="ismutiple">
+                    @Html.CheckBoxFor(model => model.IsMultiline, new { @class = "" })
+                    @Html.LabelFor(model => model.IsMultiline)
+                    </div>
+                </div>
+                <div class="two wide field">
+                    <div class="ui checkbox" name="isnullable">
+                        @Html.CheckBoxFor(model => model.IsNullable, new { @class = "" })
+                        @Html.LabelFor(model => model.IsNullable)
+                    </div>
+                </div>
+                <div class="two wide field">
+                    <div class="ui checkbox" name="issearch">
+                        @Html.CheckBoxFor(model => model.IsSearch, new { @class = "" })
+                        @Html.LabelFor(model => model.IsSearch)
+                    </div>
+                </div>
+                <div class="three wide field">
+                    <label style="visibility:hidden;">操作</label>
+                    <button type="submit" class="ui yellow button" name="CreateField" data-type="@Model.FieldType">新增欄位</button>
+                </div>
+            </div>
+        </div>
+        break;
+    case CodeTEMP002Enum.INTEGER:
+        <div class="ui inverted segment">
+            <div class="four fields">
+                <div class="required four wide field">
+                    @Html.LabelFor(model => model.FieldName)
+                    @Html.TextBoxFor(model => model.FieldName, new { @class = "", @placeholder = "欄位名稱..." })
+                </div>
+                <div class="four wide field">
+                    @Html.LabelFor(model => model.FieldDesc)
+                    @Html.TextBoxFor(model => model.FieldDesc, new { @class = "", @placeholder = "欄位描述..." })
+                </div>
+                <div class="required four wide field">
+                    @Html.LabelFor(model => model.FieldOrder)
+                    @Html.TextBoxFor(model => model.FieldOrder, new { @type = "number", @min = "0", @step = "1", @placeholder = "顯示順序..." })
+                </div>
+                <div class="five wide field required">
+                    @Html.LabelFor(model => model.FieldLen)
+                    @Html.TextBoxFor(model => model.FieldLen, new { @type = "number", @min = "0", @step = "1", @placeholder = "內容上限..." })
+                </div>
+            </div>
+            <div class="four fields">
+                <div class="nine wide field">
+                    @Html.LabelFor(model => model.FieldDef)
+                    @Html.TextBoxFor(model => model.FieldDef, new { @type = "number", @min = "0", @step = "1", @placeholder = "預設值..." })
+                </div>
+                <div class="two wide field">
+                    <div class="ui checkbox" name="isnullable">
+                        @Html.CheckBoxFor(model => model.IsNullable, new { @class = "" })
+                        @Html.LabelFor(model => model.IsNullable)
+                    </div>
+                </div>
+                @*devOPS213-2/24-自訂欄位目前可以開放進階查詢的僅有文字類型，是否有空可以把選取在日期、數字、代碼的把進階查詢選項拿掉，進階查詢一律為false *@
+                @Html.HiddenFor(m=>m.IsSearch)
+                @*<div class="two wide field">
+                    <div class="ui checkbox" name="issearch">
+                        @Html.CheckBoxFor(model => model.IsSearch, new { @class = "" })
+                        @Html.LabelFor(model => model.IsSearch)
+                    </div>
+                </div>*@
+                <div class="three wide field">
+                    <label style="visibility:hidden;">操作</label>
+                    <button type="submit" class="ui yellow button" name="CreateField" data-type="@Model.FieldType">新增欄位</button>
+                </div>
+            </div>
+        </div>
+        break;
+    case CodeTEMP002Enum.DATETIME:
+        <div class="ui inverted segment">
+            <div class="four fields">
+                <div class="required four wide field">
+                    @Html.LabelFor(model => model.FieldName)
+                    @Html.TextBoxFor(model => model.FieldName, new { @class = "", @placeholder = "欄位名稱..." })
+                </div>
+                <div class="four wide field">
+                    @Html.LabelFor(model => model.FieldDesc)
+                    @Html.TextBoxFor(model => model.FieldDesc, new { @class = "", @placeholder = "欄位描述..." })
+                </div>
+                <div class="required four wide field">
+                    @Html.LabelFor(model => model.FieldOrder)
+                    @Html.TextBoxFor(model => model.FieldOrder, new { @type = "number", @min = "0", @step = "1", @placeholder = "顯示順序..." })
+                </div>
+            </div>
+            <div class="four fields">
+                <div class="eleven wide field">
+                    @Html.Label("預設值(空值為系統時間)")
+                    @Html.TextBoxFor(model => model.FieldDef, new { @type = "datetime-local", @placeholder = "預設值..." })
+                </div>
+                @*devOPS213-2/24-自訂欄位目前可以開放進階查詢的僅有文字類型，是否有空可以把選取在日期、數字、代碼的把進階查詢選項拿掉，進階查詢一律為false *@
+                @*<div class="two wide field">
+                    <div class="ui checkbox" name="issearch">
+                        @Html.CheckBoxFor(model => model.IsSearch, new { @class = "" })
+                        @Html.LabelFor(model => model.IsSearch)
+                    </div>
+                </div>*@
+                <div class="three wide field">
+                    <label style="visibility:hidden;">操作</label>
+                    <button type="submit" class="ui yellow button" name="CreateField" data-type="@Model.FieldType">新增欄位</button>
+                </div>
+            </div>
+        </div>
+        break;
+    case CodeTEMP002Enum.CODE:
+        <div class="ui inverted segment">
+            <div class="field required">
+                @Html.LabelFor(model => model.FieldCodeId)
+                @*@Html.DropDownListFor(model => model.FieldCodeId, Model.CustomCodeList, new { @class = "ui search selection fluid dropdown" })*@
+                <select id="FieldCodeId" class="ui search selection fluid dropdown" name="FieldCodeId" data-codelist='@Html.Raw(Json.Encode(Model.CustomerCodeList))'>
+                    @{
+                        foreach (var opt in Model.CustomerCodeList)
+                        {
+                            <option value="@opt.MainCodeId">@opt.MainCodeName</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="four fields">
+                <div class="required four wide field">
+                    @Html.LabelFor(model => model.FieldName)
+                    @Html.TextBoxFor(model => model.FieldName, new { @class = "", @placeholder = "欄位名稱..." })
+                </div>
+                <div class="four wide field">
+                    @Html.LabelFor(model => model.FieldDesc)
+                    @Html.TextBoxFor(model => model.FieldDesc, new { @class = "", @placeholder = "欄位描述..." })
+                </div>
+                <div class="required four wide field">
+                    @Html.LabelFor(model => model.FieldOrder)
+                    @Html.TextBoxFor(model => model.FieldOrder, new { @type="number", @min = "0", @step = "1", @placeholder = "顯示順序..." })
+                </div>
+                <div class="five wide field required">
+                    @*<label>選擇方式</label>*@
+                    @Html.LabelFor(model => model.FieldCodeCnt)
+                    <select id="fnCODE_CNT" class="ui search selection fluid dropdown" name="fnCODE_CNT">
+                        <option value="1">單選</option>
+                        <option value="0">多選</option>
+                    </select>
+                </div>
+            </div>
+            <div class="four fields">
+                <div class="eleven wide field">
+                    @Html.LabelFor(model => model.FieldDef)
+                    @*@Html.TextBoxFor(model => model.FieldDef, new { @type = "text", @placeholder = "預設值..." })*@
+                    <select id="FieldDef" class="ui search selection fluid dropdown" name="FieldDef">
+                    @{
+                        foreach (var opt in Model.CustomerCodeList.FirstOrDefault().SubCodeList)
+                        {
+                            <option value="@opt.Value">@opt.Text</option>
+                        }
+                    }
+                </select>
+                </div>
+                <div class="two wide field">
+                    <div class="ui checkbox" name="isnullable">
+                        @Html.CheckBoxFor(model => model.IsNullable, new { @class = "" })
+                        @Html.LabelFor(model => model.IsNullable)
+                    </div>
+                </div>
+                @*devOPS213-2/24-自訂欄位目前可以開放進階查詢的僅有文字類型，是否有空可以把選取在日期、數字、代碼的把進階查詢選項拿掉，進階查詢一律為false *@
+                @*<div class="two wide field">
+            <div class="ui checkbox" name="issearch">
+                @Html.CheckBoxFor(model => model.IsSearch, new { @class = "" })
+                @Html.LabelFor(model => model.IsSearch)
+            </div>
+        </div>*@
+                <div class="three wide field">
+                    <label style="visibility:hidden;">操作</label>
+                    <button type="submit" class="ui yellow button" name="CreateField" data-type="@Model.FieldType">新增欄位</button>
+                </div>
+            </div>
+        </div>
+        break;
+    default:
+
+        break;
+}
